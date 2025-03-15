@@ -1,0 +1,27 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="login-container">
+        <div class="login-card">
+            <h2>BIENVENIDO</h2>
+            <mat-form-field appearance="outline">
+                <mat-label>{{'login.document_id' | translate}}</mat-label>
+                <input matInput type="number" [placeholder]="'login.document_label' | translate"
+                    formControlName='document_id'>
+                <mat-icon matPrefix>person</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>{{'login.password' | translate}}</mat-label>
+                <input matInput type="password" [placeholder]="'login.password_label' | translate"
+                    formControlName='password'>
+                <mat-icon matPrefix>lock</mat-icon>
+            </mat-form-field>
+
+            <button mat-raised-button color="primary" class="login-btn" [disabled]="form.invalid">Ingresar</button>
+
+            <p>No tienes cuenta? <a href="#">Crea una ahora</a></p>
+            @if(auth) {
+                <h1>Usted ha iniciado sesión</h1>
+            }
+        </div>
+    </div>
+</form>
