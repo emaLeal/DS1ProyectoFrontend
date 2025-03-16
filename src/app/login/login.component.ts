@@ -5,12 +5,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import {
-  FormBuilder,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from './auth.service';
+import TranslateLogic from '../translate/translate.class';
 
 @Component({
   selector: 'app-login',
@@ -21,20 +18,22 @@ import { AuthService } from './auth.service';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
-export class LoginComponent {
-  translate: TranslateService = inject(TranslateService);
-  translateText(lang: string) {
-    this.translate.use(lang);
-  }
+export class LoginComponent extends TranslateLogic {
   form: any;
-  auth: boolean = false
+  auth: boolean = false;
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private authService: AuthService,
+    translate: TranslateService
+  ) {
+    super(translate);
+  }
 
   // validatePassword() {
   //   const patron = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/;
@@ -54,8 +53,8 @@ export class LoginComponent {
   }
 
   submit() {
-    const {document_id, password} = this.form.value
-    this.authService.login(document_id, password)
-    this.auth = true
+    const { document_id, password } = this.form.value;
+    this.authService.login(document_id, password);
+    this.auth = true;
   }
 }

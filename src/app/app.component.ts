@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { LoginComponent } from "./login/login.component";
 import { RouterModule } from '@angular/router';
+import TranslateLogic from './translate/translate.class';
 
 @Component({
   selector: 'app-root',
@@ -9,9 +10,8 @@ import { RouterModule } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
-export class AppComponent {
-  translate: TranslateService = inject(TranslateService);
-  translateText(lang: string) {
-    this.translate.use(lang);
+export class AppComponent extends TranslateLogic {
+  constructor(translate: TranslateService) {
+    super(translate)
   }
 }

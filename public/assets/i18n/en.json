@@ -4,6 +4,8 @@
         "document_id": "Document Id",
         "password": "Password",
         "document_label": "Enter your Document Id",
-        "password_label": "Enter your Password(at least a capital letter, a lowercase and a digit)"
+        "password_label": "Enter your Password(at least a capital letter, a lowercase and a digit)",
+        "login_button": "Login",
+        "welcome_label": "WELCOME"
     }
 }

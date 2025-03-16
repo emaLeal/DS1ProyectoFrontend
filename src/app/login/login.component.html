@@ -1,7 +1,7 @@
 <form [formGroup]="form" (ngSubmit)="submit()">
     <div class="login-container">
         <div class="login-card">
-            <h2>BIENVENIDO</h2>
+            <h2>{{'login.welcome_label' | translate}}</h2>
             <mat-form-field appearance="outline">
                 <mat-label>{{'login.document_id' | translate}}</mat-label>
                 <input matInput type="number" [placeholder]="'login.document_label' | translate"
@@ -16,11 +16,10 @@
                 <mat-icon matPrefix>lock</mat-icon>
             </mat-form-field>
 
-            <button mat-raised-button color="primary" class="login-btn" [disabled]="form.invalid">Ingresar</button>
-
-            <p>No tienes cuenta? <a href="#">Crea una ahora</a></p>
+            <button mat-raised-button color="primary" class="login-btn" [disabled]="form.invalid">{{'login.login_button'
+                | translate}}</button>
             @if(auth) {
-                <h1>Usted ha iniciado sesión</h1>
+            <h1>Usted ha iniciado sesión</h1>
             }
         </div>
     </div>
