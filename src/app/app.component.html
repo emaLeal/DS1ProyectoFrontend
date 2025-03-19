@@ -1,8 +1,10 @@
-<button (click)="translateText('es')">
-  <img src="./assets/img/spanish-logo.png" width="50" alt="Logo Pagina en Español" />
-</button>
-<button (click)="translateText('en')">
-  <img src="./assets/img/english-logo.png" width="50" alt="Logo Pagina en Ingles" />
-</button>
-<p></p>
+<div class="language-selector">
+  <button class="lang-btn" (click)="translateText('es')" aria-label="Cambiar a Español">
+    <img src="./assets/img/spanish-logo.png" alt="Español" />
+  </button>
+  <button class="lang-btn" (click)="translateText('en')" aria-label="Switch to English">
+    <img src="./assets/img/english-logo.png" alt="English" />
+  </button>
+</div>
+
 <router-outlet></router-outlet>

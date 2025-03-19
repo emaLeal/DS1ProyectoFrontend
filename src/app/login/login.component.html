@@ -1,17 +1,24 @@
 <form [formGroup]="form" (ngSubmit)="submit()">
     <div class="login-container">
+        
         <div class="login-card">
-            <h2>{{'login.welcome_label' | translate}}</h2>
-            <mat-form-field appearance="outline">
+             <!-- Mensaje de Bienvenido con estilo personalizado -->
+            <div class="login-header">
+            {{ 'login.welcome_label' | translate }}
+            </div> <!--icono de user--> 
+            <div class="login-icon">
+                <img src="assets/img/user-icon.png" alt="User Icon">
+            </div>
+            <mat-form-field  class="custom-field">
                 <mat-label>{{'login.document_id' | translate}}</mat-label>
-                <input matInput type="number" [placeholder]="'login.document_label' | translate"
+                <input matInput type="number"  class="custom-input" [placeholder]="'login.document_label' | translate"
                     formControlName='document_id'>
                 <mat-icon matPrefix>person</mat-icon>
             </mat-form-field>
-
-            <mat-form-field appearance="outline">
+    
+            <mat-form-field class="custom-field">
                 <mat-label>{{'login.password' | translate}}</mat-label>
-                <input matInput type="password" [placeholder]="'login.password_label' | translate"
+                <input matInput type="password" class="custom-input" [placeholder]="'login.password_label' | translate"
                     formControlName='password'>
                 <mat-icon matPrefix>lock</mat-icon>
             </mat-form-field>

@@ -1,47 +1,116 @@
+/* Fondo general: gradiente similar al de la segunda imagen */
 .login-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background: linear-gradient(to right, #6dd5fa, #2979ff);
-  }
-  
-  .login-card {
-    background: white;
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    width: 300px;
-  }
-  
-  h2 {
-    margin-bottom: 20px;
-    color: #1565c0;
-  }
-  
-  mat-form-field {
-    width: 100%;
-    margin-bottom: 15px;
-  }
-  
-  .login-btn {
-    width: 100%;
-    margin-top: 10px;
-  }
-  
-  a {
-    color: #2979ff;
-    text-decoration: none;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #A0F6FF, #0634A9); /* Ajusta estos colores si lo requieres */
+}
 
-  input::-webkit-outer-spin-button,
-  input::-webkit-inner-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-  }
+.login-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  width: 350px;
+  position: relative;
+}
 
-  /* Hide spin buttons in Firefox */
-  input[type="number"] {
-      -moz-appearance: textfield;
-  }
+/* Estilo para el mensaje de Bienvenido, similar al de la segunda imagen */
+.login-header {
+  background: linear-gradient(90deg, #020fc5, #0037a7);
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 15px 30px;
+  border-radius: 30px;
+  box-shadow: 0 4px 10px rgba(0, 89, 255, 0.726);
+  margin-bottom: 0px;
+  display: inline-block;
+}
+
+.login-icon {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 25px;
+  background: #0057ff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.login-icon img {
+  width: 160px;
+}
+
+/* Personalización del mat-form-field */
+.custom-field {
+  width: 100%;
+  background: white;
+  border-radius: 25px;
+  padding: 5px;
+  box-shadow: 0px 4px 10px rgba(0, 119, 255, 0.37);
+  margin-bottom: 15px; /* Espaciado entre los campos */
+}
+
+
+/* Se elimina el contorno predeterminado del mat-form-field */
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  display: none;
+}
+
+/* Estilo personalizado para el input */
+.custom-field {
+  width: 90%; /* Reduce el ancho */
+  max-width: 300px; /* Limita el tamaño para que no sea demasiado grande */
+  background: white;
+  border-radius: 20px; /* Un poco menos redondeado */
+  padding: 8px 12px; /* Ajusta el relleno para reducir el tamaño */
+  box-shadow: 0px 4px 10px rgba(0, 89, 255, 0.3);
+  margin-bottom: 15px; /* Mantiene el espaciado */
+}
+
+.custom-field input {
+  width: 100%;
+  font-size: 14px; /* Reduce el tamaño del texto */
+  padding: 7px; /* Reduce el padding para mejor ajuste */
+}
+
+mat-label {
+  font-size: 13px; /* Reduce el tamaño de la etiqueta */
+}
+
+/* Sombra azul intensificada al hacer focus en el campo */
+.custom-field:focus-within {
+  box-shadow: 0px 4px 15px rgba(0, 89, 255, 0.6);
+}
+
+/* Botón de inicio de sesión */
+.login-btn {
+  width: 100%;
+  margin-top: 10px;
+  background-color: #0057ff;
+  color: white;
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 20px;
+  transition: background 0.3s ease-in-out;
+}
+
+.login-btn:hover {
+  background-color: #0037a7;
+}
+
+/* Eliminar controles de incremento para inputs de tipo number */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}

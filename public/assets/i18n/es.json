@@ -3,7 +3,7 @@
         "document_id": "Cedula",
         "password": "Contraseña",
         "document_label": "Ingresa tu documento ",
-        "password_label": "Ingrese su contraseña(Minimo 8 caracteres)",
+        "password_label": "Ingrese su contraseña",
         "login_button": "Iniciar Sesión",
         "welcome_label": "BIENVENIDO" 
     }
