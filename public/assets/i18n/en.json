@@ -6,6 +6,7 @@
         "document_label": "Enter your Document Id",
         "password_label": "Enter your Password",
         "login_button": "Login",
-        "welcome_label": "WELCOME"
+        "welcome_label": "WELCOME",
+        "captcha_error_label": "Please validate CAPTCHA"
     }
 }

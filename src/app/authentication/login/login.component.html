@@ -1,21 +1,21 @@
-<form [formGroup]="form" (ngSubmit)="submit()">
+<form [formGroup]="form!" (ngSubmit)="submit()">
     <div class="login-container">
-        
+
         <div class="login-card">
-             <!-- Mensaje de Bienvenido con estilo personalizado -->
+            <!-- Mensaje de Bienvenido con estilo personalizado -->
             <div class="login-header">
-            {{ 'login.welcome_label' | translate }}
-            </div> <!--icono de user--> 
+                {{ 'login.welcome_label' | translate }}
+            </div> <!--icono de user-->
             <div class="login-icon">
                 <img src="assets/img/user-icon.png" alt="User Icon">
             </div>
-            <mat-form-field  class="custom-field">
+            <mat-form-field class="custom-field">
                 <mat-label>{{'login.document_id' | translate}}</mat-label>
-                <input matInput type="number"  class="custom-input" [placeholder]="'login.document_label' | translate"
+                <input matInput type="number" class="custom-input" [placeholder]="'login.document_label' | translate"
                     formControlName='document_id'>
                 <mat-icon matPrefix>person</mat-icon>
             </mat-form-field>
-    
+
             <mat-form-field class="custom-field">
                 <mat-label>{{'login.password' | translate}}</mat-label>
                 <input matInput type="password" class="custom-input" [placeholder]="'login.password_label' | translate"
@@ -23,9 +23,14 @@
                 <mat-icon matPrefix>lock</mat-icon>
             </mat-form-field>
 
-            <button mat-raised-button color="primary" class="login-btn" [disabled]="form.invalid">{{'login.login_button'
+            <div id="recaptcha-container" class="g-recaptcha" data-callback="onCaptchaResolved"
+                data-sitekey="6Lcanv0qAAAAAJZXEdthr0g_wb1wMR6lYSEjOFro"></div>
+            <p *ngIf="!onCaptchaPassed" class="error-text">{{'login.captcha_error_label' | translate}}</p>
+
+            <button mat-raised-button color="primary" class="login-btn"
+                [disabled]="form?.invalid || !this.onCaptchaPassed">{{'login.login_button'
                 | translate}}</button>
-            @if(auth) {
+            @if(this.isAuthenticated()) {
             <h1>Usted ha iniciado sesión</h1>
             }
         </div>

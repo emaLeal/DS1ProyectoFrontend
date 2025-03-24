@@ -5,6 +5,7 @@
         "document_label": "Ingresa tu documento ",
         "password_label": "Ingrese su contraseña",
         "login_button": "Iniciar Sesión",
-        "welcome_label": "BIENVENIDO" 
+        "welcome_label": "BIENVENIDO",
+        "captcha_error_label": "Por favor valida CAPTCHA"
     }
 }

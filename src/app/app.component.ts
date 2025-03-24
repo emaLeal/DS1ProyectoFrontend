@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { LoginComponent } from "./login/login.component";
+import { LoginComponent } from "./authentication/login/login.component";
 import { RouterModule } from '@angular/router';
 import TranslateLogic from './translate/translate.class';
 
