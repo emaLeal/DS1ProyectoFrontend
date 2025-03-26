@@ -14,7 +14,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { AuthService } from '../auth.service';
-import TranslateLogic from '../../translate/translate.class';
+import TranslateLogic from '../../lib/translate/translate.class';
 
 @Component({
   selector: 'app-login',

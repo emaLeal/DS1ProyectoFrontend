@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { LoginComponent } from "./authentication/login/login.component";
 import { RouterModule } from '@angular/router';
-import TranslateLogic from './translate/translate.class';
+import TranslateLogic from './lib/translate/translate.class';
 
 @Component({
   selector: 'app-root',
