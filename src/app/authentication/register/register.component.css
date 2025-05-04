@@ -1,0 +1,155 @@
+/* Fondo general con gradiente */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #A0F6FF, #0634A9);
+}
+
+
+.mat-stepper-horizontal {
+  margin-top: 1px;
+}
+
+.mat-mdc-form-field {
+  margin-top: 16px;
+}
+
+/* Tarjeta principal del formulario */
+.login-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 25px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  width: 1000px;
+  position: relative;
+}
+
+/* Encabezado del formulario: "Bienvenido" */
+.login-header {
+  background: linear-gradient(90deg, #020fc5, #0037a7);
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 15px 30px;
+  border-radius: 30px;
+  box-shadow: 0 4px 10px rgba(0, 89, 255, 0.726);
+  margin-bottom: 0px;
+  display: inline-block;
+}
+
+/* Icono circular */
+.login-icon {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 35px;
+  background: #0057ff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 18px;
+}
+
+.login-icon img {
+  width: 195px;
+}
+
+/* Campo de formulario personalizado */
+.custom-field {
+  width: 120%;
+  max-width: 450px;
+  background: white;
+  border-radius: 20px;
+  padding: 8px 13px;
+  box-shadow: 0px 4px 10px rgba(0, 89, 255, 0.3);
+  margin-bottom: 25px;
+  margin-right: 5px;
+  margin-left: 19px;
+}
+
+/* Input personalizado */
+.custom-field input {
+  width: 100%;
+  font-size: 25px;
+  padding: 7px;
+}
+
+/* Etiqueta del input */
+mat-label {
+  font-size: 18px;
+}
+
+/* Sombra azul al hacer focus */
+.custom-field:focus-within {
+  box-shadow: 0px 4px 15px rgba(0, 89, 255, 0.6);
+}
+
+/* Botón de registro */
+.login-btn {
+  width: 100%;
+  margin-top: 10px;
+  background-color: #0057ff;
+  color: white;
+  font-weight: bold;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 20px;
+  transition: background 0.3s ease-in-out;
+}
+
+.login-btn:hover {
+  background-color: #0037a7;
+}
+
+/* Texto de error (Captcha) */
+.error-text {
+  color: rgb(4, 4, 4);
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+/* Eliminar controles de número */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* Estilo para matStepLabel */
+::ng-deep .step-label {
+  font-weight: bold;
+  color: #1a0bea;
+  font-size: 1.5rem;
+}
+
+
+/* Hover en pasos inactivos */
+:host ::ng-deep .mat-step-header:not(.mat-active):not(.mat-completed):hover {
+  background-color: rgba(67, 83, 255, 0.263);
+  cursor: pointer;
+  border-radius: 50px;
+}
+
+/* Ícono paso activo */
+:host ::ng-deep .mat-step-icon.mat-step-icon-selected {
+  background-color: #000359 !important;
+  color: rgb(249, 249, 249) !important;
+  font-weight: bold;
+}
+
+.custom-select-panel {
+  border: 1px solid #3009df;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(2, 8, 96, 0.2);
+  padding: 4px 0;
+  background-color: rgb(0, 136, 255);
+}
+
+

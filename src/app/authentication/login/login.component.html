@@ -33,6 +33,10 @@
             @if(this.isAuthenticated()) {
             <h1>Usted ha iniciado sesión</h1>
             }
+            <p style="margin-top: 15px;">
+                {{ 'register.havent_account' | translate }} <a href="/register">{{ 'register.register_now' | translate }}</a>
+              </p> 
         </div>
+        
     </div>
 </form>

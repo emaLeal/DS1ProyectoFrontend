@@ -15,6 +15,7 @@ import {
 } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import TranslateLogic from '../../lib/translate/translate.class';
+import {Login} from '../auth.types'
 
 @Component({
   selector: 'app-login',
@@ -82,8 +83,8 @@ export class LoginComponent extends TranslateLogic implements AfterViewInit {
   }
 
   submit() {
-    const { document_id, password } = this.form?.value;
-    this.authService.login(document_id, password);
+    const login: Login = this.form?.value;
+    this.authService.login(login);
     localStorage.setItem('captcha-token', this.captchaToken!);
   }
 }
