@@ -1,0 +1,11 @@
+{
+    "login": {
+        "document_id": "Cedula",
+        "password": "Contraseña",
+        "document_label": "Ingresa tu documento ",
+        "password_label": "Ingrese su contraseña",
+        "login_button": "Iniciar Sesión",
+        "welcome_label": "BIENVENIDO",
+        "captcha_error_label": "Por favor valida CAPTCHA"
+    }
+}
