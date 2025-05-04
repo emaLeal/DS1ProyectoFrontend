@@ -1,0 +1,53 @@
+<div class="usuarios-container">
+    <div class="header">
+      <h2>Usuarios</h2>
+      <button class="btn btn-primary">Crear usuario</button>
+    </div>
+  
+    <div class="filtros">
+      <input type="text" placeholder="Buscar usuario..." [(ngModel)]="filtroBusqueda">
+      <select [(ngModel)]="filtroRol">
+        <option value="">Todos los roles</option>
+        <option>Administrador</option>
+        <option>Director de talento Humano</option>
+      </select>
+      <select [(ngModel)]="filtroEstado">
+        <option value="">Todos los estados</option>
+        <option>Activo</option>
+        <option>Inactivo</option>
+      </select>
+    </div>
+  
+    <div class="tabla-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Documento</th>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Code</th>
+            <th>Teléfono</th>
+            <th>Rol</th>
+            <th>Estatus</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let usuario of usuariosFiltrados">
+            <td>{{ usuario.documento }}</td>
+            <td>{{ usuario.nombreCompleto }}</td>
+            <td>{{ usuario.email }}</td>
+            <td>{{ usuario.code }}</td>
+            <td>{{ usuario.telefono }}</td>
+            <td>{{ usuario.rol }}</td>
+            <td>{{ usuario.estatus }}</td>
+            <td>
+              <button (click)="editarUsuario(usuario)">✏️</button>
+              <button (click)="borrarUsuario(usuario)">🗑️</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
