@@ -149,17 +149,46 @@
       </div>
 
       <mat-form-field class="custom-field">
-        <mat-label>{{ 'register.password' | translate }}</mat-label>
-        <input matInput type="password" class="custom-input" [placeholder]="'register.password_label' | translate" formControlName="password">
+  <mat-label>{{ 'register.password' | translate }}</mat-label>
+  <input matInput [type]="showPassword ? 'text' : 'password'" 
+         class="custom-input" 
+         [placeholder]="'register.password_label' | translate" 
+         formControlName="password"
+         (input)="onPasswordInput()">
+  <button mat-icon-button matSuffix (click)="showPassword = !showPassword" [attr.aria-label]="'Toggle password visibility'" [attr.aria-pressed]="showPassword">
+    <mat-icon>{{ showPassword ? 'visibility' : 'visibility_off' }}</mat-icon>
+  </button>
+  <mat-icon matPrefix>key</mat-icon>
+</mat-form-field>
+
+      <div class="login-header">
+        {{ 'register.final_step_label1' | translate }}
+      </div>
+      <!-- Confirmar contraseña -->
+        <mat-form-field class="custom-field">
+          <mat-label>{{ 'register.password1' | translate }}</mat-label>
+          <input matInput [type]="showConfirmPassword ? 'text' : 'password'" 
+            class="custom-input" 
+            [placeholder]="'register.password_label1' | translate" 
+            formControlName="confirmPassword">
+         <button mat-icon-button matSuffix (click)="showConfirmPassword = !showConfirmPassword" [attr.aria-label]="'Toggle password visibility'" [attr.aria-pressed]="showConfirmPassword">
+          <mat-icon>{{ showConfirmPassword ? 'visibility' : 'visibility_off' }}</mat-icon>
+          </button>
+        <!-- valida contraseña  -->   
+        <mat-error *ngIf="form?.hasError('passwordMismatch') && form?.get('confirmPassword')?.touched">
+        <p>{{ 'register.incorrect' | translate }}</p>
+        </mat-error>
         <mat-icon matPrefix>key</mat-icon>
       </mat-form-field>
+      <div id="recaptcha-container" class="g-recaptcha" data-callback="onCaptchaResolved"
+                data-sitekey="6Lcanv0qAAAAAJZXEdthr0g_wb1wMR6lYSEjOFro"></div>
+            <p *ngIf="!onCaptchaPassed" class="error-text">{{ 'register.captcha_error_label' | translate }}</p>
 
-      <div id="recaptcha-container" class="g-recaptcha" data-callback="onCaptchaResolved" data-sitekey="6Lcanv0qAAAAAJZXEdthr0g_wb1wMR6lYSEjOFro"></div>
-      <p *ngIf="!onCaptchaPassed" class="error-text">{{ 'register.captcha_error_label' | translate }}</p>
-
-      <button mat-raised-button color="primary" class="login-btn" [disabled]="form?.invalid || !onCaptchaPassed">
+      <button mat-raised-button color="primary" class="login-btn" [disabled]="form?.invalid || !this.onCaptchaPassed">
         {{ 'register.button' | translate }}
-      </button>
+      </button> @if(this.isAuthenticated()) {
+                <h1>Usted se ha registrado</h1>
+            }
 
       <div style="display: flex; justify-content: space-between;">
         <button mat-button color="primary" class="login-btn" matStepperPrevious>
@@ -168,11 +197,32 @@
         <button mat-button color="primary" class="login-btn" (click)="stepper.reset()">
           {{ 'register.button_reset' | translate }}
         </button>
+       
       </div>
       <p style="margin-top: 15px;">
         {{ 'register.have_account' | translate }} <a href="/login">{{ 'register.login_now' | translate }}</a>
-      </p> 
-    </div>
+      </p>
+    
+   
+    <!-- Validación de requisitos -->
+  <div>
+    <p>{{ 'register.password_rules_intro' | translate }}</p>
+    <ul>
+      <li [ngClass]="{ valid: requisitos.length }">{{ 'register.length' | translate }}</li>
+      <li [ngClass]="{ valid: requisitos.hasNumber && requisitos.hasLower }">{{ 'register.number_lower' | translate }}</li>
+      <li [ngClass]="{ valid: requisitos.hasUpper }">{{ 'register.upper' | translate }}</li>
+      <li [ngClass]="{ valid: requisitos.hasSpecial }">{{ 'register.special' | translate }}</li>
+    </ul>
+    <!-- Mensaje de contraseña segura -->
+  <div *ngIf="requisitos.length && requisitos.hasUpper && requisitos.hasLower && requisitos.hasNumber && requisitos.hasSpecial">
+    <p style="color: green;">{{ 'register.password_secure' | translate }}</p>
+  
+</div>
+</div>
+ <p style="margin-top: 15px;">
+                {{ 'register.have_account' | translate }} <a href="/login">{{ 'register.login_now' | translate }}</a>
+              </p> 
+ </div>
   </form>
 </mat-step>
     

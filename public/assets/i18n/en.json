@@ -48,10 +48,17 @@
         "button_back":"Back",
         "button_reset":"Reset",
         "final_step_label":"CREATE A PASSWORD",
+        "final_step_label1": "CONFIRM THE PASSWORD",
+        "password1": "Confirm password",
+        "password_label1": "Confirm the password",
         "done":"Create a password",
         "havent_account": "Don't have an account?",
-        "register_now": "Register now!"
+        "register_now": "Register now!",
 
-        
+        "length": "✔ 8 or more characters",
+        "number_lower": "✔ At least one number and one lowercase letter",
+        "upper": "✔ At least one uppercase letter",
+        "special": "✔ At least one special character (*, .!#$ ...)"
+
     }
 }

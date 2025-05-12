@@ -5,7 +5,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import {MatStepperModule} from '@angular/material/stepper';
+import { MatStepperModule } from '@angular/material/stepper';
 import {
   FormBuilder,
   FormGroup,
@@ -18,6 +18,7 @@ import TranslateLogic from '../../lib/translate/translate.class';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { MatRadioModule } from '@angular/material/radio';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-register',
@@ -33,8 +34,7 @@ import { MatRadioModule } from '@angular/material/radio';
     MatStepperModule,
     MatSelectModule,
     MatOptionModule,
-    MatRadioModule
-    
+    MatRadioModule,
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
@@ -44,13 +44,19 @@ export class RegisterComponent extends TranslateLogic implements AfterViewInit {
   onCaptchaPassed = false;
   captchaToken?: string;
   show: boolean = true;
+  showPassword = false;
+  showConfirmPassword = false;
 
-  constructor(private fb: FormBuilder, translate: TranslateService) {
+  requisitos = {
+    length: false,
+    hasUpper: false,
+    hasLower: false,
+    hasNumber: false,
+    hasSpecial: false,
+  };
+
+  constructor(private fb: FormBuilder, private authService: AuthService, translate: TranslateService) {
     super(translate);
-  }
-
-  nextSession() {
-    this.show = !this.show
   }
 
   ngOnInit() {
@@ -63,23 +69,41 @@ export class RegisterComponent extends TranslateLogic implements AfterViewInit {
       gender: ['', Validators.required],
       mobile: ['', Validators.required],
       password: ['', [Validators.required, this.validatePassword(), Validators.minLength(8)]],
+      confirmPassword: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       phone: ['', Validators.required],
-      address: ['', Validators.required]
-    });
+      address: ['', Validators.required],
+    }, { validators: this.passwordsMatchValidator });
 
     (window as any).onCaptchaResolved = this.onCaptchaResolved.bind(this);
   }
 
   validatePassword() {
-    const pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/;
+    const patron = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).+$/;
     return (control: AbstractControl): ValidationErrors | null => {
-      if (control.value && !pattern.test(control.value)) {
+      if (control.value && !patron.test(control.value)) {
         return { requisitosNoCumplidos: true };
       }
       return null;
     };
   }
+
+  /** valida cada punto de la contraseña para saber q cada cosa se cumple */
+  onPasswordInput() {
+    const value = this.form?.get('password')?.value || '';
+    this.requisitos.length = value.length >= 8;
+    this.requisitos.hasUpper = /[A-Z]/.test(value);
+    this.requisitos.hasLower = /[a-z]/.test(value);
+    this.requisitos.hasNumber = /\d/.test(value);
+    this.requisitos.hasSpecial = /[!@#$%^&*(),.?":{}|<>]/.test(value);
+  }
+
+  /**se supone q es para q la contraseña indique si es la misma o no al confirmarla (NO FUNCIONA :( ) */
+  passwordsMatchValidator(group: AbstractControl): ValidationErrors | null {
+    const password = group.get('password')?.value;
+    const confirmPassword = group.get('confirmPassword')?.value;
+    return password === confirmPassword ? null : { passwordMismatch: true };
+}
 
   ngAfterViewInit() {
     if ((window as any).grecaptcha) {
@@ -94,14 +118,16 @@ export class RegisterComponent extends TranslateLogic implements AfterViewInit {
     this.captchaToken = response;
   }
 
+  isAuthenticated(): boolean {
+    return this.authService.isAuthenticated;
+  }
+
   submit() {
     if (this.form?.valid && this.onCaptchaPassed) {
-      const { name, lastname, id, password, email } = this.form.value;
-      console.log('Datos de registro:', { name, lastname, password, email });
+      const { name, lastname, id, password, email, } = this.form.value;
+      console.log('Datos de registro:', { name, lastname, password, email, id });
       localStorage.setItem('captcha-token', this.captchaToken!);
-
     }
-
   }
 
   private _formBuilder = inject(FormBuilder);
@@ -113,26 +139,28 @@ export class RegisterComponent extends TranslateLogic implements AfterViewInit {
     secondCtrl: ['', Validators.required],
   });
   thirdFormGroup = this._formBuilder.group({
-    thirdCtrl: ['', Validators.required],});
-  isLinear = false;
+    thirdCtrl: ['', Validators.required],
+  });
 
-/*Esta funcion es para que no acepte numeros en los campos de solo letras*/ 
+  isLinear = false;
+/**Solo permite letras y no numeros en los campos de solo letras  */
   onlyLetters(event: KeyboardEvent) {
     const inputChar = String.fromCharCode(event.keyCode || event.which);
     const valid = /^[a-zA-ZÀ-ÿ\s]+$/.test(inputChar);
-      if (!valid) {
+    if (!valid) {
       event.preventDefault();
-      }
+    }
   }
-  /* tipos de documentos y genero para seleccionar */
+/**Da la lista de opciones en el formulario */
   documentTypes = [
     { value: 'cedula', label: 'register.document_type.cedula' },
     { value: 'pasaporte', label: 'register.document_type.passport' },
-    { value: 'dni', label: 'register.document_type.dni' }
+    { value: 'dni', label: 'register.document_type.dni' },
   ];
-   genderTypes=[
-    {value: 'masculino', label:'register.gender.m'},
-    {value: 'femenino', label:'register.gender.f'},
-    {value: 'otro', label:'register.gender.o'}
-   ]
+
+  genderTypes = [
+    { value: 'masculino', label: 'register.gender.m' },
+    { value: 'femenino', label: 'register.gender.f' },
+    { value: 'otro', label: 'register.gender.o' },
+  ];
 }

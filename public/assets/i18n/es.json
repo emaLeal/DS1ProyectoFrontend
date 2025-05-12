@@ -48,10 +48,19 @@
         "button_back":"Atras",
         "button_reset":"Borrar todo",
         "final_step_label":"CREE UNA CONTRASEÑA",
+        "final_step_label1":"CONFIRME LA CONTRASEÑA",
+        "password1":"Confirme contraseña",
+        "password_label1":"Confirme la Contraseña",
         "done":"Crea tu contraseña",
         "havent_account":"¿No tienes una cuenta?",
-        "register_now":"Registrate ahora!!"
+        "register_now":"Registrate ahora!!",
 
-
+        "length":"✔ 8 o más caracteres",
+        "number_lower":"✔ Mínimo un número y una letra",
+        "upper":"✔ Mínimo una letra mayúscula",
+        "special":"✔ Mínimo un carácter especial (*, .!#$ ...)",
+        "password_rules_intro": "Tu contraseña debe tener:",
+        "password_secure": "Contraseña segura",
+        "incorrect": "Las contraseñas no coinciden"
     }
 }

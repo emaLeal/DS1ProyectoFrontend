@@ -35,6 +35,7 @@ export class LoginComponent extends TranslateLogic implements AfterViewInit {
   form?: FormGroup | undefined;
   onCaptchaPassed: boolean = false;
   captchaToken?: string;
+  showPassword = false;
 
   constructor(
     private formBuilder: FormBuilder,

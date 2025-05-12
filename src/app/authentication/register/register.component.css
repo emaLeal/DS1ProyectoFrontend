@@ -144,12 +144,9 @@ input[type="number"] {
   font-weight: bold;
 }
 
-.custom-select-panel {
-  border: 1px solid #3009df;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(2, 8, 96, 0.2);
-  padding: 4px 0;
-  background-color: rgb(0, 136, 255);
+.valid {
+  color: #4caf50; /* Verde */
 }
+
 
 
