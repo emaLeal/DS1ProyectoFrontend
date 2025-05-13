@@ -2,8 +2,11 @@
 .login-container {
   display: flex;
   justify-content: center;
+  padding: 280px 70px;
   align-items: center;
-  height: 100vh;
+  height: 135vh;
+  min-height: 10vh;
+  zoom:59%;
   background: linear-gradient(135deg, #A0F6FF, #0634A9);
 }
 
@@ -55,6 +58,7 @@
 
 .login-icon img {
   width: 195px;
+
 }
 
 /* Campo de formulario personalizado */
@@ -75,6 +79,7 @@
   width: 100%;
   font-size: 25px;
   padding: 7px;
+ 
 }
 
 /* Etiqueta del input */
@@ -102,6 +107,7 @@ mat-label {
 
 .login-btn:hover {
   background-color: #0037a7;
+  
 }
 
 /* Texto de error (Captcha) */
@@ -127,6 +133,7 @@ input[type="number"] {
   font-weight: bold;
   color: #1a0bea;
   font-size: 1.5rem;
+  
 }
 
 
@@ -144,9 +151,70 @@ input[type="number"] {
   font-weight: bold;
 }
 
-.valid {
-  color: #4caf50; /* Verde */
+/* Contenedor principal */
+.password-requirements {
+  background-color: #f9f9fb;
+  border: 1px solid #129af5;
+  border-radius: 12px;
+  padding: 20px 24px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  max-width: 450px;
+  margin: 20px auto;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
+/* Título */
+.password-requirements p:first-child {
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: #333;
+  margin-bottom: 12px;
+}
+
+/* Lista de requisitos */
+.password-requirements ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.password-requirements li {
+  padding: 8px 0;
+  color: #666;
+  display: flex;
+  align-items: center;
+  transition: color 0.3s ease;
+}
+
+/* Icono visual opcional con pseudo-elemento */
+.password-requirements li::before {
+  content: '⨯';
+  color: #d9534f;
+  margin-right: 10px;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+/* Requisitos validados */
+.password-requirements .valid {
+  color: #28a745;
+}
+
+.password-requirements .valid::before {
+  content: '';
+  color: #28a745;
+}
+
+/* Mensaje de contraseña segura */
+.password-requirements .secure-msg {
+  margin-top: 15px;
+  padding: 10px;
+  background-color: #e9fce9;
+  border: 1px solid #b2e3b2;
+  border-radius: 8px;
+  color: #218838;
+  font-weight: 600;
+  text-align: center;
+}
 
 

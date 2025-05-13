@@ -179,13 +179,15 @@
               <mat-icon>{{ showConfirmPassword ? 'visibility' : 'visibility_off' }}</mat-icon>
             </button>
             <!-- valida contraseña  -->
-            <mat-error *ngIf="form?.hasError('passwordMismatch') && form?.get('confirmPassword')?.touched">
-              <p>{{ 'register.incorrect' | translate }}</p>
-            </mat-error>
+            <mat-error *ngIf="form?.hasError('passwordMismatch') && form?.get('confirmPassword')">
+              {{ 'register.incorrect' | translate }}
+              </mat-error>
+
             <mat-icon matPrefix>key</mat-icon>
           </mat-form-field>
           <div id="recaptcha-container" class="g-recaptcha" data-callback="onCaptchaResolved"
             data-sitekey="6Lcanv0qAAAAAJZXEdthr0g_wb1wMR6lYSEjOFro"></div>
+
           <p *ngIf="!onCaptchaPassed" class="error-text">{{ 'register.captcha_error_label' | translate }}</p>
 
           <button mat-raised-button color="primary" (click)="this.submit()" class="login-btn"
@@ -202,13 +204,9 @@
             </button>
 
           </div>
-          <p style="margin-top: 15px;">
-            {{ 'register.have_account' | translate }} <a href="/login">{{ 'register.login_now' | translate }}</a>
-          </p>
-
-
+          
           <!-- Validación de requisitos -->
-          <div>
+          <div  class="password-requirements">
             <p>{{ 'register.password_rules_intro' | translate }}</p>
             <ul>
               <li [ngClass]="{ valid: requisitos.length }">{{ 'register.length' | translate }}</li>

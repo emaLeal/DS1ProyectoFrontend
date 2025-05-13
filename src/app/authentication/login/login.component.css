@@ -3,8 +3,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 180vh;
   background: linear-gradient(135deg, #A0F6FF, #0634A9); /* Ajusta estos colores si lo requieres */
+  zoom:60%;
 }
 
 .login-card {

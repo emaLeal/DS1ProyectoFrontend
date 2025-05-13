@@ -99,17 +99,16 @@ export class RegisterComponent extends TranslateLogic implements AfterViewInit {
   }
 
   /**se supone q es para q la contraseña indique si es la misma o no al confirmarla (NO FUNCIONA :( ) */
-  passwordsMatchValidator(group: AbstractControl): ValidationErrors | null {
-    return (formGroup: AbstractControl): ValidationErrors | null => {
-    const password = formGroup.get('password')?.value;
-    const confirmPassword = formGroup.get('confirmPassword')?.value;
+  passwordsMatchValidator(formGroup: AbstractControl): ValidationErrors | null {
+  const password = formGroup.get('password')?.value;
+  const confirmPassword = formGroup.get('confirmPassword')?.value;
 
-    if (password !== confirmPassword) {
-      return { passwordMismatch: true };
-    }
-    return null;
-  };
+  if (password !== confirmPassword) {
+    return { passwordMismatch: true };
+  }
+  return null;
 }
+
 
   ngAfterViewInit() {
     if ((window as any).grecaptcha) {
