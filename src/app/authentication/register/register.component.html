@@ -5,6 +5,85 @@
       <ng-template matStepLabel>
         <span class="step-label">{{ 'register.personal_information' | translate }}</span>
       </ng-template>
+      <form [formGroup]="form!" (submit)="this.submit()">
+        <div class="login-card">
+          <div class="login-header">
+            {{ 'register.welcome_label' | translate }}
+          </div>
+          <div class="login-icon">
+            <img src="assets/img/user-icon.png" alt="User Icon">
+          </div>
+
+
+          <mat-form-field class="custom-field">
+            <mat-label>{{ 'register.name' | translate }}</mat-label>
+            <input matInput type="text" class="custom-input" [placeholder]="'register.name_label' | translate"
+              formControlName="name" (keypress)="onlyLetters($event)">
+            <mat-icon matPrefix>person</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field class="custom-field">
+            <mat-label>{{ 'register.last_name' | translate }}</mat-label>
+            <input matInput class="custom-input" [placeholder]="'register.lastname_label' | translate"
+              formControlName="lastname" (keypress)="onlyLetters($event)">
+            <mat-icon matPrefix>person</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field class="custom-field">
+            <mat-label>{{ 'register.id_type' | translate }}</mat-label>
+            <mat-select class="custom-input" formControlName="idType"
+              [placeholder]="'register.id_type_label' | translate">
+              <mat-option *ngFor="let type of documentTypes" [value]="type.value">
+                {{ type.label | translate }}
+              </mat-option>
+            </mat-select>
+            <mat-icon matPrefix>badge</mat-icon>
+          </mat-form-field>
+
+
+          <mat-form-field class="custom-field">
+            <mat-label>{{ 'register.id' | translate }}</mat-label>
+            <input matInput type="number" class="custom-input" formControlName="idType"
+              [placeholder]="'register.id_label' | translate" formControlName="id">
+            <mat-icon matPrefix>key</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field class="custom-field" appearance="fill">
+            <mat-label>{{ 'register.birth' | translate }}</mat-label>
+            <input matInput type="date" class="custom-input" [placeholder]="'register.birth_label' | translate"
+              formControlName="birth">
+            <mat-icon matPrefix>calendar_today</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" class="custom-field">
+            <mat-label>{{ 'register.gender' | translate }}</mat-label>
+            <mat-select formControlName="gender" [placeholder]="'register.gender_label' | translate"
+              panelClass="custom-select-panel">
+              <mat-option *ngFor="let type of genderTypes" [value]="type.value">
+                {{ type.label | translate }}
+              </mat-option>
+            </mat-select>
+            <mat-icon matPrefix>person</mat-icon>
+          </mat-form-field>
+
+
+          <div>
+            <button mat-button type="button" color="primary" class="login-btn" matStepperNext>
+              {{ 'register.button_next' | translate }}
+            </button>
+            <p style="margin-top: 15px;">
+              {{ 'register.have_account' | translate }} <a href="/login">{{ 'register.login_now' | translate }}</a>
+            </p>
+          </div>
+        </div>
+      </form>
+    </mat-step>
+
+    <!-- Paso 2 -->
+    <mat-step [stepControl]="secondFormGroup">
+      <ng-template matStepLabel>
+        <span class="step-label">{{ 'register.contact_information' | translate }}</span>
+      </ng-template>
       <form [formGroup]="form!">
         <div class="login-card">
           <div class="login-header">
@@ -14,215 +93,140 @@
             <img src="assets/img/user-icon.png" alt="User Icon">
           </div>
 
-                   
           <mat-form-field class="custom-field">
-            <mat-label>{{ 'register.name' | translate }}</mat-label>
-            <input matInput type="text" class="custom-input" [placeholder]="'register.name_label' | translate" formControlName="name"
-            (keypress)="onlyLetters($event)">
-            <mat-icon matPrefix>person</mat-icon>
+            <mat-label>{{ 'register.email' | translate }}</mat-label>
+            <input matInput type="email" class="custom-input" [placeholder]="'register.email_label' | translate"
+              formControlName="email">
+            <mat-icon matPrefix>mail</mat-icon>
           </mat-form-field>
 
           <mat-form-field class="custom-field">
-            <mat-label>{{ 'register.last_name' | translate }}</mat-label>
-            <input matInput class="custom-input" [placeholder]="'register.lastname_label' | translate" formControlName="lastname"
-            (keypress)="onlyLetters($event)">
-            <mat-icon matPrefix>person</mat-icon>
+            <mat-label>{{ 'register.mobile' | translate }}</mat-label>
+            <input matInput type="number" class="custom-input" [placeholder]="'register.mobile_label' | translate"
+              formControlName="mobile">
+            <mat-icon matPrefix>smartphone</mat-icon>
           </mat-form-field>
 
           <mat-form-field class="custom-field">
-            <mat-label>{{ 'register.id_type' | translate }}</mat-label>
-            <mat-select class="custom-input" formControlName="idType" [placeholder]="'register.id_type_label' | translate">
-              <mat-option *ngFor="let type of documentTypes" [value]="type.value">
-                {{ type.label | translate }} 
-              </mat-option>
-            </mat-select>
-            <mat-icon matPrefix>badge</mat-icon>
+            <mat-label>{{ 'register.phone' | translate }}</mat-label>
+            <input matInput type="number" class="custom-input" [placeholder]="'register.phone_label' | translate"
+              formControlName="phone">
+            <mat-icon matPrefix>call</mat-icon>
           </mat-form-field>
-          
-          
+
           <mat-form-field class="custom-field">
-            <mat-label>{{ 'register.id' | translate }}</mat-label>
-            <input matInput type="number" class="custom-input" formControlName="idType" [placeholder]="'register.id_label' | translate" formControlName="id">
-            <mat-icon matPrefix>key</mat-icon>
+            <mat-label>{{ 'register.address' | translate }}</mat-label>
+            <input matInput type="text" class="custom-input" [placeholder]="'register.address_label' | translate"
+              formControlName="address">
+            <mat-icon matPrefix>home</mat-icon>
           </mat-form-field>
 
-          <mat-form-field class="custom-field" appearance="fill">
-            <mat-label>{{ 'register.birth' | translate }}</mat-label>
-            <input matInput type="date" class="custom-input" [placeholder]="'register.birth_label' | translate" formControlName="birth">
-            <mat-icon matPrefix>calendar_today</mat-icon>
-          </mat-form-field>
-          
-          <mat-form-field appearance="fill" class="custom-field">
-            <mat-label>{{ 'register.gender' | translate }}</mat-label>
-            <mat-select
-              formControlName="gender"
-              [placeholder]="'register.gender_label' | translate"
-              panelClass="custom-select-panel">
-              <mat-option *ngFor="let type of genderTypes" [value]="type.value">
-                {{ type.label | translate }}
-              </mat-option>
-            </mat-select>
-            <mat-icon matPrefix>person</mat-icon>
-          </mat-form-field>
-          
-
-           <div>
+          <div style="display: flex; justify-content: space-between;">
+            <button mat-button color="primary" class="login-btn" matStepperPrevious>
+              {{ 'register.button_back' | translate }}
+            </button>
+            <p></p>
             <button mat-button color="primary" class="login-btn" matStepperNext>
               {{ 'register.button_next' | translate }}
             </button>
-            <p style="margin-top: 15px;">
-              {{ 'register.have_account' | translate }} <a href="/login">{{ 'register.login_now' | translate }}</a>
-            </p> 
           </div>
+
         </div>
       </form>
     </mat-step>
 
-<!-- Paso 2 -->
-<mat-step [stepControl]="secondFormGroup">
-  <ng-template matStepLabel>
-    <span class="step-label">{{ 'register.contact_information' | translate }}</span>
-  </ng-template>
-  <form [formGroup]="form!">
-    <div class="login-card">
-      <div class="login-header">
-        {{ 'register.welcome_label' | translate }}
-      </div>
-      <div class="login-icon">
-        <img src="assets/img/user-icon.png" alt="User Icon">
-      </div>
 
-      <mat-form-field class="custom-field">
-        <mat-label>{{ 'register.email' | translate }}</mat-label>
-        <input matInput type="email" class="custom-input" [placeholder]="'register.email_label' | translate" formControlName="email">
-        <mat-icon matPrefix>mail</mat-icon>
-      </mat-form-field>
+    <!-- Paso Final -->
+    <mat-step [stepControl]="thirdFormGroup">
+      <ng-template matStepLabel>
+        <span class="step-label">{{ 'register.done' | translate }}</span>
+      </ng-template>
+      <form [formGroup]="form!">
+        <div class="login-card">
+          <div class="login-header">
+            {{ 'register.welcome_label' | translate }}
+          </div>
+          <div class="login-icon">
+            <img src="assets/img/user-icon.png" alt="User Icon">
+          </div>
 
-      <mat-form-field class="custom-field">
-        <mat-label>{{ 'register.mobile' | translate }}</mat-label>
-        <input matInput type="number" class="custom-input" [placeholder]="'register.mobile_label' | translate" formControlName="mobile">
-        <mat-icon matPrefix>smartphone</mat-icon>
-      </mat-form-field>
+          <div class="login-header">
+            {{ 'register.final_step_label' | translate }}
+          </div>
 
-      <mat-form-field class="custom-field">
-        <mat-label>{{ 'register.phone' | translate }}</mat-label>
-        <input matInput type="number" class="custom-input" [placeholder]="'register.phone_label' | translate" formControlName="phone">
-        <mat-icon matPrefix>call</mat-icon>
-      </mat-form-field>
+          <mat-form-field class="custom-field">
+            <mat-label>{{ 'register.password' | translate }}</mat-label>
+            <input matInput [type]="showPassword ? 'text' : 'password'" class="custom-input"
+              [placeholder]="'register.password_label' | translate" formControlName="password"
+              (input)="onPasswordInput()">
+            <button mat-icon-button matSuffix (click)="showPassword = !showPassword"
+              [attr.aria-label]="'Toggle password visibility'" [attr.aria-pressed]="showPassword">
+              <mat-icon>{{ showPassword ? 'visibility' : 'visibility_off' }}</mat-icon>
+            </button>
+            <mat-icon matPrefix>key</mat-icon>
+          </mat-form-field>
 
-      <mat-form-field class="custom-field">
-        <mat-label>{{ 'register.address' | translate }}</mat-label>
-        <input matInput type="text" class="custom-input" [placeholder]="'register.address_label' | translate" formControlName="address">
-        <mat-icon matPrefix>home</mat-icon>
-      </mat-form-field>
+          <div class="login-header">
+            {{ 'register.final_step_label1' | translate }}
+          </div>
+          <!-- Confirmar contraseña -->
+          <mat-form-field class="custom-field">
+            <mat-label>{{ 'register.password1' | translate }}</mat-label>
+            <input matInput [type]="showConfirmPassword ? 'text' : 'password'" class="custom-input"
+              [placeholder]="'register.password_label1' | translate" formControlName="confirmPassword">
+            <button mat-icon-button matSuffix (click)="showConfirmPassword = !showConfirmPassword"
+              [attr.aria-label]="'Toggle password visibility'" [attr.aria-pressed]="showConfirmPassword">
+              <mat-icon>{{ showConfirmPassword ? 'visibility' : 'visibility_off' }}</mat-icon>
+            </button>
+            <!-- valida contraseña  -->
+            <mat-error *ngIf="form?.hasError('passwordMismatch') && form?.get('confirmPassword')?.touched">
+              <p>{{ 'register.incorrect' | translate }}</p>
+            </mat-error>
+            <mat-icon matPrefix>key</mat-icon>
+          </mat-form-field>
+          <div id="recaptcha-container" class="g-recaptcha" data-callback="onCaptchaResolved"
+            data-sitekey="6Lcanv0qAAAAAJZXEdthr0g_wb1wMR6lYSEjOFro"></div>
+          <p *ngIf="!onCaptchaPassed" class="error-text">{{ 'register.captcha_error_label' | translate }}</p>
 
-      <div style="display: flex; justify-content: space-between;">
-        <button mat-button color="primary" class="login-btn" matStepperPrevious>
-          {{ 'register.button_back' | translate }}
-        </button> <p></p>
-        <button mat-button color="primary" class="login-btn" matStepperNext>
-          {{ 'register.button_next' | translate }}
-        </button>
-      </div>
-      
-    </div>
-  </form>
-</mat-step>
-
-
-<!-- Paso Final -->
-<mat-step [stepControl]="thirdFormGroup">
-  <ng-template matStepLabel>
-    <span class="step-label">{{ 'register.done' | translate }}</span>
-  </ng-template>
-  <form [formGroup]="form!">
-    <div class="login-card">
-      <div class="login-header">
-        {{ 'register.welcome_label' | translate }}
-      </div>
-      <div class="login-icon">
-        <img src="assets/img/user-icon.png" alt="User Icon">
-      </div>
-
-      <div class="login-header">
-        {{ 'register.final_step_label' | translate }}
-      </div>
-
-      <mat-form-field class="custom-field">
-  <mat-label>{{ 'register.password' | translate }}</mat-label>
-  <input matInput [type]="showPassword ? 'text' : 'password'" 
-         class="custom-input" 
-         [placeholder]="'register.password_label' | translate" 
-         formControlName="password"
-         (input)="onPasswordInput()">
-  <button mat-icon-button matSuffix (click)="showPassword = !showPassword" [attr.aria-label]="'Toggle password visibility'" [attr.aria-pressed]="showPassword">
-    <mat-icon>{{ showPassword ? 'visibility' : 'visibility_off' }}</mat-icon>
-  </button>
-  <mat-icon matPrefix>key</mat-icon>
-</mat-form-field>
-
-      <div class="login-header">
-        {{ 'register.final_step_label1' | translate }}
-      </div>
-      <!-- Confirmar contraseña -->
-        <mat-form-field class="custom-field">
-          <mat-label>{{ 'register.password1' | translate }}</mat-label>
-          <input matInput [type]="showConfirmPassword ? 'text' : 'password'" 
-            class="custom-input" 
-            [placeholder]="'register.password_label1' | translate" 
-            formControlName="confirmPassword">
-         <button mat-icon-button matSuffix (click)="showConfirmPassword = !showConfirmPassword" [attr.aria-label]="'Toggle password visibility'" [attr.aria-pressed]="showConfirmPassword">
-          <mat-icon>{{ showConfirmPassword ? 'visibility' : 'visibility_off' }}</mat-icon>
+          <button mat-raised-button color="primary" (click)="this.submit()" class="login-btn"
+            [disabled]="form?.invalid || !this.onCaptchaPassed">
+            {{ 'register.button' | translate }}
           </button>
-        <!-- valida contraseña  -->   
-        <mat-error *ngIf="form?.hasError('passwordMismatch') && form?.get('confirmPassword')?.touched">
-        <p>{{ 'register.incorrect' | translate }}</p>
-        </mat-error>
-        <mat-icon matPrefix>key</mat-icon>
-      </mat-form-field>
-      <div id="recaptcha-container" class="g-recaptcha" data-callback="onCaptchaResolved"
-                data-sitekey="6Lcanv0qAAAAAJZXEdthr0g_wb1wMR6lYSEjOFro"></div>
-            <p *ngIf="!onCaptchaPassed" class="error-text">{{ 'register.captcha_error_label' | translate }}</p>
 
-      <button mat-raised-button color="primary" class="login-btn" [disabled]="form?.invalid || !this.onCaptchaPassed">
-        {{ 'register.button' | translate }}
-      </button> @if(this.isAuthenticated()) {
-                <h1>Usted se ha registrado</h1>
-            }
+          <div style="display: flex; justify-content: space-between;">
+            <button mat-button color="primary" type="button" class="login-btn" matStepperPrevious>
+              {{ 'register.button_back' | translate }}
+            </button>
+            <button mat-button color="primary" class="login-btn" type="button" (click)="stepper.reset()">
+              {{ 'register.button_reset' | translate }}
+            </button>
 
-      <div style="display: flex; justify-content: space-between;">
-        <button mat-button color="primary" class="login-btn" matStepperPrevious>
-          {{ 'register.button_back' | translate }}
-        </button>
-        <button mat-button color="primary" class="login-btn" (click)="stepper.reset()">
-          {{ 'register.button_reset' | translate }}
-        </button>
-       
-      </div>
-      <p style="margin-top: 15px;">
-        {{ 'register.have_account' | translate }} <a href="/login">{{ 'register.login_now' | translate }}</a>
-      </p>
-    
-   
-    <!-- Validación de requisitos -->
-  <div>
-    <p>{{ 'register.password_rules_intro' | translate }}</p>
-    <ul>
-      <li [ngClass]="{ valid: requisitos.length }">{{ 'register.length' | translate }}</li>
-      <li [ngClass]="{ valid: requisitos.hasNumber && requisitos.hasLower }">{{ 'register.number_lower' | translate }}</li>
-      <li [ngClass]="{ valid: requisitos.hasUpper }">{{ 'register.upper' | translate }}</li>
-      <li [ngClass]="{ valid: requisitos.hasSpecial }">{{ 'register.special' | translate }}</li>
-    </ul>
-    <!-- Mensaje de contraseña segura -->
-  <div *ngIf="requisitos.length && requisitos.hasUpper && requisitos.hasLower && requisitos.hasNumber && requisitos.hasSpecial">
-    <p style="color: green;">{{ 'register.password_secure' | translate }}</p>
-  
-</div>
-</div>
- <p style="margin-top: 15px;">
-                {{ 'register.have_account' | translate }} <a href="/login">{{ 'register.login_now' | translate }}</a>
-              </p> 
- </div>
-  </form>
-</mat-step>
-    
+          </div>
+          <p style="margin-top: 15px;">
+            {{ 'register.have_account' | translate }} <a href="/login">{{ 'register.login_now' | translate }}</a>
+          </p>
+
+
+          <!-- Validación de requisitos -->
+          <div>
+            <p>{{ 'register.password_rules_intro' | translate }}</p>
+            <ul>
+              <li [ngClass]="{ valid: requisitos.length }">{{ 'register.length' | translate }}</li>
+              <li [ngClass]="{ valid: requisitos.hasNumber && requisitos.hasLower }">{{ 'register.number_lower' |
+                translate }}</li>
+              <li [ngClass]="{ valid: requisitos.hasUpper }">{{ 'register.upper' | translate }}</li>
+              <li [ngClass]="{ valid: requisitos.hasSpecial }">{{ 'register.special' | translate }}</li>
+            </ul>
+            <!-- Mensaje de contraseña segura -->
+            <div
+              *ngIf="requisitos.length && requisitos.hasUpper && requisitos.hasLower && requisitos.hasNumber && requisitos.hasSpecial">
+              <p style="color: green;">{{ 'register.password_secure' | translate }}</p>
+
+            </div>
+          </div>
+          <p style="margin-top: 15px;">
+            {{ 'register.have_account' | translate }} <a href="/login">{{ 'register.login_now' | translate }}</a>
+          </p>
+        </div>
+      </form>
+    </mat-step>

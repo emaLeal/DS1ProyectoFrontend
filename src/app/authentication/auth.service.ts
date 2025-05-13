@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Login } from './auth.types'
+import { Login, UserForm } from './auth.types'
 
 @Injectable({
   providedIn: 'root',
@@ -18,6 +18,10 @@ export class AuthService {
         localStorage.setItem('token', token);
         this.auth = true;
       });
+  }
+
+  register(userForm: UserForm)  {
+
   }
 
 
