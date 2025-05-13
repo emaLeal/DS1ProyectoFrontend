@@ -1,6 +1,7 @@
 .dashboard {
     display: flex;
     height: 100vh;
+    overflow: hidden
   }
   
   .sidebar {
@@ -163,6 +164,11 @@
   border-color: #6666ff;
 }
 
-
+.scrollable-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem;
+  background: #f0f0f0;
+}
 
   
