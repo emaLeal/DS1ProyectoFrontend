@@ -1,1 +1,39 @@
-<p>roles works!</p>
+<div class="roles-container">
+  <h2>Gestión de Roles</h2>
+
+  <div class="actions">
+    <input type="text" placeholder="Buscar rol..." [(ngModel)]="filtro" (input)="filtrarRoles()" />
+    <button (click)="abrirFormulario()">Crear Rol</button>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre del Rol</th>
+        <th>Descripción</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let rol of rolesFiltrados">
+        <td>{{ rol.id }}</td>
+        <td>{{ rol.nombre }}</td>
+        <td>{{ rol.descripcion }}</td>
+        <td>
+          <button (click)="editarRol(rol)">✏️</button>
+          <button (click)="eliminarRol(rol.id)">🗑️</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Modal o sección para agregar/editar -->
+  <div *ngIf="mostrarFormulario" class="formulario">
+    <h3>{{ rolSeleccionado ? 'Editar Rol' : 'Crear Rol' }}</h3>
+    <input [(ngModel)]="form.nombre" placeholder="Nombre del rol" />
+    <textarea [(ngModel)]="form.descripcion" placeholder="Descripción"></textarea>
+    <button (click)="guardarRol()">Guardar</button>
+    <button (click)="cerrarFormulario()">Cancelar</button>
+  </div>
+</div>
