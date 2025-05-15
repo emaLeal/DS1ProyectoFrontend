@@ -62,9 +62,9 @@ export class RegisterComponent extends TranslateLogic implements AfterViewInit {
   ngOnInit() {
     this.form = this.fb.group({
       name: ['', Validators.required],
-      lastname: ['', Validators.required],
+      last_name: ['', Validators.required],
       idType: ['', Validators.required],
-      id: ['', Validators.required],
+      document_id: ['', Validators.required],
       birth: ['', Validators.required],
       gender: ['', Validators.required],
       mobile: ['', Validators.required],
@@ -96,18 +96,31 @@ export class RegisterComponent extends TranslateLogic implements AfterViewInit {
     this.requisitos.hasLower = /[a-z]/.test(value);
     this.requisitos.hasNumber = /\d/.test(value);
     this.requisitos.hasSpecial = /[!@#$%^&*(),.?":{}|<>]/.test(value);
+    
   }
 
-  /**se supone q es para q la contraseña indique si es la misma o no al confirmarla (NO FUNCIONA :( ) */
-  passwordsMatchValidator(formGroup: AbstractControl): ValidationErrors | null {
+  /*Valida que las constraseñas sean iguales y sino muestra un error*/
+passwordsMatchValidator(formGroup: AbstractControl): ValidationErrors | null {
   const password = formGroup.get('password')?.value;
-  const confirmPassword = formGroup.get('confirmPassword')?.value;
+  const confirmPasswordControl = formGroup.get('confirmPassword');
 
-  if (password !== confirmPassword) {
+  if (password !== confirmPasswordControl?.value) {
+    confirmPasswordControl?.setErrors({ passwordMismatch: true });
     return { passwordMismatch: true };
+  } else {
+    const errors = confirmPasswordControl?.errors;
+    if (errors) {
+      delete errors['passwordMismatch'];
+      if (Object.keys(errors).length === 0) {
+        confirmPasswordControl?.setErrors(null);
+      } else {
+        confirmPasswordControl?.setErrors(errors);
+      }
+    }
+    return null;
   }
-  return null;
 }
+
 
 
   ngAfterViewInit() {
@@ -128,10 +141,9 @@ export class RegisterComponent extends TranslateLogic implements AfterViewInit {
   }
 
   submit() {
-    console.log(":D")
     if (this.form?.valid && this.onCaptchaPassed) {
-      const { name, lastname, id, password, email, } = this.form.value;
-      console.log('Datos de registro:', { name, lastname, password, email, id });
+
+      this.authService.register(this.form.value)
       localStorage.setItem('captcha-token', this.captchaToken!);
     }
   }
