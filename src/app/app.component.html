@@ -1,10 +1,18 @@
-<div class="language-selector">
-  <button class="lang-btn" (click)="translateText('es')" aria-label="Cambiar a Español">
-    <img src="./assets/img/spanish-logo.png" alt="Español" />
+<!-- Menú colapsable de idiomas -->
+<div class="lang-menu">
+  <button class="lang-toggle-btn" (click)="toggleMenu()" aria-label="Cambiar idioma">
+    🌐
   </button>
-  <button class="lang-btn" (click)="translateText('en')" aria-label="Switch to English">
-    <img src="./assets/img/english-logo.png" alt="English" />
-  </button>
+
+  <div class="lang-options" *ngIf="menuOpen">
+    <button class="lang-btn" (click)="translateText('es')" aria-label="Cambiar a Español">
+      <img src="./assets/img/spanish-logo.png" alt="Español" />
+    </button>
+    <button class="lang-btn" (click)="translateText('en')" aria-label="Switch to English">
+      <img src="./assets/img/english-logo.png" alt="English" />
+    </button>
+  </div>
 </div>
 
+<!-- Tu router-outlet sigue igual -->
 <router-outlet></router-outlet>
