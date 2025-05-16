@@ -7,6 +7,8 @@ import { OfertasCerradasComponent } from './dashboard/ofertas-cerradas/ofertas-c
 import { UsuariosComponent } from './dashboard/usuarios/usuarios.component';
 import { RolesComponent } from './dashboard/roles/roles.component';
 import { AgregarComponent } from './dashboard/agregar/agregar.component';
+import { RegisterComponent } from './authentication/register/register.component';
+import {  isSuperUser } from './authentication/guards/authentication.guard';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -22,7 +24,7 @@ export const routes: Routes = [
       { path: 'roles', component: RolesComponent },
       { path: 'agregar', component: AgregarComponent },
       { path: '', component: AgregarComponent },
-    ]
+    ], canActivate: [isSuperUser]
   },
   { path: '', redirectTo: 'login', pathMatch: 'full' } // Redirige a login por defecto
   
