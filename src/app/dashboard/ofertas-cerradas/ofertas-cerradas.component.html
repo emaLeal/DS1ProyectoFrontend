@@ -1,0 +1,39 @@
+<div class="postulantes-container">
+  <section class="hero">
+    <h1>Consulta las ofertas cerradas</h1>
+    <p>Estas ofertas ya no están disponibles para postularse.</p>
+  </section>
+
+  <section class="filtros">
+    <h3>Filtrar Ofertas Cerradas</h3>
+    <div class="filtro-grupo">
+      <input type="text" placeholder="Palabra clave" [(ngModel)]="filtroPalabra">
+      <select [(ngModel)]="filtroCargo">
+        <option value="">Tipo de Cargo</option>
+        <option>Analista UI/UX</option>
+        <option>Back-End</option>
+        <option>Comercial</option>
+      </select>
+      <select [(ngModel)]="filtroRango">
+        <option value="">Rango</option>
+        <option>Junior</option>
+        <option>Senior</option>
+      </select>
+      <input type="number" placeholder="Salario mínimo" [(ngModel)]="filtroSalario">
+      <button class="filtrar-btn" (click)="aplicarFiltros()">Aplicar Filtros</button>
+    </div>
+  </section>
+
+  <section class="ofertas-listado">
+    <div class="oferta-card" *ngFor="let oferta of ofertas">
+      <h4>{{ oferta.cargo }}</h4>
+      <p><strong>Empresa:</strong> {{ oferta.empresa }}</p>
+      <p><strong>Salario:</strong> {{ oferta.salario }}</p>
+      <p><strong>Ubicación:</strong> {{ oferta.ubicacion }}</p>
+      <div class="botones">
+        <button class="detalle-btn">Ver Detalles</button>
+        <button class="postular-btn" disabled>Oferta Cerrada</button>
+      </div>
+    </div>
+  </section>
+</div>

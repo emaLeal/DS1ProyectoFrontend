@@ -1,0 +1,258 @@
+/* Fondo general con gradiente */
+.login-container {
+  display: flex;
+  justify-content: center;
+
+  align-items: center;
+  height: 114vh;
+  min-height: 10vh;
+  background: linear-gradient(135deg, #A0F6FF, #0634A9);
+  zoom: 90%
+}
+
+
+.mat-stepper-horizontal {
+  margin-top: 1px;
+}
+
+.mat-mdc-form-field {
+  margin-top: 16px;
+}
+
+/* Tarjeta principal del formulario */
+.login-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 25px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  width: 800px;
+  position: relative;
+}
+
+/* Encabezado del formulario: "Bienvenido" */
+.login-header {
+  background: linear-gradient(90deg, #020fc5, #0037a7);
+  color: white;
+  font-size: 25px;
+  font-weight: bold;
+  padding: 15px 30px;
+  border-radius: 30px;
+  box-shadow: 0 4px 10px rgba(0, 89, 255, 0.726);
+  margin-bottom: 0px;
+  display: inline-block;
+}
+
+/* Icono circular */
+.login-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 35px;
+  background: #0057ff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 25px;
+}
+
+.login-icon img {
+  width: 195px;
+
+}
+
+/* Campo de formulario personalizado */
+.custom-field {
+  width: 100%;
+  max-width: 350px;
+  background: white;
+  border-radius: 20px;
+  padding: 8px 13px;
+  box-shadow: 0px 4px 10px rgba(0, 89, 255, 0.3);
+  margin-bottom: 25px;
+  margin-right: 5px;
+  margin-left: 19px;
+}
+
+/* Input personalizado */
+.custom-field input {
+  width: 100%;
+  font-size: 18px;
+ 
+}
+
+.mat-mdc-select-panell{
+  background-color: red;
+}
+
+
+/* Etiqueta del input */
+mat-label {
+  font-size: 18px;
+}
+
+/* Sombra azul al hacer focus */
+.custom-field:focus-within {
+  box-shadow: 0px 4px 15px rgba(0, 89, 255, 0.6);
+}
+
+/* Botón de registro */
+.login-btn {
+  width: 100%;
+  margin: 10px;
+  background-color: #0057ff;
+  color: white;
+  font-weight: bold;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 20px;
+  border: none;
+  transition: background 0.3s ease-in-out;
+  cursor: pointer; /* cursor normal */
+  user-select: none; /* evita selección de texto */
+}
+
+.login-btn:hover {
+  background-color: #0037a7;
+}
+
+/* 🔒 Estado deshabilitado */
+.login-btn:disabled {
+  background-color: #a0a0a0;
+  cursor: not-allowed;         /* cambia el cursor */
+  opacity: 0.6;                /* visualmente desactivado */
+  color: #ffffff;
+}
+
+/* Texto de error (Captcha) */
+.error-text {
+  color: rgb(4, 4, 4);
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+/* Eliminar controles de número */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* Estilo para matStepLabel */
+::ng-deep .step-label {
+  font-weight: bold;
+  color: #1a0bea;
+  font-size: 20px;
+  
+}
+
+
+/* Hover en pasos inactivos */
+:host ::ng-deep .mat-step-header:not(.mat-active):not(.mat-completed):hover {
+  background-color: rgba(67, 83, 255, 0.263);
+  cursor: pointer;
+  border-radius: 50px;
+}
+
+/* Ícono paso activo */
+:host ::ng-deep .mat-step-icon.mat-step-icon-selected {
+  background-color: #000359 !important;
+  color: rgb(249, 249, 249) !important;
+  font-weight: bold;
+}
+
+/* Contenedor principal */
+.password-requirements {
+  background-color: #f9f9fb;
+  border: 1px solid #129af5;
+  border-radius: 12px;
+  padding: 20px 24px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  max-width: 450px;
+  margin: 20px auto;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Título */
+.password-requirements p:first-child {
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: #333;
+  margin-bottom: 12px;
+}
+
+/* Lista de requisitos */
+.password-requirements ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.password-requirements li {
+  padding: 8px 0;
+  color: #666;
+  display: flex;
+  align-items: center;
+  transition: color 0.3s ease;
+}
+
+/* Icono visual opcional con pseudo-elemento */
+.password-requirements li::before {
+  content: '⨯';
+  color: #d9534f;
+  margin-right: 10px;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+/* Requisitos validados */
+.password-requirements .valid {
+  color: #28a745;
+}
+
+.password-requirements .valid::before {
+  content: '';
+  color: #28a745;
+}
+
+/* Mensaje de contraseña segura */
+.password-requirements .secure-msg {
+  margin-top: 15px;
+  padding: 10px;
+  background-color: #e9fce9;
+  border: 1px solid #b2e3b2;
+  border-radius: 8px;
+  color: #218838;
+  font-weight: 600;
+  text-align: center;
+}
+
+
+.custom-field {
+  font-size: 12px; /* Tamaño de texto más pequeño */
+  width: 100%; /* O ajusta a un tamaño más pequeño si prefieres */
+  margin-bottom: 8px; /* Menos espacio entre campos */
+}
+
+.custom-input {
+  padding: 4px 8px !important; /* Reducir el padding interno */
+  font-size: 12px; /* Tamaño del texto */
+  height: 28px; /* Ajusta la altura del input */
+}
+
+.mat-form-field-infix {
+  padding: 0 !important; /* Eliminar espacio interno adicional */
+}
+
+.mat-form-field-wrapper {
+  padding-bottom: 0px !important; /* Eliminar padding inferior */
+  margin: 0 !important;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  border-radius: 4px; /* Opcional: bordes más suaves */
+}

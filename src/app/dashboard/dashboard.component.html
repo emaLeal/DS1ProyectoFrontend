@@ -1,0 +1,41 @@
+<div class="dashboard">
+    <aside class="sidebar">
+      <h2>Menu</h2>
+      <ul>
+        <li><a routerLink="postulantes"><i class="fa-solid fa-circle-user"></i> Postulantes</a></li>
+        <li><a routerLink="ofertas-cerradas"><i class="fa-solid fa-xmark"></i> Ofertas cerradas</a></li>
+        <li><a routerLink="ofertas-activas"><i class="fa-solid fa-pen-to-square"></i> Ofertas activas</a></li>
+        <li class="admin-menu">
+          <h3>Menu Administrador</h3>
+          <ul>
+            <li><a routerLink="usuarios"><i class="fa-solid fa-user"></i> Usuarios</a></li>
+            <li><a routerLink="roles"><i class="fa-solid fa-users"></i> Roles</a></li>
+          </ul>
+        </li>
+        <li><i class="fa-solid fa-right-to-bracket"></i><a href="#"> Cerrar sesión</a></li>
+      </ul>
+      <a routerLink="agregar" class="inicio-btn">Inicio</a>
+    </aside>
+  
+    <main class="main-content">
+        <header class="topbar">
+            <input type="text" class="search-bar" placeholder="Search..." />
+            
+            <div class="user-section" (click)="toggleMenu()" tabindex="0" (blur)="closeMenu()">
+              <div class="icon"> 
+                <span><i class="fa-solid fa-circle-user"></i></span>
+              </div>
+                <div class="user-menu" *ngIf="isMenuOpen">
+                  <a href="#">Mi perfil</a>
+                  <a href="#">Configuración</a>
+                  <a href="#">Cerrar sesión</a>
+                  
+                </div>
+              </div>
+          </header>
+          <div class="scrollable-content">
+            <router-outlet></router-outlet>
+          </div>
+    </main>
+  </div>
+  
