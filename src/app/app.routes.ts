@@ -10,6 +10,8 @@ import { AgregarComponent } from './dashboard/agregar/agregar.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent }, //
+  { path: 'login', component: LoginComponent },
   { path: 'dashboard', 
     component: DashboardComponent,
     children: [
