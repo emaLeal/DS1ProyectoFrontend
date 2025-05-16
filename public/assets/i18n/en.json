@@ -58,7 +58,11 @@
         "length": "✔ 8 or more characters",
         "number_lower": "✔ At least one number and one lowercase letter",
         "upper": "✔ At least one uppercase letter",
-        "special": "✔ At least one special character (*, .!#$ ...)"
+        "special": "✔ At least one special character (*, .!#$ ...)",
+        "password_rules_intro": "Your password must have:",
+        "password_secure": "Secure password",
+        "incorrect": "Passwords do not match"
+
 
     }
 }

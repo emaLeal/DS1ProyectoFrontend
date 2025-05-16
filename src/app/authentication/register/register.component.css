@@ -2,9 +2,12 @@
 .login-container {
   display: flex;
   justify-content: center;
+
   align-items: center;
-  height: 100vh;
+  height: 114vh;
+  min-height: 10vh;
   background: linear-gradient(135deg, #A0F6FF, #0634A9);
+  zoom: 88%
 }
 
 
@@ -23,7 +26,7 @@
   border-radius: 25px;
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
   text-align: center;
-  width: 1000px;
+  width: 800px;
   position: relative;
 }
 
@@ -31,7 +34,7 @@
 .login-header {
   background: linear-gradient(90deg, #020fc5, #0037a7);
   color: white;
-  font-size: 1.5rem;
+  font-size: 25px;
   font-weight: bold;
   padding: 15px 30px;
   border-radius: 30px;
@@ -42,25 +45,26 @@
 
 /* Icono circular */
 .login-icon {
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
   margin: 0 auto 35px;
   background: #0057ff;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 18px;
+  padding: 25px;
 }
 
 .login-icon img {
   width: 195px;
+
 }
 
 /* Campo de formulario personalizado */
 .custom-field {
-  width: 120%;
-  max-width: 450px;
+  width: 100%;
+  max-width: 350px;
   background: white;
   border-radius: 20px;
   padding: 8px 13px;
@@ -73,9 +77,14 @@
 /* Input personalizado */
 .custom-field input {
   width: 100%;
-  font-size: 25px;
-  padding: 7px;
+  font-size: 18px;
+ 
 }
+
+.mat-mdc-select-panell{
+  background-color: red;
+}
+
 
 /* Etiqueta del input */
 mat-label {
@@ -90,18 +99,29 @@ mat-label {
 /* Botón de registro */
 .login-btn {
   width: 100%;
-  margin-top: 10px;
+  margin: 10px;
   background-color: #0057ff;
   color: white;
   font-weight: bold;
   padding: 12px;
   font-size: 16px;
   border-radius: 20px;
+  border: none;
   transition: background 0.3s ease-in-out;
+  cursor: pointer; /* cursor normal */
+  user-select: none; /* evita selección de texto */
 }
 
 .login-btn:hover {
   background-color: #0037a7;
+}
+
+/* 🔒 Estado deshabilitado */
+.login-btn:disabled {
+  background-color: #a0a0a0;
+  cursor: not-allowed;         /* cambia el cursor */
+  opacity: 0.6;                /* visualmente desactivado */
+  color: #ffffff;
 }
 
 /* Texto de error (Captcha) */
@@ -126,7 +146,8 @@ input[type="number"] {
 ::ng-deep .step-label {
   font-weight: bold;
   color: #1a0bea;
-  font-size: 1.5rem;
+  font-size: 20px;
+  
 }
 
 
@@ -144,9 +165,94 @@ input[type="number"] {
   font-weight: bold;
 }
 
-.valid {
-  color: #4caf50; /* Verde */
+/* Contenedor principal */
+.password-requirements {
+  background-color: #f9f9fb;
+  border: 1px solid #129af5;
+  border-radius: 12px;
+  padding: 20px 24px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  max-width: 450px;
+  margin: 20px auto;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Título */
+.password-requirements p:first-child {
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: #333;
+  margin-bottom: 12px;
+}
+
+/* Lista de requisitos */
+.password-requirements ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.password-requirements li {
+  padding: 8px 0;
+  color: #666;
+  display: flex;
+  align-items: center;
+  transition: color 0.3s ease;
+}
+
+/* Icono visual opcional con pseudo-elemento */
+.password-requirements li::before {
+  content: '⨯';
+  color: #d9534f;
+  margin-right: 10px;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+/* Requisitos validados */
+.password-requirements .valid {
+  color: #28a745;
+}
+
+.password-requirements .valid::before {
+  content: '';
+  color: #28a745;
+}
+
+/* Mensaje de contraseña segura */
+.password-requirements .secure-msg {
+  margin-top: 15px;
+  padding: 10px;
+  background-color: #e9fce9;
+  border: 1px solid #b2e3b2;
+  border-radius: 8px;
+  color: #218838;
+  font-weight: 600;
+  text-align: center;
 }
 
 
+.custom-field {
+  font-size: 12px; /* Tamaño de texto más pequeño */
+  width: 100%; /* O ajusta a un tamaño más pequeño si prefieres */
+  margin-bottom: 8px; /* Menos espacio entre campos */
+}
 
+.custom-input {
+  padding: 4px 8px !important; /* Reducir el padding interno */
+  font-size: 12px; /* Tamaño del texto */
+  height: 28px; /* Ajusta la altura del input */
+}
+
+.mat-form-field-infix {
+  padding: 0 !important; /* Eliminar espacio interno adicional */
+}
+
+.mat-form-field-wrapper {
+  padding-bottom: 0px !important; /* Eliminar padding inferior */
+  margin: 0 !important;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  border-radius: 4px; /* Opcional: bordes más suaves */
+}

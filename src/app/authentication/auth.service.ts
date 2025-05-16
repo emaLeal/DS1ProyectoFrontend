@@ -20,8 +20,16 @@ export class AuthService {
       });
   }
 
-  register(userForm: UserForm)  {
-
+  register(userForm: UserForm)  {  
+    console.log(userForm);
+    const url: string = 'http://localhost:8000/api/auth/register/';
+    return this.httpClient
+      .post(url, userForm)
+      .subscribe((value) => {
+        const token = JSON.stringify(value);
+        localStorage.setItem('token', token);
+        this.auth = true;
+      });
   }
 
 
