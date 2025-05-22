@@ -33,14 +33,13 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let usuario of usuariosFiltrados">
-            <td>{{ usuario.documento }}</td>
-            <td>{{ usuario.nombreCompleto }}</td>
+          <tr *ngFor="let usuario of usuarios">
+            <td>{{ usuario.document_id }}</td>
+            <td>{{ usuario.name }}</td>
+            <td>{{ usuario.last_name }}</td>
             <td>{{ usuario.email }}</td>
-            <td>{{ usuario.code }}</td>
-            <td>{{ usuario.telefono }}</td>
+            <td>{{ usuario.cell_phone }}</td>
             <td>{{ usuario.rol }}</td>
-            <td>{{ usuario.estatus }}</td>
             <td>
               <button (click)="editarUsuario(usuario)">✏️</button>
               <button (click)="borrarUsuario(usuario)">🗑️</button>

@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Login, UserForm } from './auth.types'
+import { Login, User } from './auth.types'
 import { Router } from '@angular/router';
+import { environment } from '../../../public/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +13,7 @@ export class AuthService {
   ) { }
 
   login(login: Login) {
-    const url: string = 'http://localhost:8000/api/auth/login/';
+    const url: string = environment.baseUrl + environment.authentication.login;
     return this.httpClient
       .post(url, login)
       .subscribe((value: any) => {
@@ -20,7 +21,7 @@ export class AuthService {
         const JSONToken = JSON.stringify(value)
         localStorage.setItem('token', JSONToken);
         this.auth = true;
-        let urlProfile: string = 'http://localhost:8000/api/auth/get_profile'
+        let urlProfile: string = environment.baseUrl + environment.authentication.profile
         return this.httpClient.get(urlProfile, { headers: { 'authorization': `Bearer ${token.access}` } }).subscribe(user => {
           localStorage.setItem('user_data', JSON.stringify(user))
           this.router.navigate(['/dashboard']);
@@ -28,15 +29,13 @@ export class AuthService {
       });
   }
 
-  register(userForm: UserForm) {
-    console.log(userForm);
-    const url: string = 'http://localhost:8000/api/auth/register/';
+  register(userForm: User) {
+    const url: string = environment.baseUrl + environment.authentication.register;
     return this.httpClient
       .post(url, userForm)
       .subscribe((value) => {
-        const token = JSON.stringify(value);
-        localStorage.setItem('token', token);
-        this.auth = true;
+        alert("Te has registrado correctamente")
+        this.router.navigate(['/login']);
       });
   }
 

@@ -3,11 +3,17 @@ export interface Login {
     password: string
 }
 
-export interface UserForm {
+export interface User {
     name: string,
     last_name: string,
     document_id: number,
     address: string,
-    role_id?: number,
-    phone: number
+    role: string,
+    phone: number,
+    cell_phone: number,
+    birth_date: Date,
+    gender:string,
+    identification_type:string,
+    email:string
+
 }

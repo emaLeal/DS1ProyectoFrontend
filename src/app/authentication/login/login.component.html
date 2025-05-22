@@ -18,9 +18,10 @@
 
             <mat-form-field class="custom-field">
                 <mat-label>{{'login.password' | translate}}</mat-label>
-                <input matInput formControlName="password" [type]="showPassword ? 'text' : 'password'" 
-                    class="custom-input" >
-                    <button type="button" matSuffix (click)="showPassword = !showPassword" [attr.aria-label]="'Toggle password visibility'" [attr.aria-pressed]="showPassword">
+                <input matInput formControlName="password" [type]="showPassword ? 'text' : 'password'"
+                    class="custom-input">
+                <button type="button" matSuffix (click)="showPassword = !showPassword"
+                    [attr.aria-label]="'Toggle password visibility'" [attr.aria-pressed]="showPassword">
                     <mat-icon>{{ showPassword ? 'visibility' : 'visibility_off' }}</mat-icon>
                 </button>
                 <mat-icon matPrefix>lock</mat-icon>
@@ -33,14 +34,12 @@
             <button mat-raised-button color="primary" class="login-btn" type="submit"
                 [disabled]="form?.invalid || !this.onCaptchaPassed">{{'login.login_button'
                 | translate}}</button>
-            
-                @if(this.isAuthenticated()) {
-                <h1>Usted ha iniciado sesión</h1>
-            }
+
             <p style="margin-top: 15px;">
-                {{ 'register.havent_account' | translate }} <a href="/register">{{ 'register.register_now' | translate }}</a>
-              </p> 
+                {{ 'register.havent_account' | translate }} <a href="/register">{{ 'register.register_now' | translate
+                    }}</a>
+            </p>
         </div>
-        
+
     </div>
 </form>
