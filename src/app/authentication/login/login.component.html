@@ -20,18 +20,20 @@
                 <mat-label>{{'login.password' | translate}}</mat-label>
                 <input matInput formControlName="password" [type]="showPassword ? 'text' : 'password'"
                     class="custom-input">
-                <button type="button" matSuffix (click)="showPassword = !showPassword"
-                    [attr.aria-label]="'Toggle password visibility'" [attr.aria-pressed]="showPassword">
-                    <mat-icon>{{ showPassword ? 'visibility' : 'visibility_off' }}</mat-icon>
-                </button>
+            <button mat-icon-button matSuffix (click)="showPassword = !showPassword"
+              [attr.aria-label]="'Toggle password visibility'" [attr.aria-pressed]="showPassword">
+              <mat-icon>{{ showPassword ? 'visibility' : 'visibility_off' }}</mat-icon>
+            </button>
                 <mat-icon matPrefix>lock</mat-icon>
             </mat-form-field>
+            <div style="display: flex; justify-content: center; margin-top: 10px;">
 
-            <div id="recaptcha-container" class="g-recaptcha" data-callback="onCaptchaResolved"
-                data-sitekey="6Lcanv0qAAAAAJZXEdthr0g_wb1wMR6lYSEjOFro"></div>
+                <div id="recaptcha-container" class="g-recaptcha" data-callback="onCaptchaResolved"
+                    data-sitekey="6Lcanv0qAAAAAJZXEdthr0g_wb1wMR6lYSEjOFro"></div>
+                </div>
             <p *ngIf="!onCaptchaPassed" class="error-text">{{'login.captcha_error_label' | translate}}</p>
 
-            <button mat-raised-button color="primary" class="login-btn" type="submit"
+            <button  color="primary" class="login-btn" type="submit"
                 [disabled]="form?.invalid || !this.onCaptchaPassed">{{'login.login_button'
                 | translate}}</button>
 

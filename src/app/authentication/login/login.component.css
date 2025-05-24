@@ -104,6 +104,14 @@ mat-label {
   background-color: #0037a7;
 }
 
+.login-btn:disabled {
+  background-color: #a0a0a0;
+  cursor: not-allowed;         /* cambia el cursor */
+  opacity: 0.6;                /* visualmente desactivado */
+  color: #ffffff;
+}
+
+
 /* Eliminar controles de incremento para inputs de tipo number */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {

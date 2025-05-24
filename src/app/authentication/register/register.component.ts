@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, AfterViewInit, inject } from '@angular/core';
+import { Component, AfterViewInit,NgZone } from '@angular/core';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -55,7 +55,7 @@ export class RegisterComponent extends TranslateLogic implements AfterViewInit {
     hasSpecial: false,
   };
 
-  constructor(private fb: FormBuilder, private authService: AuthService, translate: TranslateService) {
+  constructor(private fb: FormBuilder, private authService: AuthService, private zone: NgZone, translate: TranslateService) {
     super(translate);
   }
 
@@ -63,11 +63,11 @@ export class RegisterComponent extends TranslateLogic implements AfterViewInit {
     this.form = this.fb.group({
       name: ['', Validators.required],
       last_name: ['', Validators.required],
-      idType: ['', Validators.required],
+      identification_type: ['', Validators.required],
       document_id: ['', Validators.required],
-      birth: ['', Validators.required],
+      birth_date: ['', Validators.required],
       gender: ['', Validators.required],
-      mobile: ['', Validators.required],
+      cell_phone: ['', Validators.required],
       password: ['', [Validators.required, this.validatePassword(), Validators.minLength(8)]],
       confirmPassword: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -132,8 +132,12 @@ passwordsMatchValidator(formGroup: AbstractControl): ValidationErrors | null {
   }
 
   onCaptchaResolved(response: string) {
-    this.onCaptchaPassed = true;
-    this.captchaToken = response;
+    if (response) {
+      this.zone.run(() => {
+        this.onCaptchaPassed = true;
+        this.captchaToken = response;
+      });
+    }
   }
 
   isAuthenticated(): boolean {

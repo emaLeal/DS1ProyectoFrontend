@@ -31,7 +31,7 @@
 
           <mat-form-field class="custom-field">
             <mat-label>{{ 'register.id_type' | translate }}</mat-label>
-            <mat-select class="custom-input" formControlName="idType"
+            <mat-select class="custom-input" formControlName="identification_type"
               [placeholder]="'register.id_type_label' | translate">
               <mat-option *ngFor="let type of documentTypes" [value]="type.value">
                 {{ type.label | translate }}
@@ -51,7 +51,7 @@
           <mat-form-field class="custom-field" appearance="fill">
             <mat-label>{{ 'register.birth' | translate }}</mat-label>
             <input matInput type="date" class="custom-input" [placeholder]="'register.birth_label' | translate"
-              formControlName="birth">
+              formControlName="birth_date">
             <mat-icon matPrefix>calendar_today</mat-icon>
           </mat-form-field>
 
@@ -103,7 +103,7 @@
           <mat-form-field class="custom-field">
             <mat-label>{{ 'register.mobile' | translate }}</mat-label>
             <input matInput type="number" class="custom-input" [placeholder]="'register.mobile_label' | translate"
-              formControlName="mobile">
+              formControlName="cell_phone">
             <mat-icon matPrefix>smartphone</mat-icon>
           </mat-form-field>
 
