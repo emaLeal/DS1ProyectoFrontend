@@ -1,0 +1,70 @@
+<form [formGroup]="form!" (ngSubmit)="submit()">
+  <div class="login-container">
+    <mat-card class="login-card">
+      <div class="login-card-content">
+        <mat-card-header>
+          <mat-card-title>{{ 'login.welcome_label' | translate }}</mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content>
+          <div class="login-icon">
+            <img src="assets/img/user-icon.png" alt="User Icon">
+          </div>
+
+          <mat-form-field class="custom-field">
+            <mat-label>{{ 'login.document_id' | translate }}</mat-label>
+            <mat-icon matPrefix>person</mat-icon>
+            <input matInput 
+                   type="number" 
+                   class="custom-input" 
+                   [placeholder]="'login.document_label' | translate"
+                   formControlName="document_id">
+          </mat-form-field>
+
+          <mat-form-field class="custom-field">
+            <mat-label>{{ 'login.password' | translate }}</mat-label>
+            <mat-icon matPrefix>lock</mat-icon>
+            <input matInput 
+                   [type]="showPassword ? 'text' : 'password'"
+                   class="custom-input"
+                   [placeholder]="'login.password_label' | translate"
+                   formControlName="password">
+            <button mat-icon-button 
+                    matSuffix 
+                    type="button"
+                    (click)="showPassword = !showPassword"
+                    [attr.aria-label]="'Toggle password visibility'"
+                    [attr.aria-pressed]="showPassword">
+              <mat-icon>{{ showPassword ? 'visibility' : 'visibility_off' }}</mat-icon>
+            </button>
+          </mat-form-field>
+
+          <div style="display: flex; justify-content: center; margin-top: 10px;">
+            <div id="recaptcha-container" 
+                 class="g-recaptcha" 
+                 data-callback="onCaptchaResolved"
+                 data-sitekey="6Lcanv0qAAAAAJZXEdthr0g_wb1wMR6lYSEjOFro">
+            </div>
+          </div>
+
+          <p *ngIf="!onCaptchaPassed" class="error-text">
+            {{ 'login.captcha_error_label' | translate }}
+          </p>
+
+          <button mat-raised-button 
+                  color="primary" 
+                  class="login-btn" 
+                  type="submit"
+                  [disabled]="form?.invalid || !onCaptchaPassed">
+            {{ 'login.login_button' | translate }}
+          </button>
+
+          <p style="margin-top: 15px;">
+            {{ 'login.havent_account' | translate }}
+            <a routerLink="/register">{{ 'login.register_now' | translate }}</a>
+          </p>
+        </mat-card-content>
+      </div>
+    </mat-card>
+  </div>
+</form>

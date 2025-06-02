@@ -1,0 +1,42 @@
+<div class="postulantes-panel">
+  <h2>Listado de Postulantes</h2>
+
+  <div class="filtros">
+    <select [(ngModel)]="filtroGenero">
+      <option value="">Filtrar por género</option>
+      <option value="Masculino">Masculino</option>
+      <option value="Femenino">Femenino</option>
+    </select>
+
+    <select [(ngModel)]="filtroCargo">
+      <option value="">Filtrar por cargo</option>
+      <option *ngFor="let cargo of cargos">{{ cargo }}</option>
+    </select>
+
+    <button (click)="limpiarFiltros()">Limpiar Filtros</button>
+  </div>
+
+  <table class="tabla-postulantes">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Género</th>
+        <th>Cargo deseado</th>
+        <th>Correo</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let p of postulantesFiltrados()">
+        <td>{{ p.nombre }} {{ p.apellido }}</td>
+        <td>{{ p.genero }}</td>
+        <td>{{ p.cargo }}</td>
+        <td>{{ p.correo }}</td>
+        <td>
+          <button class="ver-btn">Ver</button>
+          <button class="editar-btn">Editar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

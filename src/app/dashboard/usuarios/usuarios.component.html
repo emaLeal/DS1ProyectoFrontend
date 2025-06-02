@@ -1,0 +1,375 @@
+<div class="usuarios-container">
+  <!-- Header Section -->
+  <div class="header-section">
+    <mat-card class="header-card">
+      <mat-card-content class="header-content">
+        <div class="title-section">
+          <mat-icon class="title-icon">people</mat-icon>
+          <h1 class="page-title">Gestión de Usuarios</h1>
+          <p class="page-subtitle">Administra los usuarios del sistema</p>
+        </div>
+        <button mat-raised-button (click)="mostrarFormulario = true" class="create-button">
+          <mat-icon>person_add</mat-icon>
+          Nuevo Usuario
+        </button>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Search Section -->
+  <div class="search-section">
+    <mat-card class="search-card">
+      <mat-card-content class="search-content">
+        <mat-form-field appearance="outline" class="search-field">
+          <mat-label>Buscar usuario</mat-label>
+          <input matInput [(ngModel)]="filtroBusqueda" placeholder="Buscar por nombre, apellido o email...">
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="search-field">
+          <mat-label>Filtrar por rol</mat-label>
+          <mat-select [(ngModel)]="filtroRol">
+            <mat-option value="">Todos los roles</mat-option>
+            <mat-option *ngFor="let rol of roles" [value]="rol.id.toString()">
+              {{rol.description}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Table Section -->
+  <div class="table-section">
+    <mat-card class="table-card">
+      <mat-card-header class="table-header">
+        <mat-card-title class="table-title">
+          <mat-icon>list</mat-icon>
+          Usuarios ({{usuariosFiltrados.length}})
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="table-content">
+        <div class="table-container">
+          <table mat-table [dataSource]="usuariosFiltrados" class="usuarios-table">
+            <!-- Columna Nombre -->
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef>Nombre</th>
+              <td mat-cell *matCellDef="let usuario">
+                <div class="primary-text">{{usuario.name}}</div>
+              </td>
+            </ng-container>
+
+            <!-- Columna Apellido -->
+            <ng-container matColumnDef="last_name">
+              <th mat-header-cell *matHeaderCellDef>Apellido</th>
+              <td mat-cell *matCellDef="let usuario">
+                <div class="primary-text">{{usuario.last_name}}</div>
+              </td>
+            </ng-container>
+
+            <!-- Columna Teléfono Fijo -->
+            <ng-container matColumnDef="phone">
+              <th mat-header-cell *matHeaderCellDef>Teléfono Fijo</th>
+              <td mat-cell *matCellDef="let usuario">
+                <div>
+                  <mat-icon class="small-icon">phone</mat-icon> {{usuario.phone || 'No registrado'}}
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Columna Teléfono Celular -->
+            <ng-container matColumnDef="cell_phone">
+              <th mat-header-cell *matHeaderCellDef>Teléfono Celular</th>
+              <td mat-cell *matCellDef="let usuario">
+                <div>
+                  <mat-icon class="small-icon">smartphone</mat-icon> {{usuario.cell_phone || 'No registrado'}}
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Columna Email -->
+            <ng-container matColumnDef="email">
+              <th mat-header-cell *matHeaderCellDef>Email</th>
+              <td mat-cell *matCellDef="let usuario">
+                <div>
+                  <mat-icon class="small-icon">email</mat-icon> {{usuario.email}}
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Columna Documento -->
+            <ng-container matColumnDef="document_id">
+              <th mat-header-cell *matHeaderCellDef>Número Documento</th>
+              <td mat-cell *matCellDef="let usuario">
+                <div class="primary-text">
+                  <mat-icon class="small-icon">badge</mat-icon>
+                  {{usuario.document_id}}
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Columna Género -->
+            <ng-container matColumnDef="gender">
+              <th mat-header-cell *matHeaderCellDef>Género</th>
+              <td mat-cell *matCellDef="let usuario">
+                <div>
+                  <mat-icon class="small-icon">wc</mat-icon>
+                  {{usuario.gender === 'man' ? 'Masculino' : usuario.gender === 'woman' ? 'Femenino' : 'Otro'}}
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Columna Dirección -->
+            <ng-container matColumnDef="address">
+              <th mat-header-cell *matHeaderCellDef>Dirección</th>
+              <td mat-cell *matCellDef="let usuario">
+                <div>
+                  <mat-icon class="small-icon">home</mat-icon> {{usuario.address || 'No registrada'}}
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Columna Tipo de Documento -->
+            <ng-container matColumnDef="identification_type">
+              <th mat-header-cell *matHeaderCellDef>Tipo Documento</th>
+              <td mat-cell *matCellDef="let usuario">
+                <div>
+                  <mat-icon class="small-icon">credit_card</mat-icon>
+                  {{usuario.identification_type}}
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Columna Fecha de Nacimiento -->
+            <ng-container matColumnDef="birth_date">
+              <th mat-header-cell *matHeaderCellDef>Fecha Nacimiento</th>
+              <td mat-cell *matCellDef="let usuario">
+                <div>
+                  <mat-icon class="small-icon">cake</mat-icon>
+                  {{usuario.birth_date ? (usuario.birth_date | date:'dd/MM/yyyy') : 'No registrada'}}
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Columna Rol -->
+            <ng-container matColumnDef="role">
+              <th mat-header-cell *matHeaderCellDef>Rol</th>
+              <td mat-cell *matCellDef="let usuario">
+                <span class="role-badge" [style.background]="getRoleStyle(usuario.role)">
+                  {{getRoleName(usuario.role)}}
+                </span>
+              </td>
+            </ng-container>
+
+            <!-- Columna Acciones -->
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef>Acciones</th>
+              <td mat-cell *matCellDef="let usuario">
+                <div class="action-buttons">
+                  <button mat-raised-button 
+                          color="primary"
+                          class="action-button edit-button" 
+                          (click)="editarUsuario(usuario)" 
+                          matTooltip="Editar usuario">
+                    <mat-icon>edit</mat-icon>
+                    <span>Editar</span>
+                  </button>
+                  <button mat-raised-button 
+                          color="warn"
+                          class="action-button delete-button" 
+                          (click)="borrarUsuario(usuario)" 
+                          matTooltip="Eliminar usuario">
+                    <mat-icon>delete</mat-icon>
+                    <span>Eliminar</span>
+                  </button>
+                </div>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="['name', 'last_name', 'phone', 'cell_phone', 'email', 'document_id', 'gender', 'address', 'identification_type', 'birth_date', 'role', 'actions']" class="table-header-row"></tr>
+            <tr mat-row *matRowDef="let row; columns: ['name', 'last_name', 'phone', 'cell_phone', 'email', 'document_id', 'gender', 'address', 'identification_type', 'birth_date', 'role', 'actions'];" class="table-data-row"></tr>
+
+            <!-- Fila cuando no hay datos -->
+            <tr class="mat-row" *matNoDataRow>
+              <td class="mat-cell no-data" [attr.colspan]="12">
+                <div class="no-data-content">
+                  <mat-icon class="no-data-icon">{{filtroBusqueda || filtroRol ? 'search_off' : 'people_off'}}</mat-icon>
+                  <h3 class="no-data-title">{{ filtroBusqueda || filtroRol ? 'Sin resultados' : 'No hay usuarios' }}</h3>
+                  <p class="no-data-message">
+                    {{ filtroBusqueda || filtroRol ? 'No se encontraron usuarios que coincidan con tu búsqueda' : 'Comienza creando tu primer usuario' }}
+                  </p>
+                  <button *ngIf="!filtroBusqueda && !filtroRol" mat-raised-button color="primary" (click)="mostrarFormulario = true">
+                    <mat-icon>person_add</mat-icon>
+                    Crear Primer Usuario
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Modal Form -->
+  <div *ngIf="mostrarFormulario" class="modal-overlay">
+    <div class="modal-content">
+      <mat-card>
+        <mat-card-header class="table-header">
+          <mat-card-title class="table-title">
+            <mat-icon>person_add</mat-icon>
+            Nuevo Usuario
+          </mat-card-title>
+        </mat-card-header>
+
+        <form (ngSubmit)="crearUsuario()" #usuarioForm="ngForm" class="form-container">
+          <!-- Información Personal -->
+          <div class="form-section">
+            <h3 class="section-title">
+              <mat-icon>person</mat-icon>
+              Información Personal
+            </h3>
+            <div class="form-row">
+              <mat-form-field appearance="outline" class="form-col">
+                <mat-label>Nombre</mat-label>
+                <input matInput [(ngModel)]="nuevoUsuario.name" name="name" required>
+                <mat-icon matSuffix>badge</mat-icon>
+        </mat-form-field>
+
+              <mat-form-field appearance="outline" class="form-col">
+                <mat-label>Apellido</mat-label>
+                <input matInput [(ngModel)]="nuevoUsuario.last_name" name="last_name" required>
+                <mat-icon matSuffix>badge</mat-icon>
+        </mat-form-field>
+            </div>
+
+            <div class="form-row">
+              <mat-form-field appearance="outline" class="form-col">
+                <mat-label>Tipo de Documento</mat-label>
+          <mat-select [(ngModel)]="nuevoUsuario.identification_type" name="identification_type" required>
+                  <mat-option value="CC">Cédula de Ciudadanía</mat-option>
+                  <mat-option value="CE">Cédula de Extranjería</mat-option>
+                  <mat-option value="TI">Tarjeta de Identidad</mat-option>
+                  <mat-option value="PP">Pasaporte</mat-option>
+          </mat-select>
+                <mat-icon matSuffix>credit_card</mat-icon>
+        </mat-form-field>
+
+              <mat-form-field appearance="outline" class="form-col">
+                <mat-label>Número de Documento</mat-label>
+                <input matInput [(ngModel)]="nuevoUsuario.document_id" name="document_id" required>
+                <mat-icon matSuffix>pin</mat-icon>
+              </mat-form-field>
+            </div>
+
+            <div class="form-row">
+              <mat-form-field appearance="outline" class="form-col">
+                <mat-label>Fecha de Nacimiento</mat-label>
+                <input matInput [matDatepicker]="picker" [(ngModel)]="nuevoUsuario.birth_date" name="birth_date" required>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-icon matSuffix>cake</mat-icon>
+        </mat-form-field>
+
+              <mat-form-field appearance="outline" class="form-col">
+          <mat-label>Género</mat-label>
+          <mat-select [(ngModel)]="nuevoUsuario.gender" name="gender" required>
+                  <mat-option value="M">Masculino</mat-option>
+                  <mat-option value="F">Femenino</mat-option>
+                  <mat-option value="O">Otro</mat-option>
+          </mat-select>
+                <mat-icon matSuffix>wc</mat-icon>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <!-- Información de Contacto -->
+          <div class="form-section">
+            <h3 class="section-title">
+              <mat-icon>contact_mail</mat-icon>
+              Información de Contacto
+            </h3>
+            <div class="form-row">
+              <mat-form-field appearance="outline" class="form-col">
+                <mat-label>Email</mat-label>
+                <input matInput type="email" [(ngModel)]="nuevoUsuario.email" name="email" required>
+                <mat-icon matSuffix>email</mat-icon>
+        </mat-form-field>
+
+              <mat-form-field appearance="outline" class="form-col">
+                <mat-label>Teléfono Celular</mat-label>
+                <input matInput [(ngModel)]="nuevoUsuario.cell_phone" name="cell_phone" required>
+                <mat-icon matSuffix>phone</mat-icon>
+              </mat-form-field>
+            </div>
+
+            <div class="form-row">
+              <mat-form-field appearance="outline" class="form-col">
+                <mat-label>Teléfono Fijo</mat-label>
+                <input matInput [(ngModel)]="nuevoUsuario.phone" name="phone">
+                <mat-icon matSuffix>phone_in_talk</mat-icon>
+        </mat-form-field>
+
+              <mat-form-field appearance="outline" class="form-col">
+                <mat-label>Dirección</mat-label>
+                <input matInput [(ngModel)]="nuevoUsuario.address" name="address" required>
+                <mat-icon matSuffix>home</mat-icon>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <!-- Información de Cuenta -->
+          <div class="form-section">
+            <h3 class="section-title">
+              <mat-icon>admin_panel_settings</mat-icon>
+              Información de Cuenta
+            </h3>
+            <div class="form-row">
+              <mat-form-field appearance="outline" class="form-col">
+          <mat-label>Rol</mat-label>
+                <mat-select [(ngModel)]="nuevoUsuario.role_id" name="role" required>
+                  <mat-option *ngFor="let rol of roles" [value]="rol.id.toString()">
+                    {{rol.description}}
+                  </mat-option>
+          </mat-select>
+                <mat-icon matSuffix>security</mat-icon>
+        </mat-form-field>
+            </div>
+
+            <div class="form-row">
+              <mat-form-field appearance="outline" class="form-col">
+          <mat-label>Contraseña</mat-label>
+                <input matInput type="password" [(ngModel)]="nuevoUsuario.password" name="password" required>
+                <mat-icon matSuffix>lock</mat-icon>
+        </mat-form-field>
+
+              <mat-form-field appearance="outline" class="form-col">
+          <mat-label>Confirmar Contraseña</mat-label>
+                <input matInput type="password" [(ngModel)]="nuevoUsuario.confirm_password" name="confirm_password" required>
+                <mat-icon matSuffix>lock_clock</mat-icon>
+        </mat-form-field>
+    </div>
+  </div>
+
+          <!-- Botones de Acción -->
+          <div class="form-actions">
+            <button mat-button type="button" (click)="cerrarFormulario()" class="cancel-btn">
+              <mat-icon>close</mat-icon>
+              Cancelar
+              </button>
+            <button mat-raised-button color="primary" type="submit" [disabled]="!usuarioForm.form.valid" class="save-btn">
+              <mat-icon>save</mat-icon>
+              Crear Usuario
+              </button>
+          </div>
+        </form>
+      </mat-card>
+    </div>
+  </div>
+
+  <!-- Toast Messages -->
+  <div *ngIf="mensajeToast" class="toast" [ngClass]="toastClass">
+    <mat-icon>{{ toastClass.includes('success') ? 'check_circle' : 'error' }}</mat-icon>
+    {{ mensajeToast }}
+  </div>
+</div>

@@ -1,0 +1,367 @@
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Reset global styles */
+:host {
+  display: block;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Main container styles */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  background: linear-gradient(
+    135deg,
+    #283DDB 0%,
+    #2775DB 100%
+  );
+  background-attachment: fixed;
+  position: relative;
+}
+
+/* Remove the container pseudo-elements that were causing issues */
+.login-container::before {
+  display: none;
+}
+
+.login-container::after {
+  display: none;
+}
+
+@keyframes backgroundMove {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@keyframes borderGlow {
+  0% {
+    border-image: linear-gradient(
+      45deg,
+      #1654DB 0%,
+      #1848B8 25%,
+      #1654DB 50%,
+      #1848B8 75%,
+      #1654DB 100%
+    ) 1;
+  }
+  50% {
+    border-image: linear-gradient(
+      225deg,
+      #1654DB 0%,
+      #1848B8 25%,
+      #1654DB 50%,
+      #1848B8 75%,
+      #1654DB 100%
+    ) 1;
+  }
+  100% {
+    border-image: linear-gradient(
+      45deg,
+      #1654DB 0%,
+      #1848B8 25%,
+      #1654DB 50%,
+      #1848B8 75%,
+      #1654DB 100%
+    ) 1;
+  }
+}
+
+.login-card {
+  width: 100%;
+  max-width: 360px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  overflow: hidden;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  box-shadow: 
+    0 5px 15px rgba(0, 0, 0, 0.2),
+    0 15px 35px rgba(22, 84, 219, 0.2);
+  border: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 0;
+}
+
+.login-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 30px;
+  padding: 2px;
+  background: linear-gradient(
+    135deg,
+    #1654DB 0%,
+    #1848B8 50%,
+    #1654DB 100%
+  );
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.login-card::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  z-index: -1;
+  background: linear-gradient(
+    135deg,
+    #1654DB 0%,
+    #1848B8 50%,
+    #1654DB 100%
+  );
+  filter: blur(8px);
+  opacity: 0.5;
+}
+
+.login-card:hover::before,
+.login-card:hover::after {
+  /* Remove animation on hover */
+  animation: none;
+}
+
+.login-card-content {
+  background: rgba(255, 255, 255, 0.95);
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  padding: 20px;
+}
+
+.login-card mat-card-header {
+  display: flex;
+  justify-content: center;
+  background: linear-gradient(135deg, #1654DB 0%, #1848B8 100%);
+  color: white;
+  padding: 20px;
+  margin: -16px -16px 20px -16px;
+  border-radius: 20px 20px 0 0;
+}
+
+.login-card mat-card-title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+mat-card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.login-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 20px;
+  background: #1654DB;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+}
+
+.login-icon img {
+  width: 120px;
+}
+
+.custom-field {
+  width: 100%;
+  max-width: 300px;
+  margin-bottom: 15px;
+}
+
+.custom-field input {
+  font-size: 16px;
+  padding: 10px;
+}
+
+.login-btn {
+  width: 100%;
+  max-width: 300px;
+  margin: 10px auto;
+  padding: 12px;
+  font-size: 16px;
+}
+
+#recaptcha-container {
+  margin: 20px auto;
+  display: flex;
+  justify-content: center;
+}
+
+.error-text {
+  color: #dc3545;
+  font-size: 14px;
+  margin: 10px 0;
+  text-align: center;
+}
+
+p {
+  margin: 15px 0;
+  text-align: center;
+}
+
+a {
+  color: #1654DB;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #1848B8;
+  text-decoration: underline;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .login-card {
+    max-width: 320px;
+    margin: 10px;
+  }
+  
+  .login-container {
+    padding: 0;
+  }
+
+  .custom-field {
+    max-width: 280px;
+  }
+
+  .login-btn {
+    max-width: 280px;
+    padding: 10px;
+  }
+}
+
+/* Estilo para el mensaje de Bienvenido */
+.login-header {
+  width: 100%;
+  background: linear-gradient(90deg, #1654DB, #1848B8);
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 15px 0;
+  margin: 0;
+  display: block;
+}
+
+/* Se elimina el contorno predeterminado del mat-form-field */
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+  display: none;
+}
+
+/* Estilo personalizado para el input */
+.custom-field {
+  width: 90%;
+  max-width: 300px;
+  background: white;
+  border-radius: 25px;
+  padding: 8px 12px;
+  box-shadow: 0px 4px 10px rgba(22, 84, 219, 0.2);
+  margin-bottom: 15px;
+}
+
+.custom-field input {
+  width: 100%;
+  font-size: 14px; /* Reduce el tamaño del texto */
+  padding: 7px; /* Reduce el padding para mejor ajuste */
+}
+
+::ng-deep .mat-mdc-form-field .mat-mdc-text-field-wrapper {
+  background-color: transparent;
+}
+
+::ng-deep .mat-mdc-form-field .mat-mdc-form-field-flex {
+  background-color: transparent;
+}
+
+::ng-deep mat-label {
+  font-size: 13px; /* Reduce el tamaño de la etiqueta */
+}
+
+/* Sombra azul intensificada al hacer focus en el campo */
+.custom-field:focus-within {
+  box-shadow: 0px 4px 15px rgba(22, 84, 219, 0.4);
+}
+
+/* Eliminar controles de incremento para inputs de tipo number */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* Estilos para el texto de error */
+.error-text {
+  color: #f44336;
+  font-size: 13px;
+  margin: 5px 0;
+  text-align: center;
+}
+
+/* Estilos globales para asegurar que el fondo cubra toda la página */
+:host {
+  display: block;
+  min-height: 100vh;
+  background: linear-gradient(
+    135deg,
+    #283DDB 0%,
+    #2775DB 100%
+  );
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+

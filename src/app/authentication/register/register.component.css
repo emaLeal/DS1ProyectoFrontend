@@ -1,0 +1,420 @@
+/* Fondo general con gradiente */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 179vh;
+  min-height: 10vh;
+  background: linear-gradient(135deg, #283DDB, #2775DB);
+  zoom: 60%;
+}
+
+.mat-stepper-horizontal {
+  margin-top: 1px;
+}
+
+.mat-mdc-form-field {
+  margin-top: 16px;
+}
+
+/* Tarjeta principal del formulario */
+.login-card {
+  background: white;
+  padding: 2.5rem;
+  padding-top: 2rem;
+  border-radius: 30px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  width: 1000px;
+  position: relative;
+  margin: 20px;
+}
+
+/* Encabezado del formulario: "Bienvenido" */
+.login-header {
+  background: linear-gradient(90deg, #283DDB, #2775DB);
+  color: white;
+  font-size: 32px;
+  font-weight: bold;
+  padding: 20px 50px;
+  border-radius: 30px;
+  box-shadow: 0 4px 10px rgba(40, 61, 219, 0.4);
+  margin: 0 auto 40px;
+  display: inline-block;
+  position: relative;
+  z-index: 2;
+  transform: translateY(0);
+  min-width: 250px;
+}
+
+/* Icono circular */
+.login-icon {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 35px;
+  background: #283DDB;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 25px;
+}
+
+.login-icon img {
+  width: 280px;
+}
+
+/* Campo de formulario personalizado */
+.custom-field {
+  width: 100%;
+  max-width: 450px;
+  background: white;
+  border-radius: 20px;
+  padding: 8px 13px;
+  box-shadow: 0px 4px 10px rgba(40, 61, 219, 0.2);
+  margin-bottom: 25px;
+  margin-right: 5px;
+  margin-left: 19px;
+}
+
+/* Input personalizado */
+.custom-field input {
+  width: 100%;
+  font-size: 18px;
+  padding: 12px;
+}
+
+.mat-mdc-select-panell {
+  background-color: red;
+}
+
+/* Etiqueta del input */
+mat-label {
+  font-size: 18px;
+}
+
+::ng-deep .mat-mdc-form-field .mat-mdc-text-field-wrapper {
+  background-color: transparent;
+  font-size: 18px;
+}
+
+::ng-deep .mat-mdc-form-field .mat-mdc-form-field-flex {
+  background-color: transparent;
+  font-size: 18px;
+}
+
+::ng-deep mat-label {
+  font-size: 18px !important;
+}
+
+/* Personalización del mat-form-field */
+::ng-deep .mat-mdc-form-field-infix {
+  font-size: 18px;
+}
+
+::ng-deep .mat-mdc-form-field-label {
+  font-size: 18px !important;
+}
+
+::ng-deep .mat-mdc-input-element {
+  font-size: 18px !important;
+}
+
+::ng-deep .mat-mdc-form-field {
+  font-size: 18px;
+}
+
+/* Sombra azul al hacer focus */
+.custom-field:focus-within {
+  box-shadow: 0px 4px 15px rgba(40, 61, 219, 0.4);
+}
+
+/* Botón de registro */
+.login-btn {
+  width: 100%;
+  margin: 10px;
+  background-color: #283DDB;
+  color: white;
+  font-weight: bold;
+  padding: 15px;
+  font-size: 20px;
+  border-radius: 20px;
+  border: none;
+  transition: background 0.3s ease-in-out;
+  cursor: pointer;
+  user-select: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.login-btn:hover {
+  background-color: #2775DB;
+}
+
+.login-btn:disabled {
+  background-color: #a0a0a0;
+  cursor: not-allowed;
+  opacity: 0.6;
+  color: #ffffff;
+}
+
+/* Texto de error (Captcha) */
+.error-text {
+  color: rgb(4, 4, 4);
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+/* Eliminar controles de número */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* Estilo para matStepLabel */
+::ng-deep .step-label {
+  font-weight: bold;
+  color: #283DDB;
+  font-size: 20px;
+}
+
+/* Hover en pasos inactivos */
+:host ::ng-deep .mat-step-header:not(.mat-active):not(.mat-completed):hover {
+  background-color: rgba(40, 61, 219, 0.1);
+  cursor: pointer;
+  border-radius: 50px;
+}
+
+/* Ícono paso activo */
+:host ::ng-deep .mat-step-icon.mat-step-icon-selected {
+  background-color: #283DDB !important;
+  color: rgb(249, 249, 249) !important;
+  font-weight: bold;
+}
+
+/* Contenedor principal */
+.password-requirements {
+  margin: 15px auto;
+  padding: 15px;
+  border-radius: 4px;
+  background-color: #f5f5f5;
+  width: 80%;
+  max-width: 350px;
+}
+
+.password-requirements p {
+  margin: 0 0 10px 0;
+  color: #333;
+  text-align: center;
+  font-weight: bold;
+}
+
+.password-requirements ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.password-requirements li {
+  display: flex;
+  align-items: center;
+  margin: 8px 0;
+  font-size: 14px;
+  transition: color 0.3s ease;
+}
+
+.password-requirements mat-icon {
+  margin-right: 8px;
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  transition: color 0.3s ease;
+}
+
+.password-requirements .valid-icon {
+  color: #2e7d32;
+}
+
+.password-requirements .invalid-icon {
+  color: #d32f2f;
+}
+
+.password-requirements .valid-requirement {
+  color: #2e7d32;
+}
+
+.password-requirements .invalid-requirement {
+  color: #d32f2f;
+}
+
+.password-requirements li span {
+  flex: 1;
+}
+
+.custom-field {
+  font-size: 12px;
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.custom-input {
+  padding: 4px 8px !important;
+  font-size: 12px;
+  height: 28px;
+}
+
+.mat-form-field-infix {
+  padding: 0 !important;
+}
+
+.mat-form-field-wrapper {
+  padding-bottom: 0px !important;
+  margin: 0 !important;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  border-radius: 4px;
+}
+
+/* Responsive */
+@media (max-width: 1100px) {
+  .login-card {
+    width: 90%;
+    padding: 2rem;
+  }
+
+  .custom-field {
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  .login-card {
+    width: 95%;
+    padding: 1.5rem;
+  }
+
+  .login-header {
+    font-size: 20px;
+    padding: 12px 20px;
+  }
+
+  .custom-field {
+    margin-left: 0;
+    margin-right: 0;
+    max-width: 350px;
+  }
+}
+
+/* Estilos para el stepper */
+::ng-deep .mat-stepper-horizontal {
+  background: transparent;
+}
+
+::ng-deep .mat-step-header {
+  background: transparent !important;
+}
+
+::ng-deep .step-label {
+  font-weight: bold;
+  color: white !important;
+  font-size: 20px;
+}
+
+::ng-deep .mat-step-label {
+  color: white !important;
+}
+
+::ng-deep .mat-step-label-selected {
+  color: white !important;
+}
+
+::ng-deep .mat-step-text-label {
+  color: white !important;
+}
+
+::ng-deep .mat-stepper-horizontal-line {
+  border-top-color: #5685DB !important;
+}
+
+::ng-deep .mat-step-icon {
+  background-color: #5685DB !important;
+  color: white !important;
+}
+
+::ng-deep .mat-step-icon-selected {
+  background-color: #5685DB !important;
+  color: white !important;
+}
+
+::ng-deep .mat-step-icon-state-done {
+  background-color: #5685DB !important;
+  color: white !important;
+}
+
+::ng-deep .mat-step-icon-state-edit {
+  background-color: #5685DB !important;
+  color: white !important;
+}
+
+/* Hover en pasos inactivos */
+:host ::ng-deep .mat-step-header:not(.mat-active):not(.mat-completed):hover {
+  background-color: rgba(86, 133, 219, 0.1);
+  cursor: pointer;
+  border-radius: 50px;
+}
+
+/* Para asegurar que los números dentro de los círculos sean blancos */
+::ng-deep .mat-step-icon-content {
+  color: white !important;
+}
+
+/* Para el texto de los pasos inactivos */
+::ng-deep .mat-step-label:not(.mat-step-label-active):not(.mat-step-label-selected) {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* Ajuste adicional para asegurar que las líneas tengan el color correcto */
+::ng-deep .mat-stepper-horizontal-line {
+  border-top-width: 2px !important;
+  border-top-style: solid !important;
+  border-top-color: #5685DB !important;
+}
+
+/* Para los mensajes de error */
+::ng-deep .mat-error {
+  font-size: 16px;
+}
+
+/* Para los iconos dentro de los campos */
+::ng-deep .mat-mdc-form-field .mat-icon {
+  font-size: 24px;
+  height: 24px;
+  width: 24px;
+}
+
+/* Texto y enlaces */
+p {
+  margin: 25px 0;
+  text-align: center;
+  font-size: 18px;
+  color: #333;
+}
+
+a {
+  color: #283DDB;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 18px;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #2775DB;
+  text-decoration: underline;
+}

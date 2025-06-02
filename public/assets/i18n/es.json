@@ -1,0 +1,76 @@
+{
+    "login": {
+        "document_id": "Cedula",
+        "password": "Contraseña",
+        "document_label": "Ingresa tu documento ",
+        "password_label": "Ingrese su contraseña",
+        "login_button": "Iniciar Sesión",
+        "welcome_label": "BIENVENIDO",
+        "captcha_error_label": "Por favor valida CAPTCHA",
+        "havent_account": "¿No tienes una cuenta?",
+        "register_now": "¡Regístrate ahora!"
+    },
+
+    "register": {
+        "welcome_label":"BIENVENIDO",
+        "name":"Nombre",
+        "name_label" :"Ingrese su nombre",
+        "last_name":"Apellido",
+        "lastname_label":"Ingrese su apellido",
+        "id":"D.I",
+        "id_label":"Ingrese su cedula",
+        "password":"Contraseña",
+        "password_label":"Crea una Contraseña",
+        "email":"Email",
+        "email_label":"Ingrese su email",
+        "captcha_error_label": "Por favor valida CAPTCHA",
+        "button": "Registrarme",
+        "have_account":"Ya tienes una cuenta?",
+        "login_now":"Inicia ahora!",
+        "personal_information": "Tu Información Personal",
+        "contact_information": "Tu Información de Contacto",
+        "button_next":"Siguiente",
+        "birth":"Fecha Nacimiento",
+        "id_type": "Tipo de documento",
+        "id_type_label": "Selecciona tu documento",
+        "document_type.cedula":"Cédula",
+        "document_type.passport":"Pasaporte",
+        "document_type.dni":"DNI",
+        "gender": "Genero",
+        "gender_label": "Selecciona Género",
+        "gender.f": "Femenino",
+        "gender.m": "Masculino",
+        "gender.o":"Otro",
+        "mobile": "Celular",
+        "mobile_label": "Ingresa tu número de celular",
+        "phone": "Teléfono Fijo",
+        "phone_label": "Ingresa tu número de teléfono fijo",
+        "address": "Dirección",
+        "address_label": "Ingresa tu dirección",
+        "button_back":"Atras",
+        "button_reset":"Borrar todo",
+        "final_step_label":"CREE UNA CONTRASEÑA",
+        "final_step_label1":"CONFIRME LA CONTRASEÑA",
+        "password1":"Confirme contraseña",
+        "password_label1":"Confirme la Contraseña",
+        "done":"Crea tu contraseña",
+        "length":" 8 o más caracteres",
+        "number_lower":" Mínimo un número y una letra",
+        "upper":" Mínimo una letra mayúscula",
+        "special":" Mínimo un carácter especial (*, .!#$ ...)",
+        "password_rules_intro": "Tu contraseña debe tener:",
+        "password_secure": "Contraseña segura",
+        "incorrect": "Las contraseñas no coinciden"
+    },
+
+    "dashboard": {
+        "my_profile": "Mi perfil",
+        "settings": "Configuración",
+        "logout": "Cerrar sesión"
+    },
+
+    "language": {
+        "change_to_spanish": "Cambiar a Español",
+        "change_to_english": "Cambiar a Inglés"
+    }
+}

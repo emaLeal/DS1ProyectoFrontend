@@ -1,0 +1,79 @@
+{
+    "hello": "Hello",
+    "login": {
+        "document_id": "Document Id",
+        "password": "Password",
+        "document_label": "Enter your Document Id",
+        "password_label": "Enter your Password",
+        "login_button": "Login",
+        "welcome_label": "WELCOME",
+        "captcha_error_label": "Please validate CAPTCHA"
+    },
+    "register": {
+        "welcome_label":"WELCOME",
+        "name":"Name",
+        "name_label" :"Enter your name",
+        "last_name":"Last Name",
+        "lastname_label":"Enter your last name",
+        "id":"Id",
+        "id_label":"Enter your id",
+        "password":"Password",
+        "password_label":"Enter your Password",
+        "have_account": "Already have an account?",
+        "login_now": "Log in now!",
+        "email":"Email",
+        "email_label":"Enter your email",
+        "captcha_error_label": "Please validate CAPTCHA",
+        "button": "Sing in",
+        "personal_information": "Your Personal Information",
+        "contact_information": "Your Contact Information",
+        "button_next":"Next",
+        "birth":"birthdate",
+        "id_type": "Type of document",
+        "id_type_label": "Select your document",
+        "document_type.cedula": "ID",
+        "document_type.passport": "Passport",
+        "document_type.dni": "DNI",
+        "gender": "Gender",
+        "gender_label": "Select Gender",
+        "gender.f": "Female",
+        "gender.m": "Male",
+        "gender.o": "Other",
+        "mobile": "Mobile Number",
+        "mobile_label": "Enter your mobile number",
+        "phone": "Phone Number",
+        "phone_label": "Enter your phone number",
+        "address": "Address",
+        "address_label": "Enter your address",
+        "button_back":"Back",
+        "button_reset":"Reset",
+        "final_step_label":"CREATE A PASSWORD",
+        "final_step_label1": "CONFIRM THE PASSWORD",
+        "password1": "Confirm password",
+        "password_label1": "Confirm the password",
+        "done":"Create a password",
+        "havent_account": "Don't have an account?",
+        "register_now": "Register now!",
+
+        "length": " 8 or more characters",
+        "number_lower": " At least one number and one lowercase letter",
+        "upper": " At least one uppercase letter",
+        "special": " At least one special character (*, .!#$ ...)",
+        "password_rules_intro": "Your password must have:",
+        "password_secure": "Secure password",
+        "incorrect": "Passwords do not match"
+
+
+    },
+
+    "dashboard": {
+        "my_profile": "My Profile",
+        "settings": "Settings",
+        "logout": "Logout"
+    },
+
+    "language": {
+        "change_to_spanish": "Switch to Spanish",
+        "change_to_english": "Switch to English"
+    }
+}
