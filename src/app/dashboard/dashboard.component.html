@@ -1,18 +1,37 @@
 <div class="dashboard">
   <aside class="sidebar">
     <h2>Menu</h2>
-    <ul>
-      <li><a routerLink="postulantes"><i class="fa-solid fa-circle-user"></i> <span>Postulantes</span></a></li>
-      <li><a routerLink="ofertas-cerradas"><i class="fa-solid fa-xmark"></i> <span>Ofertas cerradas</span></a></li>
-      <li><a routerLink="ofertas-activas"><i class="fa-solid fa-pen-to-square"></i> <span>Ofertas activas</span></a></li>
-      <li class="admin-menu" *ngIf="user?.role !== 3">
-          <h3>Menu Administrador</h3>
-          <ul>
-            <li><a routerLink="usuarios"><i class="fa-solid fa-user"></i> <span>Usuarios</span></a></li>
-            <li><a routerLink="roles"><i class="fa-solid fa-users"></i> <span>Roles</span></a></li>
-          </ul>
-        </li>
-    </ul>
+    <div class="menu-container">
+      <div class="menu-section" [class.collapsed]="mainMenuCollapsed">
+        <h3 (click)="toggleMainMenu()">Menú Principal</h3>
+        <ul>
+          <li><a routerLink="postulantes"><i class="fa-solid fa-circle-user"></i> <span>Postulantes</span></a></li>
+          <li><a routerLink="ofertas-cerradas"><i class="fa-solid fa-xmark"></i> <span>Ofertas cerradas</span></a></li>
+          <li><a routerLink="ofertas-activas"><i class="fa-solid fa-pen-to-square"></i> <span>Ofertas activas</span></a></li>
+        </ul>
+      </div>
+
+      <!-- Menú Director -->
+      <div class="director-menu menu-section" [class.collapsed]="directorMenuCollapsed" *ngIf="user?.role === 2 || user?.role === 1">
+        <h3 (click)="toggleDirectorMenu()">Menu Director</h3>
+        <ul>
+          <li><a routerLink="crear-oferta" routerLinkActive="active"><i class="fa-solid fa-plus"></i> <span>Crear oferta</span></a></li>
+          <li><a routerLink="editar-oferta"><i class="fa-solid fa-edit"></i> <span>Editar Oferta</span></a></li>
+          <li><a routerLink="mis-ofertas-activas"><i class="fa-solid fa-list-check"></i> <span>Mis ofertas activas</span></a></li>
+          <li><a routerLink="mis-ofertas-cerradas"><i class="fa-solid fa-folder-closed"></i> <span>Mis ofertas Cerradas</span></a></li>
+          <li><a routerLink="mis-postulantes"><i class="fa-solid fa-users"></i> <span>Mis postulantes</span></a></li>
+        </ul>
+      </div>
+
+      <!-- Menú Administrador -->
+      <div class="admin-menu menu-section" [class.collapsed]="adminMenuCollapsed" *ngIf="user?.role !== 3">
+        <h3 (click)="toggleAdminMenu()">Menu Administrador</h3>
+        <ul>
+          <li><a routerLink="usuarios"><i class="fa-solid fa-user"></i> <span>Usuarios</span></a></li>
+          <li><a routerLink="roles"><i class="fa-solid fa-users"></i> <span>Roles</span></a></li>
+        </ul>
+      </div>
+    </div>
     
     <div class="bottom-buttons">
       <a routerLink="agregar" class="inicio-btn">
@@ -20,7 +39,7 @@
         <span>Inicio</span>
       </a>
       <button (click)="logout()" class="logout-button">
-        <i class="fa-solid fa-right-to-bracket"></i>
+        <i class="fas fa-sign-out-alt"></i>
         <span>Cerrar sesión</span>
       </button>
     </div>
@@ -95,7 +114,18 @@
       </div>
     </header>
     <div class="scrollable-content">
-      <router-outlet></router-outlet>
+      <!-- Loading overlay for content area -->
+      <div class="content-loading" *ngIf="isLoading">
+        <div class="loading-spinner">
+          <mat-spinner diameter="40"></mat-spinner>
+          <span>Cargando...</span>
+        </div>
+      </div>
+      
+      <!-- Router outlet wrapper with animation -->
+      <div class="router-content" [class.loading]="isLoading">
+        <router-outlet></router-outlet>
+      </div>
     </div>
   </main>
 </div>

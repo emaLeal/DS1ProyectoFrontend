@@ -37,17 +37,9 @@ export class AuthService {
     const url: string = environment.baseUrl + environment.authentication.login;
     return this.httpClient
       .post(url, login)
-      .subscribe((value: any) => {
-        const token = value;
-        const JSONToken = JSON.stringify(value)
-        localStorage.setItem('token', JSONToken);
-        this.auth = true;
-        let urlProfile: string = environment.baseUrl + environment.authentication.profile
-        return this.httpClient.get(urlProfile, { headers: { 'authorization': `Bearer ${token.access}` } }).subscribe(user => {
-          localStorage.setItem('user_data', JSON.stringify(user))
-          this.router.navigate(['/dashboard']);
-        })
-      });
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
   register(userForm: User): Observable<any> {
