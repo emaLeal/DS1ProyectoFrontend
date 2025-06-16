@@ -10,6 +10,7 @@ import { RolesComponent } from './dashboard/roles/roles.component';
 import { AgregarComponent } from './dashboard/agregar/agregar.component';
 import { CrearOfertaComponent } from './dashboard/ofertas/crear-oferta/crear-oferta.component';
 import { EditarOfertaComponent } from './dashboard/ofertas/editar-oferta/editar-oferta.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 import { isAuthenticated, isSuperUser } from './authentication/guards/authentication.guard';
 
@@ -44,5 +45,6 @@ export const routes: Routes = [
       { path: '', component: AgregarComponent },
     ]
   },
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' }
+  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: '**', component: NotFoundComponent }
 ];

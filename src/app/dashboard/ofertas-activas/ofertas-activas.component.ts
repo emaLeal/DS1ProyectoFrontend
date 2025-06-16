@@ -1,80 +1,76 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { JobOffer, OfertasService } from '../../services/ofertas.service';
+import { MatCardModule } from '@angular/material/card';
+import { MatDialogModule, MatDialog } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { OfertasService, JobOffer } from '../../services/ofertas.service';
 
 @Component({
   selector: 'app-ofertas-activas',
   standalone: true,
   imports: [
-    CommonModule, 
+    CommonModule,
     FormsModule,
-    MatSnackBarModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatCardModule,
+    MatDialogModule,
+    MatSnackBarModule
   ],
   templateUrl: './ofertas-activas.component.html',
   styleUrls: ['./ofertas-activas.component.css']
 })
-export class OfertasActivasComponent implements OnInit {
+export class OfertasActivasComponent {
   filtroPalabra = '';
   filtroCargo = '';
   filtroRango = '';
   filtroSalario: number | null = null;
-
   ofertas: JobOffer[] = [];
   ofertasFiltradas: JobOffer[] = [];
 
-  private ofertasService = inject(OfertasService);
-  private snackBar = inject(MatSnackBar);
-  private router = inject(Router);
-
-  ngOnInit() {
+  constructor(
+    private ofertasService: OfertasService,
+    private dialog: MatDialog
+  ) {
     this.cargarOfertas();
   }
 
   cargarOfertas() {
     this.ofertasService.getOfertas().subscribe({
-      next: (ofertas: JobOffer[]) => {
-        this.ofertas = ofertas.filter(oferta => oferta.status === 'active');
-        this.ofertasFiltradas = [...this.ofertas];
+      next: (ofertas) => {
+        this.ofertas = ofertas;
         this.aplicarFiltros();
       },
-      error: (error: Error) => {
-        console.error('Error al cargar las ofertas:', error);
-        this.mostrarMensaje('Error al cargar las ofertas', 'error');
+      error: (error) => {
+        console.error('Error al cargar ofertas:', error);
       }
     });
   }
 
   aplicarFiltros() {
     this.ofertasFiltradas = this.ofertas.filter(oferta => {
+      const salario = oferta.salary;
+      const rango = oferta.rank === 'SemiSenior' ? 'Semi Senior' : oferta.rank;
       return (
-        (!this.filtroPalabra || 
-          oferta.title.toLowerCase().includes(this.filtroPalabra.toLowerCase()) ||
-          oferta.responsibilities.toLowerCase().includes(this.filtroPalabra.toLowerCase())
-        ) &&
+        (!this.filtroPalabra || oferta.title.toLowerCase().includes(this.filtroPalabra.toLowerCase())) &&
         (!this.filtroCargo || oferta.title === this.filtroCargo) &&
-        (!this.filtroRango || oferta.rank === this.filtroRango) &&
-        (this.filtroSalario === null || oferta.salary >= this.filtroSalario)
+        (!this.filtroRango || rango === this.filtroRango) &&
+        (this.filtroSalario === null || salario >= this.filtroSalario)
       );
     });
   }
 
   editarOferta(id: number) {
-    this.router.navigate(['/dashboard/editar-oferta', id]);
-  }
-
-  private mostrarMensaje(mensaje: string, tipo: 'success' | 'error') {
-    this.snackBar.open(mensaje, 'Cerrar', {
-      duration: 5000,
-      panelClass: tipo === 'success' ? ['success-snackbar'] : ['error-snackbar'],
-      horizontalPosition: 'center',
-      verticalPosition: 'bottom'
-    });
+    // Implementar lógica de edición
+    console.log('Editar oferta:', id);
   }
 }

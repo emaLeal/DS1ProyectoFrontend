@@ -8,20 +8,40 @@
   <section class="filtros fade-in-up delay-1">
     <h3>Filtrar Ofertas</h3>
     <div class="filtro-grupo">
-      <input type="text" placeholder="Palabra clave" [(ngModel)]="filtroPalabra" (ngModelChange)="aplicarFiltros()">
-      <select [(ngModel)]="filtroCargo" (ngModelChange)="aplicarFiltros()">
-        <option value="">Tipo de Cargo</option>
-        <option [value]="oferta.title" *ngFor="let oferta of ofertas">{{oferta.title}}</option>
-      </select>
-      <select [(ngModel)]="filtroRango" (ngModelChange)="aplicarFiltros()">
-        <option value="">Rango</option>
-        <option value="Junior">Junior</option>
-        <option value="Semi Senior">Semi Senior</option>
-        <option value="Senior">Senior</option>
-        <option value="Lead">Lead</option>
-      </select>
-      <input type="number" placeholder="Salario mínimo" [(ngModel)]="filtroSalario" (ngModelChange)="aplicarFiltros()">
-      <button class="filtrar-btn" (click)="aplicarFiltros()">
+      <mat-form-field appearance="outline">
+        <mat-label>Palabra clave</mat-label>
+        <input matInput [(ngModel)]="filtroPalabra" (ngModelChange)="aplicarFiltros()">
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Tipo de Cargo</mat-label>
+        <mat-select [(ngModel)]="filtroCargo" (ngModelChange)="aplicarFiltros()">
+          <mat-option value="">Todos los cargos</mat-option>
+          <mat-option *ngFor="let oferta of ofertas" [value]="oferta.title">
+            {{oferta.title}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Rango</mat-label>
+        <mat-select [(ngModel)]="filtroRango" (ngModelChange)="aplicarFiltros()">
+          <mat-option value="">Todos los rangos</mat-option>
+          <mat-option value="Junior">Junior</mat-option>
+          <mat-option value="Semi Senior">Semi Senior</mat-option>
+          <mat-option value="Senior">Senior</mat-option>
+          <mat-option value="Lead">Lead</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Salario mínimo</mat-label>
+        <input matInput type="number" [(ngModel)]="filtroSalario" (ngModelChange)="aplicarFiltros()">
+        <mat-icon matSuffix>attach_money</mat-icon>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" (click)="aplicarFiltros()">
         <mat-icon>filter_list</mat-icon>
         Aplicar Filtros
       </button>

@@ -12,7 +12,7 @@ export interface JobOffer {
   end_date: string | Date;
   education_level: string; // max 100 caracteres
   job_type: string;       // max 50 caracteres
-  rank: string;           // max 10 caracteres
+  rank: string;           // max 20 caracteres
   other_requirements: string; // texto
   salary: number;         // decimal(10,2)
   status: 'active' | 'closed'; // max 20 caracteres
@@ -36,15 +36,25 @@ export class OfertasService {
       errorMessage = error.error.message;
     } else {
       // Error del servidor
-      if (typeof error.error === 'object') {
-        // Si el error es un objeto, intentamos extraer mensajes específicos
-        const errorMessages = [];
-        for (const key in error.error) {
-          if (error.error.hasOwnProperty(key)) {
-            errorMessages.push(`${key}: ${error.error[key]}`);
+      if (error.error && typeof error.error === 'object') {
+        if (error.error.detail) {
+          // Si hay un objeto detail, extraer los mensajes de validación
+          const detail = error.error.detail;
+          if (typeof detail === 'object') {
+            const messages = Object.entries(detail)
+              .map(([field, message]) => `${field}: ${message}`)
+              .join('. ');
+            errorMessage = messages;
+          } else {
+            errorMessage = detail;
           }
+        } else {
+          // Si no hay detail, intentar extraer mensajes del objeto de error
+          const errorMessages = Object.entries(error.error)
+            .map(([key, value]) => `${key}: ${value}`)
+            .join('. ');
+          errorMessage = errorMessages;
         }
-        errorMessage = errorMessages.join('. ');
       } else if (typeof error.error === 'string') {
         errorMessage = error.error;
       }
@@ -75,7 +85,8 @@ export class OfertasService {
     const ofertaFormateada = {
       ...oferta,
       start_date: this.formatDate(oferta.start_date),
-      end_date: this.formatDate(oferta.end_date)
+      end_date: this.formatDate(oferta.end_date),
+      rank: oferta.rank === 'Semi Senior' ? 'SemiSenior' : oferta.rank
     };
 
     console.log('Enviando oferta:', ofertaFormateada);

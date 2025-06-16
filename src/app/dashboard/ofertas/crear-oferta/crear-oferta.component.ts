@@ -100,11 +100,11 @@ import { trigger, transition, style, animate } from '@angular/animations';
 
                 <mat-form-field appearance="outline">
                   <mat-label>Rango</mat-label>
-                  <mat-select [(ngModel)]="oferta.rank" name="rank" required maxlength="10" #rank="ngModel">
-                    <mat-option value="Junior">Junior</mat-option>
-                    <mat-option value="Semi Senior">Semi Senior</mat-option>
-                    <mat-option value="Senior">Senior</mat-option>
-                    <mat-option value="Lead">Lead</mat-option>
+                  <mat-select [(ngModel)]="oferta.rank" name="rank" required #rank="ngModel">
+                    <mat-option [value]="'Junior'">Junior</mat-option>
+                    <mat-option [value]="'SemiSenior'">Semi Senior</mat-option>
+                    <mat-option [value]="'Senior'">Senior</mat-option>
+                    <mat-option [value]="'Lead'">Lead</mat-option>
                   </mat-select>
                   <mat-error *ngIf="rank.invalid && (rank.dirty || rank.touched)">
                     El rango es requerido
@@ -356,8 +356,9 @@ export class CrearOfertaComponent implements OnInit {
       touched: this.ofertaForm.form.touched
     });
     console.log('CrearOferta - Datos de la oferta:', this.oferta);
+    console.log('CrearOferta - Valor del rango:', this.oferta.rank);
 
-    if (this.ofertaForm.form.valid && this.validarFormulario()) {
+    if (this.validarFormulario()) {
       console.log('CrearOferta - Formulario válido, procediendo a guardar');
       this.ofertasService.crearOferta(this.oferta).subscribe({
         next: (ofertaCreada) => {
@@ -366,28 +367,13 @@ export class CrearOfertaComponent implements OnInit {
           this.router.navigate(['/dashboard/ofertas-activas']);
         },
         error: (error) => {
-          console.error('CrearOferta - Error detallado:', {
-            error: error,
-            status: error.status,
-            message: error.message,
-            errorObj: error.error
-          });
+          console.error('CrearOferta - Error al guardar la oferta:', error);
           this.mostrarMensaje(error, 'error');
         }
       });
     } else {
       console.warn('CrearOferta - Formulario inválido');
       this.mostrarMensaje('Por favor complete todos los campos requeridos correctamente', 'error');
-      Object.keys(this.ofertaForm.controls).forEach(key => {
-        const control = this.ofertaForm.controls[key];
-        if (control.invalid) {
-          console.warn(`CrearOferta - Campo inválido: ${key}`, {
-            errors: control.errors,
-            value: control.value
-          });
-          control.markAsTouched();
-        }
-      });
     }
   }
 
@@ -396,59 +382,65 @@ export class CrearOfertaComponent implements OnInit {
   }
 
   private validarFormulario(): boolean {
-    if (!this.oferta.talent_director_document) {
-      this.mostrarMensaje('Error: No se encontró el documento del director de talento', 'error');
+    console.log('CrearOferta - Validando formulario');
+    console.log('CrearOferta - Estado del formulario:', {
+      valid: this.ofertaForm.form.valid,
+      pristine: this.ofertaForm.form.pristine,
+      touched: this.ofertaForm.form.touched
+    });
+    console.log('CrearOferta - Datos de la oferta:', this.oferta);
+    console.log('CrearOferta - Valor del rango:', this.oferta.rank);
+
+    // Validar campos requeridos
+    if (!this.oferta.title || !this.oferta.responsibilities || !this.oferta.education_level || 
+        !this.oferta.rank || !this.oferta.other_requirements || !this.oferta.job_type || 
+        !this.oferta.salary || !this.oferta.start_date || !this.oferta.end_date) {
+      console.warn('CrearOferta - Campos requeridos faltantes');
       return false;
     }
 
-    // Validar longitudes máximas
-    if (this.oferta.title.length > 255) {
-      this.mostrarMensaje('El título no puede exceder los 255 caracteres', 'error');
-      return false;
-    }
-
-    if (this.oferta.education_level.length > 100) {
-      this.mostrarMensaje('El nivel de educación no puede exceder los 100 caracteres', 'error');
-      return false;
-    }
-
-    if (this.oferta.job_type.length > 50) {
-      this.mostrarMensaje('El tipo de empleo no puede exceder los 50 caracteres', 'error');
-      return false;
-    }
-
-    if (this.oferta.rank.length > 10) {
-      this.mostrarMensaje('El rango no puede exceder los 10 caracteres', 'error');
+    // Validar que el rango sea uno de los valores permitidos
+    const rangosPermitidos = ['Junior', 'SemiSenior', 'Senior', 'Lead'];
+    if (!rangosPermitidos.includes(this.oferta.rank)) {
+      console.warn('CrearOferta - Rango no válido:', this.oferta.rank);
+      this.mostrarMensaje('Por favor seleccione un rango válido', 'error');
       return false;
     }
 
     // Validar salario
-    if (this.oferta.salary <= 0 || this.oferta.salary > 9999999999.99) {
-      this.mostrarMensaje('El salario debe estar entre 0 y 9,999,999,999.99', 'error');
+    if (this.oferta.salary <= 0) {
+      console.warn('CrearOferta - Salario inválido:', this.oferta.salary);
+      this.mostrarMensaje('El salario debe ser mayor a 0', 'error');
       return false;
     }
 
     // Validar fechas
-    const startDate = new Date(this.oferta.start_date);
-    const endDate = new Date(this.oferta.end_date);
-    
-    if (isNaN(startDate.getTime()) || isNaN(endDate.getTime())) {
-      this.mostrarMensaje('Las fechas no son válidas', 'error');
+    const fechaInicio = new Date(this.oferta.start_date);
+    const fechaFin = new Date(this.oferta.end_date);
+    const hoy = new Date();
+
+    if (fechaInicio < hoy) {
+      console.warn('CrearOferta - Fecha de inicio inválida:', fechaInicio);
+      this.mostrarMensaje('La fecha de inicio no puede ser anterior a hoy', 'error');
       return false;
     }
 
-    if (endDate < startDate) {
+    if (fechaFin <= fechaInicio) {
+      console.warn('CrearOferta - Fecha de fin inválida:', fechaFin);
       this.mostrarMensaje('La fecha de fin no puede ser anterior a la fecha de inicio', 'error');
       return false;
     }
 
+    console.log('CrearOferta - Validación exitosa');
     return true;
   }
 
   private mostrarMensaje(mensaje: string, tipo: 'success' | 'error') {
     this.snackBar.open(mensaje, 'Cerrar', {
-      duration: 3000,
-      panelClass: [`snackbar-${tipo}`]
+      duration: 5000,
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom',
+      panelClass: tipo === 'error' ? ['error-snackbar'] : ['success-snackbar']
     });
   }
 } 

@@ -105,16 +105,16 @@ export class LoginComponent extends TranslateLogic implements AfterViewInit {
       this.isLoggingIn = true;
 
       this.authService.login(login).subscribe({
-        next: (value: any) => {
-          const token = value;
-          const JSONToken = JSON.stringify(value);
-          localStorage.setItem('token', JSONToken);
+        next: (response: any) => {
+          // Guardar los tokens
+          localStorage.setItem('token', response.access);
+          localStorage.setItem('refresh_token', response.refresh);
           localStorage.setItem('captcha-token', this.captchaToken!);
           
           let urlProfile: string = environment.baseUrl + environment.authentication.profile;
           
           this.httpClient.get(urlProfile, { 
-            headers: { 'authorization': `Bearer ${token.access}` } 
+            headers: { 'authorization': `Bearer ${response.access}` } 
           }).subscribe({
             next: (user) => {
               localStorage.setItem('user_data', JSON.stringify(user));
