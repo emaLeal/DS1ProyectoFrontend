@@ -6,7 +6,13 @@
         "password_label": "Ingrese su contraseña",
         "login_button": "Iniciar Sesión",
         "welcome_label": "BIENVENIDO",
+<<<<<<< HEAD
         "captcha_error_label": "Por favor valida CAPTCHA"
+=======
+        "captcha_error_label": "Por favor valida CAPTCHA",
+        "havent_account": "¿No tienes una cuenta?",
+        "register_now": "¡Regístrate ahora!"
+>>>>>>> 7d23f567d5cd6d0829fa751721be5398cea4fbb0
     },
 
     "register": {
@@ -52,6 +58,7 @@
         "password1":"Confirme contraseña",
         "password_label1":"Confirme la Contraseña",
         "done":"Crea tu contraseña",
+<<<<<<< HEAD
         "havent_account":"¿No tienes una cuenta?",
         "register_now":"Registrate ahora!!",
 
@@ -62,5 +69,25 @@
         "password_rules_intro": "Tu contraseña debe tener:",
         "password_secure": "Contraseña segura",
         "incorrect": "Las contraseñas no coinciden"
+=======
+        "length":" 8 o más caracteres",
+        "number_lower":" Mínimo un número y una letra",
+        "upper":" Mínimo una letra mayúscula",
+        "special":" Mínimo un carácter especial (*, .!#$ ...)",
+        "password_rules_intro": "Tu contraseña debe tener:",
+        "password_secure": "Contraseña segura",
+        "incorrect": "Las contraseñas no coinciden"
+    },
+
+    "dashboard": {
+        "my_profile": "Mi perfil",
+        "settings": "Configuración",
+        "logout": "Cerrar sesión"
+    },
+
+    "language": {
+        "change_to_spanish": "Cambiar a Español",
+        "change_to_english": "Cambiar a Inglés"
+>>>>>>> 7d23f567d5cd6d0829fa751721be5398cea4fbb0
     }
 }

@@ -1,41 +1,131 @@
 <div class="dashboard">
-    <aside class="sidebar">
-      <h2>Menu</h2>
-      <ul>
-        <li><a routerLink="postulantes"><i class="fa-solid fa-circle-user"></i> Postulantes</a></li>
-        <li><a routerLink="ofertas-cerradas"><i class="fa-solid fa-xmark"></i> Ofertas cerradas</a></li>
-        <li><a routerLink="ofertas-activas"><i class="fa-solid fa-pen-to-square"></i> Ofertas activas</a></li>
-        <li class="admin-menu">
-          <h3>Menu Administrador</h3>
-          <ul>
-            <li><a routerLink="usuarios"><i class="fa-solid fa-user"></i> Usuarios</a></li>
-            <li><a routerLink="roles"><i class="fa-solid fa-users"></i> Roles</a></li>
-          </ul>
-        </li>
-        <li><i class="fa-solid fa-right-to-bracket"></i><a href="#"> Cerrar sesión</a></li>
-      </ul>
-      <a routerLink="agregar" class="inicio-btn">Inicio</a>
-    </aside>
-  
-    <main class="main-content">
-        <header class="topbar">
-            <input type="text" class="search-bar" placeholder="Search..." />
-            
-            <div class="user-section" (click)="toggleMenu()" tabindex="0" (blur)="closeMenu()">
-              <div class="icon"> 
-                <span><i class="fa-solid fa-circle-user"></i></span>
-              </div>
-                <div class="user-menu" *ngIf="isMenuOpen">
-                  <a href="#">Mi perfil</a>
-                  <a href="#">Configuración</a>
-                  <a href="#">Cerrar sesión</a>
-                  
-                </div>
-              </div>
-          </header>
-          <div class="scrollable-content">
-            <router-outlet></router-outlet>
+  <aside class="sidebar">
+    <h2>Menu</h2>
+    <div class="menu-container">
+      <div class="menu-section" [class.collapsed]="mainMenuCollapsed">
+        <h3 (click)="toggleMainMenu()">Menú Principal</h3>
+        <ul>
+          <li><a routerLink="postulantes"><i class="fa-solid fa-circle-user"></i> <span>Postulantes</span></a></li>
+          <li><a routerLink="ofertas-cerradas"><i class="fa-solid fa-xmark"></i> <span>Ofertas cerradas</span></a></li>
+          <li><a routerLink="ofertas-activas"><i class="fa-solid fa-pen-to-square"></i> <span>Ofertas activas</span></a></li>
+        </ul>
+      </div>
+
+      <!-- Menú Director -->
+      <div class="director-menu menu-section" [class.collapsed]="directorMenuCollapsed" *ngIf="user?.role === 2 || user?.role === 1">
+        <h3 (click)="toggleDirectorMenu()">Menu Director</h3>
+        <ul>
+          <li><a routerLink="crear-oferta" routerLinkActive="active"><i class="fa-solid fa-plus"></i> <span>Crear oferta</span></a></li>
+          <li><a routerLink="editar-oferta"><i class="fa-solid fa-edit"></i> <span>Editar Oferta</span></a></li>
+          <li><a routerLink="mis-ofertas-activas"><i class="fa-solid fa-list-check"></i> <span>Mis ofertas activas</span></a></li>
+          <li><a routerLink="mis-ofertas-cerradas"><i class="fa-solid fa-folder-closed"></i> <span>Mis ofertas Cerradas</span></a></li>
+          <li><a routerLink="mis-postulantes"><i class="fa-solid fa-users"></i> <span>Mis postulantes</span></a></li>
+        </ul>
+      </div>
+
+      <!-- Menú Administrador -->
+      <div class="admin-menu menu-section" [class.collapsed]="adminMenuCollapsed" *ngIf="user?.role !== 3">
+        <h3 (click)="toggleAdminMenu()">Menu Administrador</h3>
+        <ul>
+          <li><a routerLink="usuarios"><i class="fa-solid fa-user"></i> <span>Usuarios</span></a></li>
+          <li><a routerLink="roles"><i class="fa-solid fa-users"></i> <span>Roles</span></a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="bottom-buttons">
+      <a routerLink="agregar" class="inicio-btn">
+        <i class="fa-solid fa-house"></i>
+        <span>Inicio</span>
+      </a>
+      <button (click)="logout()" class="logout-button">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Cerrar sesión</span>
+      </button>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <header class="topbar">
+      <div class="search-container">
+        <i class="fa-solid fa-search search-icon"></i>
+        <input 
+          type="text" 
+          class="search-bar" 
+          placeholder="Buscar postulantes, ofertas, usuarios..." 
+          [(ngModel)]="searchTerm"
+          (input)="onSearch($event)"
+          (focus)="showSearchResults = true"
+          (blur)="closeSearchResults()"
+        />
+        <div class="search-loading" *ngIf="isSearching">
+          <i class="fa-solid fa-circle-notch fa-spin"></i>
+        </div>
+        <div class="search-results" [class.show]="showSearchResults && (searchResults.length > 0 || isSearching)">
+          <div class="search-message" *ngIf="isSearching">
+            Buscando...
           </div>
-    </main>
-  </div>
-  
+          <div class="search-message" *ngIf="!isSearching && searchResults.length === 0 && searchTerm">
+            No se encontraron resultados
+          </div>
+          <div 
+            class="search-result-item" 
+            *ngFor="let result of searchResults"
+            (mousedown)="selectResult(result)"
+          >
+            <i class="fa-solid {{result.icon}}"></i>
+            <div class="result-info">
+              <div class="result-title">{{result.title}}</div>
+              <div class="result-description">{{result.description}}</div>
+              <div class="result-highlight" *ngIf="result.highlightedText">
+                "...{{result.highlightedText}}..."
+              </div>
+            </div>
+            <span class="result-category" [class]="result.type">{{result.type}}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Language Selector -->
+      <div class="lang-menu">
+        <button class="lang-toggle-btn" (click)="toggleLangMenu()" aria-label="Cambiar idioma">
+          🌐
+        </button>
+
+        <div class="lang-options" *ngIf="menuOpen" (blur)="closeLangMenu()">
+          <button class="lang-btn" (click)="translateText('es')" aria-label="Cambiar a Español">
+            <img src="./assets/img/spanish-logo.png" alt="Español" />
+          </button>
+          <button class="lang-btn" (click)="translateText('en')" aria-label="Switch to English">
+            <img src="./assets/img/english-logo.png" alt="English" />
+          </button>
+        </div>
+      </div>
+      
+      <div class="user-section" (click)="toggleMenu()" tabindex="0" (blur)="closeMenu()">
+        <div class="user-avatar">
+          <i class="fa-solid fa-circle-user"></i>
+        </div>
+        <div class="user-menu" *ngIf="isMenuOpen">
+          <a href="#"><i class="fa-solid fa-user"></i> Mi perfil</a>
+          <a href="#"><i class="fa-solid fa-gear"></i> Configuración</a>
+          <a (click)="logout()"><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión</a>
+        </div>
+      </div>
+    </header>
+    <div class="scrollable-content">
+      <!-- Loading overlay for content area -->
+      <div class="content-loading" *ngIf="isLoading">
+        <div class="loading-spinner">
+          <mat-spinner diameter="40"></mat-spinner>
+          <span>Cargando...</span>
+        </div>
+      </div>
+      
+      <!-- Router outlet wrapper with animation -->
+      <div class="router-content" [class.loading]="isLoading">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </main>
+</div>

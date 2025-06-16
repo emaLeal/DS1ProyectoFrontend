@@ -1,5 +1,5 @@
-<!-- Menú colapsable de idiomas -->
-<div class="lang-menu">
+<!-- Menú colapsable de idiomas - solo visible en login y registro -->
+<div class="lang-menu" *ngIf="isAuthRoute()">
   <button class="lang-toggle-btn" (click)="toggleMenu()" aria-label="Cambiar idioma">
     🌐
   </button>

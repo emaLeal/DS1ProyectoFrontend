@@ -13,59 +13,64 @@
 /* Contenedor del botón de idioma */
 .lang-menu {
   position: fixed;
-  bottom: 20px;
+  top: 20px;
   right: 20px;
   z-index: 1000;
 }
 
 /* Botón principal (🌐) */
 .lang-toggle-btn {
-  background: #ffffff;
+  background: #0057ff;
+  color: white;
   border: none;
-  font-size: 24px;
-  padding: 10px;
   border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
   cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition: background 0.2s ease-in-out;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
 }
 
 .lang-toggle-btn:hover {
-  background: #f0f0f0;
+  transform: scale(1.1);
 }
 
 /* Menú desplegable de opciones */
 .lang-options {
-  margin-top: 10px;
+  position: absolute;
+  top: 50px;
+  right: 0;
   background: white;
-  padding: 10px 15px;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 10px;
   display: flex;
-  gap: 10px;
-  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
 }
 
 /* Botones de idioma */
 .lang-btn {
-  background: transparent;
+  background: none;
   border: none;
+  padding: 5px;
   cursor: pointer;
-  transition: transform 0.2s ease-in-out;
-}
-
-.lang-btn img {
-  width: 35px;
-  height: auto;
-  border-radius: 50%;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-  transition: box-shadow 0.2s ease-in-out;
+  transition: transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .lang-btn:hover {
-  transform: scale(1.2);
+  transform: scale(1.1);
 }
 
-.lang-btn img:hover {
-  box-shadow: 0 4px 10px rgba(65, 139, 236, 0.623);
+.lang-btn img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
 }

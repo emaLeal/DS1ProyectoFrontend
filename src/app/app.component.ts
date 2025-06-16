@@ -1,22 +1,43 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { RouterOutlet, Router } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import TranslateLogic from './lib/translate/translate.class';
-import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [TranslateModule, RouterModule, NgIf],
+  imports: [RouterOutlet, HttpClientModule, FormsModule, TranslateModule, CommonModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
+  styleUrls: ['./app.component.css']
 })
-export class AppComponent extends TranslateLogic {
+export class AppComponent extends TranslateLogic implements OnInit {
+  title = 'frontend';
   menuOpen = false;
-  constructor(translate: TranslateService) {
-    super(translate)
+
+  constructor(
+    translate: TranslateService,
+    private router: Router
+  ) {
+    super(translate);
+    // Establecer el idioma por defecto
+    this.translate?.setDefaultLang('es');
+    // Usar el idioma preferido del usuario o el español por defecto
+    this.translate?.use(this.preferedLanguage);
   }
-  toggleMenu(): void {
+
+  ngOnInit() {
+    // La inicialización ya se hizo en el constructor
+  }
+
+  toggleMenu() {
     this.menuOpen = !this.menuOpen;
+  }
+
+  isAuthRoute(): boolean {
+    const currentUrl = this.router.url;
+    return currentUrl.includes('/login') || currentUrl.includes('/register');
   }
 }

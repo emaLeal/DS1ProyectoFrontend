@@ -4,7 +4,5 @@ import { AppComponent } from './app/app.component';
 import { LoginComponent } from './app/authentication/login/login.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async'; // ✅ Importa LoginComponent
 
-bootstrapApplication(AppComponent, {
-  ...appConfig,
-  providers: [...(appConfig.providers || []), LoginComponent, provideAnimationsAsync()], // ✅ Agrega LoginComponent aquí
-}).catch((err) => console.error(err));
+bootstrapApplication(AppComponent, appConfig)
+  .catch(err => console.error(err));
