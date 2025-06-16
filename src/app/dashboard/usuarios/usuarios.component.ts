@@ -48,7 +48,7 @@ interface PredefinedColors {
     MatDatepickerModule,
     MatNativeDateModule,
     MatTooltipModule,
-    UserDetailsModalComponent
+    // UserDetailsModalComponent
   ],
   templateUrl: './usuarios.component.html',
   styleUrls: ['./usuarios.component.css'],

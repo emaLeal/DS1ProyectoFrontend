@@ -2,17 +2,6 @@
 .login-container {
   display: flex;
   justify-content: center;
-<<<<<<< HEAD
-
-  align-items: center;
-  height: 179vh;
-  min-height: 10vh;
-  background: linear-gradient(135deg, #A0F6FF, #0634A9);
-  zoom: 60%
-}
-
-
-=======
   align-items: center;
   height: 179vh;
   min-height: 10vh;
@@ -20,7 +9,6 @@
   zoom: 60%;
 }
 
->>>>>>> 7d23f567d5cd6d0829fa751721be5398cea4fbb0
 .mat-stepper-horizontal {
   margin-top: 1px;
 }
@@ -32,14 +20,6 @@
 /* Tarjeta principal del formulario */
 .login-card {
   background: white;
-<<<<<<< HEAD
-  padding: 2rem;
-  border-radius: 25px;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-  text-align: center;
-  width: 800px;
-  position: relative;
-=======
   padding: 2.5rem;
   padding-top: 2rem;
   border-radius: 30px;
@@ -48,22 +28,10 @@
   width: 1000px;
   position: relative;
   margin: 20px;
->>>>>>> 7d23f567d5cd6d0829fa751721be5398cea4fbb0
 }
 
 /* Encabezado del formulario: "Bienvenido" */
 .login-header {
-<<<<<<< HEAD
-  background: linear-gradient(90deg, #020fc5, #0037a7);
-  color: white;
-  font-size: 25px;
-  font-weight: bold;
-  padding: 15px 30px;
-  border-radius: 30px;
-  box-shadow: 0 4px 10px rgba(0, 89, 255, 0.726);
-  margin-bottom: 0px;
-  display: inline-block;
-=======
   background: linear-gradient(90deg, #283DDB, #2775DB);
   color: white;
   font-size: 32px;
@@ -77,22 +45,14 @@
   z-index: 2;
   transform: translateY(0);
   min-width: 250px;
->>>>>>> 7d23f567d5cd6d0829fa751721be5398cea4fbb0
 }
 
 /* Icono circular */
 .login-icon {
-<<<<<<< HEAD
-  width: 80px;
-  height: 80px;
-  margin: 0 auto 35px;
-  background: #0057ff;
-=======
   width: 120px;
   height: 120px;
   margin: 0 auto 35px;
   background: #283DDB;
->>>>>>> 7d23f567d5cd6d0829fa751721be5398cea4fbb0
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -101,30 +61,17 @@
 }
 
 .login-icon img {
-<<<<<<< HEAD
-  width: 195px;
-
-=======
   width: 280px;
->>>>>>> 7d23f567d5cd6d0829fa751721be5398cea4fbb0
 }
 
 /* Campo de formulario personalizado */
 .custom-field {
   width: 100%;
-<<<<<<< HEAD
-  max-width: 350px;
-  background: white;
-  border-radius: 20px;
-  padding: 8px 13px;
-  box-shadow: 0px 4px 10px rgba(0, 89, 255, 0.3);
-=======
   max-width: 450px;
   background: white;
   border-radius: 20px;
   padding: 8px 13px;
   box-shadow: 0px 4px 10px rgba(40, 61, 219, 0.2);
->>>>>>> 7d23f567d5cd6d0829fa751721be5398cea4fbb0
   margin-bottom: 25px;
   margin-right: 5px;
   margin-left: 19px;
@@ -134,16 +81,6 @@
 .custom-field input {
   width: 100%;
   font-size: 18px;
-<<<<<<< HEAD
- 
-}
-
-.mat-mdc-select-panell{
-  background-color: red;
-}
-
-
-=======
   padding: 12px;
 }
 
@@ -151,17 +88,11 @@
   background-color: red;
 }
 
->>>>>>> 7d23f567d5cd6d0829fa751721be5398cea4fbb0
 /* Etiqueta del input */
 mat-label {
   font-size: 18px;
 }
 
-<<<<<<< HEAD
-/* Sombra azul al hacer focus */
-.custom-field:focus-within {
-  box-shadow: 0px 4px 15px rgba(0, 89, 255, 0.6);
-=======
 ::ng-deep .mat-mdc-form-field .mat-mdc-text-field-wrapper {
   background-color: transparent;
   font-size: 18px;
@@ -196,36 +127,12 @@ mat-label {
 /* Sombra azul al hacer focus */
 .custom-field:focus-within {
   box-shadow: 0px 4px 15px rgba(40, 61, 219, 0.4);
->>>>>>> 7d23f567d5cd6d0829fa751721be5398cea4fbb0
 }
 
 /* Botón de registro */
 .login-btn {
   width: 100%;
   margin: 10px;
-<<<<<<< HEAD
-  background-color: #0057ff;
-  color: white;
-  font-weight: bold;
-  padding: 12px;
-  font-size: 16px;
-  border-radius: 20px;
-  border: none;
-  transition: background 0.3s ease-in-out;
-  cursor: pointer; /* cursor normal */
-  user-select: none; /* evita selección de texto */
-}
-
-.login-btn:hover {
-  background-color: #0037a7;
-}
-
-/* 🔒 Estado deshabilitado */
-.login-btn:disabled {
-  background-color: #a0a0a0;
-  cursor: not-allowed;         /* cambia el cursor */
-  opacity: 0.6;                /* visualmente desactivado */
-=======
   background-color: #283DDB;
   color: white;
   font-weight: bold;
@@ -248,7 +155,6 @@ mat-label {
   background-color: #a0a0a0;
   cursor: not-allowed;
   opacity: 0.6;
->>>>>>> 7d23f567d5cd6d0829fa751721be5398cea4fbb0
   color: #ffffff;
 }
 
@@ -273,17 +179,6 @@ input[type="number"] {
 /* Estilo para matStepLabel */
 ::ng-deep .step-label {
   font-weight: bold;
-<<<<<<< HEAD
-  color: #1a0bea;
-  font-size: 20px;
-  
-}
-
-
-/* Hover en pasos inactivos */
-:host ::ng-deep .mat-step-header:not(.mat-active):not(.mat-completed):hover {
-  background-color: rgba(67, 83, 255, 0.263);
-=======
   color: #283DDB;
   font-size: 20px;
 }
@@ -291,48 +186,19 @@ input[type="number"] {
 /* Hover en pasos inactivos */
 :host ::ng-deep .mat-step-header:not(.mat-active):not(.mat-completed):hover {
   background-color: rgba(40, 61, 219, 0.1);
->>>>>>> 7d23f567d5cd6d0829fa751721be5398cea4fbb0
   cursor: pointer;
   border-radius: 50px;
 }
 
 /* Ícono paso activo */
 :host ::ng-deep .mat-step-icon.mat-step-icon-selected {
-<<<<<<< HEAD
-  background-color: #000359 !important;
-=======
   background-color: #283DDB !important;
->>>>>>> 7d23f567d5cd6d0829fa751721be5398cea4fbb0
   color: rgb(249, 249, 249) !important;
   font-weight: bold;
 }
 
 /* Contenedor principal */
 .password-requirements {
-<<<<<<< HEAD
-  background-color: #f9f9fb;
-  border: 1px solid #129af5;
-  border-radius: 12px;
-  padding: 20px 24px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  max-width: 450px;
-  margin: 20px auto;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-}
-
-/* Título */
-.password-requirements p:first-child {
-  font-size: 1.1rem;
-  font-weight: 900;
-  color: #333;
-  margin-bottom: 12px;
-}
-
-/* Lista de requisitos */
-.password-requirements ul {
-  list-style: none;
-  padding-left: 0;
-=======
   margin: 15px auto;
   padding: 15px;
   border-radius: 4px;
@@ -351,70 +217,10 @@ input[type="number"] {
 .password-requirements ul {
   list-style: none;
   padding: 0;
->>>>>>> 7d23f567d5cd6d0829fa751721be5398cea4fbb0
   margin: 0;
 }
 
 .password-requirements li {
-<<<<<<< HEAD
-  padding: 8px 0;
-  color: #666;
-  display: flex;
-  align-items: center;
-  transition: color 0.3s ease;
-}
-
-/* Icono visual opcional con pseudo-elemento */
-.password-requirements li::before {
-  content: '⨯';
-  color: #d9534f;
-  margin-right: 10px;
-  font-weight: bold;
-  transition: color 0.3s ease;
-}
-
-/* Requisitos validados */
-.password-requirements .valid {
-  color: #28a745;
-}
-
-.password-requirements .valid::before {
-  content: '';
-  color: #28a745;
-}
-
-/* Mensaje de contraseña segura */
-.password-requirements .secure-msg {
-  margin-top: 15px;
-  padding: 10px;
-  background-color: #e9fce9;
-  border: 1px solid #b2e3b2;
-  border-radius: 8px;
-  color: #218838;
-  font-weight: 600;
-  text-align: center;
-}
-
-
-.custom-field {
-  font-size: 12px; /* Tamaño de texto más pequeño */
-  width: 100%; /* O ajusta a un tamaño más pequeño si prefieres */
-  margin-bottom: 8px; /* Menos espacio entre campos */
-}
-
-.custom-input {
-  padding: 4px 8px !important; /* Reducir el padding interno */
-  font-size: 12px; /* Tamaño del texto */
-  height: 28px; /* Ajusta la altura del input */
-}
-
-.mat-form-field-infix {
-  padding: 0 !important; /* Eliminar espacio interno adicional */
-}
-
-.mat-form-field-wrapper {
-  padding-bottom: 0px !important; /* Eliminar padding inferior */
-=======
   display: flex;
   align-items: center;
   margin: 8px 0;
@@ -468,14 +274,10 @@ input[type="number"] {
 
 .mat-form-field-wrapper {
   padding-bottom: 0px !important;
->>>>>>> 7d23f567d5cd6d0829fa751721be5398cea4fbb0
   margin: 0 !important;
 }
 
 .mat-form-field-appearance-outline .mat-form-field-outline {
-<<<<<<< HEAD
-  border-radius: 4px; /* Opcional: bordes más suaves */
-=======
   border-radius: 4px;
 }
 
@@ -615,5 +417,4 @@ a {
 a:hover {
   color: #2775DB;
   text-decoration: underline;
->>>>>>> 7d23f567d5cd6d0829fa751721be5398cea4fbb0
 }

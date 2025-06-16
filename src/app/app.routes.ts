@@ -11,7 +11,7 @@ import { AgregarComponent } from './dashboard/agregar/agregar.component';
 import { CrearOfertaComponent } from './dashboard/ofertas/crear-oferta/crear-oferta.component';
 import { EditarOfertaComponent } from './dashboard/ofertas/editar-oferta/editar-oferta.component';
 
-import { isAuthenticated, isSuperUser } from './authentication/guards/authentication.guard';
+import { isSuperUser } from './authentication/guards/authentication.guard';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -19,7 +19,7 @@ export const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
-    canActivate: [isAuthenticated], // ✅ Requiere estar logueado
+    canActivate: [isSuperUser], // ✅ Requiere estar logueado
     children: [
       {
         path: 'postulantes',

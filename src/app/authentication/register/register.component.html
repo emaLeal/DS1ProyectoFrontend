@@ -1,20 +1,10 @@
 <div class="login-container">
-<<<<<<< HEAD
-  <mat-stepper [linear]="isLinear" #stepper class="custom-stepper">
-    <!-- Paso 1 -->
-    <mat-step [stepControl]="firstFormGroup">
-      <ng-template matStepLabel>
-        <span class="step-label">{{ 'register.personal_information' | translate }}</span>
-      </ng-template>
-      <form [formGroup]="form!" (submit)="this.submit()">
-=======
   <mat-stepper linear #stepper>
     <mat-step [stepControl]="personalInfoForm">
       <ng-template matStepLabel>
         <span class="step-label">{{ 'register.personal_information' | translate }}</span>
       </ng-template>
       <form [formGroup]="personalInfoForm">
->>>>>>> 7d23f567d5cd6d0829fa751721be5398cea4fbb0
         <div class="login-card">
           <div class="login-header">
             {{ 'register.welcome_label' | translate }}
@@ -23,35 +13,22 @@
             <img src="assets/img/user-icon.png" alt="User Icon">
           </div>
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 7d23f567d5cd6d0829fa751721be5398cea4fbb0
           <mat-form-field container-vertical-padding class="custom-field">
             <mat-label>{{ 'register.name' | translate }}</mat-label>
             <input matInput type="text" class="custom-input" [placeholder]="'register.name_label' | translate"
               formControlName="name" (keypress)="onlyLetters($event)">
             <mat-icon matPrefix>person</mat-icon>
-<<<<<<< HEAD
-=======
             <mat-icon matSuffix *ngIf="personalInfoForm.get('name')?.valid" color="primary">check_circle</mat-icon>
             <mat-icon matSuffix *ngIf="personalInfoForm.get('name')?.invalid && personalInfoForm.get('name')?.touched" color="warn">error</mat-icon>
-            <mat-error *ngIf="personalInfoForm.get('name')?.errors?.['required']">
-              {{ 'register.name_required' | translate }}
-            </mat-error>
             <mat-error *ngIf="personalInfoForm.get('name')?.errors?.['minlength']">
               {{ 'register.name_min_length' | translate }}
             </mat-error>
->>>>>>> 7d23f567d5cd6d0829fa751721be5398cea4fbb0
           </mat-form-field>
 
           <mat-form-field class="custom-field">
-            <mat-label>{{ 'register.last_name' | translate }}</mat-label>
             <input matInput class="custom-input" [placeholder]="'register.lastname_label' | translate"
               formControlName="last_name" (keypress)="onlyLetters($event)">
             <mat-icon matPrefix>person</mat-icon>
-<<<<<<< HEAD
-=======
             <mat-icon matSuffix *ngIf="personalInfoForm.get('last_name')?.valid" color="primary">check_circle</mat-icon>
             <mat-icon matSuffix *ngIf="personalInfoForm.get('last_name')?.invalid && personalInfoForm.get('last_name')?.touched" color="warn">error</mat-icon>
             <mat-error *ngIf="personalInfoForm.get('last_name')?.errors?.['required']">
@@ -60,7 +37,6 @@
             <mat-error *ngIf="personalInfoForm.get('last_name')?.errors?.['minlength']">
               {{ 'register.lastname_min_length' | translate }}
             </mat-error>
->>>>>>> 7d23f567d5cd6d0829fa751721be5398cea4fbb0
           </mat-form-field>
 
           <mat-form-field class="custom-field">
@@ -68,15 +44,6 @@
             <mat-select class="custom-input" formControlName="identification_type"
               [placeholder]="'register.id_type_label' | translate">
               <mat-option *ngFor="let type of documentTypes" [value]="type.value">
-<<<<<<< HEAD
-                {{ type.label | translate }}
-              </mat-option>
-            </mat-select>
-            <mat-icon matPrefix>badge</mat-icon>
-          </mat-form-field>
-
-
-=======
                 {{ type.label }}
               </mat-option>
             </mat-select>
@@ -88,14 +55,11 @@
             </mat-error>
           </mat-form-field>
 
->>>>>>> 7d23f567d5cd6d0829fa751721be5398cea4fbb0
           <mat-form-field class="custom-field">
             <mat-label>{{ 'register.id' | translate }}</mat-label>
             <input matInput type="number" class="custom-input"
               [placeholder]="'register.id_label' | translate" formControlName="document_id">
             <mat-icon matPrefix>key</mat-icon>
-<<<<<<< HEAD
-=======
             <mat-icon matSuffix *ngIf="personalInfoForm.get('document_id')?.valid" color="primary">check_circle</mat-icon>
             <mat-icon matSuffix *ngIf="personalInfoForm.get('document_id')?.invalid && personalInfoForm.get('document_id')?.touched" color="warn">error</mat-icon>
             <mat-error *ngIf="personalInfoForm.get('document_id')?.errors?.['required']">
@@ -104,7 +68,6 @@
             <mat-error *ngIf="personalInfoForm.get('document_id')?.errors?.['pattern']">
               {{ 'register.id_invalid' | translate }}
             </mat-error>
->>>>>>> 7d23f567d5cd6d0829fa751721be5398cea4fbb0
           </mat-form-field>
 
           <mat-form-field class="custom-field" appearance="fill">
@@ -112,34 +75,15 @@
             <input matInput type="date" class="custom-input" [placeholder]="'register.birth_label' | translate"
               formControlName="birth_date">
             <mat-icon matPrefix>calendar_today</mat-icon>
-<<<<<<< HEAD
-=======
             <mat-icon matSuffix *ngIf="personalInfoForm.get('birth_date')?.valid" color="primary">check_circle</mat-icon>
             <mat-icon matSuffix *ngIf="personalInfoForm.get('birth_date')?.invalid && personalInfoForm.get('birth_date')?.touched" color="warn">error</mat-icon>
             <mat-error *ngIf="personalInfoForm.get('birth_date')?.errors?.['required']">
               {{ 'register.birth_required' | translate }}
             </mat-error>
->>>>>>> 7d23f567d5cd6d0829fa751721be5398cea4fbb0
           </mat-form-field>
 
           <mat-form-field appearance="fill" class="custom-field">
             <mat-label>{{ 'register.gender' | translate }}</mat-label>
-<<<<<<< HEAD
-            <mat-select formControlName="gender"  [placeholder]="'register.gender_label' | translate"
-              panelClass="custom-select-panel" >
-              <mat-option *ngFor="let type of genderTypes" [value]="type.value" > 
-                {{ type.label | translate }}
-              </mat-option>
-            </mat-select>
-            <mat-icon matPrefix>person</mat-icon>
-          </mat-form-field>
-
-
-          <div>
-            <button class="login-btn"  type="button"  matStepperNext>
-              {{ 'register.button_next' | translate }}
-            </button>
-=======
             <mat-select formControlName="gender" [placeholder]="'register.gender_label' | translate"
               panelClass="custom-select-panel">
               <mat-option *ngFor="let type of genderTypes" [value]="type.value">
@@ -161,33 +105,21 @@
               {{ 'register.button_next' | translate }}
             </button>
 
->>>>>>> 7d23f567d5cd6d0829fa751721be5398cea4fbb0
             <p style="margin-top: 15px;">
               {{ 'register.have_account' | translate }} <a href="/login">{{ 'register.login_now' | translate }}</a>
             </p>
           </div>
-<<<<<<< HEAD
-=======
           
->>>>>>> 7d23f567d5cd6d0829fa751721be5398cea4fbb0
         </div>
       </form>
     </mat-step>
 
     <!-- Paso 2 -->
-<<<<<<< HEAD
-    <mat-step [stepControl]="secondFormGroup">
-      <ng-template matStepLabel>
-        <span class="step-label">{{ 'register.contact_information' | translate }}</span>
-      </ng-template>
-      <form [formGroup]="form!">
-=======
     <mat-step [stepControl]="contactInfoForm">
       <ng-template matStepLabel>
         <span class="step-label">{{ 'register.contact_information' | translate }}</span>
       </ng-template>
       <form [formGroup]="contactInfoForm">
->>>>>>> 7d23f567d5cd6d0829fa751721be5398cea4fbb0
         <div class="login-card">
           <div class="login-header">
             {{ 'register.welcome_label' | translate }}
@@ -201,8 +133,6 @@
             <input matInput type="email" class="custom-input" [placeholder]="'register.email_label' | translate"
               formControlName="email">
             <mat-icon matPrefix>mail</mat-icon>
-<<<<<<< HEAD
-=======
             <mat-icon matSuffix *ngIf="contactInfoForm.get('email')?.valid" color="primary">check_circle</mat-icon>
             <mat-icon matSuffix *ngIf="contactInfoForm.get('email')?.invalid && contactInfoForm.get('email')?.touched" color="warn">error</mat-icon>
             <mat-error *ngIf="contactInfoForm.get('email')?.errors?.['required']">
@@ -211,7 +141,6 @@
             <mat-error *ngIf="contactInfoForm.get('email')?.errors?.['email']">
               {{ 'register.email_invalid' | translate }}
             </mat-error>
->>>>>>> 7d23f567d5cd6d0829fa751721be5398cea4fbb0
           </mat-form-field>
 
           <mat-form-field class="custom-field">
@@ -219,8 +148,6 @@
             <input matInput type="number" class="custom-input" [placeholder]="'register.mobile_label' | translate"
               formControlName="cell_phone">
             <mat-icon matPrefix>smartphone</mat-icon>
-<<<<<<< HEAD
-=======
             <mat-icon matSuffix *ngIf="contactInfoForm.get('cell_phone')?.valid" color="primary">check_circle</mat-icon>
             <mat-icon matSuffix *ngIf="contactInfoForm.get('cell_phone')?.invalid && contactInfoForm.get('cell_phone')?.touched" color="warn">error</mat-icon>
             <mat-error *ngIf="contactInfoForm.get('cell_phone')?.errors?.['required']">
@@ -229,7 +156,6 @@
             <mat-error *ngIf="contactInfoForm.get('cell_phone')?.errors?.['pattern']">
               {{ 'register.mobile_invalid' | translate }}
             </mat-error>
->>>>>>> 7d23f567d5cd6d0829fa751721be5398cea4fbb0
           </mat-form-field>
 
           <mat-form-field class="custom-field">
@@ -237,8 +163,6 @@
             <input matInput type="number" class="custom-input" [placeholder]="'register.phone_label' | translate"
               formControlName="phone">
             <mat-icon matPrefix>call</mat-icon>
-<<<<<<< HEAD
-=======
             <mat-icon matSuffix *ngIf="contactInfoForm.get('phone')?.valid" color="primary">check_circle</mat-icon>
             <mat-icon matSuffix *ngIf="contactInfoForm.get('phone')?.invalid && contactInfoForm.get('phone')?.touched" color="warn">error</mat-icon>
             <mat-error *ngIf="contactInfoForm.get('phone')?.errors?.['required']">
@@ -247,7 +171,6 @@
             <mat-error *ngIf="contactInfoForm.get('phone')?.errors?.['pattern']">
               {{ 'register.phone_invalid' | translate }}
             </mat-error>
->>>>>>> 7d23f567d5cd6d0829fa751721be5398cea4fbb0
           </mat-form-field>
 
           <mat-form-field class="custom-field">
@@ -255,20 +178,6 @@
             <input matInput type="text" class="custom-input" [placeholder]="'register.address_label' | translate"
               formControlName="address">
             <mat-icon matPrefix>home</mat-icon>
-<<<<<<< HEAD
-          </mat-form-field>
-
-          <div style="display: flex; justify-content: space-between;">
-            <button  color="primary" class="login-btn" matStepperPrevious>
-              {{ 'register.button_back' | translate }}
-            </button>
-            <p></p>
-            <button  color="primary" class="login-btn" matStepperNext>
-              {{ 'register.button_next' | translate }}
-            </button>
-          </div>
-
-=======
             <mat-icon matSuffix *ngIf="contactInfoForm.get('address')?.valid" color="primary">check_circle</mat-icon>
             <mat-icon matSuffix *ngIf="contactInfoForm.get('address')?.invalid && contactInfoForm.get('address')?.touched" color="warn">error</mat-icon>
             <mat-error *ngIf="contactInfoForm.get('address')?.errors?.['required']">
@@ -287,27 +196,16 @@
               {{ 'register.button_next' | translate }}
             </button>
           </div>
->>>>>>> 7d23f567d5cd6d0829fa751721be5398cea4fbb0
         </div>
       </form>
     </mat-step>
 
-<<<<<<< HEAD
-
-    <!-- Paso Final -->
-    <mat-step [stepControl]="thirdFormGroup">
-      <ng-template matStepLabel>
-        <span class="step-label">{{ 'register.done' | translate }}</span>
-      </ng-template>
-      <form [formGroup]="form!">
-=======
     <!-- Paso Final -->
     <mat-step [stepControl]="passwordForm">
       <ng-template matStepLabel>
         <span class="step-label">{{ 'register.done' | translate }}</span>
       </ng-template>
       <form [formGroup]="passwordForm">
->>>>>>> 7d23f567d5cd6d0829fa751721be5398cea4fbb0
         <div class="login-card">
           <div class="login-header">
             {{ 'register.welcome_label' | translate }}
@@ -316,13 +214,6 @@
             <img src="assets/img/user-icon.png" alt="User Icon">
           </div>
 
-<<<<<<< HEAD
-          <!-- <div class="login-header">
-            {{ 'register.final_step_label' | translate }}
-          </div> -->
-
-=======
->>>>>>> 7d23f567d5cd6d0829fa751721be5398cea4fbb0
           <mat-form-field class="custom-field">
             <mat-label>{{ 'register.password' | translate }}</mat-label>
             <input matInput [type]="showPassword ? 'text' : 'password'" class="custom-input"
@@ -333,14 +224,6 @@
               <mat-icon>{{ showPassword ? 'visibility' : 'visibility_off' }}</mat-icon>
             </button>
             <mat-icon matPrefix>key</mat-icon>
-<<<<<<< HEAD
-          </mat-form-field>
-
-          <!-- <div class="login-header">
-            {{ 'register.final_step_label1' | translate }}
-          </div> -->
-          <!-- Confirmar contraseña -->
-=======
             <mat-error *ngIf="passwordForm.get('password')?.errors?.['required']">
               {{ 'register.password_required' | translate }}
             </mat-error>
@@ -349,7 +232,6 @@
             </mat-error>
           </mat-form-field>
 
->>>>>>> 7d23f567d5cd6d0829fa751721be5398cea4fbb0
           <mat-form-field class="custom-field">
             <mat-label>{{ 'register.password1' | translate }}</mat-label>
             <input matInput [type]="showConfirmPassword ? 'text' : 'password'" class="custom-input"
@@ -358,53 +240,6 @@
               [attr.aria-label]="'Toggle password visibility'" [attr.aria-pressed]="showConfirmPassword">
               <mat-icon>{{ showConfirmPassword ? 'visibility' : 'visibility_off' }}</mat-icon>
             </button>
-<<<<<<< HEAD
-            <!-- valida contraseña  -->
-            <mat-error *ngIf="form?.hasError('passwordMismatch') && form?.get('confirmPassword')" style="color: red;">
-              {{ 'register.incorrect' | translate }}
-              </mat-error>
-            
-            <mat-icon matPrefix>key</mat-icon>
-          </mat-form-field>
-          <div style="display: flex; justify-content: center; margin-top: 10px;">
-
-          <div id="recaptcha-container" class="g-recaptcha" data-callback="onCaptchaResolved"
-            data-sitekey="6Lcanv0qAAAAAJZXEdthr0g_wb1wMR6lYSEjOFro"></div>
-            </div>
-
-          <p *ngIf="!onCaptchaPassed" class="error-text">{{ 'register.captcha_error_label' | translate }}</p>
-
-
-          <div style="display: flex; justify-content: space-between;">
-            <button  color="primary" type="button" class="login-btn" matStepperPrevious>
-              {{ 'register.button_back' | translate }}
-            </button>
-            <!-- <button  color="primary" class="login-btn" type="button" (click)="stepper.reset()">
-              {{ 'register.button_reset' | translate }}
-            </button> -->
-            <button  (click)="this.submit()" class="login-btn"
-            [disabled]="form?.invalid || !this.onCaptchaPassed">
-            {{ 'register.button' | translate }}
-          </button>
-          </div>
-          <!-- Validación de requisitos -->
-          <div  class="password-requirements">
-            <p>{{ 'register.password_rules_intro' | translate }}</p>
-            <ul>
-              <li [ngClass]="{ valid: requisitos.length }">{{ 'register.length' | translate }}</li>
-              <li [ngClass]="{ valid: requisitos.hasNumber && requisitos.hasLower }">{{ 'register.number_lower' |
-                translate }}</li>
-              <li [ngClass]="{ valid: requisitos.hasUpper }">{{ 'register.upper' | translate }}</li>
-              <li [ngClass]="{ valid: requisitos.hasSpecial }">{{ 'register.special' | translate }}</li>
-            </ul>
-            <!-- Mensaje de contraseña segura -->
-            <div
-              *ngIf="requisitos.length && requisitos.hasUpper && requisitos.hasLower && requisitos.hasNumber && requisitos.hasSpecial">
-              <p style="color: green;">{{ 'register.password_secure' | translate }}</p>
-
-            </div>
-          </div>
-=======
             <mat-icon matPrefix>key</mat-icon>
             <mat-error *ngIf="passwordForm.hasError('passwordMismatch') && passwordForm.get('confirmPassword')?.touched">
               {{ 'register.incorrect' | translate }}
@@ -454,16 +289,11 @@
             </button>
           </div>
 
->>>>>>> 7d23f567d5cd6d0829fa751721be5398cea4fbb0
           <p style="margin-top: 15px;">
             {{ 'register.have_account' | translate }} <a href="/login">{{ 'register.login_now' | translate }}</a>
           </p>
         </div>
       </form>
-<<<<<<< HEAD
-    </mat-step>
-=======
     </mat-step>
   </mat-stepper>
 </div>
->>>>>>> 7d23f567d5cd6d0829fa751721be5398cea4fbb0

@@ -5,7 +5,6 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './agregar.component.html',
-  styleUrl: './agregar.component.css'
 })
 export class AgregarComponent {
 

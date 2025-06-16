@@ -1,20 +1,12 @@
 import { CommonModule } from '@angular/common';
-<<<<<<< HEAD
-import { Component, AfterViewInit,NgZone,inject } from '@angular/core';
-=======
 import { Component, AfterViewInit, NgZone, ViewChild, OnInit } from '@angular/core';
->>>>>>> 7d23f567d5cd6d0829fa751721be5398cea4fbb0
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-<<<<<<< HEAD
-import { MatStepperModule } from '@angular/material/stepper';
-=======
 import { MatStepperModule, MatStepper } from '@angular/material/stepper';
 import { RouterModule, Router } from '@angular/router';
->>>>>>> 7d23f567d5cd6d0829fa751721be5398cea4fbb0
 import {
   FormBuilder,
   FormGroup,
@@ -28,8 +20,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { MatRadioModule } from '@angular/material/radio';
 import { AuthService } from '../auth.service';
-<<<<<<< HEAD
-=======
 import { firstValueFrom } from 'rxjs';
 
 interface RegisterResponse {
@@ -37,7 +27,6 @@ interface RegisterResponse {
   message: string;
   // Agrega aquí más campos según la respuesta real de tu API
 }
->>>>>>> 7d23f567d5cd6d0829fa751721be5398cea4fbb0
 
 @Component({
   selector: 'app-register',
@@ -54,21 +43,11 @@ interface RegisterResponse {
     MatSelectModule,
     MatOptionModule,
     MatRadioModule,
-<<<<<<< HEAD
-=======
     RouterModule
->>>>>>> 7d23f567d5cd6d0829fa751721be5398cea4fbb0
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
 })
-<<<<<<< HEAD
-export class RegisterComponent extends TranslateLogic implements AfterViewInit {
-  form?: FormGroup;
-  onCaptchaPassed = false;
-  captchaToken?: string;
-  show: boolean = true;
-=======
 export class RegisterComponent extends TranslateLogic implements OnInit, AfterViewInit {
   @ViewChild('stepper') stepper!: MatStepper;
   
@@ -80,7 +59,6 @@ export class RegisterComponent extends TranslateLogic implements OnInit, AfterVi
   isLinear = true;
   onCaptchaPassed = false;
   captchaToken?: string;
->>>>>>> 7d23f567d5cd6d0829fa751721be5398cea4fbb0
   showPassword = false;
   showConfirmPassword = false;
 
@@ -92,9 +70,6 @@ export class RegisterComponent extends TranslateLogic implements OnInit, AfterVi
     hasSpecial: false,
   };
 
-<<<<<<< HEAD
-  constructor(private fb: FormBuilder, private authService: AuthService, private zone: NgZone, translate: TranslateService) {
-=======
   documentTypes = [
     { value: 'CC', label: 'Cédula de Ciudadanía' },
     { value: 'CE', label: 'Cédula de Extranjería' },
@@ -114,37 +89,10 @@ export class RegisterComponent extends TranslateLogic implements OnInit, AfterVi
     translate: TranslateService,
     private router: Router
   ) {
->>>>>>> 7d23f567d5cd6d0829fa751721be5398cea4fbb0
     super(translate);
   }
 
   ngOnInit() {
-<<<<<<< HEAD
-    this.form = this.fb.group({
-      name: ['', Validators.required],
-      last_name: ['', Validators.required],
-      identification_type: ['', Validators.required],
-      document_id: ['', Validators.required],
-      birth_date: ['', Validators.required],
-      gender: ['', Validators.required],
-      cell_phone: ['', Validators.required],
-      password: ['', [Validators.required, this.validatePassword(), Validators.minLength(8)]],
-      confirmPassword: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      phone: ['', Validators.required],
-      address: ['', Validators.required],
-    }, { validators: this.passwordsMatchValidator });
-
-    (window as any).onCaptchaResolved = this.onCaptchaResolved.bind(this);
-  }
-
-  validatePassword() {
-    const patron = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).+$/;
-    return (control: AbstractControl): ValidationErrors | null => {
-      if (control.value && !patron.test(control.value)) {
-        return { requisitosNoCumplidos: true };
-      }
-=======
     this.initForm();
     (window as any).onCaptchaResolved = this.onCaptchaResolved.bind(this);
   }
@@ -302,110 +250,10 @@ export class RegisterComponent extends TranslateLogic implements OnInit, AfterVi
         return { requisitosNoCumplidos: true };
       }
 
->>>>>>> 7d23f567d5cd6d0829fa751721be5398cea4fbb0
       return null;
     };
   }
 
-<<<<<<< HEAD
-  /** valida cada punto de la contraseña para saber q cada cosa se cumple */
-  onPasswordInput() {
-    const value = this.form?.get('password')?.value || '';
-    this.requisitos.length = value.length >= 8;
-    this.requisitos.hasUpper = /[A-Z]/.test(value);
-    this.requisitos.hasLower = /[a-z]/.test(value);
-    this.requisitos.hasNumber = /\d/.test(value);
-    this.requisitos.hasSpecial = /[!@#$%^&*(),.?":{}|<>]/.test(value);
-    
-  }
-
-  /*Valida que las constraseñas sean iguales y sino muestra un error*/
-passwordsMatchValidator(formGroup: AbstractControl): ValidationErrors | null {
-  const password = formGroup.get('password')?.value;
-  const confirmPasswordControl = formGroup.get('confirmPassword');
-
-  if (password !== confirmPasswordControl?.value) {
-    confirmPasswordControl?.setErrors({ passwordMismatch: true });
-    return { passwordMismatch: true };
-  } else {
-    const errors = confirmPasswordControl?.errors;
-    if (errors) {
-      delete errors['passwordMismatch'];
-      if (Object.keys(errors).length === 0) {
-        confirmPasswordControl?.setErrors(null);
-      } else {
-        confirmPasswordControl?.setErrors(errors);
-      }
-    }
-    return null;
-  }
-}
-
-
-
-  ngAfterViewInit() {
-    if ((window as any).grecaptcha) {
-      (window as any).grecaptcha.render('recaptcha-container', {
-        sitekey: '6Lcanv0qAAAAAJZXEdthr0g_wb1wMR6lYSEjOFro',
-      });
-    }
-  }
-
-  onCaptchaResolved(response: string) {
-    if (response) {
-      this.zone.run(() => {
-        this.onCaptchaPassed = true;
-        this.captchaToken = response;
-      });
-    }
-  }
-
-  isAuthenticated(): boolean {
-    return this.authService.isAuthenticated;
-  }
-
-  submit() {
-    if (this.form?.valid && this.onCaptchaPassed) {
-
-      this.authService.register(this.form.value)
-      localStorage.setItem('captcha-token', this.captchaToken!);
-    }
-  }
-
-  private _formBuilder = inject(FormBuilder);
-
-  firstFormGroup = this._formBuilder.group({
-    firstCtrl: ['', Validators.required],
-  });
-  secondFormGroup = this._formBuilder.group({
-    secondCtrl: ['', Validators.required],
-  });
-  thirdFormGroup = this._formBuilder.group({
-    thirdCtrl: ['', Validators.required],
-  });
-
-  isLinear = false;
-/**Solo permite letras y no numeros en los campos de solo letras  */
-  onlyLetters(event: KeyboardEvent) {
-    const inputChar = String.fromCharCode(event.keyCode || event.which);
-    const valid = /^[a-zA-ZÀ-ÿ\s]+$/.test(inputChar);
-    if (!valid) {
-      event.preventDefault();
-    }
-  }
-/**Da la lista de opciones en el formulario */
-  documentTypes = [
-    { value: 'cedula', label: 'register.document_type.cedula' },
-    { value: 'pasaporte', label: 'register.document_type.passport' },
-    { value: 'dni', label: 'register.document_type.dni' },
-  ];
-
-  genderTypes = [
-    { value: 'masculino', label: 'register.gender.m' },
-    { value: 'femenino', label: 'register.gender.f' },
-    { value: 'otro', label: 'register.gender.o' },
-  ];
-=======
   passwordsMatchValidator(formGroup: AbstractControl): ValidationErrors | null {
     const password = formGroup.get('password');
     const confirmPassword = formGroup.get('confirmPassword');
@@ -614,5 +462,4 @@ passwordsMatchValidator(formGroup: AbstractControl): ValidationErrors | null {
       });
     }
   }
->>>>>>> 7d23f567d5cd6d0829fa751721be5398cea4fbb0
 }
