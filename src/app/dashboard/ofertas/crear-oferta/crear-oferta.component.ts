@@ -418,7 +418,7 @@ export class CrearOfertaComponent implements OnInit {
     const fechaInicio = new Date(this.oferta.start_date);
     const fechaFin = new Date(this.oferta.end_date);
     const hoy = new Date();
-
+    
     if (fechaInicio < hoy) {
       console.warn('CrearOferta - Fecha de inicio inválida:', fechaInicio);
       this.mostrarMensaje('La fecha de inicio no puede ser anterior a hoy', 'error');

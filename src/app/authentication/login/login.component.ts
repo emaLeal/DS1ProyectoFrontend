@@ -49,6 +49,7 @@ export class LoginComponent extends TranslateLogic implements AfterViewInit {
   loginError: string = '';
   isLoading: boolean = true;
   isLoggingIn: boolean = false;
+  isTestMode: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -62,6 +63,14 @@ export class LoginComponent extends TranslateLogic implements AfterViewInit {
   }
 
   ngOnInit() {
+    // Detectar modo test por localStorage
+    this.isTestMode = localStorage.getItem('PLAYWRIGHT_TEST') === 'true';
+    if (this.isTestMode) {
+      this.onCaptchaPassed = true;
+      this.captchaToken = 'test-token';
+    }
+    // Enlazar el callback global para reCAPTCHA
+    (window as any).onCaptchaResolved = this.onCaptchaResolved.bind(this);
     this.form = this.formBuilder.group({
       document_id: ['', Validators.required],
       password: [
@@ -69,8 +78,7 @@ export class LoginComponent extends TranslateLogic implements AfterViewInit {
         [Validators.required,],
       ],
     });
-    (window as any).onCaptchaResolved = this.onCaptchaResolved.bind(this);
-    
+
     // Simular tiempo de carga inicial
     setTimeout(() => {
       this.isLoading = false;
@@ -78,20 +86,19 @@ export class LoginComponent extends TranslateLogic implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-    if ((window as any).grecaptcha) {
-      (window as any).grecaptcha.render('recaptcha-container', {
-        sitekey: '6Lcanv0qAAAAAJZXEdthr0g_wb1wMR6lYSEjOFro',
-      });
+    // Solo renderizar el captcha si NO estamos en test
+    if (!this.isTestMode) {
+      if ((window as any).grecaptcha) {
+        (window as any).grecaptcha.render('recaptcha-container', {
+          sitekey: '6Lcanv0qAAAAAJZXEdthr0g_wb1wMR6lYSEjOFro',
+        });
+      }
     }
   }
 
-  onCaptchaResolved(response: string) {
-    if (response) {
-      this.zone.run(() => {
-        this.onCaptchaPassed = true;
-        this.captchaToken = response;
-      });
-    }
+  onCaptchaResolved(token: string) {
+    this.onCaptchaPassed = true;
+    this.captchaToken = token;
   }
 
   isAuthenticated(): boolean {

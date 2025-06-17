@@ -52,12 +52,12 @@
             {{ loginError }}
           </div>
 
-          <div style="display: flex; justify-content: center; margin-top: 10px;">
-            <div id="recaptcha-container" 
-                 class="g-recaptcha" 
-                 data-callback="onCaptchaResolved"
-                 data-sitekey="6Lcanv0qAAAAAJZXEdthr0g_wb1wMR6lYSEjOFro">
-            </div>
+          <!-- Solo mostrar el captcha si NO estamos en modo test -->
+          <div *ngIf="!isTestMode"
+               id="recaptcha-container"
+               class="g-recaptcha"
+               data-callback="onCaptchaResolved"
+               data-sitekey="6Lcanv0qAAAAAJZXEdthr0g_wb1wMR6lYSEjOFro">
           </div>
 
           <p *ngIf="!onCaptchaPassed" class="error-text">
