@@ -55,24 +55,15 @@
         "havent_account": "Don't have an account?",
         "register_now": "Register now!",
 
-<<<<<<< HEAD
-        "length": "✔ 8 or more characters",
-        "number_lower": "✔ At least one number and one lowercase letter",
-        "upper": "✔ At least one uppercase letter",
-        "special": "✔ At least one special character (*, .!#$ ...)",
-=======
         "length": " 8 or more characters",
         "number_lower": " At least one number and one lowercase letter",
         "upper": " At least one uppercase letter",
         "special": " At least one special character (*, .!#$ ...)",
->>>>>>> 7d23f567d5cd6d0829fa751721be5398cea4fbb0
         "password_rules_intro": "Your password must have:",
         "password_secure": "Secure password",
         "incorrect": "Passwords do not match"
 
 
-<<<<<<< HEAD
-=======
     },
 
     "dashboard": {
@@ -84,6 +75,5 @@
     "language": {
         "change_to_spanish": "Switch to Spanish",
         "change_to_english": "Switch to English"
->>>>>>> 7d23f567d5cd6d0829fa751721be5398cea4fbb0
     }
 }
