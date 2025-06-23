@@ -17,6 +17,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { RolesService, Role } from '../roles/roles.service';
 import { EditarUsuarioComponent } from './editar-usuario/editar-usuario.component';
+import { UserDetailsModalComponent } from './user-details-modal/user-details-modal.component';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { ConfirmDialogComponent } from './confirm-dialog.component';
 
@@ -46,7 +47,8 @@ interface PredefinedColors {
     MatDialogModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatTooltipModule
+    MatTooltipModule,
+    UserDetailsModalComponent
   ],
   templateUrl: './usuarios.component.html',
   styleUrls: ['./usuarios.component.css'],
@@ -418,6 +420,23 @@ export class UsuariosComponent implements OnInit {
            usuario.email?.toLowerCase().includes(texto))
         : true;
       return cumpleRol && cumpleBusqueda;
+    });
+  }
+
+  verDetalles(usuario: any) {
+    const dialogRef = this.dialog.open(UserDetailsModalComponent, {
+      width: '600px',
+      data: { usuario: usuario }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        if (result.action === 'edit') {
+          this.editarUsuario(result.usuario);
+        } else if (result.action === 'delete') {
+          this.borrarUsuario(result.usuario);
+        }
+      }
     });
   }
 }

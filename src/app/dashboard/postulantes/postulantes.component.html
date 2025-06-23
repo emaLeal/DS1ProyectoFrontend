@@ -1,42 +1,126 @@
-<div class="postulantes-panel">
-  <h2>Listado de Postulantes</h2>
-
-  <div class="filtros">
-    <select [(ngModel)]="filtroGenero">
-      <option value="">Filtrar por género</option>
-      <option value="Masculino">Masculino</option>
-      <option value="Femenino">Femenino</option>
-    </select>
-
-    <select [(ngModel)]="filtroCargo">
-      <option value="">Filtrar por cargo</option>
-      <option *ngFor="let cargo of cargos">{{ cargo }}</option>
-    </select>
-
-    <button (click)="limpiarFiltros()">Limpiar Filtros</button>
+<div class="postulantes-container page-animate">
+  <!-- Header Section -->
+  <div class="header-section fade-in-up">
+    <mat-card class="header-card">
+      <mat-card-content>
+        <div class="title-section">
+          <mat-icon>people_outline</mat-icon>
+          <h1>Postulantes</h1>
+          <p>Gestiona los postulantes a las ofertas laborales</p>
+        </div>
+        <div class="actions-section">
+          <button mat-raised-button color="primary">
+            <mat-icon>add</mat-icon>
+            Nuevo Postulante
+          </button>
+        </div>
+      </mat-card-content>
+    </mat-card>
   </div>
 
-  <table class="tabla-postulantes">
-    <thead>
-      <tr>
-        <th>Nombre</th>
-        <th>Género</th>
-        <th>Cargo deseado</th>
-        <th>Correo</th>
-        <th>Acciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let p of postulantesFiltrados()">
-        <td>{{ p.nombre }} {{ p.apellido }}</td>
-        <td>{{ p.genero }}</td>
-        <td>{{ p.cargo }}</td>
-        <td>{{ p.correo }}</td>
-        <td>
-          <button class="ver-btn">Ver</button>
-          <button class="editar-btn">Editar</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <!-- Filters Section -->
+  <div class="filters-section fade-in-up delay-1">
+    <mat-card>
+      <mat-card-content>
+        <div class="filters-grid">
+          <mat-form-field appearance="outline">
+            <mat-label>Buscar postulante</mat-label>
+            <input matInput placeholder="Nombre, email, documento...">
+            <mat-icon matSuffix>search</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Estado</mat-label>
+            <mat-select>
+              <mat-option value="all">Todos</mat-option>
+              <mat-option value="active">Activos</mat-option>
+              <mat-option value="inactive">Inactivos</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Oferta</mat-label>
+            <mat-select>
+              <mat-option value="all">Todas</mat-option>
+              <mat-option value="dev">Desarrollador Frontend</mat-option>
+              <mat-option value="analyst">Analista de Datos</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Table Section -->
+  <div class="table-section fade-in-up delay-2">
+    <mat-card>
+      <mat-card-content>
+        <table mat-table [dataSource]="postulantes" class="mat-elevation-z8">
+          <!-- Foto Column -->
+          <ng-container matColumnDef="foto">
+            <th mat-header-cell *matHeaderCellDef>Foto</th>
+            <td mat-cell *matCellDef="let postulante" class="fade-in-left">
+              <img [src]="postulante.foto" alt="Foto postulante" class="postulante-foto">
+            </td>
+          </ng-container>
+
+          <!-- Nombre Column -->
+          <ng-container matColumnDef="nombre">
+            <th mat-header-cell *matHeaderCellDef>Nombre</th>
+            <td mat-cell *matCellDef="let postulante" class="fade-in-left delay-1">
+              {{postulante.nombre}} {{postulante.apellido}}
+            </td>
+          </ng-container>
+
+          <!-- Email Column -->
+          <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef>Email</th>
+            <td mat-cell *matCellDef="let postulante" class="fade-in-left delay-2">
+              {{postulante.email}}
+            </td>
+          </ng-container>
+
+          <!-- Oferta Column -->
+          <ng-container matColumnDef="oferta">
+            <th mat-header-cell *matHeaderCellDef>Oferta</th>
+            <td mat-cell *matCellDef="let postulante" class="fade-in-left delay-3">
+              <span class="oferta-badge">{{postulante.oferta}}</span>
+            </td>
+          </ng-container>
+
+          <!-- Estado Column -->
+          <ng-container matColumnDef="estado">
+            <th mat-header-cell *matHeaderCellDef>Estado</th>
+            <td mat-cell *matCellDef="let postulante" class="fade-in-left delay-4">
+              <span class="estado-badge" [class.active]="postulante.estado === 'Activo'">
+                {{postulante.estado}}
+              </span>
+            </td>
+          </ng-container>
+
+          <!-- Actions Column -->
+          <ng-container matColumnDef="acciones">
+            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+            <td mat-cell *matCellDef="let postulante" class="fade-in-left delay-5">
+              <button mat-icon-button color="primary" matTooltip="Ver detalles">
+                <mat-icon>visibility</mat-icon>
+              </button>
+              <button mat-icon-button color="accent" matTooltip="Editar">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button color="warn" matTooltip="Eliminar">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="['foto', 'nombre', 'email', 'oferta', 'estado', 'acciones']"></tr>
+          <tr mat-row *matRowDef="let row; columns: ['foto', 'nombre', 'email', 'oferta', 'estado', 'acciones'];"></tr>
+        </table>
+
+        <!-- Pagination -->
+        <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </div>

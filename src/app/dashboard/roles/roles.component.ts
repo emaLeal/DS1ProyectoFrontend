@@ -11,8 +11,18 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
 import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatChipsModule } from '@angular/material/chips';
 import { RolesService, Role, CreateRoleRequest } from './roles.service';
 import { ConfirmDialogComponent, DialogData } from './confirm-dialog.component';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+
+interface ExtendedRole extends Role {
+  icon?: string;
+  name?: string;
+  permissions?: string[];
+  usersCount?: number;
+  isDefault?: boolean;
+}
 
 @Component({
   selector: 'app-roles',
@@ -29,17 +39,19 @@ import { ConfirmDialogComponent, DialogData } from './confirm-dialog.component';
     MatProgressSpinnerModule,
     MatCardModule,
     MatSnackBarModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatChipsModule
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './roles.component.html',
   styleUrls: ['./roles.component.css']
 })
 export class RolesComponent implements OnInit {
-  roles: Role[] = [];
-  rolesFiltrados: Role[] = [];
+  roles: ExtendedRole[] = [];
+  rolesFiltrados: ExtendedRole[] = [];
   filtro = '';
   mostrarFormulario = false;
-  rolSeleccionado: Role | null = null;
+  rolSeleccionado: ExtendedRole | null = null;
   cargando = false;
   
   form: { id: number | null; description: string } = {
@@ -59,11 +71,31 @@ export class RolesComponent implements OnInit {
     this.cargarRoles();
   }
 
+  openNewRoleDialog() {
+    this.abrirFormulario();
+  }
+
+  editRole(role: ExtendedRole) {
+    this.editarRol(role);
+  }
+
+  deleteRole(role: ExtendedRole) {
+    this.eliminarRol(role);
+  }
+
   cargarRoles() {
     this.cargando = true;
     this.rolesService.getRoles().subscribe({
       next: (data) => {
-        this.roles = data;
+        // Extend the roles with additional properties
+        this.roles = data.map(role => ({
+          ...role,
+          icon: 'security',
+          name: role.description,
+          permissions: ['Ver', 'Editar', 'Eliminar'],
+          usersCount: 0,
+          isDefault: role.id === 1
+        }));
         this.rolesFiltrados = [...this.roles];
         this.cargando = false;
       },
@@ -93,9 +125,9 @@ export class RolesComponent implements OnInit {
     this.form = { id: null, description: '' };
   }
 
-  editarRol(rol: Role) {
+  editarRol(rol: ExtendedRole) {
     this.rolSeleccionado = rol;
-    this.form = { ...rol };
+    this.form = { id: rol.id, description: rol.description };
     this.mostrarFormulario = true;
   }
 
@@ -197,7 +229,7 @@ export class RolesComponent implements OnInit {
     }
   }
 
-  eliminarRol(rol: Role) {
+  eliminarRol(rol: ExtendedRole) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '300px',
       data: { 

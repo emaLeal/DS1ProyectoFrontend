@@ -92,6 +92,17 @@
             ],
             "scripts": []
           }
+        },
+        "e2e": {
+          "builder": "playwright-ng-schematics:playwright",
+          "options": {
+            "devServerTarget": "DS1ProyectoFrontend:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "DS1ProyectoFrontend:serve:production"
+            }
+          }
         }
       }
     }

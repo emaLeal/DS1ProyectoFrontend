@@ -1,6 +1,14 @@
+<!-- Loading overlay -->
+<div class="loading-overlay" *ngIf="isLoading">
+  <div class="loading-spinner">
+    <mat-spinner diameter="50"></mat-spinner>
+    <p>Cargando...</p>
+  </div>
+</div>
+
 <form [formGroup]="form!" (ngSubmit)="submit()">
   <div class="login-container">
-    <mat-card class="login-card">
+    <mat-card class="login-card" [class.loading]="isLoading">
       <div class="login-card-content">
         <mat-card-header>
           <mat-card-title>{{ 'login.welcome_label' | translate }}</mat-card-title>
@@ -39,12 +47,17 @@
             </button>
           </mat-form-field>
 
-          <div style="display: flex; justify-content: center; margin-top: 10px;">
-            <div id="recaptcha-container" 
-                 class="g-recaptcha" 
-                 data-callback="onCaptchaResolved"
-                 data-sitekey="6Lcanv0qAAAAAJZXEdthr0g_wb1wMR6lYSEjOFro">
-            </div>
+          <div *ngIf="loginError" class="error-text" style="margin-bottom: 15px;">
+            <mat-icon color="warn" style="vertical-align: middle; margin-right: 5px;">error</mat-icon>
+            {{ loginError }}
+          </div>
+
+          <!-- Solo mostrar el captcha si NO estamos en modo test -->
+          <div *ngIf="!isTestMode"
+               id="recaptcha-container"
+               class="g-recaptcha"
+               data-callback="onCaptchaResolved"
+               data-sitekey="6Lcanv0qAAAAAJZXEdthr0g_wb1wMR6lYSEjOFro">
           </div>
 
           <p *ngIf="!onCaptchaPassed" class="error-text">
@@ -55,8 +68,10 @@
                   color="primary" 
                   class="login-btn" 
                   type="submit"
-                  [disabled]="form?.invalid || !onCaptchaPassed">
-            {{ 'login.login_button' | translate }}
+                  [disabled]="form?.invalid || !onCaptchaPassed || isLoggingIn">
+            <mat-spinner *ngIf="isLoggingIn" diameter="20" class="button-spinner"></mat-spinner>
+            <span *ngIf="!isLoggingIn">{{ 'login.login_button' | translate }}</span>
+            <span *ngIf="isLoggingIn">Iniciando sesión...</span>
           </button>
 
           <p style="margin-top: 15px;">

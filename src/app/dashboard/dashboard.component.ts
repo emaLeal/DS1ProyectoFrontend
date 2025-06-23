@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet, Router } from '@angular/router';
+import { RouterOutlet, Router, NavigationStart, NavigationEnd, NavigationCancel, NavigationError } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { AuthService } from '../authentication/auth.service';
 import { SearchService, SearchResult } from '../services/search.service';
@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { HttpClientModule } from '@angular/common/http';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import TranslateLogic from '../lib/translate/translate.class';
 
 @Component({
@@ -19,7 +20,8 @@ import TranslateLogic from '../lib/translate/translate.class';
     RouterModule,
     FormsModule,
     HttpClientModule,
-    TranslateModule
+    TranslateModule,
+    MatProgressSpinnerModule
   ],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
@@ -33,6 +35,13 @@ export class DashboardComponent extends TranslateLogic implements OnInit, OnDest
   isSearching = false;
   private searchSubscription?: Subscription;
   menuOpen = false;
+  isLoading = false;
+  private routerSubscription?: Subscription;
+
+  // Nuevas propiedades para el manejo de menús colapsables
+  mainMenuCollapsed = false;
+  directorMenuCollapsed = false;
+  adminMenuCollapsed = false;
 
   constructor(
     private router: Router, 
@@ -59,12 +68,44 @@ export class DashboardComponent extends TranslateLogic implements OnInit, OnDest
         this.isSearching = false;
       }
     });
+
+    // Suscribirse a los eventos del router para mostrar/ocultar el loading
+    this.routerSubscription = this.router.events.subscribe(event => {
+      if (event instanceof NavigationStart) {
+        this.isLoading = true;
+      } else if (
+        event instanceof NavigationEnd ||
+        event instanceof NavigationCancel ||
+        event instanceof NavigationError
+      ) {
+        // Simular un pequeño delay para que la animación sea visible
+        setTimeout(() => {
+          this.isLoading = false;
+        }, 500);
+      }
+    });
   }
 
   ngOnDestroy() {
     if (this.searchSubscription) {
       this.searchSubscription.unsubscribe();
     }
+    if (this.routerSubscription) {
+      this.routerSubscription.unsubscribe();
+    }
+  }
+
+  // Métodos para manejar los menús colapsables
+  toggleMainMenu() {
+    this.mainMenuCollapsed = !this.mainMenuCollapsed;
+  }
+
+  toggleDirectorMenu() {
+    this.directorMenuCollapsed = !this.directorMenuCollapsed;
+  }
+
+  toggleAdminMenu() {
+    this.adminMenuCollapsed = !this.adminMenuCollapsed;
   }
 
   onSearch(event: any): void {

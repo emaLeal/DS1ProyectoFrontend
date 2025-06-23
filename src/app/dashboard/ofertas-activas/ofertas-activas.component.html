@@ -1,39 +1,70 @@
-<div class="postulantes-container">
-  <section class="hero">
+<div class="postulantes-container page-animate">
+  <section class="hero fade-in-up">
     <h1>Encuentra la oportunidad que estás buscando</h1>
     <p>Postúlate a ofertas laborales que se ajusten a tu perfil profesional.</p>
     <button class="buscar-btn">Buscar Ofertas</button>
   </section>
 
-  <section class="filtros">
+  <section class="filtros fade-in-up delay-1">
     <h3>Filtrar Ofertas</h3>
     <div class="filtro-grupo">
-      <input type="text" placeholder="Palabra clave" [(ngModel)]="filtroPalabra">
-      <select [(ngModel)]="filtroCargo">
-        <option value="">Tipo de Cargo</option>
-        <option>Analista de Datos</option>
-        <option>Desarrollador Frontend</option>
-        <option>Back-End</option>
-      </select>
-      <select [(ngModel)]="filtroRango">
-        <option value="">Rango</option>
-        <option>Junior</option>
-        <option>Senior</option>
-      </select>
-      <input type="number" placeholder="Salario mínimo" [(ngModel)]="filtroSalario">
-      <button class="filtrar-btn" (click)="aplicarFiltros()">Aplicar Filtros</button>
+      <mat-form-field appearance="outline">
+        <mat-label>Palabra clave</mat-label>
+        <input matInput [(ngModel)]="filtroPalabra" (ngModelChange)="aplicarFiltros()">
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Tipo de Cargo</mat-label>
+        <mat-select [(ngModel)]="filtroCargo" (ngModelChange)="aplicarFiltros()">
+          <mat-option value="">Todos los cargos</mat-option>
+          <mat-option *ngFor="let oferta of ofertas" [value]="oferta.title">
+            {{oferta.title}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Rango</mat-label>
+        <mat-select [(ngModel)]="filtroRango" (ngModelChange)="aplicarFiltros()">
+          <mat-option value="">Todos los rangos</mat-option>
+          <mat-option value="Junior">Junior</mat-option>
+          <mat-option value="Semi Senior">Semi Senior</mat-option>
+          <mat-option value="Senior">Senior</mat-option>
+          <mat-option value="Lead">Lead</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Salario mínimo</mat-label>
+        <input matInput type="number" [(ngModel)]="filtroSalario" (ngModelChange)="aplicarFiltros()">
+        <mat-icon matSuffix>attach_money</mat-icon>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" (click)="aplicarFiltros()">
+        <mat-icon>filter_list</mat-icon>
+        Aplicar Filtros
+      </button>
     </div>
   </section>
 
-  <section class="ofertas-listado">
-    <div class="oferta-card" *ngFor="let oferta of ofertas">
-      <h4>{{ oferta.cargo }}</h4>
-      <p><strong>Empresa:</strong> {{ oferta.empresa }}</p>
-      <p><strong>Salario:</strong> {{ oferta.salario }}</p>
-      <p><strong>Ubicación:</strong> {{ oferta.ubicacion }}</p>
+  <section class="ofertas-listado fade-in-up delay-2">
+    <div class="oferta-card fade-in-scale" *ngFor="let oferta of ofertasFiltradas; let i = index" [ngStyle]="{'animation-delay': (i * 0.1 + 0.3) + 's'}">
+      <h4>{{ oferta.title }}</h4>
+      <p><strong>Rango:</strong> {{ oferta.rank }}</p>
+      <p><strong>Tipo:</strong> {{ oferta.job_type }}</p>
+      <p><strong>Salario:</strong> {{ oferta.salary | currency:'COP':'symbol-narrow':'1.0-0' }}</p>
+      <p><strong>Nivel de Educación:</strong> {{ oferta.education_level }}</p>
+      <p class="descripcion">{{ oferta.responsibilities }}</p>
       <div class="botones">
-        <button class="detalle-btn">Ver Detalles</button>
-        <button class="postular-btn">Postularme</button>
+        <button mat-button color="primary" (click)="editarOferta(oferta.id!)">
+          <mat-icon>edit</mat-icon>
+          Editar
+        </button>
+        <button mat-raised-button color="primary">
+          <mat-icon>person_add</mat-icon>
+          Postularme
+        </button>
       </div>
     </div>
   </section>
