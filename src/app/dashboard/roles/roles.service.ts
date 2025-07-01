@@ -2,6 +2,8 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { environment } from '../../../../public/environment';
+
 
 export interface Role {
   id: number;
@@ -19,46 +21,50 @@ export interface CreateRoleRequest {
 export class RolesService {
   private apiUrl = 'http://localhost:8000/api/roles/';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getRoles(): Observable<Role[]> {
-    return this.http.get<Role[]>(`${this.apiUrl}getall/`)
+    const url: string = environment.baseUrl + environment.role.getRoles
+    return this.http.get<Role[]>(url)
       .pipe(catchError(this.handleError));
   }
 
   createRole(role: CreateRoleRequest): Observable<Role> {
+    const url: string = environment.baseUrl + environment.role.createRole
     console.log('Datos recibidos en el servicio:', role);
     console.log('URL:', `${this.apiUrl}create/`);
-    
+
     // Crear el payload limpio sin modificar el objeto original
     const payload: any = {
       description: role.description
     };
-    
+
     // Solo incluir ID si está presente y es válido
     if (role.id !== undefined && role.id !== null && role.id > 0) {
       payload.id = role.id;
     }
-    
+
     console.log('Payload final enviado al backend:', payload);
-    
-    return this.http.post<Role>(`${this.apiUrl}create/`, payload)
+
+    return this.http.post<Role>(url, payload)
       .pipe(catchError(this.handleError));
   }
 
   updateRole(id: number, role: Partial<Role>): Observable<Role> {
-    return this.http.put<Role>(`${this.apiUrl}update/${id}/`, role)
+    const url: string = environment.baseUrl + environment.role.updateRole + id + '/'
+    return this.http.put<Role>(url, role)
       .pipe(catchError(this.handleError));
   }
 
   deleteRole(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}delete/${id}/`)
+    const url = environment.baseUrl + environment.role.deleteRole + id + '/'
+    return this.http.delete<void>(url)
       .pipe(catchError(this.handleError));
   }
 
   private handleError(error: HttpErrorResponse) {
     let errorMessage = 'Ocurrió un error desconocido';
-    
+
     if (error.error instanceof ErrorEvent) {
       // Error del lado del cliente
       errorMessage = error.error.message;
@@ -68,7 +74,7 @@ export class RolesService {
       console.error('Status:', error.status);
       console.error('Error body:', error.error);
       console.error('Headers:', error.headers);
-      
+
       switch (error.status) {
         case 400:
           // Mostrar el mensaje específico del servidor si está disponible
@@ -98,7 +104,7 @@ export class RolesService {
           errorMessage = `Error ${error.status}: ${error.message}`;
       }
     }
-    
+
     return throwError(() => new Error(errorMessage));
   }
 }
