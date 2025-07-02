@@ -97,5 +97,9 @@ export class PostulantesComponent {
     this.filtroGenero = '';
     this.filtroCargo = '';
   }
+
+  loadApplicants() {
+
+  } 
 }
 

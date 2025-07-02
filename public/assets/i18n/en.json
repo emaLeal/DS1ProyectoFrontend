@@ -259,6 +259,25 @@
     "MiPerfil": "My profile",
     "Configuracion": "Settings",
     "Cargando": "Loading..."
+  },
+
+  "roles": {
+    "gestionRoles": "Role Management",
+    "adminRoles": "Administer roles in the system",
+    "nuevoRol": "New Role",
+    "editarRol": "Edit Role",
+    "id": "ID",
+    "descripcionRol": "DESCRIPTION",
+    "accionRole": "ACTIONS",
+    "eliminar": "Delete",
+    "editar": "Edit Role",
+    "buscarRole": "Search role",
+    "Cancelar": "Cancel",
+    "Actualizar": "Update",
+
+
+    "verDetalles": "View Details",
+    "sinResultados": "No roles found"
   }
 
 

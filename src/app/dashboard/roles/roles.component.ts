@@ -15,6 +15,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { RolesService, Role, CreateRoleRequest } from './roles.service';
 import { ConfirmDialogComponent, DialogData } from './confirm-dialog.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 interface ExtendedRole extends Role {
   icon?: string;
@@ -40,7 +41,8 @@ interface ExtendedRole extends Role {
     MatCardModule,
     MatSnackBarModule,
     MatToolbarModule,
-    MatChipsModule
+    MatChipsModule,
+    TranslateModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './roles.component.html',

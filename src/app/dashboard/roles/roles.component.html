@@ -5,12 +5,12 @@
       <mat-card-content class="header-content">
         <div class="title-section">
           <mat-icon class="title-icon">admin_panel_settings</mat-icon>
-          <h1 class="page-title">Gestión de Roles</h1>
-          <p class="page-subtitle">Administra los roles del sistema</p>
+          <h1 class="page-title">{{ 'roles.gestionRoles' | translate }}</h1>
+          <p class="page-subtitle">{{'roles.adminRoles' | translate }}</p>
         </div>
         <button mat-raised-button (click)="openNewRoleDialog()" class="create-button">
           <mat-icon>add_circle</mat-icon>
-          Nuevo Rol
+          {{ 'roles.nuevoRol' | translate }}
         </button>
       </mat-card-content>
     </mat-card>
@@ -21,7 +21,7 @@
     <mat-card class="search-card">
       <mat-card-content class="search-content">
         <mat-form-field appearance="outline" class="search-field">
-          <mat-label>Buscar rol</mat-label>
+          <mat-label>{{'roles.buscarRole' | translate}}</mat-label>
           <input matInput [(ngModel)]="filtro" (keyup)="filtrarRoles()" placeholder="Buscar por descripción...">
           <mat-icon matSuffix>search</mat-icon>
         </mat-form-field>
@@ -43,7 +43,7 @@
           <table mat-table [dataSource]="rolesFiltrados" class="roles-table">
             <!-- ID Column -->
             <ng-container matColumnDef="id">
-              <th mat-header-cell *matHeaderCellDef>ID</th>
+              <th mat-header-cell *matHeaderCellDef>{{'roles.id' | translate}}</th>
               <td mat-cell *matCellDef="let rol" class="fade-in-left">
                 <div class="id-badge">{{rol.id}}</div>
               </td>
@@ -51,7 +51,7 @@
 
             <!-- Description Column -->
             <ng-container matColumnDef="description">
-              <th mat-header-cell *matHeaderCellDef>DESCRIPCIÓN</th>
+              <th mat-header-cell *matHeaderCellDef>{{'roles.descripcionRol' | translate}}</th>
               <td mat-cell *matCellDef="let rol" class="fade-in-left delay-1">
                 <div class="description-content">
                   <span class="description-text">{{rol.description}}</span>
@@ -61,7 +61,7 @@
 
             <!-- Actions Column -->
             <ng-container matColumnDef="actions">
-              <th mat-header-cell *matHeaderCellDef>ACCIONES</th>
+              <th mat-header-cell *matHeaderCellDef>{{'roles.accionRole' | translate}}</th>
               <td mat-cell *matCellDef="let rol" class="fade-in-left delay-2">
                 <div class="action-buttons">
                   <button mat-icon-button 
@@ -111,7 +111,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <mat-icon>edit</mat-icon>
-        <h2>Editar Rol</h2>
+        <h2>{{'roles.editar'| translate}}</h2>
       </div>
 
       <form (ngSubmit)="guardarRol()" class="form-container">
@@ -131,10 +131,10 @@
 
         <div class="modal-actions">
           <button mat-button type="button" (click)="cerrarFormulario()">
-            Cancelar
+            {{ 'roles.Cancelar' | translate }}
           </button>
           <button mat-flat-button color="primary" type="submit">
-            Actualizar
+          {{ 'roles.Actualizar' | translate  }}
           </button>
         </div>
       </form>

@@ -257,6 +257,30 @@
     "MiPerfil": "Mi perfil",
     "Configuracion": "Configuración",
     "Cargando": "Cargando..."
+  },
+
+  "roles": {
+    "gestionRoles": "Gestión de Roles",
+    "adminRoles": "Administrar los roles del sistema",
+    "nuevoRol": "NUEVO ROL",
+    "EditarRol": "Editar rol",
+    "id": "DI",
+    "descripcionRol": "DESCRIPCIÓN",
+    "accionRole": "ACCIONES",
+    "Eliminar": "Eliminar",
+    "editar": "Editar Rol",
+    "BuscarRoleS": "Buscar rol",
+    "Cancelar": "Cancelar",
+    "Actualizar": "Actualizar",
+
+
+    "NombreRol": "Nombre del rol",
+    "Permisos": "Permisos",
+    "GuardarCambios": "Guardar cambios",
+    "RolExistente": "El rol ya existe",
+    "RolCreadoExitosamente": "Rol creado exitosamente",
+    "RolActualizadoExitosamente": "Rol actualizado exitosamente",
+    "RolEliminadoExitosamente": "Rol eliminado exitosamente"
   }
 
 
