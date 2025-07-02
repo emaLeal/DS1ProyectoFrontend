@@ -1,34 +1,86 @@
 <div class="dashboard">
   <aside class="sidebar">
-    <h2>Menu</h2>
+    <div class="sidebar-header">
+    <h2>{{ 'dashboard.Menu' | translate }}</h2>
+    </div>
     <div class="menu-container">
+      <!-- Menú Principal -->
       <div class="menu-section" [class.collapsed]="mainMenuCollapsed">
-        <h3 (click)="toggleMainMenu()">Menú Principal</h3>
-        <ul>
-          <li><a routerLink="postulantes"><i class="fa-solid fa-circle-user"></i> <span>Postulantes</span></a></li>
-          <li><a routerLink="ofertas-cerradas"><i class="fa-solid fa-xmark"></i> <span>Ofertas cerradas</span></a></li>
-          <li><a routerLink="ofertas-activas"><i class="fa-solid fa-pen-to-square"></i> <span>Ofertas activas</span></a></li>
+        <h3 (click)="toggleMainMenu()">{{ 'dashboard.MenuPrincipal' | translate }}</h3>
+        <ul><li>
+            <a routerLink="postulantes">
+              <i class="fa-solid fa-circle-user"></i>
+              <span>{{ 'dashboard.Postulantes' | translate }}</span>
+            </a>
+          </li>
+          <li>
+            <a routerLink="ofertas-cerradas">
+              <i class="fa-solid fa-xmark"></i>
+              <span>{{ 'dashboard.OfertasCerradas' | translate }}</span>
+            </a>
+          </li>
+          <li>
+            <a routerLink="ofertas-activas">
+              <i class="fa-solid fa-pen-to-square"></i>
+              <span>{{ 'dashboard.OfertasActivas' | translate }}</span>
+            </a>
+          </li>
         </ul>
       </div>
 
       <!-- Menú Director -->
       <div class="director-menu menu-section" [class.collapsed]="directorMenuCollapsed" *ngIf="user?.role === 2 || user?.role === 1">
-        <h3 (click)="toggleDirectorMenu()">Menu Director</h3>
+        <h3 (click)="toggleDirectorMenu()">{{ 'dashboard.MenuDirector' | translate }}</h3>
         <ul>
-          <li><a routerLink="crear-oferta" routerLinkActive="active"><i class="fa-solid fa-plus"></i> <span>Crear oferta</span></a></li>
-          <li><a routerLink="editar-oferta"><i class="fa-solid fa-edit"></i> <span>Editar Oferta</span></a></li>
-          <li><a routerLink="mis-ofertas-activas"><i class="fa-solid fa-list-check"></i> <span>Mis ofertas activas</span></a></li>
-          <li><a routerLink="mis-ofertas-cerradas"><i class="fa-solid fa-folder-closed"></i> <span>Mis ofertas Cerradas</span></a></li>
-          <li><a routerLink="mis-postulantes"><i class="fa-solid fa-users"></i> <span>Mis postulantes</span></a></li>
+          <li>
+            <a routerLink="crear-oferta" routerLinkActive="active">
+              <i class="fa-solid fa-plus"></i>
+              <span>{{ 'dashboard.CrearOferta' | translate }}</span>
+            </a>
+          </li>
+          <li>
+            <a routerLink="editar-oferta">
+              <i class="fa-solid fa-edit"></i>
+              <span>{{ 'dashboard.EditarOferta' | translate }}</span>
+            </a>
+          </li>
+          <li>
+            <a routerLink="mis-ofertas-activas">
+              <i class="fa-solid fa-list-check"></i>
+              <span>{{ 'dashboard.MisOfertasActivas' | translate }}</span>
+            </a>
+          </li>
+          <li>
+            <a routerLink="mis-ofertas-cerradas">
+              <i class="fa-solid fa-folder-closed"></i>
+              <span>{{ 'dashboard.MisOfertasCerradas' | translate }}</span>
+            </a>
+          </li>
+          <li>
+            <a routerLink="mis-postulantes">
+              <i class="fa-solid fa-users"></i>
+              <span>{{ 'dashboard.MisPostulantes' | translate }}</span>
+            </a>
+          </li>
         </ul>
       </div>
 
       <!-- Menú Administrador -->
       <div class="admin-menu menu-section" [class.collapsed]="adminMenuCollapsed" *ngIf="user?.role !== 3">
-        <h3 (click)="toggleAdminMenu()">Menu Administrador</h3>
+        <h3 (click)="toggleAdminMenu()">{{ 'dashboard.MenuAdministrador' | translate }}</h3>
         <ul>
-          <li><a routerLink="usuarios"><i class="fa-solid fa-user"></i> <span>Usuarios</span></a></li>
-          <li><a routerLink="roles"><i class="fa-solid fa-users"></i> <span>Roles</span></a></li>
+          <li>
+            <a routerLink="usuarios">
+              <i class="fa-solid fa-user"></i>
+              <span>{{ 'dashboard.Usuarios' | translate }}</span>
+            </a>
+          </li>
+          <li>
+            <a routerLink="roles">
+              <i class="fa-solid fa-users"></i>
+              <span>{{ 'dashboard.Roles' | translate }}</span>
+            </a>
+          </li>
         </ul>
       </div>
     </div>
@@ -36,11 +88,11 @@
     <div class="bottom-buttons">
       <a routerLink="agregar" class="inicio-btn">
         <i class="fa-solid fa-house"></i>
-        <span>Inicio</span>
+        <span>{{ 'dashboard.Inicio' | translate }}</span>
       </a>
       <button (click)="logout()" class="logout-button">
         <i class="fas fa-sign-out-alt"></i>
-        <span>Cerrar sesión</span>
+        <span>{{ 'dashboard.CerrarSesion' | translate }}</span>
       </button>
     </div>
   </aside>
@@ -52,7 +104,7 @@
         <input 
           type="text" 
           class="search-bar" 
-          placeholder="Buscar postulantes, ofertas, usuarios..." 
+          [placeholder]="'dashboard.BuscarPlaceholder' | translate"
           [(ngModel)]="searchTerm"
           (input)="onSearch($event)"
           (focus)="showSearchResults = true"
@@ -63,10 +115,10 @@
         </div>
         <div class="search-results" [class.show]="showSearchResults && (searchResults.length > 0 || isSearching)">
           <div class="search-message" *ngIf="isSearching">
-            Buscando...
+            {{ 'dashboard.Buscando' | translate }}
           </div>
           <div class="search-message" *ngIf="!isSearching && searchResults.length === 0 && searchTerm">
-            No se encontraron resultados
+            {{ 'dashboard.SinResultados' | translate }}
           </div>
           <div 
             class="search-result-item" 
@@ -88,15 +140,14 @@
 
       <!-- Language Selector -->
       <div class="lang-menu">
-        <button class="lang-toggle-btn" (click)="toggleLangMenu()" aria-label="Cambiar idioma">
+        <button class="lang-toggle-btn" (click)="toggleLangMenu()" aria-label=CambiarIdioma>
           🌐
         </button>
-
         <div class="lang-options" *ngIf="menuOpen" (blur)="closeLangMenu()">
-          <button class="lang-btn" (click)="translateText('es')" aria-label="Cambiar a Español">
+          <button class="lang-btn" (click)="translateText('es')" aria-label="Español">
             <img src="./assets/img/spanish-logo.png" alt="Español" />
           </button>
-          <button class="lang-btn" (click)="translateText('en')" aria-label="Switch to English">
+          <button class="lang-btn" (click)="translateText('en')" aria-label="English">
             <img src="./assets/img/english-logo.png" alt="English" />
           </button>
         </div>
@@ -107,22 +158,19 @@
           <i class="fa-solid fa-circle-user"></i>
         </div>
         <div class="user-menu" *ngIf="isMenuOpen">
-          <a href="#"><i class="fa-solid fa-user"></i> Mi perfil</a>
-          <a href="#"><i class="fa-solid fa-gear"></i> Configuración</a>
-          <a (click)="logout()"><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión</a>
+          <a href="#"><i class="fa-solid fa-user"></i> {{ 'dashboard.MiPerfil' | translate }}</a>
+          <a href="#"><i class="fa-solid fa-gear"></i> {{ 'dashboard.Configuracion' | translate }}</a>
+          <a (click)="logout()"><i class="fa-solid fa-right-from-bracket"></i> {{ 'dashboard.CerrarSesion' | translate }}</a>
         </div>
       </div>
     </header>
     <div class="scrollable-content">
-      <!-- Loading overlay for content area -->
       <div class="content-loading" *ngIf="isLoading">
         <div class="loading-spinner">
           <mat-spinner diameter="40"></mat-spinner>
-          <span>Cargando...</span>
+          <span>{{ 'dashboard.Cargando' | translate }}</span>
         </div>
       </div>
-      
-      <!-- Router outlet wrapper with animation -->
       <div class="router-content" [class.loading]="isLoading">
         <router-outlet></router-outlet>
       </div>

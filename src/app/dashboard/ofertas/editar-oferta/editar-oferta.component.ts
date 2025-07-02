@@ -14,6 +14,7 @@ import { MatCardModule } from '@angular/material/card';
 import { Router, ActivatedRoute } from '@angular/router';
 import { JobOffer, OfertasService } from '../../../services/ofertas.service';
 import { trigger, transition, style, animate } from '@angular/animations';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-editar-oferta',
@@ -30,170 +31,171 @@ import { trigger, transition, style, animate } from '@angular/animations';
     MatNativeDateModule,
     MatDialogModule,
     MatSnackBarModule,
-    MatCardModule
+    MatCardModule,
+    TranslateModule
   ],
   template: `
-    <div class="form-container" [@fadeIn]>
-      <mat-card class="form-card">
-        <mat-card-header>
-          <mat-icon mat-card-avatar>edit</mat-icon>
-          <mat-card-title>Editar Oferta Laboral</mat-card-title>
-          <mat-card-subtitle>Modifique los detalles de la oferta</mat-card-subtitle>
-        </mat-card-header>
+ <div class="form-container" [@fadeIn]>
+  <mat-card class="form-card">
+    <mat-card-header>
+      <mat-icon mat-card-avatar>edit</mat-icon>
+      <mat-card-title>{{ 'editar-oferta.TituloPrincipal' | translate }}</mat-card-title>
+      <mat-card-subtitle>{{ 'editar-oferta.Subtitulo' | translate }}</mat-card-subtitle>
+    </mat-card-header>
 
-        <mat-card-content>
-          <form #ofertaForm="ngForm" class="offer-form" (ngSubmit)="guardar()">
-            <!-- Información Básica -->
-            <div class="form-section">
-              <h3>
-                <mat-icon>info</mat-icon>
-                Información Básica
-              </h3>
-              <div class="form-row">
-                <mat-form-field appearance="outline">
-                  <mat-label>Título de la Oferta</mat-label>
-                  <input matInput [(ngModel)]="oferta.title" name="title" required maxlength="10" #title="ngModel">
-                  <mat-error *ngIf="title.invalid && (title.dirty || title.touched)">
-                    <span *ngIf="title.errors?.['required']">El título es requerido</span>
-                    <span *ngIf="title.errors?.['maxlength']">El título no puede tener más de 10 caracteres</span>
-                  </mat-error>
-                  <mat-hint align="end">{{title.value?.length || 0}}/10</mat-hint>
-                  <mat-icon matSuffix>title</mat-icon>
-                </mat-form-field>
-              </div>
+    <mat-card-content>
+      <form #ofertaForm="ngForm" class="offer-form" (ngSubmit)="guardar()">
+        <!-- Información Básica -->
+        <div class="form-section">
+          <h3>
+            <mat-icon>info</mat-icon>
+            {{ 'editar-oferta.SeccionInformacionBasica' | translate }}
+          </h3>
+          <div class="form-row">
+            <mat-form-field appearance="outline">
+              <mat-label>{{ 'editar-oferta.TituloOferta' | translate }}</mat-label>
+              <input matInput [(ngModel)]="oferta.title" name="title" required maxlength="10" #title="ngModel">
+              <mat-error *ngIf="title.invalid && (title.dirty || title.touched)">
+                <span *ngIf="title.errors?.['required']">{{ 'editar-oferta.ErrorTituloRequerido' | translate }}</span>
+                <span *ngIf="title.errors?.['maxlength']">{{ 'editar-oferta.ErrorTituloMaxLength' | translate }}</span>
+              </mat-error>
+              <mat-hint align="end">{{title.value?.length || 0}}/10</mat-hint>
+              <mat-icon matSuffix>title</mat-icon>
+            </mat-form-field>
+          </div>
 
-              <div class="form-row">
-                <mat-form-field appearance="outline">
-                  <mat-label>Responsabilidades</mat-label>
-                  <textarea matInput [(ngModel)]="oferta.responsibilities" name="responsibilities" required rows="4" #responsibilities="ngModel"></textarea>
-                  <mat-error *ngIf="responsibilities.invalid && (responsibilities.dirty || responsibilities.touched)">
-                    Las responsabilidades son requeridas
-                  </mat-error>
-                  <mat-icon matSuffix>assignment</mat-icon>
-                </mat-form-field>
-              </div>
-            </div>
+          <div class="form-row">
+            <mat-form-field appearance="outline">
+              <mat-label>{{ 'editar-oferta.Responsabilidades' | translate }}</mat-label>
+              <textarea matInput [(ngModel)]="oferta.responsibilities" name="responsibilities" required rows="4" #responsibilities="ngModel"></textarea>
+              <mat-error *ngIf="responsibilities.invalid && (responsibilities.dirty || responsibilities.touched)">
+                {{ 'editar-oferta.ErrorResponsabilidades' | translate }}
+              </mat-error>
+              <mat-icon matSuffix>assignment</mat-icon>
+            </mat-form-field>
+          </div>
+        </div>
 
-            <!-- Requisitos -->
-            <div class="form-section">
-              <h3>
-                <mat-icon>school</mat-icon>
-                Requisitos
-              </h3>
-              <div class="form-row">
-                <mat-form-field appearance="outline">
-                  <mat-label>Nivel de Educación</mat-label>
-                  <mat-select [(ngModel)]="oferta.education_level" name="education_level" required #education="ngModel">
-                    <mat-option value="Bachiller">Bachiller</mat-option>
-                    <mat-option value="Técnico">Técnico</mat-option>
-                    <mat-option value="Tecnólogo">Tecnólogo</mat-option>
-                    <mat-option value="Profesional">Profesional</mat-option>
-                    <mat-option value="Especialización">Especialización</mat-option>
-                    <mat-option value="Maestría">Maestría</mat-option>
-                    <mat-option value="Doctorado">Doctorado</mat-option>
-                  </mat-select>
-                  <mat-error *ngIf="education.invalid && (education.dirty || education.touched)">
-                    El nivel de educación es requerido
-                  </mat-error>
-                  <mat-icon matSuffix>school</mat-icon>
-                </mat-form-field>
+        <!-- Requisitos -->
+        <div class="form-section">
+          <h3>
+            <mat-icon>school</mat-icon>
+            {{ 'editar-oferta.SeccionRequisitos' | translate }}
+          </h3>
+          <div class="form-row">
+            <mat-form-field appearance="outline">
+              <mat-label>{{ 'editar-oferta.NivelEducacion' | translate }}</mat-label>
+              <mat-select [(ngModel)]="oferta.education_level" name="education_level" required #education="ngModel">
+                <mat-option value="Bachiller">{{ 'editar-oferta.Bachiller' | translate }}</mat-option>
+                <mat-option value="Técnico">{{ 'editar-oferta.Tecnico' | translate }}</mat-option>
+                <mat-option value="Tecnólogo">{{ 'editar-oferta.Tecnologo' | translate }}</mat-option>
+                <mat-option value="Profesional">{{ 'editar-oferta.Profesional' | translate }}</mat-option>
+                <mat-option value="Especialización">{{ 'editar-oferta.Especializacion' | translate }}</mat-option>
+                <mat-option value="Maestría">{{ 'editar-oferta.Maestria' | translate }}</mat-option>
+                <mat-option value="Doctorado">{{ 'editar-oferta.Doctorado' | translate }}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="education.invalid && (education.dirty || education.touched)">
+                {{ 'editar-oferta.ErrorNivelEducacion' | translate }}
+              </mat-error>
+              <mat-icon matSuffix>school</mat-icon>
+            </mat-form-field>
 
-                <mat-form-field appearance="outline">
-                  <mat-label>Rango</mat-label>
-                  <mat-select [(ngModel)]="oferta.rank" name="rank" required #rank="ngModel">
-                    <mat-option value="Junior">Junior</mat-option>
-                    <mat-option value="Semi Senior">Semi Senior</mat-option>
-                    <mat-option value="Senior">Senior</mat-option>
-                    <mat-option value="Lead">Lead</mat-option>
-                  </mat-select>
-                  <mat-error *ngIf="rank.invalid && (rank.dirty || rank.touched)">
-                    El rango es requerido
-                  </mat-error>
-                  <mat-icon matSuffix>trending_up</mat-icon>
-                </mat-form-field>
-              </div>
+            <mat-form-field appearance="outline">
+              <mat-label>{{ 'editar-oferta.Rango' | translate }}</mat-label>
+              <mat-select [(ngModel)]="oferta.rank" name="rank" required #rank="ngModel">
+                <mat-option [value]="'Junior'">Junior</mat-option>
+                <mat-option [value]="'SemiSenior'">Semi Senior</mat-option>
+                <mat-option [value]="'Senior'">Senior</mat-option>
+                <mat-option [value]="'Lead'">Lead</mat-option>
+              </mat-select>
+              <mat-error *ngIf="rank.invalid && (rank.dirty || rank.touched)">
+                {{ 'editar-oferta.ErrorRango' | translate }}
+              </mat-error>
+              <mat-icon matSuffix>trending_up</mat-icon>
+            </mat-form-field>
+          </div>
 
-              <div class="form-row">
-                <mat-form-field appearance="outline">
-                  <mat-label>Otros Requisitos</mat-label>
-                  <textarea matInput [(ngModel)]="oferta.other_requirements" name="other_requirements" required rows="4" #requirements="ngModel"></textarea>
-                  <mat-error *ngIf="requirements.invalid && (requirements.dirty || requirements.touched)">
-                    Los otros requisitos son requeridos
-                  </mat-error>
-                  <mat-icon matSuffix>list_alt</mat-icon>
-                </mat-form-field>
-              </div>
-            </div>
+          <div class="form-row">
+            <mat-form-field appearance="outline">
+              <mat-label>{{ 'editar-oferta.OtrosRequisitos' | translate }}</mat-label>
+              <textarea matInput [(ngModel)]="oferta.other_requirements" name="other_requirements" required rows="4" #requirements="ngModel"></textarea>
+              <mat-error *ngIf="requirements.invalid && (requirements.dirty || requirements.touched)">
+                {{ 'editar-oferta.ErrorOtrosRequisitos' | translate }}
+              </mat-error>
+              <mat-icon matSuffix>list_alt</mat-icon>
+            </mat-form-field>
+          </div>
+        </div>
 
-            <!-- Detalles del Empleo -->
-            <div class="form-section">
-              <h3>
-                <mat-icon>business_center</mat-icon>
-                Detalles del Empleo
-              </h3>
-              <div class="form-row">
-                <mat-form-field appearance="outline">
-                  <mat-label>Tipo de Empleo</mat-label>
-                  <mat-select [(ngModel)]="oferta.job_type" name="job_type" required #jobType="ngModel">
-                    <mat-option value="Tiempo Completo">Tiempo Completo</mat-option>
-                    <mat-option value="Medio Tiempo">Medio Tiempo</mat-option>
-                    <mat-option value="Freelance">Freelance</mat-option>
-                    <mat-option value="Temporal">Temporal</mat-option>
-                    <mat-option value="Prácticas">Prácticas</mat-option>
-                  </mat-select>
-                  <mat-error *ngIf="jobType.invalid && (jobType.dirty || jobType.touched)">
-                    El tipo de empleo es requerido
-                  </mat-error>
-                  <mat-icon matSuffix>work</mat-icon>
-                </mat-form-field>
+        <!-- Detalles del Empleo -->
+        <div class="form-section">
+          <h3>
+            <mat-icon>business_center</mat-icon>
+            {{ 'editar-oferta.SeccionDetallesEmpleo' | translate }}
+          </h3>
+          <div class="form-row">
+            <mat-form-field appearance="outline">
+              <mat-label>{{ 'editar-oferta.TipoEmpleo' | translate }}</mat-label>
+              <mat-select [(ngModel)]="oferta.job_type" name="job_type" required #jobType="ngModel">
+                <mat-option value="Tiempo Completo">{{ 'editar-oferta.TiempoCompleto' | translate }}</mat-option>
+                <mat-option value="Medio Tiempo">{{ 'editar-oferta.MedioTiempo' | translate }}</mat-option>
+                <mat-option value="Freelance">{{ 'editar-oferta.Freelance' | translate }}</mat-option>
+                <mat-option value="Temporal">{{ 'editar-oferta.Temporal' | translate }}</mat-option>
+                <mat-option value="Prácticas">{{ 'editar-oferta.Practicas' | translate }}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="jobType.invalid && (jobType.dirty || jobType.touched)">
+                {{ 'editar-oferta.ErrorTipoEmpleo' | translate }}
+              </mat-error>
+              <mat-icon matSuffix>work</mat-icon>
+            </mat-form-field>
 
-                <mat-form-field appearance="outline">
-                  <mat-label>Salario</mat-label>
-                  <input matInput type="number" [(ngModel)]="oferta.salary" name="salary" required min="1" #salary="ngModel">
-                  <mat-error *ngIf="salary.invalid && (salary.dirty || salary.touched)">
-                    El salario es requerido y debe ser mayor a 0
-                  </mat-error>
-                  <mat-icon matSuffix>attach_money</mat-icon>
-                </mat-form-field>
-              </div>
+            <mat-form-field appearance="outline">
+              <mat-label>{{ 'editar-oferta.Salario' | translate }}</mat-label>
+              <input matInput type="number" [(ngModel)]="oferta.salary" name="salary" required min="1" #salary="ngModel">
+              <mat-error *ngIf="salary.invalid && (salary.dirty || salary.touched)">
+                {{ 'editar-oferta.ErrorSalario' | translate }}
+              </mat-error>
+              <mat-icon matSuffix>attach_money</mat-icon>
+            </mat-form-field>
+          </div>
 
-              <div class="form-row">
-                <mat-form-field appearance="outline">
-                  <mat-label>Fecha de Inicio</mat-label>
-                  <input matInput [matDatepicker]="startPicker" [(ngModel)]="oferta.start_date" name="start_date" required #startDate="ngModel">
-                  <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
-                  <mat-datepicker #startPicker></mat-datepicker>
-                  <mat-error *ngIf="startDate.invalid && (startDate.dirty || startDate.touched)">
-                    La fecha de inicio es requerida
-                  </mat-error>
-                </mat-form-field>
+          <div class="form-row">
+            <mat-form-field appearance="outline">
+              <mat-label>{{ 'editar-oferta.FechaInicio' | translate }}</mat-label>
+              <input matInput [matDatepicker]="startPicker" [(ngModel)]="oferta.start_date" name="start_date" required #startDate="ngModel">
+              <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+              <mat-datepicker #startPicker></mat-datepicker>
+              <mat-error *ngIf="startDate.invalid && (startDate.dirty || startDate.touched)">
+                {{ 'editar-oferta.ErrorFechaInicio' | translate }}
+              </mat-error>
+            </mat-form-field>
 
-                <mat-form-field appearance="outline">
-                  <mat-label>Fecha de Fin</mat-label>
-                  <input matInput [matDatepicker]="endPicker" [(ngModel)]="oferta.end_date" name="end_date" required #endDate="ngModel">
-                  <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
-                  <mat-datepicker #endPicker></mat-datepicker>
-                  <mat-error *ngIf="endDate.invalid && (endDate.dirty || endDate.touched)">
-                    La fecha de fin es requerida
-                  </mat-error>
-                </mat-form-field>
-              </div>
-            </div>
+            <mat-form-field appearance="outline">
+              <mat-label>{{ 'editar-oferta.FechaFin' | translate }}</mat-label>
+              <input matInput [matDatepicker]="endPicker" [(ngModel)]="oferta.end_date" name="end_date" required #endDate="ngModel">
+              <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+              <mat-datepicker #endPicker></mat-datepicker>
+              <mat-error *ngIf="endDate.invalid && (endDate.dirty || endDate.touched)">
+                {{ 'editar-oferta.ErrorFechaFin' | translate }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
 
-            <mat-card-actions align="end">
-              <button mat-button type="button" (click)="cancelar()">
-                <mat-icon>close</mat-icon>
-                Cancelar
-              </button>
-              <button mat-raised-button color="primary" type="submit" [disabled]="!ofertaForm.form.valid">
-                <mat-icon>save</mat-icon>
-                Guardar Cambios
-              </button>
-            </mat-card-actions>
-          </form>
-        </mat-card-content>
-      </mat-card>
-    </div>
+        <mat-card-actions align="end">
+          <button mat-button type="button" (click)="cancelar()">
+            <mat-icon>close</mat-icon>
+            {{ 'editar-oferta.Cancelar' | translate }}
+          </button>
+          <button mat-raised-button color="primary" type="submit" [disabled]="!ofertaForm.form.valid">
+            <mat-icon>save</mat-icon>
+            {{ 'editar-oferta.GuardarCambios' | translate }}
+          </button>
+        </mat-card-actions>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
   `,
   styles: [`
     .form-container {

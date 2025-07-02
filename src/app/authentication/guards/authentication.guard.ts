@@ -8,7 +8,7 @@ export const isAuthenticated: CanActivateFn = (route, state) => {
   const router = inject(Router);
 
   const token = localStorage.getItem('token');
-  if (!token) {
+  if (!token) {   
     router.navigate(['/login']);
     return false;
   }

@@ -1,23 +1,25 @@
-<div class="postulantes-container page-animate">
+<div class="ofertas_activas-container page-animate">
   <section class="hero fade-in-up">
-    <h1>Encuentra la oportunidad que estás buscando</h1>
-    <p>Postúlate a ofertas laborales que se ajusten a tu perfil profesional.</p>
-    <button class="buscar-btn">Buscar Ofertas</button>
+    <h1>{{ 'ofertas_activas.TituloPrincipal' | translate }}</h1>
+    <p>{{ 'ofertas_activas.Subtitulo' | translate }}</p>
+    <button class="buscar-btn">
+      {{ 'ofertas_activas.BotonBuscar' | translate }}
+    </button>
   </section>
 
   <section class="filtros fade-in-up delay-1">
-    <h3>Filtrar Ofertas</h3>
+    <h3>{{ 'ofertas_activas.TituloFiltros' | translate }}</h3>
     <div class="filtro-grupo">
       <mat-form-field appearance="outline">
-        <mat-label>Palabra clave</mat-label>
+        <mat-label>{{ 'ofertas_activas.PalabraClave' | translate }}</mat-label>
         <input matInput [(ngModel)]="filtroPalabra" (ngModelChange)="aplicarFiltros()">
         <mat-icon matSuffix>search</mat-icon>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <mat-label>Tipo de Cargo</mat-label>
+        <mat-label>{{ 'ofertas_activas.TipoCargo' | translate }}</mat-label>
         <mat-select [(ngModel)]="filtroCargo" (ngModelChange)="aplicarFiltros()">
-          <mat-option value="">Todos los cargos</mat-option>
+          <mat-option value="">{{ 'ofertas_activas.TodosLosCargos' | translate }}</mat-option>
           <mat-option *ngFor="let oferta of ofertas" [value]="oferta.title">
             {{oferta.title}}
           </mat-option>
@@ -25,25 +27,25 @@
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <mat-label>Rango</mat-label>
+        <mat-label>{{ 'ofertas_activas.Rango' | translate }}</mat-label>
         <mat-select [(ngModel)]="filtroRango" (ngModelChange)="aplicarFiltros()">
-          <mat-option value="">Todos los rangos</mat-option>
-          <mat-option value="Junior">Junior</mat-option>
-          <mat-option value="Semi Senior">Semi Senior</mat-option>
-          <mat-option value="Senior">Senior</mat-option>
-          <mat-option value="Lead">Lead</mat-option>
+          <mat-option value="">{{ 'ofertas_activas.TodosLosRangos' | translate }}</mat-option>
+          <mat-option value="Junior">{{ 'ofertas_activas.Junior' | translate }}</mat-option>
+          <mat-option value="Semi Senior">{{ 'ofertas_activas.SemiSenior' | translate }}</mat-option>
+          <mat-option value="Senior">{{ 'ofertas_activas.Senior' | translate }}</mat-option>
+          <mat-option value="Lead">{{ 'ofertas_activas.Lead' | translate }}</mat-option>
         </mat-select>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <mat-label>Salario mínimo</mat-label>
+        <mat-label>{{ 'ofertas_activas.SalarioMinimo' | translate }}</mat-label>
         <input matInput type="number" [(ngModel)]="filtroSalario" (ngModelChange)="aplicarFiltros()">
         <mat-icon matSuffix>attach_money</mat-icon>
       </mat-form-field>
 
       <button mat-raised-button color="primary" (click)="aplicarFiltros()">
         <mat-icon>filter_list</mat-icon>
-        Aplicar Filtros
+        {{ 'ofertas_activas.AplicarFiltros' | translate }}
       </button>
     </div>
   </section>
@@ -51,19 +53,19 @@
   <section class="ofertas-listado fade-in-up delay-2">
     <div class="oferta-card fade-in-scale" *ngFor="let oferta of ofertasFiltradas; let i = index" [ngStyle]="{'animation-delay': (i * 0.1 + 0.3) + 's'}">
       <h4>{{ oferta.title }}</h4>
-      <p><strong>Rango:</strong> {{ oferta.rank }}</p>
-      <p><strong>Tipo:</strong> {{ oferta.job_type }}</p>
-      <p><strong>Salario:</strong> {{ oferta.salary | currency:'COP':'symbol-narrow':'1.0-0' }}</p>
-      <p><strong>Nivel de Educación:</strong> {{ oferta.education_level }}</p>
+      <p><strong>{{ 'ofertas_activas.Rango' | translate }}:</strong> {{ oferta.rank }}</p>
+      <p><strong>{{ 'ofertas_activas.Tipo' | translate }}:</strong> {{ oferta.job_type }}</p>
+      <p><strong>{{ 'ofertas_activas.Salario' | translate }}:</strong> {{ oferta.salary | currency:'COP':'symbol-narrow':'1.0-0' }}</p>
+      <p><strong>{{ 'ofertas_activas.NivelEducacion' | translate }}:</strong> {{ oferta.education_level }}</p>
       <p class="descripcion">{{ oferta.responsibilities }}</p>
       <div class="botones">
         <button mat-button color="primary" (click)="editarOferta(oferta.id!)">
           <mat-icon>edit</mat-icon>
-          Editar
+          {{ 'ofertas_activas.Editar' | translate }}
         </button>
         <button mat-raised-button color="primary">
           <mat-icon>person_add</mat-icon>
-          Postularme
+          {{ 'ofertas_activas.Postularme' | translate }}
         </button>
       </div>
     </div>
