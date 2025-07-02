@@ -10,7 +10,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { OfertasService, JobOffer } from '../../services/ofertas.service';
-
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-ofertas-activas',
   standalone: true,
@@ -24,7 +24,8 @@ import { OfertasService, JobOffer } from '../../services/ofertas.service';
     MatIconModule,
     MatCardModule,
     MatDialogModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    TranslateModule
   ],
   templateUrl: './ofertas-activas.component.html',
   styleUrls: ['./ofertas-activas.component.css']

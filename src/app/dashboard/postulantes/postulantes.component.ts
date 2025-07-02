@@ -11,7 +11,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSort } from '@angular/material/sort';
-
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 interface Postulante {
   foto: string;
   nombre: string;
@@ -36,7 +36,8 @@ interface Postulante {
     MatButtonModule,
     MatTableModule,
     MatPaginatorModule,
-    MatTooltipModule
+    MatTooltipModule,
+    TranslateModule
   ],
   standalone: true,
   templateUrl: './postulantes.component.html',
