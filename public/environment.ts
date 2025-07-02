@@ -13,8 +13,12 @@ export const environment = {
         updateOffer: '/offer/put/',
         deleteOffer: '/offer/delete/'
     },
-    role: {},
-    
+    role: {
+        getRoles: '/roles/getall/',
+        createRole: '/roles/create/',
+        updateRole: '/roles/update/',
+        deleteRole: '/roles/delete'
+    },
     postulants: {
         getPostulants: '/postulant/getall/',
         getOnePostulant: 'postulant/get/',
