@@ -4,6 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/materia
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-user-details-modal',
@@ -13,83 +14,89 @@ import { MatCardModule } from '@angular/material/card';
     MatDialogModule,
     MatButtonModule,
     MatIconModule,
-    MatCardModule
+    MatCardModule,
+    TranslateModule
   ],
   template: `
-    <div class="modal-container">
-      <mat-card class="details-card">
-        <div class="modal-header">
-          <div class="header-title">
-            <mat-icon>person</mat-icon>
-            <span>Detalles del Usuario</span>
+<div class="modal-container">
+  <mat-card class="details-card">
+    <div class="modal-header">
+      <div class="header-title">
+        <mat-icon>person</mat-icon>
+        <span>{{ 'userDetails.titulo' | translate }}</span>
+      </div>
+    </div>
+
+    <mat-card-content class="card-content">
+      <div class="user-details">
+        <!-- Información Personal -->
+        <div class="detail-section">
+          <h3>{{ 'userDetails.informacionPersonal' | translate }}</h3>
+          <div class="detail-row">
+            <span class="label">{{ 'userDetails.nombre' | translate }}</span>
+            <span class="value">{{data.usuario.name}} {{data.usuario.last_name}}</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">{{ 'userDetails.documento' | translate }}</span>
+            <span class="value">{{data.usuario.identification_type}} {{data.usuario.document_id}}</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">{{ 'userDetails.genero' | translate }}</span>
+            <span class="value">{{getGender(data.usuario.gender)}}</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">{{ 'userDetails.fechaNacimiento' | translate }}</span>
+            <span class="value">{{data.usuario.birth_date | date:'dd/MM/yyyy'}}</span>
           </div>
         </div>
 
-        <mat-card-content class="card-content">
-          <div class="user-details">
-            <div class="detail-section">
-              <h3>Información Personal</h3>
-              <div class="detail-row">
-                <span class="label">Nombre:</span>
-                <span class="value">{{data.usuario.name}} {{data.usuario.last_name}}</span>
-              </div>
-              <div class="detail-row">
-                <span class="label">Documento:</span>
-                <span class="value">{{data.usuario.identification_type}} {{data.usuario.document_id}}</span>
-              </div>
-              <div class="detail-row">
-                <span class="label">Género:</span>
-                <span class="value">{{getGender(data.usuario.gender)}}</span>
-              </div>
-              <div class="detail-row">
-                <span class="label">Fecha de Nacimiento:</span>
-                <span class="value">{{data.usuario.birth_date | date:'dd/MM/yyyy'}}</span>
-              </div>
-            </div>
-
-            <div class="detail-section">
-              <h3>Información de Contacto</h3>
-              <div class="detail-row">
-                <span class="label">Email:</span>
-                <span class="value">{{data.usuario.email}}</span>
-              </div>
-              <div class="detail-row">
-                <span class="label">Teléfono Fijo:</span>
-                <span class="value">{{data.usuario.phone || 'No registrado'}}</span>
-              </div>
-              <div class="detail-row">
-                <span class="label">Teléfono Celular:</span>
-                <span class="value">{{data.usuario.cell_phone || 'No registrado'}}</span>
-              </div>
-              <div class="detail-row">
-                <span class="label">Dirección:</span>
-                <span class="value">{{data.usuario.address}}</span>
-              </div>
-            </div>
-
-            <div class="detail-section">
-              <h3>Información del Sistema</h3>
-              <div class="detail-row">
-                <span class="label">Rol:</span>
-                <span class="value">{{getRoleName(data.usuario.role)}}</span>
-              </div>
-            </div>
+        <!-- Información de Contacto -->
+        <div class="detail-section">
+          <h3>{{ 'userDetails.informacionContacto' | translate }}</h3>
+          <div class="detail-row">
+            <span class="label">{{ 'userDetails.email' | translate }}</span>
+            <span class="value">{{data.usuario.email}}</span>
           </div>
-        </mat-card-content>
+          <div class="detail-row">
+            <span class="label">{{ 'userDetails.telefonoFijo' | translate }}</span>
+            <span class="value">{{data.usuario.phone || ('userDetails.noRegistrado' | translate)}}</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">{{ 'userDetails.telefonoCelular' | translate }}</span>
+            <span class="value">{{data.usuario.cell_phone || ('userDetails.noRegistrado' | translate)}}</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">{{ 'userDetails.direccion' | translate }}</span>
+            <span class="value">{{data.usuario.address}}</span>
+          </div>
+        </div>
 
-        <mat-card-actions align="end">
-          <button mat-raised-button color="primary" (click)="onEdit()">
-            <mat-icon>edit</mat-icon>
-            Editar
-          </button>
-          <button mat-raised-button color="warn" (click)="onDelete()">
-            <mat-icon>delete</mat-icon>
-            Eliminar
-          </button>
-          <button mat-button (click)="onClose()">Cerrar</button>
-        </mat-card-actions>
-      </mat-card>
-    </div>
+        <!-- Información del Sistema -->
+        <div class="detail-section">
+          <h3>{{ 'userDetails.informacionSistema' | translate }}</h3>
+          <div class="detail-row">
+            <span class="label">{{ 'userDetails.rol' | translate }}</span>
+            <span class="value">{{getRoleName(data.usuario.role)}}</span>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+
+    <mat-card-actions align="end">
+      <button mat-raised-button color="primary" (click)="onEdit()">
+        <mat-icon>edit</mat-icon>
+        {{ 'userDetails.editar' | translate }}
+      </button>
+      <button mat-raised-button color="warn" (click)="onDelete()">
+        <mat-icon>delete</mat-icon>
+        {{ 'userDetails.eliminar' | translate }}
+      </button>
+      <button mat-button (click)="onClose()">
+        {{ 'userDetails.cerrar' | translate }}
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>
   `,
   styles: [`
     .modal-container {

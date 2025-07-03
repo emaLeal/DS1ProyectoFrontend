@@ -1,5 +1,4 @@
 {
-    "hello": "Hello",
     "login": {
         "document_id": "Document Id",
         "password": "Password",
@@ -66,24 +65,13 @@
 
     },
 
-    "dashboard-w": {
-        "my_profile": "My Profile",
-        "settings": "Settings",
-        "logout": "Logout"
-    },
-
+ 
     "language": {
         "change_to_spanish": "Switch to Spanish",
         "change_to_english": "Switch to English"
     },
 
-   "agregar":{
-    "postulant":"Postulant" ,
-    "add":"Add",
-    "offer":"Active Offers",
-    "offer1":"Closed Offers"
-    },
-
+   
     "crear-oferta": {
     "titleCard": "New Job Offer",
     "subtitleCard": "Complete the offer details",
@@ -274,11 +262,125 @@
     "buscarRole": "Search role",
     "Cancelar": "Cancel",
     "Actualizar": "Update",
+    "sinResultados": "No results",
+    "noHayRoles": "No roles",
+    "noCoinciden": "No roles matched your search",
+    "comienzaCrear": "Start by creating your first role",
+    "crearPrimerRol": "Create First Role",
+    "idOpcional": "ID (optional)",
+    "confirmarEliminacion": "Confirm deletion",
+    "mensajeConfirmacion": "Are you sure you want to delete the role \"{{rol}}\"?", 
+    "descripcionLabel": "Description"
+  },
 
+  "editarUsuario": {
+    "titulo": "Edit User Data",
+    "informacionPersonal": "Personal Information",
+    "nombre": "First Name",
+    "apellido": "Last Name",
+    "tipoDocumento": "Document Type",
+    "cedulaCiudadania": "Citizen ID",
+    "cedulaExtranjeria": "Foreigner ID",
+    "tarjetaIdentidad": "Identity Card",
+    "pasaporte": "Passport",
+    "numeroDocumento": "Document Number",
+    "fechaNacimiento": "Date of Birth",
+    "genero": "Gender",
+    "masculino": "Male",
+    "femenino": "Female",
+    "otro": "Other",
+    "informacionContacto": "Contact Information",
+    "email": "Email",
+    "telefonoCelular": "Mobile Phone",
+    "telefonoFijo": "Landline Phone",
+    "direccion": "Address",
+    "informacionCuenta": "Account Information",
+    "rol": "Role",
+    "nuevaContrasena": "New Password (optional)",
+    "confirmarContrasena": "Confirm New Password",
+    "hintContrasena": "Leave blank to keep current password",
+    "cancelar": "Cancel",
+    "guardarCambios": "Save Changes"
+  },
 
-    "verDetalles": "View Details",
-    "sinResultados": "No roles found"
+  "userDetails": {
+    "titulo": "User Details",
+    "informacionPersonal": "Personal Information",
+    "nombre": "Name:",
+    "documento": "Document:",
+    "genero": "Gender:",
+    "fechaNacimiento": "Date of Birth:",
+    "informacionContacto": "Contact Information",
+    "email": "Email:",
+    "telefonoFijo": "Landline Phone:",
+    "telefonoCelular": "Mobile Phone:",
+    "direccion": "Address:",
+    "informacionSistema": "System Information",
+    "rol": "Role:",
+    "noRegistrado": "Not registered",
+    "editar": "Edit",
+    "eliminar": "Delete",
+    "cerrar": "Close"
+  },
+
+  
+  "confirmDialog": {
+    "nombre": "Name",
+    "documento": "Document",
+    "email": "Email",
+    "cancelar": "Cancel",
+    "eliminar": "Delete",
+    "tituloEliminar": "Confirm deletion",
+    "mensajeEliminar": "Are you sure you want to delete this record? This action cannot be undone."
+  },
+
+  
+  "usuarios": {
+    "titulo": "User Management",
+    "subtitulo": "Manage the system users",
+    "nuevoUsuario": "New User",
+    "buscarUsuario": "Search user",
+    "placeholderBusqueda": "Search by first name, last name, or email...",
+    "filtrarPorRol": "Filter by role",
+    "todosLosRoles": "All roles",
+    "total": "Users",
+    "nombre": "First Name",
+    "apellido": "Last Name",
+    "documento": "Document",
+    "rol": "Role",
+    "acciones": "Actions",
+    "verDetalles": "View details",
+    "editar": "Edit user",
+    "eliminar": "Delete user",
+    "sinResultados": "No results",
+    "mensajeSinResultados": "No users found matching your search",
+    "noUsuarios": "No users",
+    "mensajeNoUsuarios": "Start by creating your first user",
+    "crearPrimerUsuario": "Create First User",
+    "infoPersonal": "Personal Information",
+    "tipoDocumento": "Document Type",
+    "cc": "National ID",
+    "ce": "Foreigner ID",
+    "ti": "Identity Card",
+    "pp": "Passport",
+    "numeroDocumento": "Document Number",
+    "fechaNacimiento": "Date of Birth",
+    "genero": "Gender",
+    "masculino": "Male",
+    "femenino": "Female",
+    "otro": "Other",
+    "infoContacto": "Contact Information",
+    "telefonoCelular": "Mobile Phone",
+    "telefonoFijo": "Landline",
+    "direccion": "Address",
+    "infoCuenta": "Account Information",
+    "contrasena": "Password",
+    "confirmarContrasena": "Confirm Password",
+    "cancelar": "Cancel",
+    "crearUsuario": "Create User"
   }
+
+
 
 
 }
