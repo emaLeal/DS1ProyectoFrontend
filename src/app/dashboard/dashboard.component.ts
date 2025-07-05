@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import TranslateLogic from '../lib/translate/translate.class';
+import { PerfilUsuarioComponent } from './perfil-usuario/perfil-usuario.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -21,13 +22,13 @@ import TranslateLogic from '../lib/translate/translate.class';
     FormsModule,
     HttpClientModule,
     TranslateModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
   ],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent extends TranslateLogic implements OnInit, OnDestroy {
-  isMenuOpen = false;
+  isMenuOpen = true;
   user: any;
   searchTerm: string = '';
   searchResults: SearchResult[] = [];
@@ -107,6 +108,7 @@ export class DashboardComponent extends TranslateLogic implements OnInit, OnDest
   toggleAdminMenu() {
     this.adminMenuCollapsed = !this.adminMenuCollapsed;
   }
+  
 
   onSearch(event: any): void {
     console.log('Search event triggered:', event.target.value);
@@ -154,4 +156,5 @@ export class DashboardComponent extends TranslateLogic implements OnInit, OnDest
     localStorage.removeItem('token');
     this.router.navigate(['/login']);
   }
+  
 }

@@ -303,6 +303,13 @@
     "guardarCambios": "Save Changes"
   },
 
+  "agregar": {
+    "postulant": "Add applicant",
+    "offer": "Create offer",
+    "offer1": "Cancel offer",
+    "add": "Add"
+  },
+
   "userDetails": {
     "titulo": "User Details",
     "informacionPersonal": "Personal Information",

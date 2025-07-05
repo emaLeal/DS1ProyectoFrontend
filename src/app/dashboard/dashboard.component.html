@@ -157,8 +157,12 @@
         <div class="user-avatar">
           <i class="fa-solid fa-circle-user"></i>
         </div>
+        
+        
         <div class="user-menu" *ngIf="isMenuOpen">
-          <a href="#"><i class="fa-solid fa-user"></i> {{ 'dashboard.MiPerfil' | translate }}</a>
+          <a routerLink="perfil" >
+            <i class="fa-solid fa-user"></i> {{ 'dashboard.MiPerfil' | translate }}
+          </a>
           <a href="#"><i class="fa-solid fa-gear"></i> {{ 'dashboard.Configuracion' | translate }}</a>
           <a (click)="logout()"><i class="fa-solid fa-right-from-bracket"></i> {{ 'dashboard.CerrarSesion' | translate }}</a>
         </div>

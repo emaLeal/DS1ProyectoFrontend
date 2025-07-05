@@ -271,6 +271,14 @@
     "mensajeConfirmacion": "¿Estás seguro de eliminar el rol \"{{rol}}\"?"
   },
 
+  "agregar":{
+     "postulant": "Agregar postulante",
+    "offer": "Crear oferta",
+    "offer1": "Cancelar oferta",
+    "add": "Agregar"
+
+  },
+
   "editarUsuario": {
     "titulo": "Edición de Datos",
     "informacionPersonal": "Información Personal",
