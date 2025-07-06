@@ -11,6 +11,7 @@ import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { OfertasService, JobOffer } from '../../services/ofertas.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { PostularDialogComponent } from './postular-dialog/postular-dialog.component';
 @Component({
   selector: 'app-ofertas-activas',
   standalone: true,
@@ -37,6 +38,7 @@ export class OfertasActivasComponent {
   filtroSalario: number | null = null;
   ofertas: JobOffer[] = [];
   ofertasFiltradas: JobOffer[] = [];
+  postulateData: any = {}
 
   constructor(
     private ofertasService: OfertasService,
@@ -67,6 +69,19 @@ export class OfertasActivasComponent {
         (!this.filtroRango || rango === this.filtroRango) &&
         (this.filtroSalario === null || salario >= this.filtroSalario)
       );
+    });
+  }
+
+  postulate() {
+    const dialogRef = this.dialog.open(PostularDialogComponent, {
+      width: '600px',
+      data: { usuario: this.postulateData }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log(result)
+      }
     });
   }
 

@@ -219,6 +219,14 @@
     "Editar": "Editar",
     "Eliminar": "Eliminar"
   },
+  "postulacion": {
+    "titulo_postulacion": "Postulacion",
+    "informacion_academica": "Información Académica",
+    "titulo_pregrado": "Titulo de Pregrado",
+    "titulo_posgrado": "Titulo de Posgrado",
+    "motivacion": "Motivación",
+    "perfil": "Perfil de Aspirante"
+  },
 
   
   "dashboard": {
