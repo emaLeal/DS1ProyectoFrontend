@@ -37,6 +37,7 @@ interface PredefinedColors {
   imports: [
     CommonModule,
     FormsModule,
+    TranslateModule,
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
@@ -92,7 +93,7 @@ export class UsuariosComponent implements OnInit {
     private userService: UsuariosService,
     private rolesService: RolesService,
     private dialog: MatDialog,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
   ) {}
 
   ngOnInit() {

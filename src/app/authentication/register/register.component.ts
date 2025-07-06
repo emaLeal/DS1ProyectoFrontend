@@ -457,7 +457,7 @@ export class RegisterComponent extends TranslateLogic implements OnInit, AfterVi
         const response = await firstValueFrom(this.authService.register(formData));
         console.log('Registro exitoso:', response);
         alert("Te has registrado correctamente");
-        this.router.navigate(['/login']);
+        this.router.navigate(['/login']).then(() => window.location.reload());
       } catch (error) {
         console.error('Error en el registro:', error);
         alert(error);
