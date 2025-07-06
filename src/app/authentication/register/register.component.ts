@@ -165,12 +165,7 @@ export class RegisterComponent extends TranslateLogic implements OnInit, AfterVi
       });
     });
 
-    // Formulario principal que combina todos los grupos
-    this.form = this.formBuilder.group({
-      ...this.personalInfoForm.controls,
-      ...this.contactInfoForm.controls,
-      password: this.passwordForm.get('password')?.value
-    });
+    
   }
 
   checkFormValidity(): void {
@@ -426,6 +421,12 @@ export class RegisterComponent extends TranslateLogic implements OnInit, AfterVi
   }
 
   async submit(): Promise<void> {
+    // Formulario principal que combina todos los grupos
+    this.form = this.formBuilder.group({
+      ...this.personalInfoForm.controls,
+      ...this.contactInfoForm.controls,
+      password: this.passwordForm.get('password')?.value
+    });
     // Marcar todos los formularios como tocados para mostrar errores si los hay
     this.personalInfoForm.markAllAsTouched();
     this.contactInfoForm.markAllAsTouched();
