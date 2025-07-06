@@ -5,12 +5,12 @@
       <mat-card-content class="header-content">
         <div class="title-section">
           <mat-icon class="title-icon">people</mat-icon>
-          <h1 class="page-title">Gestión de Usuarios</h1>
-          <p class="page-subtitle">Administra los usuarios del sistema</p>
+          <h1 class="page-title">{{ 'usuarios.titulo' | translate }}</h1>
+          <p class="page-subtitle">{{ 'usuarios.subtitulo' | translate }}</p>
         </div>
         <button mat-raised-button (click)="mostrarFormulario = true" class="create-button">
           <mat-icon>person_add</mat-icon>
-          Nuevo Usuario
+          {{ 'usuarios.nuevoUsuario' | translate }}
         </button>
       </mat-card-content>
     </mat-card>
@@ -21,15 +21,15 @@
     <mat-card class="search-card">
       <mat-card-content class="search-content">
         <mat-form-field appearance="outline" class="search-field">
-          <mat-label>Buscar usuario</mat-label>
-          <input matInput [(ngModel)]="filtroBusqueda" placeholder="Buscar por nombre, apellido o email...">
+          <mat-label>{{ 'usuarios.buscarUsuario' | translate }}</mat-label>
+          <input matInput [(ngModel)]="filtroBusqueda" [placeholder]="'usuarios.placeholderBusqueda' | translate">
           <mat-icon matSuffix>search</mat-icon>
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="search-field">
-          <mat-label>Filtrar por rol</mat-label>
+          <mat-label>{{ 'usuarios.filtrarPorRol' | translate }}</mat-label>
           <mat-select [(ngModel)]="filtroRol">
-            <mat-option value="">Todos los roles</mat-option>
+            <mat-option value="">{{ 'usuarios.todosLosRoles' | translate }}</mat-option>
             <mat-option *ngFor="let rol of roles" [value]="rol.id.toString()">
               {{rol.description}}
             </mat-option>
@@ -45,7 +45,7 @@
       <mat-card-header class="table-header">
         <mat-card-title class="table-title">
           <mat-icon>list</mat-icon>
-          Usuarios ({{usuariosFiltrados.length}})
+          {{ 'usuarios.total' | translate }} ({{usuariosFiltrados.length}})
         </mat-card-title>
       </mat-card-header>
       <mat-card-content class="table-content">
@@ -53,7 +53,7 @@
           <table mat-table [dataSource]="usuariosFiltrados" class="usuarios-table">
             <!-- Columna Nombre -->
             <ng-container matColumnDef="name">
-              <th mat-header-cell *matHeaderCellDef>Nombre</th>
+              <th mat-header-cell *matHeaderCellDef>{{ 'usuarios.nombre' | translate }}</th>
               <td mat-cell *matCellDef="let usuario" class="fade-in-left">{{usuario.name}} {{usuario.last_name}}</td>
             </ng-container>
 
@@ -65,7 +65,7 @@
 
             <!-- Columna Documento -->
             <ng-container matColumnDef="document_id">
-              <th mat-header-cell *matHeaderCellDef>Documento</th>
+              <th mat-header-cell *matHeaderCellDef>{{ 'usuarios.documento' | translate }}</th>
               <td mat-cell *matCellDef="let usuario" class="fade-in-left delay-2">
                 <div class="primary-text">
                   <mat-icon class="small-icon">badge</mat-icon>
@@ -76,7 +76,7 @@
 
             <!-- Columna Rol -->
             <ng-container matColumnDef="role">
-              <th mat-header-cell *matHeaderCellDef>Rol</th>
+              <th mat-header-cell *matHeaderCellDef>{{ 'usuarios.rol' | translate }}</th>
               <td mat-cell *matCellDef="let usuario" class="fade-in-left delay-3">
                 <span class="role-badge" [style.background]="getRoleStyle(usuario.role)">
                   {{getRoleName(usuario.role)}}
@@ -86,25 +86,25 @@
 
             <!-- Columna Acciones -->
             <ng-container matColumnDef="actions">
-              <th mat-header-cell *matHeaderCellDef>Acciones</th>
+              <th mat-header-cell *matHeaderCellDef>{{ 'usuarios.acciones' | translate }}</th>
               <td mat-cell *matCellDef="let usuario" class="fade-in-left delay-4">
                 <div class="action-buttons">
                   <button mat-icon-button 
                           color="primary"
                           (click)="verDetalles(usuario)" 
-                          matTooltip="Ver detalles">
+                          matTooltip="{{ 'usuarios.verDetalles' | translate }}">
                     <mat-icon>visibility</mat-icon>
                   </button>
                   <button mat-icon-button 
                           color="primary"
                           (click)="editarUsuario(usuario)" 
-                          matTooltip="Editar usuario">
+                          matTooltip="{{ 'usuarios.editar' | translate }}">
                     <mat-icon>edit</mat-icon>
                   </button>
                   <button mat-icon-button 
                           color="warn"
                           (click)="borrarUsuario(usuario)" 
-                          matTooltip="Eliminar usuario">
+                          matTooltip="{{ 'usuarios.eliminar' | translate }}">
                     <mat-icon>delete</mat-icon>
                   </button>
                 </div>
@@ -119,13 +119,13 @@
               <td class="mat-cell no-data" [attr.colspan]="5">
                 <div class="no-data-content">
                   <mat-icon class="no-data-icon">{{filtroBusqueda || filtroRol ? 'search_off' : 'people_off'}}</mat-icon>
-                  <h3 class="no-data-title">{{ filtroBusqueda || filtroRol ? 'Sin resultados' : 'No hay usuarios' }}</h3>
+                  <h3 class="no-data-title">{{ filtroBusqueda || filtroRol ? ('usuarios.sinResultados' | translate) : ('usuarios.noUsuarios' | translate) }}</h3>
                   <p class="no-data-message">
-                    {{ filtroBusqueda || filtroRol ? 'No se encontraron usuarios que coincidan con tu búsqueda' : 'Comienza creando tu primer usuario' }}
+                    {{ filtroBusqueda || filtroRol ? ('usuarios.mensajeSinResultados' | translate) : ('usuarios.mensajeNoUsuarios' | translate) }}
                   </p>
                   <button *ngIf="!filtroBusqueda && !filtroRol" mat-raised-button color="primary" (click)="mostrarFormulario = true">
                     <mat-icon>person_add</mat-icon>
-                    Crear Primer Usuario
+                    {{ 'usuarios.crearPrimerUsuario' | translate }}
                   </button>
                 </div>
               </td>
@@ -143,7 +143,7 @@
         <mat-card-header class="table-header">
           <mat-card-title class="table-title">
             <mat-icon>person_add</mat-icon>
-            Nuevo Usuario
+            {{ 'usuarios.nuevoUsuario' | translate }}
           </mat-card-title>
         </mat-card-header>
 
@@ -152,17 +152,17 @@
           <div class="form-section">
             <h3 class="section-title">
               <mat-icon>person</mat-icon>
-              Información Personal
+              {{ 'usuarios.infoPersonal' | translate }}
             </h3>
             <div class="form-row">
               <mat-form-field appearance="outline" class="form-col">
-                <mat-label>Nombre</mat-label>
+                <mat-label>{{ 'usuarios.nombre' | translate }}</mat-label>
                 <input matInput [(ngModel)]="nuevoUsuario.name" name="name" required>
                 <mat-icon matSuffix>badge</mat-icon>
               </mat-form-field>
 
               <mat-form-field appearance="outline" class="form-col">
-                <mat-label>Apellido</mat-label>
+                <mat-label>{{ 'usuarios.apellido' | translate }}</mat-label>
                 <input matInput [(ngModel)]="nuevoUsuario.last_name" name="last_name" required>
                 <mat-icon matSuffix>badge</mat-icon>
               </mat-form-field>
@@ -170,18 +170,18 @@
 
             <div class="form-row">
               <mat-form-field appearance="outline" class="form-col">
-                <mat-label>Tipo de Documento</mat-label>
+                <mat-label>{{ 'usuarios.tipoDocumento' | translate }}</mat-label>
                 <mat-select [(ngModel)]="nuevoUsuario.identification_type" name="identification_type" required>
-                  <mat-option value="CC">Cédula de Ciudadanía</mat-option>
-                  <mat-option value="CE">Cédula de Extranjería</mat-option>
-                  <mat-option value="TI">Tarjeta de Identidad</mat-option>
-                  <mat-option value="PP">Pasaporte</mat-option>
+                  <mat-option value="CC">{{ 'usuarios.cc' | translate }}</mat-option>
+                  <mat-option value="CE">{{ 'usuarios.ce' | translate }}</mat-option>
+                  <mat-option value="TI">{{ 'usuarios.ti' | translate }}</mat-option>
+                  <mat-option value="PP">{{ 'usuarios.pp' | translate }}</mat-option>
                 </mat-select>
                 <mat-icon matSuffix>credit_card</mat-icon>
               </mat-form-field>
 
               <mat-form-field appearance="outline" class="form-col">
-                <mat-label>Número de Documento</mat-label>
+                <mat-label>{{ 'usuarios.numeroDocumento' | translate }}</mat-label>
                 <input matInput [(ngModel)]="nuevoUsuario.document_id" name="document_id" required>
                 <mat-icon matSuffix>pin</mat-icon>
               </mat-form-field>
@@ -189,7 +189,7 @@
 
             <div class="form-row">
               <mat-form-field appearance="outline" class="form-col">
-                <mat-label>Fecha de Nacimiento</mat-label>
+                <mat-label>{{ 'usuarios.fechaNacimiento' | translate }}</mat-label>
                 <input matInput [matDatepicker]="picker" [(ngModel)]="nuevoUsuario.birth_date" name="birth_date" required>
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
@@ -197,11 +197,11 @@
               </mat-form-field>
 
               <mat-form-field appearance="outline" class="form-col">
-                <mat-label>Género</mat-label>
+                <mat-label>{{ 'usuarios.genero' | translate }}</mat-label>
                 <mat-select [(ngModel)]="nuevoUsuario.gender" name="gender" required>
-                  <mat-option value="M">Masculino</mat-option>
-                  <mat-option value="F">Femenino</mat-option>
-                  <mat-option value="O">Otro</mat-option>
+                  <mat-option value="M">{{ 'usuarios.masculino' | translate }}</mat-option>
+                  <mat-option value="F">{{ 'usuarios.femenino' | translate }}</mat-option>
+                  <mat-option value="O">{{ 'usuarios.otro' | translate }}</mat-option>
                 </mat-select>
                 <mat-icon matSuffix>wc</mat-icon>
               </mat-form-field>
@@ -212,7 +212,7 @@
           <div class="form-section">
             <h3 class="section-title">
               <mat-icon>contact_mail</mat-icon>
-              Información de Contacto
+              {{ 'usuarios.infoContacto' | translate }}
             </h3>
             <div class="form-row">
               <mat-form-field appearance="outline" class="form-col">
@@ -222,7 +222,7 @@
               </mat-form-field>
 
               <mat-form-field appearance="outline" class="form-col">
-                <mat-label>Teléfono Celular</mat-label>
+                <mat-label>{{ 'usuarios.telefonoCelular' | translate }}</mat-label>
                 <input matInput [(ngModel)]="nuevoUsuario.cell_phone" name="cell_phone" required>
                 <mat-icon matSuffix>phone</mat-icon>
               </mat-form-field>
@@ -230,13 +230,13 @@
 
             <div class="form-row">
               <mat-form-field appearance="outline" class="form-col">
-                <mat-label>Teléfono Fijo</mat-label>
+                <mat-label>{{ 'usuarios.telefonoFijo' | translate }}</mat-label>
                 <input matInput [(ngModel)]="nuevoUsuario.phone" name="phone">
                 <mat-icon matSuffix>phone_in_talk</mat-icon>
               </mat-form-field>
 
               <mat-form-field appearance="outline" class="form-col">
-                <mat-label>Dirección</mat-label>
+                <mat-label>{{ 'usuarios.direccion' | translate }}</mat-label>
                 <input matInput [(ngModel)]="nuevoUsuario.address" name="address" required>
                 <mat-icon matSuffix>home</mat-icon>
               </mat-form-field>
@@ -247,11 +247,11 @@
           <div class="form-section">
             <h3 class="section-title">
               <mat-icon>admin_panel_settings</mat-icon>
-              Información de Cuenta
+              {{ 'usuarios.infoCuenta' | translate }}
             </h3>
             <div class="form-row">
               <mat-form-field appearance="outline" class="form-col">
-                <mat-label>Rol</mat-label>
+                <mat-label>{{ 'usuarios.rol' | translate }}</mat-label>
                 <mat-select [(ngModel)]="nuevoUsuario.role_id" name="role" required>
                   <mat-option *ngFor="let rol of roles" [value]="rol.id.toString()">
                     {{rol.description}}
@@ -263,13 +263,13 @@
 
             <div class="form-row">
               <mat-form-field appearance="outline" class="form-col">
-                <mat-label>Contraseña</mat-label>
+                <mat-label>{{ 'usuarios.contrasena' | translate }}</mat-label>
                 <input matInput type="password" [(ngModel)]="nuevoUsuario.password" name="password" required>
                 <mat-icon matSuffix>lock</mat-icon>
               </mat-form-field>
 
               <mat-form-field appearance="outline" class="form-col">
-                <mat-label>Confirmar Contraseña</mat-label>
+                <mat-label>{{ 'usuarios.confirmarContrasena' | translate }}</mat-label>
                 <input matInput type="password" [(ngModel)]="nuevoUsuario.confirm_password" name="confirm_password" required>
                 <mat-icon matSuffix>lock_clock</mat-icon>
               </mat-form-field>
@@ -280,11 +280,11 @@
           <div class="form-actions">
             <button mat-button type="button" (click)="cerrarFormulario()" class="cancel-btn">
               <mat-icon>close</mat-icon>
-              Cancelar
+              {{ 'usuarios.cancelar' | translate }}
             </button>
             <button mat-raised-button color="primary" type="submit" [disabled]="!usuarioForm.form.valid" class="save-btn">
               <mat-icon>save</mat-icon>
-              Crear Usuario
+              {{ 'usuarios.crearUsuario' | translate }}
             </button>
           </div>
         </form>

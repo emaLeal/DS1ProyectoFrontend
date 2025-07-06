@@ -63,22 +63,10 @@
         "incorrect": "Las contraseñas no coinciden"
     },
 
-    "dashboard-w": {
-        "my_profile": "Mi perfil",
-        "settings": "Configuración",
-        "logout": "Cerrar sesión"
-    },
 
     "language": {
         "change_to_spanish": "Cambiar a Español",
         "change_to_english": "Cambiar a Inglés"
-    },
-
-    "agregar":{
-    "postulant":"Postulante",
-    "add":"Agregar",
-    "offer":"Ofertas activas",
-    "offer1":"Ofertas cerradas"
     },
 
     "crear-oferta": {
@@ -269,19 +257,136 @@
     "accionRole": "ACCIONES",
     "Eliminar": "Eliminar",
     "editar": "Editar Rol",
-    "BuscarRoleS": "Buscar rol",
+    "buscarRole": "Buscar rol",
     "Cancelar": "Cancelar",
     "Actualizar": "Actualizar",
+    "sinResultados": "Sin resultados",
+    "noHayRoles": "No hay roles",
+    "noCoinciden": "No se encontraron roles que coincidan con tu búsqueda",
+    "comienzaCrear": "Comienza creando tu primer rol",
+    "crearPrimerRol": "Crear Primer Rol",
+    "idOpcional": "ID (opcional)",
+    "descripcionLabel": "Descripción",
+    "confirmarEliminacion": "Confirmar eliminación",
+    "mensajeConfirmacion": "¿Estás seguro de eliminar el rol \"{{rol}}\"?"
+  },
 
+  "agregar":{
+     "postulant": "Agregar postulante",
+    "offer": "Crear oferta",
+    "offer1": "Cancelar oferta",
+    "add": "Agregar"
 
-    "NombreRol": "Nombre del rol",
-    "Permisos": "Permisos",
-    "GuardarCambios": "Guardar cambios",
-    "RolExistente": "El rol ya existe",
-    "RolCreadoExitosamente": "Rol creado exitosamente",
-    "RolActualizadoExitosamente": "Rol actualizado exitosamente",
-    "RolEliminadoExitosamente": "Rol eliminado exitosamente"
+  },
+
+  "editarUsuario": {
+    "titulo": "Edición de Datos",
+    "informacionPersonal": "Información Personal",
+    "nombre": "Nombre",
+    "apellido": "Apellido",
+    "tipoDocumento": "Tipo de Documento",
+    "cedulaCiudadania": "Cédula de Ciudadanía",
+    "cedulaExtranjeria": "Cédula de Extranjería",
+    "tarjetaIdentidad": "Tarjeta de Identidad",
+    "pasaporte": "Pasaporte",
+    "numeroDocumento": "Número de Documento",
+    "fechaNacimiento": "Fecha de Nacimiento",
+    "genero": "Género",
+    "masculino": "Masculino",
+    "femenino": "Femenino",
+    "otro": "Otro",
+    "informacionContacto": "Información de Contacto",
+    "email": "Correo Electrónico",
+    "telefonoCelular": "Teléfono Celular",
+    "telefonoFijo": "Teléfono Fijo",
+    "direccion": "Dirección",
+    "informacionCuenta": "Información de Cuenta",
+    "rol": "Rol",
+    "nuevaContrasena": "Nueva Contraseña (opcional)",
+    "confirmarContrasena": "Confirmar Nueva Contraseña",
+    "hintContrasena": "Dejar en blanco para mantener la contraseña actual",
+    "cancelar": "Cancelar",
+    "guardarCambios": "Guardar Cambios"
+  },
+
+  "userDetails": {
+    "titulo": "Detalles del Usuario",
+    "informacionPersonal": "Información Personal",
+    "nombre": "Nombre:",
+    "documento": "Documento:",
+    "genero": "Género:",
+    "fechaNacimiento": "Fecha de Nacimiento:",
+    "informacionContacto": "Información de Contacto",
+    "email": "Correo Electrónico:",
+    "telefonoFijo": "Teléfono Fijo:",
+    "telefonoCelular": "Teléfono Celular:",
+    "direccion": "Dirección:",
+    "informacionSistema": "Información del Sistema",
+    "rol": "Rol:",
+    "noRegistrado": "No registrado",
+    "editar": "Editar",
+    "eliminar": "Eliminar",
+    "cerrar": "Cerrar"
+  },
+
+  
+  "confirmDialog": {
+    "nombre": "Nombre",
+    "documento": "Documento",
+    "email": "Email",
+    "cancelar": "Cancelar",
+    "eliminar": "Eliminar",
+    "tituloEliminar": "Confirmar eliminación",
+    "mensajeEliminar": "¿Estás seguro de que deseas eliminar este elemento? Esta acción no se puede deshacer."
+  },
+
+  
+  "usuarios": {
+    "titulo": "Gestión de Usuarios",
+    "subtitulo": "Administra los usuarios del sistema",
+    "nuevoUsuario": "Nuevo Usuario",
+    "buscarUsuario": "Buscar usuario",
+    "placeholderBusqueda": "Buscar por nombre, apellido o email...",
+    "filtrarPorRol": "Filtrar por rol",
+    "todosLosRoles": "Todos los roles",
+    "total": "Usuarios",
+    "nombre": "Nombre",
+    "apellido": "Apellido",
+    "documento": "Documento",
+    "rol": "Rol",
+    "acciones": "Acciones",
+    "verDetalles": "Ver detalles",
+    "editar": "Editar usuario",
+    "eliminar": "Eliminar usuario",
+    "sinResultados": "Sin resultados",
+    "mensajeSinResultados": "No se encontraron usuarios que coincidan con tu búsqueda",
+    "noUsuarios": "No hay usuarios",
+    "mensajeNoUsuarios": "Comienza creando tu primer usuario",
+    "crearPrimerUsuario": "Crear Primer Usuario",
+    "infoPersonal": "Información Personal",
+    "tipoDocumento": "Tipo de Documento",
+    "cc": "Cédula de Ciudadanía",
+    "ce": "Cédula de Extranjería",
+    "ti": "Tarjeta de Identidad",
+    "pp": "Pasaporte",
+    "numeroDocumento": "Número de Documento",
+    "fechaNacimiento": "Fecha de Nacimiento",
+    "genero": "Género",
+    "masculino": "Masculino",
+    "femenino": "Femenino",
+    "otro": "Otro",
+    "infoContacto": "Información de Contacto",
+    "telefonoCelular": "Teléfono Celular",
+    "telefonoFijo": "Teléfono Fijo",
+    "direccion": "Dirección",
+    "infoCuenta": "Información de Cuenta",
+    "contrasena": "Contraseña",
+    "confirmarContrasena": "Confirmar Contraseña",
+    "cancelar": "Cancelar",
+    "crearUsuario": "Crear Usuario"
   }
+
+
 
 
 }

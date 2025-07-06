@@ -11,6 +11,7 @@ import { AgregarComponent } from './dashboard/agregar/agregar.component';
 import { CrearOfertaComponent } from './dashboard/ofertas/crear-oferta/crear-oferta.component';
 import { EditarOfertaComponent } from './dashboard/ofertas/editar-oferta/editar-oferta.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { PerfilUsuarioComponent } from './dashboard/perfil-usuario/perfil-usuario.component';
 
 import { isAuthenticated, isSuperUser } from './authentication/guards/authentication.guard';
 
@@ -42,6 +43,7 @@ export const routes: Routes = [
         canActivate: [isSuperUser] // ✅ Solo para usuarios con rol distinto a 3
       },
       { path: 'agregar', component: AgregarComponent },
+      {path : 'perfil', component: PerfilUsuarioComponent},
       { path: '', component: AgregarComponent },
     ]
   },

@@ -20,6 +20,7 @@ import { EditarUsuarioComponent } from './editar-usuario/editar-usuario.componen
 import { UserDetailsModalComponent } from './user-details-modal/user-details-modal.component';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { ConfirmDialogComponent } from './confirm-dialog.component';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 interface ColorGradient {
   start: string;
@@ -48,6 +49,7 @@ interface PredefinedColors {
     MatDatepickerModule,
     MatNativeDateModule,
     MatTooltipModule,
+    TranslateModule,
     UserDetailsModalComponent
   ],
   templateUrl: './usuarios.component.html',

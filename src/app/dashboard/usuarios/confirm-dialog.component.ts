@@ -3,40 +3,42 @@ import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/materia
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-confirm-dialog',
   standalone: true,
-  imports: [CommonModule, MatDialogModule, MatButtonModule, MatIconModule],
+  imports: [CommonModule, MatDialogModule, MatButtonModule, MatIconModule, TranslateModule],
   template: `
     <div class="confirmation-dialog">
-      <h2 mat-dialog-title>
-        <mat-icon>warning</mat-icon>
-        {{ data.titulo }}
-      </h2>
+  <h2 mat-dialog-title>
+    <mat-icon>warning</mat-icon>
+    {{ data.titulo  }}
+  </h2>
 
-      <mat-dialog-content>
-        <div class="confirmation-content">
-          <p class="confirmation-message">{{ data.mensaje }}</p>
-          <p class="user-details" *ngIf="data.usuario">
-            <strong>Nombre:</strong> {{ data.usuario.name }} {{ data.usuario.last_name }}<br>
-            <strong>Documento:</strong> {{ data.usuario.document_id }}<br>
-            <strong>Email:</strong> {{ data.usuario.email }}
-          </p>
-        </div>
-      </mat-dialog-content>
-
-      <mat-dialog-actions align="end">
-        <button mat-button (click)="onCancel()">
-          <mat-icon>close</mat-icon>
-          Cancelar
-        </button>
-        <button mat-raised-button color="warn" (click)="onConfirm()">
-          <mat-icon>delete</mat-icon>
-          Eliminar
-        </button>
-      </mat-dialog-actions>
+  <mat-dialog-content>
+    <div class="confirmation-content">
+      <p class="confirmation-message">{{ data.mensaje | translate }}</p>
+      <p class="user-details" *ngIf="data.usuario">
+        <strong>{{ 'confirmDialog.nombre' | translate }}:</strong> {{ data.usuario.name }} {{ data.usuario.last_name }}<br>
+        <strong>{{ 'confirmDialog.documento' | translate }}:</strong> {{ data.usuario.document_id }}<br>
+        <strong>{{ 'confirmDialog.email' | translate }}:</strong> {{ data.usuario.email }}
+      </p>
     </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button (click)="onCancel()">
+      <mat-icon>close</mat-icon>
+      {{ 'confirmDialog.cancelar' | translate }}
+    </button>
+    <button mat-raised-button color="warn" (click)="onConfirm()">
+      <mat-icon>delete</mat-icon>
+      {{ 'confirmDialog.eliminar' | translate }}
+    </button>
+  </mat-dialog-actions>
+</div>
+
   `,
   styles: [`
     .confirmation-dialog {

@@ -66,7 +66,8 @@ export class RolesComponent implements OnInit {
   constructor(
     private rolesService: RolesService,
     private snackBar: MatSnackBar,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private translate: TranslateService
   ) {}
 
   ngOnInit() {
@@ -235,8 +236,8 @@ export class RolesComponent implements OnInit {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '300px',
       data: { 
-        title: 'Confirmar eliminación',
-        message: `¿Estás seguro de eliminar el rol "${rol.description}"?`
+        title: this.translate.instant('roles.confirmarEliminacion'),
+        message: this.translate.instant('roles.mensajeConfirmacion', { rol: rol.description })
       } as DialogData
     });
 

@@ -11,6 +11,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { RolesService, Role } from '../../roles/roles.service';
 import { UsuariosService } from '../usuarios.service';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 interface Usuario {
   name: string;
@@ -42,160 +43,161 @@ interface Usuario {
     MatIconModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatDialogModule
+    MatDialogModule,
+    TranslateModule
   ],
   template: `
-    <div class="edit-dialog">
-      <h2 mat-dialog-title>
-        <mat-icon>edit_note</mat-icon>
-        Edición de Datos
-      </h2>
+  <div class="edit-dialog">
+  <h2 mat-dialog-title>
+    <mat-icon>edit_note</mat-icon>
+    {{ 'editarUsuario.titulo' | translate }}
+  </h2>
 
-      <mat-dialog-content>
-        <form #editForm="ngForm" class="edit-form">
-          <!-- Información Personal -->
-          <div class="form-section">
-            <h3>
-              <mat-icon>person</mat-icon>
-              Información Personal
-            </h3>
-            <div class="form-row">
-              <mat-form-field appearance="outline">
-                <mat-label>Nombre</mat-label>
-                <input matInput [(ngModel)]="usuario.name" name="name" required>
-                <mat-icon matSuffix>badge</mat-icon>
-              </mat-form-field>
+  <mat-dialog-content>
+    <form #editForm="ngForm" class="edit-form">
+      <!-- Información Personal -->
+      <div class="form-section">
+        <h3>
+          <mat-icon>person</mat-icon>
+          {{ 'editarUsuario.informacionPersonal' | translate }}
+        </h3>
+        <div class="form-row">
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'editarUsuario.nombre' | translate }}</mat-label>
+            <input matInput [(ngModel)]="usuario.name" name="name" required>
+            <mat-icon matSuffix>badge</mat-icon>
+          </mat-form-field>
 
-              <mat-form-field appearance="outline">
-                <mat-label>Apellido</mat-label>
-                <input matInput [(ngModel)]="usuario.last_name" name="last_name" required>
-                <mat-icon matSuffix>badge</mat-icon>
-              </mat-form-field>
-            </div>
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'editarUsuario.apellido' | translate }}</mat-label>
+            <input matInput [(ngModel)]="usuario.last_name" name="last_name" required>
+            <mat-icon matSuffix>badge</mat-icon>
+          </mat-form-field>
+        </div>
 
-            <div class="form-row">
-              <mat-form-field appearance="outline">
-                <mat-label>Tipo de Documento</mat-label>
-                <mat-select [(ngModel)]="usuario.identification_type" name="identification_type" required>
-                  <mat-option value="CC">Cédula de Ciudadanía</mat-option>
-                  <mat-option value="CE">Cédula de Extranjería</mat-option>
-                  <mat-option value="TI">Tarjeta de Identidad</mat-option>
-                  <mat-option value="PP">Pasaporte</mat-option>
-                </mat-select>
-                <mat-icon matSuffix>credit_card</mat-icon>
-              </mat-form-field>
+        <div class="form-row">
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'editarUsuario.tipoDocumento' | translate }}</mat-label>
+            <mat-select [(ngModel)]="usuario.identification_type" name="identification_type" required>
+              <mat-option value="CC">{{ 'editarUsuario.cedulaCiudadania' | translate }}</mat-option>
+              <mat-option value="CE">{{ 'editarUsuario.cedulaExtranjeria' | translate }}</mat-option>
+              <mat-option value="TI">{{ 'editarUsuario.tarjetaIdentidad' | translate }}</mat-option>
+              <mat-option value="PP">{{ 'editarUsuario.pasaporte' | translate }}</mat-option>
+            </mat-select>
+            <mat-icon matSuffix>credit_card</mat-icon>
+          </mat-form-field>
 
-              <mat-form-field appearance="outline">
-                <mat-label>Número de Documento</mat-label>
-                <input matInput [(ngModel)]="usuario.document_id" name="document_id" required>
-                <mat-icon matSuffix>pin</mat-icon>
-              </mat-form-field>
-            </div>
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'editarUsuario.numeroDocumento' | translate }}</mat-label>
+            <input matInput [(ngModel)]="usuario.document_id" name="document_id" required>
+            <mat-icon matSuffix>pin</mat-icon>
+          </mat-form-field>
+        </div>
 
-            <div class="form-row">
-              <mat-form-field appearance="outline">
-                <mat-label>Fecha de Nacimiento</mat-label>
-                <input matInput [matDatepicker]="picker" [(ngModel)]="usuario.birth_date" name="birth_date" required>
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-                <mat-icon matSuffix>cake</mat-icon>
-              </mat-form-field>
+        <div class="form-row">
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'editarUsuario.fechaNacimiento' | translate }}</mat-label>
+            <input matInput [matDatepicker]="picker" [(ngModel)]="usuario.birth_date" name="birth_date" required>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-icon matSuffix>cake</mat-icon>
+          </mat-form-field>
 
-              <mat-form-field appearance="outline">
-                <mat-label>Género</mat-label>
-                <mat-select [(ngModel)]="usuario.gender" name="gender" required>
-                  <mat-option value="M">Masculino</mat-option>
-                  <mat-option value="F">Femenino</mat-option>
-                  <mat-option value="O">Otro</mat-option>
-                </mat-select>
-                <mat-icon matSuffix>wc</mat-icon>
-              </mat-form-field>
-            </div>
-          </div>
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'editarUsuario.genero' | translate }}</mat-label>
+            <mat-select [(ngModel)]="usuario.gender" name="gender" required>
+              <mat-option value="M">{{ 'editarUsuario.masculino' | translate }}</mat-option>
+              <mat-option value="F">{{ 'editarUsuario.femenino' | translate }}</mat-option>
+              <mat-option value="O">{{ 'editarUsuario.otro' | translate }}</mat-option>
+            </mat-select>
+            <mat-icon matSuffix>wc</mat-icon>
+          </mat-form-field>
+        </div>
+      </div>
 
-          <!-- Información de Contacto -->
-          <div class="form-section">
-            <h3>
-              <mat-icon>contact_mail</mat-icon>
-              Información de Contacto
-            </h3>
-            <div class="form-row">
-              <mat-form-field appearance="outline">
-                <mat-label>Email</mat-label>
-                <input matInput type="email" [(ngModel)]="usuario.email" name="email" required>
-                <mat-icon matSuffix>email</mat-icon>
-              </mat-form-field>
+      <!-- Información de Contacto -->
+      <div class="form-section">
+        <h3>
+          <mat-icon>contact_mail</mat-icon>
+          {{ 'editarUsuario.informacionContacto' | translate }}
+        </h3>
+        <div class="form-row">
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'editarUsuario.email' | translate }}</mat-label>
+            <input matInput type="email" [(ngModel)]="usuario.email" name="email" required>
+            <mat-icon matSuffix>email</mat-icon>
+          </mat-form-field>
 
-              <mat-form-field appearance="outline">
-                <mat-label>Teléfono Celular</mat-label>
-                <input matInput [(ngModel)]="usuario.cell_phone" name="cell_phone" required>
-                <mat-icon matSuffix>phone</mat-icon>
-              </mat-form-field>
-            </div>
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'editarUsuario.telefonoCelular' | translate }}</mat-label>
+            <input matInput [(ngModel)]="usuario.cell_phone" name="cell_phone" required>
+            <mat-icon matSuffix>phone</mat-icon>
+          </mat-form-field>
+        </div>
 
-            <div class="form-row">
-              <mat-form-field appearance="outline">
-                <mat-label>Teléfono Fijo</mat-label>
-                <input matInput [(ngModel)]="usuario.phone" name="phone">
-                <mat-icon matSuffix>phone_in_talk</mat-icon>
-              </mat-form-field>
+        <div class="form-row">
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'editarUsuario.telefonoFijo' | translate }}</mat-label>
+            <input matInput [(ngModel)]="usuario.phone" name="phone">
+            <mat-icon matSuffix>phone_in_talk</mat-icon>
+          </mat-form-field>
 
-              <mat-form-field appearance="outline">
-                <mat-label>Dirección</mat-label>
-                <input matInput [(ngModel)]="usuario.address" name="address" required>
-                <mat-icon matSuffix>home</mat-icon>
-              </mat-form-field>
-            </div>
-          </div>
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'editarUsuario.direccion' | translate }}</mat-label>
+            <input matInput [(ngModel)]="usuario.address" name="address" required>
+            <mat-icon matSuffix>home</mat-icon>
+          </mat-form-field>
+        </div>
+      </div>
 
-          <!-- Información de Cuenta -->
-          <div class="form-section">
-            <h3>
-              <mat-icon>admin_panel_settings</mat-icon>
-              Información de Cuenta
-            </h3>
-            <div class="form-row">
-              <mat-form-field appearance="outline">
-                <mat-label>Rol</mat-label>
-                <mat-select [(ngModel)]="usuario.role_id" name="role" required>
-                  <mat-option *ngFor="let rol of roles" [value]="rol.id.toString()">
-                    {{rol.description}}
-                  </mat-option>
-                </mat-select>
-                <mat-icon matSuffix>security</mat-icon>
-              </mat-form-field>
-            </div>
+      <!-- Información de Cuenta -->
+      <div class="form-section">
+        <h3>
+          <mat-icon>admin_panel_settings</mat-icon>
+          {{ 'editarUsuario.informacionCuenta' | translate }}
+        </h3>
+        <div class="form-row">
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'editarUsuario.rol' | translate }}</mat-label>
+            <mat-select [(ngModel)]="usuario.role_id" name="role" required>
+              <mat-option *ngFor="let rol of roles" [value]="rol.id.toString()">
+                {{ rol.description }}
+              </mat-option>
+            </mat-select>
+            <mat-icon matSuffix>security</mat-icon>
+          </mat-form-field>
+        </div>
 
-            <div class="form-row">
-              <mat-form-field appearance="outline">
-                <mat-label>Nueva Contraseña (opcional)</mat-label>
-                <input matInput type="password" [(ngModel)]="usuario.password" name="password">
-                <mat-icon matSuffix>lock</mat-icon>
-                <mat-hint>Dejar en blanco para mantener la contraseña actual</mat-hint>
-              </mat-form-field>
+        <div class="form-row">
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'editarUsuario.nuevaContrasena' | translate }}</mat-label>
+            <input matInput type="password" [(ngModel)]="usuario.password" name="password">
+            <mat-icon matSuffix>lock</mat-icon>
+            <mat-hint>{{ 'editarUsuario.hintContrasena' | translate }}</mat-hint>
+          </mat-form-field>
 
-              <mat-form-field appearance="outline">
-                <mat-label>Confirmar Nueva Contraseña</mat-label>
-                <input matInput type="password" [(ngModel)]="usuario.confirm_password" name="confirm_password">
-                <mat-icon matSuffix>lock_clock</mat-icon>
-                <mat-hint>Dejar en blanco para mantener la contraseña actual</mat-hint>
-              </mat-form-field>
-            </div>
-          </div>
-        </form>
-      </mat-dialog-content>
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'editarUsuario.confirmarContrasena' | translate }}</mat-label>
+            <input matInput type="password" [(ngModel)]="usuario.confirm_password" name="confirm_password">
+            <mat-icon matSuffix>lock_clock</mat-icon>
+            <mat-hint>{{ 'editarUsuario.hintContrasena' | translate }}</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+    </form>
+  </mat-dialog-content>
 
-      <mat-dialog-actions align="end">
-        <button mat-button (click)="cancelar()">
-          <mat-icon>close</mat-icon>
-          Cancelar
-        </button>
-        <button mat-raised-button color="primary" (click)="guardar()" [disabled]="!editForm.form.valid">
-          <mat-icon>save</mat-icon>
-          Guardar Cambios
-        </button>
-      </mat-dialog-actions>
-    </div>
+  <mat-dialog-actions align="end">
+    <button mat-button (click)="cancelar()">
+      <mat-icon>close</mat-icon>
+      {{ 'editarUsuario.cancelar' | translate }}
+    </button>
+    <button mat-raised-button color="primary" (click)="guardar()" [disabled]="!editForm.form.valid">
+      <mat-icon>save</mat-icon>
+      {{ 'editarUsuario.guardarCambios' | translate }}
+    </button>
+  </mat-dialog-actions>
+</div>
   `,
   styles: [`
     .edit-dialog {
