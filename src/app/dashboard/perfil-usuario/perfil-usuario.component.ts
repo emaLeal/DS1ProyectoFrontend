@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -29,20 +29,30 @@ interface Usuario {
   templateUrl: './perfil-usuario.component.html',
   styleUrls: ['./perfil-usuario.component.css']
 })
-export class PerfilUsuarioComponent {
-  // Datos simulados porq no se como traerlos del backend :(
-  usuario: Usuario = {
-    foto: 'assets/default-avatar.png',
-    name: 'Valentina',
-    last_name: 'Gomez',
-    email: 'valentina@exampe.com',
-    document_type: 'Cédula',
-    document_id: '1098456788',
-    address: 'Calle 56 #45-78',
-    birth_date: '1998-08-15',
-    cell_phone: '3204567890',
-    role: 1,
-    phone: '6047891234',
-    gender: 'woman'
-  };
+export class PerfilUsuarioComponent implements OnInit {
+  usuario!: Usuario | null;
+
+  ngOnInit() {
+    const userData = localStorage.getItem('user_data'); //trae el usuario del localStorage
+    // Verifica si userData existe y es un string válido
+    if (userData) {
+      const data = JSON.parse(userData);
+      this.usuario = {
+        foto: '',
+        name: data.name,
+        last_name: data.last_name,
+        email: data.email,
+        document_type: data.document_type,
+        document_id: data.document_id,
+        address: data.address,
+        birth_date: data.birth_date,
+        cell_phone: data.cell_phone,
+        role: data.role,
+        phone: data.phone,
+        gender: data.gender
+      };
+    } else {
+      this.usuario = null;
+    }
+  }
 }

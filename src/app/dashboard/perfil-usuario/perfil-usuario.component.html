@@ -1,45 +1,47 @@
-<div class="perfil-container">
-  <div class="perfil-avatar">
-    <img src="assets/img/user-icon.png" alt="Foto de perfil" />
-  </div>
-  <div class="perfil-datos">
-    <div class="perfil-header">
-      <h2>Hola
-
-      </h2>
+<div class="perfil-container" *ngIf="usuario; else sinDatos">
+  <div class="perfil-header">
+    <div class="perfil-avatar">
+      <img src="assets/img/user-icon.png" alt="Foto de perfil" />
+    </div>
+    <div class="perfil-info-header">
+      <h2>HOLA</h2>
       <h2>{{ usuario.name }} {{ usuario.last_name }}</h2>
-      <p></p>
       <p class="perfil-email">{{ usuario.email }}</p>
     </div>
-    <div class="perfil-info">
-      <div class="perfil-row">
-        <mat-icon>badge</mat-icon>
-        <span><strong>Documento:</strong> {{ usuario.document_id }}</span>
-      </div>
-      <div class="perfil-row">
-        <mat-icon>security</mat-icon>
-        <span><strong>Rol:</strong> {{ usuario.role }}</span>
-      </div>
-      <div class="perfil-row">
-        <mat-icon>cake</mat-icon>
-        <span><strong>Fecha de nacimiento:</strong> {{ usuario.birth_date }}</span>
-      </div>
-      <div class="perfil-row">
-        <mat-icon>wc</mat-icon>
-        <span><strong>Género:</strong> {{ usuario.gender }}</span>
-      </div>
-      <div class="perfil-row">
-        <mat-icon>phone_iphone</mat-icon>
-        <span><strong>Celular:</strong> {{ usuario.cell_phone }}</span>
-      </div>
-      <div class="perfil-row">
-        <mat-icon>call</mat-icon>
-        <span><strong>Teléfono:</strong> {{ usuario.phone }}</span>
-      </div>
-      <div class="perfil-row">
-        <mat-icon>home</mat-icon>
-        <span><strong>Dirección:</strong> {{ usuario.address }}</span>
-      </div>
+  </div>
+
+  <div class="perfil-details">
+    <div class="perfil-row">
+      <mat-icon>badge</mat-icon>
+      <span><strong>Documento:</strong> {{ usuario.document_type }} {{ usuario.document_id }}</span>
+    </div>
+    <div class="perfil-row">
+      <mat-icon>security</mat-icon>
+      <span><strong>Rol:</strong> {{ usuario.role }}</span>
+    </div>
+    <div class="perfil-row">
+      <mat-icon>cake</mat-icon>
+      <span><strong>Fecha de nacimiento:</strong> {{ usuario.birth_date }}</span>
+    </div>
+    <div class="perfil-row">
+      <mat-icon>wc</mat-icon>
+      <span><strong>Género:</strong> {{ usuario.gender }}</span>
+    </div>
+    <div class="perfil-row">
+      <mat-icon>phone_iphone</mat-icon>
+      <span><strong>Celular:</strong> {{ usuario.cell_phone }}</span>
+    </div>
+    <div class="perfil-row">
+      <mat-icon>call</mat-icon>
+      <span><strong>Teléfono:</strong> {{ usuario.phone }}</span>
+    </div>
+    <div class="perfil-row">
+      <mat-icon>home</mat-icon>
+      <span><strong>Dirección:</strong> {{ usuario.address }}</span>
     </div>
   </div>
 </div>
+
+<ng-template #sinDatos>
+  <p>No hay datos de usuario.</p>
+</ng-template>
