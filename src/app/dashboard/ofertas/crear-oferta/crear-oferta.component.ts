@@ -84,7 +84,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
           <div class="form-row">
             <mat-form-field appearance="outline">
               <mat-label>{{ 'crear-oferta.educationLevel' | translate }}</mat-label>
-              <mat-select [(ngModel)]="oferta.education_level" name="education_level" required maxlength="100" #education="ngModel">
+              <mat-select data-testid="education-select" [(ngModel)]="oferta.education_level" name="education_level" required maxlength="100" #education="ngModel">
                 <mat-option value="Bachiller">{{ 'crear-oferta.Bachiller' | translate }}</mat-option>
                   <mat-option value="Técnico">{{ 'crear-oferta.Tecnico' | translate }}</mat-option>
                   <mat-option value="Tecnólogo">{{ 'crear-oferta.Tecnologo' | translate }}</mat-option>
@@ -101,7 +101,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
             <mat-form-field appearance="outline">
               <mat-label>{{ 'crear-oferta.rank' | translate }}</mat-label>
-              <mat-select [(ngModel)]="oferta.rank" name="rank" required #rank="ngModel">
+              <mat-select data-testid="rank"[(ngModel)]="oferta.rank" name="rank" required #rank="ngModel">
                 <mat-option [value]="'Junior'">Junior</mat-option>
                 <mat-option [value]="'SemiSenior'">Semi Senior</mat-option>
                 <mat-option [value]="'Senior'">Senior</mat-option>
@@ -135,7 +135,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
           <div class="form-row">
             <mat-form-field appearance="outline">
               <mat-label>{{ 'crear-oferta.jobType' | translate }}</mat-label>
-              <mat-select [(ngModel)]="oferta.job_type" name="job_type" required maxlength="50" #jobType="ngModel">
+              <mat-select data-testid="job_type" [(ngModel)]="oferta.job_type" name="job_type" required maxlength="50" #jobType="ngModel">
                <mat-option value="Tiempo Completo">{{ 'crear-oferta.TiempoCompleto' | translate }}</mat-option>
                   <mat-option value="Medio Tiempo">{{ 'crear-oferta.MedioTiempo' | translate }}</mat-option>
                   <mat-option value="Freelance">{{ 'crear-oferta.Freelance' | translate }}</mat-option>
@@ -188,7 +188,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
             <mat-icon>close</mat-icon>
             {{ 'crear-oferta.cancel' | translate }}
           </button>
-          <button mat-raised-button color="primary" type="submit" [disabled]="!ofertaForm.form.valid || ofertaForm.form.pristine">
+          <button mat-raised-button name="submit" color="primary" type="submit" [disabled]="!ofertaForm.form.valid || ofertaForm.form.pristine">
             <mat-icon>save</mat-icon>
             {{ 'crear-oferta.save' | translate }}
           </button>
@@ -395,7 +395,7 @@ export class CrearOfertaComponent implements OnInit {
     // Validar campos requeridos
     if (!this.oferta.title || !this.oferta.responsibilities || !this.oferta.education_level || 
         !this.oferta.rank || !this.oferta.other_requirements || !this.oferta.job_type || 
-        !this.oferta.salary || !this.oferta.start_date || !this.oferta.end_date) {
+        !this.oferta.salary) {
       console.warn('CrearOferta - Campos requeridos faltantes');
       return false;
     }
@@ -414,23 +414,23 @@ export class CrearOfertaComponent implements OnInit {
       this.mostrarMensaje('El salario debe ser mayor a 0', 'error');
       return false;
     }
-
-    // Validar fechas
-    const fechaInicio = new Date(this.oferta.start_date);
-    const fechaFin = new Date(this.oferta.end_date);
-    const hoy = new Date();
     
-    if (fechaInicio < hoy) {
-      console.warn('CrearOferta - Fecha de inicio inválida:', fechaInicio);
-      this.mostrarMensaje('La fecha de inicio no puede ser anterior a hoy', 'error');
-      return false;
-    }
+    // Validar fechas
+    // const fechaInicio = new Date(this.oferta.start_date);
+    // const fechaFin = new Date(this.oferta.end_date);
+    // const hoy = new Date();
+    
+    // if (fechaInicio <= hoy) {
+    //   console.warn('CrearOferta - Fecha de inicio inválida:', fechaInicio);
+    //   this.mostrarMensaje('La fecha de inicio no puede ser anterior a hoy', 'error');
+    //   return false;
+    // }
 
-    if (fechaFin <= fechaInicio) {
-      console.warn('CrearOferta - Fecha de fin inválida:', fechaFin);
-      this.mostrarMensaje('La fecha de fin no puede ser anterior a la fecha de inicio', 'error');
-      return false;
-    }
+    // if (fechaFin <= fechaInicio) {
+    //   console.warn('CrearOferta - Fecha de fin inválida:', fechaFin);
+    //   this.mostrarMensaje('La fecha de fin no puede ser anterior a la fecha de inicio', 'error');
+    //   return false;
+    // }
 
     console.log('CrearOferta - Validación exitosa');
     return true;
