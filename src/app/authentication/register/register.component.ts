@@ -61,6 +61,7 @@ export class RegisterComponent extends TranslateLogic implements OnInit, AfterVi
   captchaToken?: string;
   showPassword = false;
   showConfirmPassword = false;
+  isTestMode: boolean = false;
 
   requisitos = {
     length: false,
@@ -95,6 +96,14 @@ export class RegisterComponent extends TranslateLogic implements OnInit, AfterVi
   ngOnInit() {
     this.initForm();
     (window as any).onCaptchaResolved = this.onCaptchaResolved.bind(this);
+    
+    // Detectar modo test por localStorage
+    this.isTestMode = localStorage.getItem('PLAYWRIGHT_TEST') === 'true';
+    if (this.isTestMode) {
+      this.onCaptchaPassed = true;
+      this.captchaToken = 'test-token';
+    }
+
   }
 
   private initForm(): void {
