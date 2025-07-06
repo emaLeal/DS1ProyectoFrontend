@@ -15,10 +15,6 @@ const DATAUSER = {
 }
 
 test.describe('Prueba de Login', () => {
-  const CREDENCIALES_VALIDAS = {
-    documento: '1110283134',
-    password: 'Contraseña1.'
-  };
 
   test('register', async ({ page }) => {
     test.setTimeout(180000); // 3 minutos
@@ -114,14 +110,14 @@ test.describe('Prueba de Login', () => {
     console.log('Llenando documento...');
     await page.fill('input[formControlName="document_id"]', '');
     await page.waitForTimeout(1000);
-    await page.type('input[formControlName="document_id"]', CREDENCIALES_VALIDAS.documento, { delay: 100 });
+    await page.type('input[formControlName="document_id"]', DATAUSER.documento, { delay: 100 });
     await page.waitForTimeout(2000);
 
     // Llenar la contraseña
     console.log('Llenando contraseña...');
     await page.fill('input[formControlName="password"]', '');
     await page.waitForTimeout(1000);
-    await page.type('input[formControlName="password"]', CREDENCIALES_VALIDAS.password, { delay: 100 });
+    await page.type('input[formControlName="password"]', DATAUSER.password, { delay: 100 });
     await page.waitForTimeout(2000);
 
     // Esperar a que el botón esté habilitado
