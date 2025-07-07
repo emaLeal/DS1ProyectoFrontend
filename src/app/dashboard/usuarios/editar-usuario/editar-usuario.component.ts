@@ -192,7 +192,7 @@ interface Usuario {
       <mat-icon>close</mat-icon>
       {{ 'editarUsuario.cancelar' | translate }}
     </button>
-    <button mat-raised-button color="primary" (click)="guardar()" [disabled]="!editForm.form.valid">
+    <button mat-raised-button color="primary" name="submit_editar" (click)="guardar()" [disabled]="!editForm.form.valid">
       <mat-icon>save</mat-icon>
       {{ 'editarUsuario.guardarCambios' | translate }}
     </button>

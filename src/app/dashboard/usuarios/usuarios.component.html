@@ -8,7 +8,7 @@
           <h1 class="page-title">{{ 'usuarios.titulo' | translate }}</h1>
           <p class="page-subtitle">{{ 'usuarios.subtitulo' | translate }}</p>
         </div>
-        <button mat-raised-button (click)="mostrarFormulario = true" class="create-button">
+        <button mat-raised-button (click)="mostrarFormulario = true" class="create-button" name="Crear_usuario">
           <mat-icon>person_add</mat-icon>
           {{ 'usuarios.nuevoUsuario' | translate }}
         </button>
@@ -171,8 +171,8 @@
             <div class="form-row">
               <mat-form-field appearance="outline" class="form-col">
                 <mat-label>{{ 'usuarios.tipoDocumento' | translate }}</mat-label>
-                <mat-select [(ngModel)]="nuevoUsuario.identification_type" name="identification_type" required>
-                  <mat-option value="CC">{{ 'usuarios.cc' | translate }}</mat-option>
+                <mat-select [(ngModel)]="nuevoUsuario.identification_type"  name="identification_type" required>
+                  <mat-option data-testid="identification-CC" value="CC">{{ 'usuarios.cc' | translate }}</mat-option>
                   <mat-option value="CE">{{ 'usuarios.ce' | translate }}</mat-option>
                   <mat-option value="TI">{{ 'usuarios.ti' | translate }}</mat-option>
                   <mat-option value="PP">{{ 'usuarios.pp' | translate }}</mat-option>
@@ -199,7 +199,7 @@
               <mat-form-field appearance="outline" class="form-col">
                 <mat-label>{{ 'usuarios.genero' | translate }}</mat-label>
                 <mat-select [(ngModel)]="nuevoUsuario.gender" name="gender" required>
-                  <mat-option value="M">{{ 'usuarios.masculino' | translate }}</mat-option>
+                  <mat-option  data-testid="M" value="M">{{ 'usuarios.masculino' | translate }}</mat-option>
                   <mat-option value="F">{{ 'usuarios.femenino' | translate }}</mat-option>
                   <mat-option value="O">{{ 'usuarios.otro' | translate }}</mat-option>
                 </mat-select>
@@ -282,7 +282,7 @@
               <mat-icon>close</mat-icon>
               {{ 'usuarios.cancelar' | translate }}
             </button>
-            <button mat-raised-button color="primary" type="submit" [disabled]="!usuarioForm.form.valid" class="save-btn">
+            <button mat-raised-button color="primary" type="submit" name="submit" [disabled]="!usuarioForm.form.valid" class="save-btn">
               <mat-icon>save</mat-icon>
               {{ 'usuarios.crearUsuario' | translate }}
             </button>

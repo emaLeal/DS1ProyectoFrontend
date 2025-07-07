@@ -1,5 +1,10 @@
 import { test, expect } from '@playwright/test';
 
+const CREDENCIALES = {
+  document: "1110283134",
+  password: "Contraseña1."
+}
+
 test('crear y eliminar rol "estudiantes" después de login', async ({ page }) => {
   await page.addInitScript(() => {
     localStorage.setItem('PLAYWRIGHT_TEST', 'true');
@@ -8,8 +13,8 @@ test('crear y eliminar rol "estudiantes" después de login', async ({ page }) =>
   // LOGIN
   await page.goto('http://localhost:4200/login', { waitUntil: 'networkidle' });
   await page.waitForSelector('form', { timeout: 10000 });
-  await page.fill('input[formControlName="document_id"]', '1107102338');
-  await page.fill('input[formControlName="password"]', 'Hernan5515095');
+  await page.fill('input[formControlName="document_id"]', CREDENCIALES.document);
+  await page.fill('input[formControlName="password"]', CREDENCIALES.password);
   await page.waitForSelector('button[type="submit"]:not([disabled])', { timeout: 10000 });
   await page.click('button[type="submit"]');
   await page.waitForURL('**/dashboard', { timeout: 20000 });
@@ -41,7 +46,7 @@ test('crear y eliminar rol "estudiantes" después de login', async ({ page }) =>
   await rolLocator.locator('button[mat-icon-button][color="warn"]').click();
   await page.waitForTimeout(1000); // Pausa para ver el diálogo de confirmación
   await page.click('button:has-text("Eliminar")');
-  await page.waitForTimeout(2000); // Pausa para ver el rol eliminado
+  await page.waitForTimeout(5000); // Pausa para ver el rol eliminado
 
   // Verifica que ya no está el rol
   const rolSigue = await page.isVisible('text=estudiantes');

@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 
 const DATAOFERT = {
-  titulo: 'oferta prueba',
+  titulo: 'Oferta prueba',
   responsabilidad: 'Datos de prueba',
   responsabilidad2: 'Datos de prueba 2',
   salario: "3000000",
@@ -14,7 +14,7 @@ const CREDENCIALES = {
   document: "1110283134",
   password: "Contraseña1."
 }
-test('register', async ({ page }) => {
+test('Crear_oferta', async ({ page }) => {
   test.setTimeout(180000); // 3 minutos
 
   // Establecer modo de prueba en localStorage
@@ -41,7 +41,7 @@ test('register', async ({ page }) => {
   await page.waitForSelector('button[type="submit"]:not([disabled])', { timeout: 10000 });
   await page.waitForTimeout(1000);
   await page.click('button[type="submit"]');
-  await page.waitForTimeout(2000);
+  await page.waitForTimeout(4000);
 
   await page.goto('http://localhost:4200/dashboard/crear-oferta', { waitUntil: 'networkidle' });
   await page.waitForTimeout(2000);
@@ -79,13 +79,11 @@ test('register', async ({ page }) => {
   await page.waitForTimeout(1000);
 
   await page.fill('input[name="end_date"]', "");
-  await page.fill('input[name="end_date"]', DATAOFERT.fecha_final, { delay: 100 });
+  await page.type('input[name="end_date"]', DATAOFERT.fecha_final, { delay: 100 });
   await page.waitForTimeout(2000);
 
   await page.click('button[name="submit"]');
   await page.waitForTimeout(5000);
-
-
 
 });
 

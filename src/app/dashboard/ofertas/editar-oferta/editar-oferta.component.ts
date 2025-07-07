@@ -187,7 +187,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
             <mat-icon>close</mat-icon>
             {{ 'editar-oferta.Cancelar' | translate }}
           </button>
-          <button mat-raised-button color="primary" type="submit" [disabled]="!ofertaForm.form.valid">
+          <button mat-raised-button color="primary" type="submit" >
             <mat-icon>save</mat-icon>
             {{ 'editar-oferta.GuardarCambios' | translate }}
           </button>
@@ -336,7 +336,7 @@ export class EditarOfertaComponent implements OnInit {
       this.ofertasService.actualizarOferta(this.oferta.id, ofertaActualizada).subscribe({
         next: () => {
           this.mostrarMensaje('Oferta actualizada exitosamente', 'success');
-          this.router.navigate(['/dashboard/ofertas-activas']);
+          this.router.navigate(['/dashboard/ver-ofertas']);
         },
         error: (error: Error) => {
           console.error('Error al actualizar la oferta:', error);
@@ -351,10 +351,11 @@ export class EditarOfertaComponent implements OnInit {
   }
 
   private validarFormulario(): boolean {
-    if (!this.ofertaForm.valid) {
-      this.mostrarMensaje('Por favor complete todos los campos requeridos', 'error');
-      return false;
-    }
+    
+    // if (!this.ofertaForm.valid) {
+    //   this.mostrarMensaje('Por favor complete todos los campos requeridos', 'error');
+    //   return false;
+    // }
 
     if (this.oferta.end_date < this.oferta.start_date) {
       this.mostrarMensaje('La fecha de fin no puede ser anterior a la fecha de inicio', 'error');

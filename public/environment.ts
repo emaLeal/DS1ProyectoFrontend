@@ -17,7 +17,7 @@ export const environment = {
         getRoles: '/roles/getall/',
         createRole: '/roles/create/',
         updateRole: '/roles/update/',
-        deleteRole: '/roles/delete'
+        deleteRole: '/roles/delete/'
     },
     postulants: {
         getPostulants: '/postulant/getall/',
