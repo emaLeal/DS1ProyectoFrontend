@@ -72,7 +72,14 @@ export class OfertasActivasComponent {
     });
   }
 
-  postulate() {
+  postulate(job_offer_id: any) {
+    const userData = JSON.parse(localStorage.getItem('user_data')!)
+    this.postulateData = {
+      ...this.postulateData,
+      applicant_document: userData.document_id,
+      phone: userData.cell_phone,
+      job_offer_id
+    }
     const dialogRef = this.dialog.open(PostularDialogComponent, {
       width: '600px',
       data: { usuario: this.postulateData }

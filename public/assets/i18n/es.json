@@ -1,75 +1,71 @@
 {
-    "login": {
-        "document_id": "Cedula",
-        "password": "Contraseña",
-        "document_label": "Ingresa tu documento ",
-        "password_label": "Ingrese su contraseña",
-        "login_button": "Iniciar Sesión",
-        "welcome_label": "BIENVENIDO",
-        "captcha_error_label": "Por favor valida CAPTCHA",
-        "havent_account": "¿No tienes una cuenta?",
-        "register_now": "¡Regístrate ahora!"
-    },
-
-    "register": {
-        "welcome_label":"BIENVENIDO",
-        "name":"Nombre",
-        "name_label" :"Ingrese su nombre",
-        "last_name":"Apellido",
-        "lastname_label":"Ingrese su apellido",
-        "id":"D.I",
-        "id_label":"Ingrese su cedula",
-        "password":"Contraseña",
-        "password_label":"Crea una Contraseña",
-        "email":"Email",
-        "email_label":"Ingrese su email",
-        "captcha_error_label": "Por favor valida CAPTCHA",
-        "button": "Registrarme",
-        "have_account":"Ya tienes una cuenta?",
-        "login_now":"Inicia ahora!",
-        "personal_information": "Tu Información Personal",
-        "contact_information": "Tu Información de Contacto",
-        "button_next":"Siguiente",
-        "birth":"Fecha Nacimiento",
-        "id_type": "Tipo de documento",
-        "id_type_label": "Selecciona tu documento",
-        "document_type.cedula":"Cédula",
-        "document_type.passport":"Pasaporte",
-        "document_type.dni":"DNI",
-        "gender": "Genero",
-        "gender_label": "Selecciona Género",
-        "gender.f": "Femenino",
-        "gender.m": "Masculino",
-        "gender.o":"Otro",
-        "mobile": "Celular",
-        "mobile_label": "Ingresa tu número de celular",
-        "phone": "Teléfono Fijo",
-        "phone_label": "Ingresa tu número de teléfono fijo",
-        "address": "Dirección",
-        "address_label": "Ingresa tu dirección",
-        "button_back":"Atras",
-        "button_reset":"Borrar todo",
-        "final_step_label":"CREE UNA CONTRASEÑA",
-        "final_step_label1":"CONFIRME LA CONTRASEÑA",
-        "password1":"Confirme contraseña",
-        "password_label1":"Confirme la Contraseña",
-        "done":"Crea tu contraseña",
-        "length":" 8 o más caracteres",
-        "number_lower":" Mínimo un número y una letra",
-        "upper":" Mínimo una letra mayúscula",
-        "special":" Mínimo un carácter especial (*, .!#$ ...)",
-        "password_rules_intro": "Tu contraseña debe tener:",
-        "password_secure": "Contraseña segura",
-        "incorrect": "Las contraseñas no coinciden"
-    },
-
-
-    "language": {
-        "change_to_spanish": "Cambiar a Español",
-        "change_to_english": "Cambiar a Inglés"
-    },
-
-    "crear-oferta": {
+  "login": {
+    "document_id": "Cedula",
+    "password": "Contraseña",
+    "document_label": "Ingresa tu documento ",
+    "password_label": "Ingrese su contraseña",
+    "login_button": "Iniciar Sesión",
+    "welcome_label": "BIENVENIDO",
+    "captcha_error_label": "Por favor valida CAPTCHA",
+    "havent_account": "¿No tienes una cuenta?",
+    "register_now": "¡Regístrate ahora!"
+  },
+  "register": {
+    "welcome_label": "BIENVENIDO",
+    "name": "Nombre",
+    "name_label": "Ingrese su nombre",
+    "last_name": "Apellido",
+    "lastname_label": "Ingrese su apellido",
+    "id": "D.I",
+    "id_label": "Ingrese su cedula",
+    "password": "Contraseña",
+    "password_label": "Crea una Contraseña",
+    "email": "Email",
+    "email_label": "Ingrese su email",
+    "captcha_error_label": "Por favor valida CAPTCHA",
+    "button": "Registrarme",
+    "have_account": "Ya tienes una cuenta?",
+    "login_now": "Inicia ahora!",
+    "personal_information": "Tu Información Personal",
+    "contact_information": "Tu Información de Contacto",
+    "button_next": "Siguiente",
+    "birth": "Fecha Nacimiento",
+    "id_type": "Tipo de documento",
+    "id_type_label": "Selecciona tu documento",
+    "document_type.cedula": "Cédula",
+    "document_type.passport": "Pasaporte",
+    "document_type.dni": "DNI",
+    "gender": "Genero",
+    "gender_label": "Selecciona Género",
+    "gender.f": "Femenino",
+    "gender.m": "Masculino",
+    "gender.o": "Otro",
+    "mobile": "Celular",
+    "mobile_label": "Ingresa tu número de celular",
+    "phone": "Teléfono Fijo",
+    "phone_label": "Ingresa tu número de teléfono fijo",
+    "address": "Dirección",
+    "address_label": "Ingresa tu dirección",
+    "button_back": "Atras",
+    "button_reset": "Borrar todo",
+    "final_step_label": "CREE UNA CONTRASEÑA",
+    "final_step_label1": "CONFIRME LA CONTRASEÑA",
+    "password1": "Confirme contraseña",
+    "password_label1": "Confirme la Contraseña",
+    "done": "Crea tu contraseña",
+    "length": " 8 o más caracteres",
+    "number_lower": " Mínimo un número y una letra",
+    "upper": " Mínimo una letra mayúscula",
+    "special": " Mínimo un carácter especial (*, .!#$ ...)",
+    "password_rules_intro": "Tu contraseña debe tener:",
+    "password_secure": "Contraseña segura",
+    "incorrect": "Las contraseñas no coinciden"
+  },
+  "language": {
+    "change_to_spanish": "Cambiar a Español",
+    "change_to_english": "Cambiar a Inglés"
+  },
+  "crear-oferta": {
     "titleCard": "Nueva Oferta Laboral",
     "subtitleCard": "Complete los detalles de la oferta",
     "basicInfo": "Información Básica",
@@ -111,7 +107,6 @@
     "Temporal": "Temporal",
     "Practicas": "Prácticas"
   },
-  
   "editar-oferta": {
     "TituloPrincipal": "Editar Oferta Laboral",
     "Subtitulo": "Modifique los detalles de la oferta",
@@ -152,7 +147,6 @@
     "Cancelar": "Cancelar",
     "GuardarCambios": "Guardar Cambios"
   },
-  
   "ofertas_activas": {
     "TituloPrincipal": "Encuentra la oportunidad que estás buscando",
     "Subtitulo": "Postúlate a ofertas laborales que se ajusten a tu perfil profesional.",
@@ -175,7 +169,6 @@
     "Editar": "Editar",
     "Postularme": "Postularme"
   },
-
   "ofertas-cerradas": {
     "HeroTitulo": "Consulta las ofertas cerradas",
     "HeroDescripcion": "Estas ofertas ya no están disponibles para postularse.",
@@ -196,7 +189,6 @@
     "VerDetalles": "Ver Detalles",
     "OfertaCerrada": "Oferta Cerrada"
   },
-  
   "postulantes": {
     "Titulo": "Postulantes",
     "Subtitulo": "Gestiona los postulantes a las ofertas laborales",
@@ -225,10 +217,10 @@
     "titulo_pregrado": "Titulo de Pregrado",
     "titulo_posgrado": "Titulo de Posgrado",
     "motivacion": "Motivación",
-    "perfil": "Perfil de Aspirante"
+    "perfil": "Perfil de Aspirante",
+    "confirmar_postulacion": "Confirmar Postulación",
+    "cancelar": "Cancelar"
   },
-
-  
   "dashboard": {
     "Menu": "Menú",
     "MenuPrincipal": "Menú Principal",
@@ -254,7 +246,6 @@
     "Configuracion": "Configuración",
     "Cargando": "Cargando..."
   },
-
   "roles": {
     "gestionRoles": "Gestión de Roles",
     "adminRoles": "Administrar los roles del sistema",
@@ -278,15 +269,12 @@
     "confirmarEliminacion": "Confirmar eliminación",
     "mensajeConfirmacion": "¿Estás seguro de eliminar el rol \"{{rol}}\"?"
   },
-
-  "agregar":{
-     "postulant": "Agregar postulante",
+  "agregar": {
+    "postulant": "Agregar postulante",
     "offer": "Crear oferta",
     "offer1": "Cancelar oferta",
     "add": "Agregar"
-
   },
-
   "editarUsuario": {
     "titulo": "Edición de Datos",
     "informacionPersonal": "Información Personal",
@@ -316,7 +304,6 @@
     "cancelar": "Cancelar",
     "guardarCambios": "Guardar Cambios"
   },
-
   "userDetails": {
     "titulo": "Detalles del Usuario",
     "informacionPersonal": "Información Personal",
@@ -336,8 +323,6 @@
     "eliminar": "Eliminar",
     "cerrar": "Cerrar"
   },
-
-  
   "confirmDialog": {
     "nombre": "Nombre",
     "documento": "Documento",
@@ -347,8 +332,6 @@
     "tituloEliminar": "Confirmar eliminación",
     "mensajeEliminar": "¿Estás seguro de que deseas eliminar este elemento? Esta acción no se puede deshacer."
   },
-
-  
   "usuarios": {
     "titulo": "Gestión de Usuarios",
     "subtitulo": "Administra los usuarios del sistema",
@@ -393,8 +376,4 @@
     "cancelar": "Cancelar",
     "crearUsuario": "Crear Usuario"
   }
-
-
-
-
 }
