@@ -28,7 +28,7 @@ import { PerfilUsuarioComponent } from './perfil-usuario/perfil-usuario.componen
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent extends TranslateLogic implements OnInit, OnDestroy {
-  isMenuOpen = true;
+  isMenuOpen = false;
   user: any;
   searchTerm: string = '';
   searchResults: SearchResult[] = [];

@@ -91,7 +91,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
         <mat-icon>delete</mat-icon>
         {{ 'userDetails.eliminar' | translate }}
       </button>
-      <button mat-button (click)="onClose()">
+      <button mat-button (click)="onClose()" name="cerrar">
         {{ 'userDetails.cerrar' | translate }}
       </button>
     </mat-card-actions>

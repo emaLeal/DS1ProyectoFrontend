@@ -32,7 +32,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
       <mat-icon>close</mat-icon>
       {{ 'confirmDialog.cancelar' | translate }}
     </button>
-    <button mat-raised-button color="warn" (click)="onConfirm()">
+    <button mat-raised-button color="warn" (click)="onConfirm()" name="button_delete">
       <mat-icon>delete</mat-icon>
       {{ 'confirmDialog.eliminar' | translate }}
     </button>
