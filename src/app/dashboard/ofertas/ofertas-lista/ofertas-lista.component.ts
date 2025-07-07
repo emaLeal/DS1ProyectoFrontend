@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { UsuariosService } from '../../usuarios/usuarios.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -23,6 +24,7 @@ import { OfertasService, JobOffer } from '../../../services/ofertas.service';
   selector: 'app-ofertas-lista',
   imports: [
     CommonModule,
+    RouterModule,
     TranslateModule,
     MatFormFieldModule,
     MatInputModule,
