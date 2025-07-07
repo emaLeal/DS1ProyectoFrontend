@@ -1,5 +1,8 @@
 <div class="dashboard">
-  <aside class="sidebar">
+  <button class="hamburger" (click)="toggleSidebar()">
+  <i class="fa-solid fa-bars"></i>
+</button>
+  <aside class="sidebar" [class.collapsed]="sidebarCollapsed">
     <div class="sidebar-header">
     <h2>{{ 'dashboard.Menu' | translate }}</h2>
     </div>
@@ -7,7 +10,7 @@
       <!-- Menú Principal -->
       <div class="menu-section" [class.collapsed]="mainMenuCollapsed">
         <h3 (click)="toggleMainMenu()">{{ 'dashboard.MenuPrincipal' | translate }}</h3>
-        <ul><li>
+        <ul class="menu-lista"><li>
             <a routerLink="postulantes">
               <i class="fa-solid fa-circle-user"></i>
               <span>{{ 'dashboard.Postulantes' | translate }}</span>
@@ -31,31 +34,31 @@
       <!-- Menú Director -->
       <div class="director-menu menu-section" [class.collapsed]="directorMenuCollapsed" *ngIf="user?.role === 2 || user?.role === 1">
         <h3 (click)="toggleDirectorMenu()">{{ 'dashboard.MenuDirector' | translate }}</h3>
-        <ul>
+        <ul class="menu-lista">
           <li>
             <a routerLink="crear-oferta" routerLinkActive="active">
               <i class="fa-solid fa-plus"></i>
               <span>{{ 'dashboard.CrearOferta' | translate }}</span>
             </a>
           </li>
-          <li>
+          <!-- <li>
             <a routerLink="editar-oferta">
               <i class="fa-solid fa-edit"></i>
               <span>{{ 'dashboard.EditarOferta' | translate }}</span>
             </a>
-          </li>
+          </li> -->
           <li>
-            <a routerLink="mis-ofertas-activas">
+            <a routerLink="ver-ofertas">
               <i class="fa-solid fa-list-check"></i>
               <span>{{ 'dashboard.MisOfertasActivas' | translate }}</span>
             </a>
           </li>
-          <li>
+          <!-- <li>
             <a routerLink="mis-ofertas-cerradas">
               <i class="fa-solid fa-folder-closed"></i>
               <span>{{ 'dashboard.MisOfertasCerradas' | translate }}</span>
             </a>
-          </li>
+          </li> -->
           <li>
             <a routerLink="mis-postulantes">
               <i class="fa-solid fa-users"></i>
@@ -68,7 +71,7 @@
       <!-- Menú Administrador -->
       <div class="admin-menu menu-section" [class.collapsed]="adminMenuCollapsed" *ngIf="user?.role !== 3">
         <h3 (click)="toggleAdminMenu()">{{ 'dashboard.MenuAdministrador' | translate }}</h3>
-        <ul>
+        <ul class="menu-lista">
           <li>
             <a routerLink="usuarios">
               <i class="fa-solid fa-user"></i>
@@ -97,7 +100,7 @@
     </div>
   </aside>
 
-  <main class="main-content">
+  <main class="main-content" [class.sidebar-collapsed]="sidebarCollapsedMain">
     <header class="topbar">
       <div class="search-container">
         <i class="fa-solid fa-search search-icon"></i>

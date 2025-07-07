@@ -38,6 +38,9 @@ export class DashboardComponent extends TranslateLogic implements OnInit, OnDest
   menuOpen = false;
   isLoading = false;
   private routerSubscription?: Subscription;
+  sidebarCollapsed: boolean = false;
+  sidebarCollapsedMain: boolean = false
+
 
   // Nuevas propiedades para el manejo de menús colapsables
   mainMenuCollapsed = false;
@@ -54,6 +57,8 @@ export class DashboardComponent extends TranslateLogic implements OnInit, OnDest
     console.log('Dashboard component constructed');
     this.user = this.authService.getProfile;
   }
+
+  
 
   ngOnInit() {
     console.log('Dashboard component initialized');
@@ -85,6 +90,9 @@ export class DashboardComponent extends TranslateLogic implements OnInit, OnDest
         }, 500);
       }
     });
+
+    this.handleResize(); // Ajuste inicial
+    window.addEventListener('resize', this.handleResize.bind(this));
   }
 
   ngOnDestroy() {
@@ -94,6 +102,9 @@ export class DashboardComponent extends TranslateLogic implements OnInit, OnDest
     if (this.routerSubscription) {
       this.routerSubscription.unsubscribe();
     }
+
+    window.removeEventListener('resize', this.handleResize.bind(this));
+
   }
 
   // Métodos para manejar los menús colapsables
@@ -108,6 +119,21 @@ export class DashboardComponent extends TranslateLogic implements OnInit, OnDest
   toggleAdminMenu() {
     this.adminMenuCollapsed = !this.adminMenuCollapsed;
   }
+  handleResize(): void {
+  const screenWidth = window.innerWidth;
+
+  if (screenWidth < 768) {
+    this.sidebarCollapsedMain = true;
+    this.sidebarCollapsed = true;
+
+  } else {
+    this.sidebarCollapsedMain = false;
+    this.sidebarCollapsed = false;
+  }
+}
+  toggleSidebar() {
+  this.sidebarCollapsed = !this.sidebarCollapsed;
+}
   
 
   onSearch(event: any): void {

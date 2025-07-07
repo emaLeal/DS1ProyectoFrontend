@@ -416,9 +416,9 @@ export class CrearOfertaComponent implements OnInit {
     }
     
     // Validar fechas
-    // const fechaInicio = new Date(this.oferta.start_date);
-    // const fechaFin = new Date(this.oferta.end_date);
-    // const hoy = new Date();
+    const fechaInicio = new Date(this.oferta.start_date);
+    const fechaFin = new Date(this.oferta.end_date);
+    const hoy = new Date();
     
     // if (fechaInicio <= hoy) {
     //   console.warn('CrearOferta - Fecha de inicio inválida:', fechaInicio);

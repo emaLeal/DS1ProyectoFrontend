@@ -220,6 +220,11 @@
   box-sizing: border-box;
 }
 
+.main-content.sidebar-collapsed {
+  margin-left: 0;
+  width: 100vw;
+}
+
 /* CORRECCIÓN CLAVE: Topbar sin position fixed */
 .topbar {
   position: relative;
@@ -1357,4 +1362,51 @@ button.mat-mdc-raised-button:hover {
 .animate-slide-up,
 .header-loading {
   display: none;
+}
+
+/* Estilo general */
+.sidebar {
+  width: 250px;
+  background-color: rgba(0, 0, 0, 0.9); /* Semitransparente */
+  color: white;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+/* Ocultar en pantallas pequeñas cuando esté colapsado */
+.sidebar.collapsed {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+
+/* Botón hamburguesa */
+.hamburger {
+  display: none;
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 1100;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  color: #000;
+}
+
+/* Mostrar hamburguesa en pantallas pequeñas */
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+
+  .sidebar {
+    width: 80%;
+    opacity: 0.95;
+  }
+}
+
+.menu-lista{
+  list-style: none;
 }

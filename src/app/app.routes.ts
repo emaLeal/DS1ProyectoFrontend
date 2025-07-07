@@ -14,6 +14,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { PerfilUsuarioComponent } from './dashboard/perfil-usuario/perfil-usuario.component';
 
 import { isAuthenticated, isSuperUser } from './authentication/guards/authentication.guard';
+import { OfertasListaComponent } from './dashboard/ofertas/ofertas-lista/ofertas-lista.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -32,6 +33,11 @@ export const routes: Routes = [
       { path: 'ofertas-cerradas', component: OfertasCerradasComponent },
       { path: 'crear-oferta', component: CrearOfertaComponent },
       { path: 'editar-oferta/:id', component: EditarOfertaComponent },
+      {
+        path: 'ver-ofertas',
+        component: OfertasListaComponent,
+        canActivate: [isSuperUser] // ✅ Solo para usuarios con rol distinto a 3
+      },
       {
         path: 'usuarios',
         component: UsuariosComponent,
