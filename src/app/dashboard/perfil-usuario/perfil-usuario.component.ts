@@ -16,6 +16,7 @@ interface Usuario {
   role: number;
   phone: string;
   gender: string;
+  role_description: string; // mostrar el rol como texto
 }
 
 @Component({
@@ -49,7 +50,8 @@ export class PerfilUsuarioComponent implements OnInit {
         cell_phone: data.cell_phone,
         role: data.role,
         phone: data.phone,
-        gender: data.gender
+        gender: data.gender,
+        role_description: data.role_description
       };
     } else {
       this.usuario = null;
