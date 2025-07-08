@@ -68,6 +68,7 @@ export class UsuariosComponent implements OnInit {
   roles: Role[] = [];
   filtroRol: string = '';
   filtroBusqueda: string = '';
+  filtroDocumento: string = '';
   mensajeToast: string = '';
   toastClass: string = '';
   mostrarFormulario = false;
@@ -94,7 +95,7 @@ export class UsuariosComponent implements OnInit {
     private rolesService: RolesService,
     private dialog: MatDialog,
     private sanitizer: DomSanitizer,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.cargarUsuarios();
@@ -208,18 +209,18 @@ export class UsuariosComponent implements OnInit {
   validarFormulario(): boolean {
     // Validar campos requeridos
     const camposRequeridos = [
-      'name', 
-      'last_name', 
-      'email', 
-      'document_id', 
-      'identification_type', 
+      'name',
+      'last_name',
+      'email',
+      'document_id',
+      'identification_type',
       'role_id',
       'birth_date',
       'gender',
       'cell_phone',
       'address'
     ];
-    
+
     for (const campo of camposRequeridos) {
       if (!this.nuevoUsuario[campo]) {
         this.mostrarToast(`El campo ${campo.replace('_', ' ')} es requerido`, 'error');
@@ -271,7 +272,7 @@ export class UsuariosComponent implements OnInit {
 
   obtenerMensajeError(error: any): string {
     console.log('Error completo recibido:', error);
-    
+
     if (error.error && typeof error.error === 'object') {
       // Si el error contiene múltiples campos con error
       const errores = Object.entries(error.error)
@@ -279,7 +280,7 @@ export class UsuariosComponent implements OnInit {
         .join('\n');
       return errores || 'Error en los datos ingresados';
     }
-    
+
     if (error.error?.message) {
       return error.error.message;
     }
@@ -418,12 +419,19 @@ export class UsuariosComponent implements OnInit {
       const cumpleRol = this.filtroRol ? usuario.role.toString() === this.filtroRol : true;
       const cumpleBusqueda = texto
         ? (usuario.name?.toLowerCase().includes(texto) ||
-           usuario.last_name?.toLowerCase().includes(texto) ||
-           usuario.email?.toLowerCase().includes(texto))
+          usuario.last_name?.toLowerCase().includes(texto) ||
+          usuario.email?.toLowerCase().includes(texto))
         : true;
-      return cumpleRol && cumpleBusqueda;
+      const documento = this.filtroDocumento.toLowerCase();
+
+      const cumpleDocumento = documento
+        ? (usuario.document_id?.toLowerCase().includes(documento))
+        : true;
+      return cumpleRol && cumpleBusqueda && cumpleDocumento;
     });
   }
+
+
 
   verDetalles(usuario: any) {
     const dialogRef = this.dialog.open(UserDetailsModalComponent, {

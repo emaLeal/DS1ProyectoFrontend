@@ -25,7 +25,11 @@
           <input matInput [(ngModel)]="filtroBusqueda" [placeholder]="'usuarios.placeholderBusqueda' | translate">
           <mat-icon matSuffix>search</mat-icon>
         </mat-form-field>
-
+          <mat-form-field appearance="outline" class="search-field">
+          <mat-label>{{ 'usuarios.buscarDocumento' | translate }}</mat-label>
+          <input matInput [(ngModel)]="filtroDocumento" [placeholder]="'usuarios.placeholderDocumento' | translate">
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
         <mat-form-field appearance="outline" class="search-field">
           <mat-label>{{ 'usuarios.filtrarPorRol' | translate }}</mat-label>
           <mat-select [(ngModel)]="filtroRol">

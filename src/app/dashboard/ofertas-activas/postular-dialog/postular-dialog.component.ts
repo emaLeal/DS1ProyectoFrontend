@@ -96,10 +96,8 @@ export class PostularDialogComponent implements OnInit {
     const application_date = year + "-" + month + "-" + day + " " + hour + ":" + minutes + ":" + seconds
     this.form = { ...this.form, application_date }
     this.postulationService.postular(this.form).subscribe(value => {
-      console.log(value)
       this.dialogRef.close(true)
     })
-
   }
 
 

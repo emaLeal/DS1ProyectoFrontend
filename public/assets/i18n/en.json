@@ -154,6 +154,15 @@
     "ErrorFechaFin": "End date is required",
     "Cancelar": "Cancel",
     "GuardarCambios": "Save Changes"
+  },"postulacion": {
+    "titulo_postulacion": "Application",
+    "informacion_academica": "Academic information",
+    "titulo_pregrado": "Undergraduate Title",
+    "titulo_posgrado": "PostGraduate Title",
+    "motivacion": "Motivation",
+    "perfil": "Applicant's Profile",
+    "confirmar_postulacion": "Confirm Application",
+    "cancelar": "Cancel"
   },
   
   "ofertas_activas": {
@@ -384,7 +393,8 @@
     "contrasena": "Password",
     "confirmarContrasena": "Confirm Password",
     "cancelar": "Cancel",
-    "crearUsuario": "Create User"
+    "crearUsuario": "Create User",
+    "buscarDocumento": "Search Document Number"
   }
 
 
