@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { loginUsuario } from './utils';
 
 
 const DATAOFERT = {
@@ -11,38 +12,12 @@ const DATAOFERT = {
 }
 
 const CREDENCIALES = {
-  document: "1110283134",
+  documento: "1110283134",
   password: "Contraseña1."
 }
 test('Crear_oferta', async ({ page }) => {
   test.setTimeout(180000); // 3 minutos
-
-  // Establecer modo de prueba en localStorage
-  await page.addInitScript(() => {
-    localStorage.setItem('PLAYWRIGHT_TEST', 'true');
-  });
-
-  await page.goto('http://localhost:4200/login', { waitUntil: 'networkidle' });
-
-  // Llenar el documento
-  console.log('Llenando documento...');
-  await page.fill('input[formControlName="document_id"]', '');
-  await page.waitForTimeout(1000);
-  await page.type('input[formControlName="document_id"]', CREDENCIALES.document, { delay: 100 });
-  await page.waitForTimeout(2000);
-
-  // Llenar la contraseña
-  console.log('Llenando contraseña...');
-  await page.fill('input[formControlName="password"]', '');
-  await page.waitForTimeout(1000);
-  await page.type('input[formControlName="password"]', CREDENCIALES.password, { delay: 100 });
-  await page.waitForTimeout(1000);
-
-  await page.waitForSelector('button[type="submit"]:not([disabled])', { timeout: 10000 });
-  await page.waitForTimeout(1000);
-  await page.click('button[type="submit"]');
-  await page.waitForTimeout(4000);
-
+  await loginUsuario(page, CREDENCIALES)
   await page.goto('http://localhost:4200/dashboard/crear-oferta', { waitUntil: 'networkidle' });
   await page.waitForTimeout(2000);
 
@@ -73,7 +48,7 @@ test('Crear_oferta', async ({ page }) => {
   await page.fill('input[name="salary"]', "");
   await page.type('input[name="salary"]', DATAOFERT.salario, { delay: 100 });
   await page.waitForTimeout(1000);
-  
+
   await page.fill('input[name="start_date"]', "");
   await page.type('input[name="start_date"]', DATAOFERT.fecha_inicio, { delay: 100 });
   await page.waitForTimeout(1000);
@@ -87,3 +62,57 @@ test('Crear_oferta', async ({ page }) => {
 
 });
 
+test('Editar_oferta', async ({ page }) => {
+  test.setTimeout(180000); // 3 minutos
+  await loginUsuario(page, CREDENCIALES)
+  await page.goto('http://localhost:4200/dashboard/ver-ofertas', { waitUntil: 'networkidle' });
+  await page.waitForTimeout(3000);
+
+  const filaUsuario = page.locator('tr.table-data-row', {
+    hasText: 'Oferta prueba' // o nombre, documento, etc.
+  });
+
+  await filaUsuario.locator('button >> mat-icon:text("edit")').click();
+  await page.waitForTimeout(3000);
+
+  await page.fill('input[name="title"]','');
+  await page.type('input[name="title"]', "Editar oferta prueba", { delay: 100 });
+  await page.waitForTimeout(1000);
+
+  await page.locator('mat-select[data-testid="education-select"]').click({ force: true });
+  await page.waitForSelector('mat-option');
+  await page.click('mat-option >> text="Bachiller"');
+  await page.waitForTimeout(1000);
+
+  await page.click('mat-select[data-testid="job_type"]');
+  await page.waitForSelector('mat-option');
+  await page.click('mat-option >> text="Prácticas"');
+  await page.waitForTimeout(1000);
+
+  await page.fill('input[name="salary"]', "");
+  await page.type('input[name="salary"]', '1000000', { delay: 100 });
+  await page.waitForTimeout(3000);
+
+  await page.click('button[name="edit_offer"]');
+  await page.waitForTimeout(5000);
+  
+
+})
+
+test('Eliminar_oferta', async ({ page }) => {
+  test.setTimeout(180000); // 3 minutos
+  await loginUsuario(page, CREDENCIALES)
+  await page.goto('http://localhost:4200/dashboard/ver-ofertas', { waitUntil: 'networkidle' });
+  await page.waitForTimeout(3000);
+
+  const filaUsuario = page.locator('tr.table-data-row', {
+    hasText: 'Editar oferta prueba' // o nombre, documento, etc.
+  });
+
+  await filaUsuario.locator('button >> mat-icon:text("delete")').click();
+  await page.waitForTimeout(3000);
+
+  await page.click('button[name="button_delete"]');
+  await page.waitForTimeout(5000);
+
+})

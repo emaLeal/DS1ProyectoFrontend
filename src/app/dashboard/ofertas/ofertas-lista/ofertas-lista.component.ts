@@ -18,6 +18,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { RolesService, Role } from '../../roles/roles.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { OfertasService, JobOffer } from '../../../services/ofertas.service';
+import { ConfirmDialogComponent } from '../../usuarios/confirm-dialog.component';
 
 
 @Component({
@@ -54,6 +55,10 @@ export class OfertasListaComponent implements OnInit {
   filtroBusqueda: string = '';
   ofertas: JobOffer[] = [];
   ofertasFiltradas: JobOffer[] = [];
+  mensajeToast: string = '';
+  toastClass: string = '';
+  mostrarFormulario = false;
+  cargando = false;
 
     constructor(
     private ofertasService: OfertasService,
@@ -81,9 +86,11 @@ export class OfertasListaComponent implements OnInit {
   }
 
   cargarOfertas() {
+      this.cargando = true;
     this.ofertasService.getOfertas().subscribe({
       next: (data) => {
         this.ofertas = data;
+        this.cargando = false;
         console.log("Ofertas recibidas:", this.ofertas);
       },
       error: (error) => {
@@ -133,4 +140,73 @@ export class OfertasListaComponent implements OnInit {
       return cumpleRol && cumpleBusqueda;
     });
   }
+
+  borrarOferta(oferta: any) {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '400px',
+      data: {
+        titulo: 'Confirmar eliminación',
+        mensaje: '¿Estás seguro que deseas eliminar esta oferta? Esta acción no se puede deshacer.',
+        oferta: oferta
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.cargando = true;
+        this.ofertasService.eliminarOferta(oferta.id).subscribe({
+          next: () => {
+            this.cargarOfertas()
+            this.mostrarToast(`oferta eliminado exitosamente`, 'success');
+            this.cargando = false;
+          },
+          error: (err) => {
+            console.error('Error al eliminar:', err);
+            this.mostrarToast(this.obtenerMensajeError(err), 'error');
+            this.cargando = false;
+          }
+        });
+      }
+    });
+  }
+  
+    obtenerMensajeError(error: any): string {
+    console.log('Error completo recibido:', error);
+    
+    if (error.error && typeof error.error === 'object') {
+      // Si el error contiene múltiples campos con error
+      const errores = Object.entries(error.error)
+        .map(([campo, mensaje]) => `${campo}: ${mensaje}`)
+        .join('\n');
+      return errores || 'Error en los datos ingresados';
+    }
+    
+    if (error.error?.message) {
+      return error.error.message;
+    }
+    if (error.error?.detail) {
+      return error.error.detail;
+    }
+    if (typeof error.error === 'string') {
+      return error.error;
+    }
+    if (error.status === 400) {
+      return 'Datos inválidos. Por favor verifica la información.';
+    }
+    if (error.status === 409) {
+      return 'Ya existe un usuario con ese documento o email.';
+    }
+    return 'Error al procesar la solicitud. Por favor intenta de nuevo.';
+  }
+
+  mostrarToast(mensaje: string, tipo: 'success' | 'error') {
+    this.mensajeToast = mensaje;
+    this.toastClass = `toast toast-${tipo}`;
+    setTimeout(() => {
+      this.mensajeToast = '';
+    }, 4000);
+  }
+
 }
+
+

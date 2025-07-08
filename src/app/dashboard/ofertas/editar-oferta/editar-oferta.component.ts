@@ -54,7 +54,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
           <div class="form-row">
             <mat-form-field appearance="outline">
               <mat-label>{{ 'editar-oferta.TituloOferta' | translate }}</mat-label>
-              <input matInput [(ngModel)]="oferta.title" name="title" required maxlength="10" #title="ngModel">
+              <input matInput [(ngModel)]="oferta.title" name="title" required maxlength="50" #title="ngModel">
               <mat-error *ngIf="title.invalid && (title.dirty || title.touched)">
                 <span *ngIf="title.errors?.['required']">{{ 'editar-oferta.ErrorTituloRequerido' | translate }}</span>
                 <span *ngIf="title.errors?.['maxlength']">{{ 'editar-oferta.ErrorTituloMaxLength' | translate }}</span>
@@ -85,7 +85,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
           <div class="form-row">
             <mat-form-field appearance="outline">
               <mat-label>{{ 'editar-oferta.NivelEducacion' | translate }}</mat-label>
-              <mat-select [(ngModel)]="oferta.education_level" name="education_level" required #education="ngModel">
+              <mat-select [(ngModel)]="oferta.education_level" data-testid="education-select" name="education_level" required #education="ngModel">
                 <mat-option value="Bachiller">{{ 'editar-oferta.Bachiller' | translate }}</mat-option>
                 <mat-option value="Técnico">{{ 'editar-oferta.Tecnico' | translate }}</mat-option>
                 <mat-option value="Tecnólogo">{{ 'editar-oferta.Tecnologo' | translate }}</mat-option>
@@ -136,7 +136,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
           <div class="form-row">
             <mat-form-field appearance="outline">
               <mat-label>{{ 'editar-oferta.TipoEmpleo' | translate }}</mat-label>
-              <mat-select [(ngModel)]="oferta.job_type" name="job_type" required #jobType="ngModel">
+              <mat-select [(ngModel)]="oferta.job_type" name="job_type" data-testid="job_type" required #jobType="ngModel">
                 <mat-option value="Tiempo Completo">{{ 'editar-oferta.TiempoCompleto' | translate }}</mat-option>
                 <mat-option value="Medio Tiempo">{{ 'editar-oferta.MedioTiempo' | translate }}</mat-option>
                 <mat-option value="Freelance">{{ 'editar-oferta.Freelance' | translate }}</mat-option>
@@ -187,7 +187,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
             <mat-icon>close</mat-icon>
             {{ 'editar-oferta.Cancelar' | translate }}
           </button>
-          <button mat-raised-button color="primary" type="submit" >
+          <button mat-raised-button color="primary" type="submit" name="edit_offer">
             <mat-icon>save</mat-icon>
             {{ 'editar-oferta.GuardarCambios' | translate }}
           </button>

@@ -108,6 +108,7 @@
                   </button>
                   <button mat-icon-button 
                           color="warn"
+                          (click)="borrarOferta(ofertas)"
                           matTooltip="{{ 'usuarios.eliminar' | translate }}">
                     <mat-icon>delete</mat-icon>
                   </button>
@@ -138,4 +139,11 @@
         </div>
       </mat-card-content>
     </mat-card>
+      <!-- Toast Messages -->
+
   </div>
+  <div *ngIf="mensajeToast" class="toast" [ngClass]="toastClass">
+    <mat-icon>{{ toastClass.includes('success') ? 'check_circle' : 'error' }}</mat-icon>
+    {{ mensajeToast }}
+  </div>
+  
