@@ -374,7 +374,8 @@
     "contrasena": "Contraseña",
     "confirmarContrasena": "Confirmar Contraseña",
     "cancelar": "Cancelar",
-    "crearUsuario": "Crear Usuario"
+    "crearUsuario": "Crear Usuario",
+    "buscarDocumento": "Buscar Numero de Documento"
   },
 
   "perfil": {
