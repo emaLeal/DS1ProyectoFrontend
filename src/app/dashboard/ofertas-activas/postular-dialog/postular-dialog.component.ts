@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -14,6 +14,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { Postulacion } from './postular.types';
+import { PostulationService } from '../../../services/postulation.service';
 
 interface Usuario {
   name: string;
@@ -50,7 +51,7 @@ interface Usuario {
   templateUrl: './postular-dialog.component.html',
   styleUrl: './postular-dialog.component.css'
 })
-export class PostularDialogComponent {
+export class PostularDialogComponent implements OnInit {
   form: Postulacion = {
     applicant_document: "",
     job_offer_id: 0,
@@ -66,9 +67,17 @@ export class PostularDialogComponent {
   constructor(
     private dialogRef: MatDialogRef<PostularDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private usuariosService: UsuariosService
+    private postulationService: PostulationService
   ) {
-    this.form = { ...data.postulateData }
+    this.form = {
+      ...this.form,
+      job_offer_id: data.usuario.job_offer_id,
+      applicant_document: data.usuario.applicant_document,
+      phone: data.usuario.phone
+    }
+  }
+  ngOnInit(): void {
+    console.log(this.form)
   }
 
 
@@ -76,7 +85,24 @@ export class PostularDialogComponent {
     this.dialogRef.close();
   }
 
- 
+  postular() {
+    const currentdate = new Date();
+    const year = currentdate.getFullYear()
+    const month = currentdate.getMonth().toString().length == 1 ? '0' + (currentdate.getMonth() + 1) : currentdate.getMonth() + 1
+    const day = currentdate.getDate().toString().length == 1 ? '0' + currentdate.getDate() : currentdate.getDate()
+    const hour = currentdate.getHours().toString().length == 1 ? '0' + currentdate.getHours() : currentdate.getHours()
+    const minutes = currentdate.getMinutes().toString().length == 1 ? '0' + currentdate.getMinutes() : currentdate.getMinutes()
+    const seconds = currentdate.getSeconds().toString().length == 1 ? '0' + currentdate.getSeconds() : currentdate.getSeconds()
+    const application_date = year + "-" + month + "-" + day + " " + hour + ":" + minutes + ":" + seconds
+    this.form = { ...this.form, application_date }
+    this.postulationService.postular(this.form).subscribe(value => {
+      console.log(value)
+      this.dialogRef.close(true)
+    })
+
+  }
+
+
   private formatearFecha(fecha: any): string {
     if (!fecha) return '';
     const d = new Date(fecha);
