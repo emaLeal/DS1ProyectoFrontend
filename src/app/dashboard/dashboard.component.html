@@ -69,7 +69,7 @@
       </div>
 
       <!-- Menú Administrador -->
-      <div class="admin-menu menu-section" [class.collapsed]="adminMenuCollapsed" *ngIf="user?.role !== 1">
+      <div class="admin-menu menu-section" [class.collapsed]="adminMenuCollapsed" *ngIf="user?.role === 1">
         <h3 (click)="toggleAdminMenu()">{{ 'dashboard.MenuAdministrador' | translate }}</h3>
         <ul class="menu-lista">
           <li>
