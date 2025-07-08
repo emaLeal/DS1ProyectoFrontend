@@ -50,7 +50,7 @@
       <mat-icon>close</mat-icon>
       {{ 'postulacion.cancelar' | translate }}
     </button>
-    <button mat-raised-button color="primary" (click)="postular()" [disabled]="!editForm.form.valid">
+    <button mat-raised-button name="submit" color="primary" (click)="postular()" [disabled]="!editForm.form.valid">
       <mat-icon>save</mat-icon>
       {{ 'postulacion.confirmar_postulacion' | translate }}
     </button>
