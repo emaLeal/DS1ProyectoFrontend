@@ -375,5 +375,18 @@
     "confirmarContrasena": "Confirmar Contraseña",
     "cancelar": "Cancelar",
     "crearUsuario": "Crear Usuario"
+  },
+
+  "perfil": {
+    "altFoto": "Foto de perfil",
+    "bienvenida": "HOLA",
+    "documento": "Documento",
+    "rol": "Rol",
+    "fechaNacimiento": "Fecha de nacimiento",
+    "genero": "Género",
+    "celular": "Celular",
+    "telefono": "Teléfono",
+    "direccion": "Dirección",
+    "sinDatos": "No hay datos de usuario."
   }
 }
