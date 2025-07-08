@@ -162,7 +162,7 @@
         </div>
         
         
-        <div class="user-menu">
+        <div class="user-menu" *ngIf="isMenuOpen">
           <a routerLink="perfil" >
             <i class="fa-solid fa-user"></i> {{ 'dashboard.MiPerfil' | translate }}
           </a>
