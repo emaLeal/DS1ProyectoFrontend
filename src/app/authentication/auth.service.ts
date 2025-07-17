@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Login, User } from './auth.types'
 import { Router } from '@angular/router';
-import { environment } from '../../../public/environment';
+import { environment } from '../../environments/environment';
 import { catchError } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 

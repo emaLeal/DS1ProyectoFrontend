@@ -21,7 +21,7 @@ import TranslateLogic from '../../lib/translate/translate.class';
 import { Login } from '../auth.types';
 import { MatCardModule } from '@angular/material/card';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../../public/environment';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-login',
