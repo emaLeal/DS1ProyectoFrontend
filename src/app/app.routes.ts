@@ -17,6 +17,7 @@ import { PasswordRecoveryComponent } from './authentication/password-recovery/pa
 import { isAuthenticated, isSuperUser } from './authentication/guards/authentication.guard';
 import { OfertasListaComponent } from './dashboard/ofertas/ofertas-lista/ofertas-lista.component';
 import { TodosPostulantesComponent } from './dashboard/postulantes/todos-postulantes.component';
+import { GraphicsComponent } from './dashboard/graphics/graphics.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -53,7 +54,7 @@ export const routes: Routes = [
       },
       { path: 'agregar', component: AgregarComponent },
       {path : 'perfil', component: PerfilUsuarioComponent},
-      { path: '', component: AgregarComponent },
+      { path: '', component: GraphicsComponent },
       {
         path: 'todos-postulantes',
         component: TodosPostulantesComponent
