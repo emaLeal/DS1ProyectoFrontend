@@ -10,12 +10,7 @@
       <!-- Menú Principal -->
       <div class="menu-section" [class.collapsed]="mainMenuCollapsed">
         <h3 (click)="toggleMainMenu()">{{ 'dashboard.MenuPrincipal' | translate }}</h3>
-        <ul class="menu-lista"><li>
-            <a routerLink="postulantes">
-              <i class="fa-solid fa-circle-user"></i>
-              <span>{{ 'dashboard.Postulantes' | translate }}</span>
-            </a>
-          </li>
+        <ul class="menu-lista">
           <li>
             <a routerLink="ofertas-cerradas">
               <i class="fa-solid fa-xmark"></i>
@@ -60,9 +55,15 @@
             </a>
           </li> -->
           <li>
-            <a routerLink="mis-postulantes">
+            <a routerLink="todos-postulantes">
               <i class="fa-solid fa-users"></i>
-              <span>{{ 'dashboard.MisPostulantes' | translate }}</span>
+              <span>Todos los postulantes</span>
+            </a>
+          </li>
+          <li>
+            <a routerLink="postulantes">
+              <i class="fa-solid fa-circle-user"></i>
+              <span>Mis postulantes</span>
             </a>
           </li>
         </ul>

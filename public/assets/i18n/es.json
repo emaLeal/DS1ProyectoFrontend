@@ -8,7 +8,10 @@
     "welcome_label": "BIENVENIDO",
     "captcha_error_label": "Por favor valida CAPTCHA",
     "havent_account": "¿No tienes una cuenta?",
-    "register_now": "¡Regístrate ahora!"
+    "register_now": "¡Regístrate ahora!",
+    "forgot_password": "¿Olvidaste tu contraseña?",
+    "recover_password": "Recuperar Contraseña",
+    "back_to_login": "Volver al login"
   },
   "register": {
     "welcome_label": "BIENVENIDO",
@@ -59,7 +62,38 @@
     "special": " Mínimo un carácter especial (*, .!#$ ...)",
     "password_rules_intro": "Tu contraseña debe tener:",
     "password_secure": "Contraseña segura",
-    "incorrect": "Las contraseñas no coinciden"
+    "incorrect": "Las contraseñas no coinciden",
+    "id_required": "El número de documento es obligatorio",
+    "id_invalid": "El número de documento debe ser solo números",
+    "lastname_required": "El apellido es obligatorio",
+    "lastname_min_length": "El apellido debe tener al menos 2 caracteres",
+    "name_required": "El nombre es obligatorio",
+    "name_min_length": "El nombre debe tener al menos 2 caracteres",
+    "id_type_required": "El tipo de documento es obligatorio",
+    "birth_required": "La fecha de nacimiento es obligatoria",
+    "gender_required": "El género es obligatorio",
+    "email_invalid": "El correo electrónico no es válido",
+    "mobile_invalid": "El número de celular debe tener al menos 10 dígitos",
+    "phone_invalid": "El teléfono fijo debe tener entre 7 y 10 dígitos",
+    "address_min_length": "La dirección debe tener al menos 5 caracteres",
+    "email_required": "El correo electrónico es obligatorio",
+    "mobile_required": "El número de celular es obligatorio",
+    "phone_required": "El teléfono fijo es obligatorio",
+    "address_required": "La dirección es obligatoria",
+    "password_requirements_not_met": "La contraseña no cumple con los requisitos de seguridad",
+    "password_required": "La contraseña es obligatoria"
+  },
+  "password_recovery": {
+    "title": "Recuperar Contraseña",
+    "subtitle": "Ingresa tu correo electrónico para recibir instrucciones de recuperación",
+    "email": "Correo Electrónico",
+    "email_label": "Ingresa tu correo electrónico",
+    "email_required": "El correo electrónico es requerido",
+    "email_invalid": "Por favor ingresa un correo electrónico válido",
+    "submit_button": "Enviar Instrucciones",
+    "success_message": "Se han enviado las instrucciones de recuperación a tu correo electrónico",
+    "error_message": "No se pudo enviar las instrucciones. Verifica tu correo electrónico",
+    "loading": "Enviando..."
   },
   "language": {
     "change_to_spanish": "Cambiar a Español",

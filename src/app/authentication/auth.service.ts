@@ -51,6 +51,15 @@ export class AuthService {
       );
   }
 
+  passwordRecovery(email: string): Observable<any> {
+    const url: string = environment.baseUrl + environment.authentication.passwordRecovery;
+    return this.httpClient
+      .post(url, { email })
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
   get getProfile() {
     return JSON.parse(localStorage.getItem('user_data')!)
   }

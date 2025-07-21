@@ -12,6 +12,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { OfertasService, JobOffer } from '../../services/ofertas.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { PostularDialogComponent } from './postular-dialog/postular-dialog.component';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-ofertas-activas',
   standalone: true,
@@ -39,11 +40,15 @@ export class OfertasActivasComponent {
   ofertas: JobOffer[] = [];
   ofertasFiltradas: JobOffer[] = [];
   postulateData: any = {}
+  isAdmin: boolean = false;
 
   constructor(
     private ofertasService: OfertasService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private router: Router
   ) {
+    const user = JSON.parse(localStorage.getItem('user_data')!);
+    this.isAdmin = user?.role === 1 || user?.role?.id === 1;
     this.cargarOfertas();
   }
 
@@ -93,7 +98,6 @@ export class OfertasActivasComponent {
   }
 
   editarOferta(id: number) {
-    // Implementar lógica de edición
-    console.log('Editar oferta:', id);
+    this.router.navigate(['/dashboard/editar-oferta', id]);
   }
 }

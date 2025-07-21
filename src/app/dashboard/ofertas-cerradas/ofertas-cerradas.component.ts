@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { OfertasService, JobOffer } from '../../services/ofertas.service';
+import { OfertaDetalleModalComponent } from '../ofertas/ofertas-lista/oferta-detalle-modal.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-ofertas-cerradas',
@@ -16,23 +19,53 @@ export class OfertasCerradasComponent {
   filtroRango = '';
   filtroSalario: number | null = null;
 
-  ofertasOriginales = [
-    { cargo: 'Analista UI/UX', empresa: 'Creativa Studio', salario: '$2.500.000', ubicacion: 'Bogotá', rango: 'Junior' },
-    { cargo: 'Back-End', empresa: 'CodeWorks', salario: '$4.000.000', ubicacion: 'Medellín', rango: 'Senior' },
-    { cargo: 'Comercial', empresa: 'VentasPro', salario: '$3.200.000', ubicacion: 'Cali', rango: 'Junior' }
-  ];
+  ofertas: JobOffer[] = [];
+  ofertasOriginales: JobOffer[] = [];
 
-  ofertas = [...this.ofertasOriginales];
+  constructor(private ofertasService: OfertasService, private dialog: MatDialog) {
+    this.cargarOfertas();
+  }
+
+  cargarOfertas() {
+    this.ofertasService.getOfertas().subscribe({
+      next: (data) => {
+        this.ofertasOriginales = data.filter(oferta => oferta.status === 'closed');
+        this.ofertas = [...this.ofertasOriginales];
+      },
+      error: (error) => {
+        console.error('Error al cargar ofertas cerradas:', error);
+      }
+    });
+  }
 
   aplicarFiltros() {
     this.ofertas = this.ofertasOriginales.filter(oferta => {
-      const salario = parseInt(oferta.salario.replace(/\D/g, ''), 10);
+      let salario = 0;
+      if (typeof oferta.salary === 'string') {
+        salario = parseInt((oferta.salary as string).replace(/\D/g, ''), 10);
+      } else if (typeof oferta.salary === 'number') {
+        salario = oferta.salary;
+      }
       return (
-        (!this.filtroPalabra || oferta.cargo.toLowerCase().includes(this.filtroPalabra.toLowerCase())) &&
-        (!this.filtroCargo || oferta.cargo === this.filtroCargo) &&
-        (!this.filtroRango || oferta.rango === this.filtroRango) &&
+        (!this.filtroPalabra || oferta.title.toLowerCase().includes(this.filtroPalabra.toLowerCase())) &&
+        (!this.filtroCargo || oferta.title === this.filtroCargo) &&
+        (!this.filtroRango || oferta.rank === this.filtroRango) &&
         (this.filtroSalario === null || salario >= this.filtroSalario)
       );
+    });
+  }
+
+  verDetallesOferta(id: number) {
+    this.ofertasService.getOferta(id).subscribe({
+      next: (oferta) => {
+        this.dialog.open(OfertaDetalleModalComponent, {
+          width: '500px',
+          data: oferta
+        });
+      },
+      error: () => {
+        // Puedes mostrar un mensaje de error si lo deseas
+      }
     });
   }
 }

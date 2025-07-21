@@ -120,8 +120,11 @@
 
           <label>{{ 'roles.descripcionLabel' | translate }}</label>
           <mat-form-field appearance="outline">
-            <input matInput [(ngModel)]="form.description" name="description" required>
+            <input matInput [(ngModel)]="form.description" name="description" required #descripcionInput="ngModel">
             <mat-icon matSuffix class="copy-icon">content_copy</mat-icon>
+            <mat-error *ngIf="descripcionInput.invalid && (descripcionInput.touched || descripcionInput.dirty)">
+              La descripción es obligatoria
+            </mat-error>
           </mat-form-field>
         </div>
 

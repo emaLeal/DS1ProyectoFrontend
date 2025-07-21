@@ -23,10 +23,18 @@
             <mat-label>{{ 'login.document_id' | translate }}</mat-label>
             <mat-icon matPrefix>person</mat-icon>
             <input matInput 
-                   type="number" 
+                   type="text" 
                    class="custom-input" 
                    [placeholder]="'login.document_label' | translate"
-                   formControlName="document_id">
+                   formControlName="document_id"
+                   maxlength="15"
+                   (input)="onDocumentInput($event)">
+            <mat-error *ngIf="form?.get('document_id')?.hasError('required')">
+              Digite un ID
+            </mat-error>
+            <mat-error *ngIf="form?.get('document_id')?.hasError('pattern')">
+              Solo se permiten números
+            </mat-error>
           </mat-form-field>
 
           <mat-form-field class="custom-field">
@@ -45,6 +53,9 @@
                     [attr.aria-pressed]="showPassword">
               <mat-icon>{{ showPassword ? 'visibility' : 'visibility_off' }}</mat-icon>
             </button>
+            <mat-error *ngIf="form?.get('password')?.hasError('required')">
+              Digite la contraseña
+            </mat-error>
           </mat-form-field>
 
           <div *ngIf="loginError" class="error-text" style="margin-bottom: 15px;">
@@ -69,14 +80,26 @@
                   class="login-btn" 
                   type="submit"
                   [disabled]="form?.invalid || !onCaptchaPassed || isLoggingIn">
-            <mat-spinner *ngIf="isLoggingIn" diameter="20" class="button-spinner"></mat-spinner>
-            <span *ngIf="!isLoggingIn">{{ 'login.login_button' | translate }}</span>
-            <span *ngIf="isLoggingIn">Iniciando sesión...</span>
+            <ng-container *ngIf="isLoggingIn; else loginText">
+              <div class="login-btn-center">
+                <mat-spinner diameter="20"></mat-spinner>
+                <span style="margin-left: 12px;">Iniciando sesión...</span>
+              </div>
+            </ng-container>
+            <ng-template #loginText>
+              <span>{{ 'login.login_button' | translate }}</span>
+            </ng-template>
           </button>
 
           <p style="margin-top: 15px;">
             {{ 'login.havent_account' | translate }}
             <a routerLink="/register">{{ 'login.register_now' | translate }}</a>
+          </p>
+
+          <p style="margin-top: 10px; text-align: center;">
+            <a routerLink="/password-recovery" style="color: #1976d2; text-decoration: none; font-size: 14px;">
+              {{ 'login.forgot_password' | translate }}
+            </a>
           </p>
         </mat-card-content>
       </div>
