@@ -397,5 +397,17 @@
     "cancelar": "Cancel",
     "crearUsuario": "Create User",
     "buscarDocumento": "Search Document Number"
+  },
+  "perfil": {
+    "altFoto": "Profile picture",
+    "bienvenida": "HELLO",
+    "documento": "Document",
+    "rol": "Role",
+    "fechaNacimiento": "Date of birth",
+    "genero": "Gender",
+    "celular": "Mobile phone",
+    "telefono": "Phone",
+    "direccion": "Address",
+    "sinDatos": "No user data available."
   }
 }

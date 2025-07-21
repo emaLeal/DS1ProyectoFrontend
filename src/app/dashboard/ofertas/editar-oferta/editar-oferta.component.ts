@@ -182,6 +182,25 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
           </div>
         </div>
 
+        <!-- Estado de la oferta -->
+        <div class="form-section">
+          <h3>
+            <mat-icon>toggle_on</mat-icon>
+            Estado de la oferta
+          </h3>
+          <div class="form-row">
+            <mat-form-field appearance="outline">
+              <mat-label>Estado</mat-label>
+              <mat-select [(ngModel)]="oferta.status" name="status" required>
+                <mat-option value="active">Activa</mat-option>
+                <mat-option value="closed">Cerrada</mat-option>
+                <mat-option value="suspended">Suspendida</mat-option>
+              </mat-select>
+              <mat-icon matSuffix>toggle_on</mat-icon>
+            </mat-form-field>
+          </div>
+        </div>
+
         <mat-card-actions align="end">
           <button mat-button type="button" (click)="cancelar()">
             <mat-icon>close</mat-icon>

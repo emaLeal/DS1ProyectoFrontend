@@ -29,7 +29,8 @@ export const environment = {
     deletePostulants: '/postulant/delete/',
   },
   postulations: {
-    postulate: '/postulation/create/'
+    postulate: '/postulation/create/',
+    getAll: '/postulation/getall/'
   },
   users: {
     getUsers: '/auth/users/getall/'

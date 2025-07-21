@@ -82,13 +82,22 @@ export class UsuariosComponent implements OnInit {
     phone: '',
     document_id: '',
     identification_type: '',
-    birth_date: '',
+    birth_date: null, // antes era ''
     gender: '',
     address: '',
     role_id: '',
     password: '',
     confirm_password: ''
   };
+
+  requisitosPassword = {
+    length: false,
+    hasUpper: false,
+    hasLower: false,
+    hasNumber: false,
+    hasSpecial: false
+  };
+  cumpleRequisitosPassword = false;
 
   constructor(
     private userService: UsuariosService,
@@ -206,6 +215,35 @@ export class UsuariosComponent implements OnInit {
     return `${year}-${month}-${day}`;
   }
 
+  onDocumentInput(event: any) {
+    const value = event.target.value.replace(/[^0-9]/g, '');
+    this.nuevoUsuario.document_id = value;
+  }
+
+  onCellPhoneInput(event: any) {
+    const value = event.target.value.replace(/[^0-9]/g, '');
+    this.nuevoUsuario.cell_phone = value;
+  }
+
+  onCellPhoneChange(value: string) {
+    this.nuevoUsuario.cell_phone = value.replace(/[^0-9]/g, '');
+  }
+
+  onPasswordInput() {
+    const value = this.nuevoUsuario.password || '';
+    this.requisitosPassword.length = value.length >= 8;
+    this.requisitosPassword.hasUpper = /[A-Z]/.test(value);
+    this.requisitosPassword.hasLower = /[a-z]/.test(value);
+    this.requisitosPassword.hasNumber = /[0-9]/.test(value);
+    this.requisitosPassword.hasSpecial = /[!@#$%^&*(),.?":{}|<>_\-+=\[\]\\\/]/.test(value);
+    this.cumpleRequisitosPassword =
+      this.requisitosPassword.length &&
+      this.requisitosPassword.hasUpper &&
+      this.requisitosPassword.hasLower &&
+      this.requisitosPassword.hasNumber &&
+      this.requisitosPassword.hasSpecial;
+  }
+
   validarFormulario(): boolean {
     // Validar campos requeridos
     const camposRequeridos = [
@@ -223,7 +261,7 @@ export class UsuariosComponent implements OnInit {
 
     for (const campo of camposRequeridos) {
       if (!this.nuevoUsuario[campo]) {
-        this.mostrarToast(`El campo ${campo.replace('_', ' ')} es requerido`, 'error');
+        this.mostrarToast(this.traducirCampoRequerido(campo), 'error');
         return false;
       }
     }
@@ -231,7 +269,7 @@ export class UsuariosComponent implements OnInit {
     // Validar contraseñas solo para usuarios nuevos
     if (!this.nuevoUsuario.id) {
       if (!this.nuevoUsuario.password) {
-        this.mostrarToast('La contraseña es requerida', 'error');
+        this.mostrarToast('La contraseña es obligatoria', 'error');
         return false;
       }
       if (this.nuevoUsuario.password !== this.nuevoUsuario.confirm_password) {
@@ -239,7 +277,6 @@ export class UsuariosComponent implements OnInit {
         return false;
       }
     } else {
-      // Para usuarios existentes, validar que las contraseñas coincidan si se proporciona una nueva
       if (this.nuevoUsuario.password || this.nuevoUsuario.confirm_password) {
         if (this.nuevoUsuario.password !== this.nuevoUsuario.confirm_password) {
           this.mostrarToast('Las contraseñas no coinciden', 'error');
@@ -251,23 +288,51 @@ export class UsuariosComponent implements OnInit {
     // Validar formato de email
     const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
     if (!emailRegex.test(this.nuevoUsuario.email)) {
-      this.mostrarToast('El formato del email no es válido', 'error');
+      this.mostrarToast('Ingresa un correo electrónico válido.', 'error');
       return false;
     }
 
-    // Validar teléfono celular
-    if (this.nuevoUsuario.cell_phone && !/^\d{10}$/.test(this.nuevoUsuario.cell_phone)) {
-      this.mostrarToast('El teléfono celular debe tener 10 dígitos', 'error');
+    // Validar documento: solo números, entre 6 y 15 dígitos
+    if (!/^[0-9]{6,15}$/.test(this.nuevoUsuario.document_id)) {
+      this.mostrarToast('El número de documento debe tener entre 6 y 15 dígitos y solo números', 'error');
       return false;
     }
 
-    // Validar teléfono fijo
-    if (this.nuevoUsuario.phone && !/^\d{7,10}$/.test(this.nuevoUsuario.phone)) {
+    // Validar teléfono celular: solo números, al menos 10 dígitos
+    if (!/^[0-9]{10,}$/.test(this.nuevoUsuario.cell_phone)) {
+      this.mostrarToast('El número de celular debe tener al menos 10 dígitos', 'error');
+      return false;
+    }
+
+    // Validar teléfono fijo: solo números, entre 7 y 10 dígitos
+    if (this.nuevoUsuario.phone && !/^[0-9]{7,10}$/.test(this.nuevoUsuario.phone)) {
       this.mostrarToast('El teléfono fijo debe tener entre 7 y 10 dígitos', 'error');
       return false;
     }
 
+    // Validar dirección: al menos 5 caracteres
+    if (this.nuevoUsuario.address && this.nuevoUsuario.address.length < 5) {
+      this.mostrarToast('La dirección debe tener al menos 5 caracteres', 'error');
+      return false;
+    }
+
     return true;
+  }
+
+  traducirCampoRequerido(campo: string): string {
+    const traducciones: { [key: string]: string } = {
+      name: 'El nombre es obligatorio',
+      last_name: 'El apellido es obligatorio',
+      email: 'El correo electrónico es obligatorio',
+      document_id: 'El número de documento es obligatorio',
+      identification_type: 'El tipo de documento es obligatorio',
+      role_id: 'El rol es obligatorio',
+      birth_date: 'La fecha de nacimiento es obligatoria',
+      gender: 'El género es obligatorio',
+      cell_phone: 'El número de celular es obligatorio',
+      address: 'La dirección es obligatoria'
+    };
+    return traducciones[campo] || `El campo ${campo.replace('_', ' ')} es obligatorio`;
   }
 
   obtenerMensajeError(error: any): string {
@@ -314,7 +379,7 @@ export class UsuariosComponent implements OnInit {
       phone: '',
       document_id: '',
       identification_type: '',
-      birth_date: '',
+      birth_date: null, // antes era ''
       gender: '',
       address: '',
       role_id: '',
@@ -431,7 +496,21 @@ export class UsuariosComponent implements OnInit {
     });
   }
 
+  esCelularValido(valor: string): boolean {
+    return /^[0-9]{10,}$/.test(valor);
+  }
 
+  esDocumentoValido(valor: string): boolean {
+    return /^[0-9]{6,15}$/.test(valor);
+  }
+
+  esTelefonoFijoValido(valor: string): boolean {
+    return /^[0-9]{7,10}$/.test(valor);
+  }
+
+  onPhoneChange(value: string) {
+    this.nuevoUsuario.phone = value.replace(/[^0-9]/g, '');
+  }
 
   verDetalles(usuario: any) {
     const dialogRef = this.dialog.open(UserDetailsModalComponent, {
@@ -448,5 +527,11 @@ export class UsuariosComponent implements OnInit {
         }
       }
     });
+  }
+
+  blockNonNumeric(event: KeyboardEvent) {
+    if (!/[0-9]/.test(event.key) && event.key !== 'Backspace' && event.key !== 'Tab' && event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') {
+      event.preventDefault();
+    }
   }
 }

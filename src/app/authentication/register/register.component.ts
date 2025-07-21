@@ -21,6 +21,7 @@ import { MatOptionModule } from '@angular/material/core';
 import { MatRadioModule } from '@angular/material/radio';
 import { AuthService } from '../auth.service';
 import { firstValueFrom } from 'rxjs';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 interface RegisterResponse {
   success: boolean;
@@ -43,7 +44,8 @@ interface RegisterResponse {
     MatSelectModule,
     MatOptionModule,
     MatRadioModule,
-    RouterModule
+    RouterModule,
+    MatSnackBarModule
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
@@ -88,7 +90,8 @@ export class RegisterComponent extends TranslateLogic implements OnInit, AfterVi
     private authService: AuthService,
     private zone: NgZone,
     translate: TranslateService,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ) {
     super(translate);
   }
@@ -112,7 +115,7 @@ export class RegisterComponent extends TranslateLogic implements OnInit, AfterVi
       name: ['', [Validators.required, Validators.minLength(2)]],
       last_name: ['', [Validators.required, Validators.minLength(2)]],
       identification_type: ['', [Validators.required]],
-      document_id: ['', [Validators.required, Validators.pattern('^[0-9]{6,12}$')]],
+      document_id: ['', [Validators.required, Validators.pattern('^[0-9]{6,15}$')]],
       birth_date: ['', [Validators.required]],
       gender: ['', [Validators.required]]
     });
@@ -132,7 +135,7 @@ export class RegisterComponent extends TranslateLogic implements OnInit, AfterVi
     // Formulario de información de contacto
     this.contactInfoForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      cell_phone: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
+      cell_phone: ['', [Validators.required, Validators.pattern('^[0-9]{10,}$')]],
       phone: ['', [Validators.required, Validators.pattern('^[0-9]{7,10}$')]],
       address: ['', [Validators.required, Validators.minLength(5)]]
     });
@@ -351,6 +354,14 @@ export class RegisterComponent extends TranslateLogic implements OnInit, AfterVi
     }
   }
 
+  onDocumentInputRegister(event: any) {
+    // Elimina cualquier caracter que no sea número
+    const value = event.target.value.replace(/[^0-9]/g, '');
+    if (this.personalInfoForm) {
+      this.personalInfoForm.get('document_id')?.setValue(value, { emitEvent: false });
+    }
+  }
+
   debugFormState(): void {
     console.log('Estado del formulario:', {
       formValid: this.personalInfoForm.valid,
@@ -456,11 +467,60 @@ export class RegisterComponent extends TranslateLogic implements OnInit, AfterVi
         console.log('Enviando datos del formulario:', formData);
         const response = await firstValueFrom(this.authService.register(formData));
         console.log('Registro exitoso:', response);
-        alert("Te has registrado correctamente");
+        this.snackBar.open('Te has registrado correctamente', 'Cerrar', {
+          duration: 4000,
+          horizontalPosition: 'center',
+          verticalPosition: 'top'
+        });
         this.router.navigate(['/login']).then(() => window.location.reload());
-      } catch (error) {
-        console.error('Error en el registro:', error);
-        alert(error);
+      } catch (error: any) {
+        let errorMsg = 'Error al registrar usuario';
+        if (error) {
+          if (typeof error === 'string') {
+            errorMsg = error;
+          } else if (error.error) {
+            if (typeof error.error === 'string') {
+              errorMsg = error.error;
+            } else if (typeof error.error === 'object') {
+              const firstKey = Object.keys(error.error)[0];
+              errorMsg = error.error[firstKey];
+              if (Array.isArray(errorMsg)) {
+                errorMsg = errorMsg[0];
+              }
+            }
+          } else if (error.message) {
+            errorMsg = error.message;
+          }
+        }
+        // Diccionario de traducciones para errores comunes
+        const errorTranslations: { [key: string]: { es: string, en: string } } = {
+          'Enter a valid email address.': {
+            es: 'Ingresa un correo electrónico válido.',
+            en: 'Enter a valid email address.'
+          },
+          'This field may not be blank.': {
+            es: 'Este campo no puede estar vacío.',
+            en: 'This field may not be blank.'
+          },
+          'A user with that email already exists.': {
+            es: 'Ya existe un usuario con ese correo electrónico.',
+            en: 'A user with that email already exists.'
+          },
+          // Agrega más mensajes según los que recibas del backend
+        };
+        const userLang = this.translate?.currentLang === 'en' ? 'en' : 'es';
+        if (errorTranslations[errorMsg]) {
+          if (userLang === 'en' || userLang === 'es') {
+            errorMsg = errorTranslations[errorMsg][userLang] || errorMsg;
+          } else {
+            errorMsg = errorTranslations[errorMsg]['es'];
+          }
+        }
+        this.snackBar.open(errorMsg, 'Cerrar', {
+          duration: 4000,
+          horizontalPosition: 'center',
+          verticalPosition: 'top'
+        });
       }
     } else {
       console.log('Formulario inválido o captcha no completado:', {

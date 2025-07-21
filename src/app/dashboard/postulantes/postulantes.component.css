@@ -73,3 +73,11 @@
   background-color: #0045cc;
   color: white;
 }
+
+.tabla-scroll {
+  overflow-x: auto;
+  width: 100%;
+}
+table.mat-table {
+  min-width: 1200px;
+}

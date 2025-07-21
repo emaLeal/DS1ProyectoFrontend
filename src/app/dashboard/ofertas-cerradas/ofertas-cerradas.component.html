@@ -36,17 +36,17 @@
 
   <section class="ofertas-listado">
     <div class="oferta-card" *ngFor="let oferta of ofertas">
-      <h4>{{ oferta.cargo }}</h4>
-      <p><strong>{{ 'ofertas-cerradas.Empresa' | translate }}:</strong> {{ oferta.empresa }}</p>
-      <p><strong>{{ 'ofertas-cerradas.Salario' | translate }}:</strong> {{ oferta.salario }}</p>
-      <p><strong>{{ 'ofertas-cerradas.Ubicacion' | translate }}:</strong> {{ oferta.ubicacion }}</p>
+      <h4>{{ oferta.title }}</h4>
+      <p><strong>{{ 'ofertas-cerradas.Salario' | translate }}:</strong> {{ oferta.salary | currency:'COP':'symbol-narrow':'1.0-0' }}</p>
+      <p><strong>{{ 'ofertas-cerradas.TipoCargo' | translate }}:</strong> {{ oferta.job_type }}</p>
+      <p><strong>{{ 'ofertas-cerradas.Rango' | translate }}:</strong> {{ oferta.rank }}</p>
       <div class="botones">
-        <button class="detalle-btn">
+        <button class="detalle-btn" (click)="verDetallesOferta(oferta.id!)">
           {{ 'ofertas-cerradas.VerDetalles' | translate }}
         </button>
-        <button class="postular-btn" disabled>
+        <span class="cerrada-label">
           {{ 'ofertas-cerradas.OfertaCerrada' | translate }}
-        </button>
+        </span>
       </div>
     </div>
   </section>

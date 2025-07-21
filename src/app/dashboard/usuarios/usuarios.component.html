@@ -161,53 +161,116 @@
             <div class="form-row">
               <mat-form-field appearance="outline" class="form-col">
                 <mat-label>{{ 'usuarios.nombre' | translate }}</mat-label>
-                <input matInput [(ngModel)]="nuevoUsuario.name" name="name" required>
+                <input matInput
+                       [(ngModel)]="nuevoUsuario.name"
+                       name="name"
+                       required
+                       minlength="2"
+                       #nameInput="ngModel">
                 <mat-icon matSuffix>badge</mat-icon>
+                <mat-error *ngIf="nameInput.invalid && (nameInput.touched || nameInput.dirty)">
+                  <ng-container *ngIf="!nuevoUsuario.name">
+                    El nombre es obligatorio
+                  </ng-container>
+                  <ng-container *ngIf="nuevoUsuario.name && nuevoUsuario.name.length < 2">
+                    El nombre debe tener al menos 2 caracteres
+                  </ng-container>
+                </mat-error>
               </mat-form-field>
 
               <mat-form-field appearance="outline" class="form-col">
                 <mat-label>{{ 'usuarios.apellido' | translate }}</mat-label>
-                <input matInput [(ngModel)]="nuevoUsuario.last_name" name="last_name" required>
+                <input matInput
+                       [(ngModel)]="nuevoUsuario.last_name"
+                       name="last_name"
+                       required
+                       minlength="2"
+                       #lastNameInput="ngModel">
                 <mat-icon matSuffix>badge</mat-icon>
+                <mat-error *ngIf="lastNameInput.invalid && (lastNameInput.touched || lastNameInput.dirty)">
+                  <ng-container *ngIf="!nuevoUsuario.last_name">
+                    El apellido es obligatorio
+                  </ng-container>
+                  <ng-container *ngIf="nuevoUsuario.last_name && nuevoUsuario.last_name.length < 2">
+                    El apellido debe tener al menos 2 caracteres
+                  </ng-container>
+                </mat-error>
               </mat-form-field>
             </div>
 
             <div class="form-row">
               <mat-form-field appearance="outline" class="form-col">
                 <mat-label>{{ 'usuarios.tipoDocumento' | translate }}</mat-label>
-                <mat-select [(ngModel)]="nuevoUsuario.identification_type"  name="identification_type" required>
+                <mat-select [(ngModel)]="nuevoUsuario.identification_type"  name="identification_type" required #idTypeInput="ngModel">
                   <mat-option data-testid="identification-CC" value="CC">{{ 'usuarios.cc' | translate }}</mat-option>
                   <mat-option value="CE">{{ 'usuarios.ce' | translate }}</mat-option>
                   <mat-option value="TI">{{ 'usuarios.ti' | translate }}</mat-option>
                   <mat-option value="PP">{{ 'usuarios.pp' | translate }}</mat-option>
                 </mat-select>
                 <mat-icon matSuffix>credit_card</mat-icon>
+                <mat-error *ngIf="idTypeInput.invalid && (idTypeInput.touched || idTypeInput.dirty)">
+                  El tipo de documento es obligatorio
+                </mat-error>
               </mat-form-field>
 
               <mat-form-field appearance="outline" class="form-col">
                 <mat-label>{{ 'usuarios.numeroDocumento' | translate }}</mat-label>
-                <input matInput [(ngModel)]="nuevoUsuario.document_id" name="document_id" required>
+                <input matInput
+                       [(ngModel)]="nuevoUsuario.document_id"
+                       name="document_id"
+                       required
+                       maxlength="15"
+                       minlength="6"
+                       pattern="^[0-9]*$"
+                       (keydown)="blockNonNumeric($event)"
+                       (ngModelChange)="onDocumentInput($event)"
+                       #documentInput="ngModel">
                 <mat-icon matSuffix>pin</mat-icon>
+                <mat-error *ngIf="documentInput.invalid && (documentInput.touched || documentInput.dirty)">
+                  <ng-container *ngIf="!nuevoUsuario.document_id">
+                    El número de documento es obligatorio
+                  </ng-container>
+                  <ng-container *ngIf="nuevoUsuario.document_id && !esDocumentoValido(nuevoUsuario.document_id)">
+                    El número de documento debe tener entre 6 y 15 dígitos y solo números
+                  </ng-container>
+                </mat-error>
               </mat-form-field>
             </div>
 
             <div class="form-row">
               <mat-form-field appearance="outline" class="form-col">
                 <mat-label>{{ 'usuarios.fechaNacimiento' | translate }}</mat-label>
-                <input matInput [matDatepicker]="picker" [(ngModel)]="nuevoUsuario.birth_date" name="birth_date" required>
+                <input matInput
+                       [matDatepicker]="picker"
+                       [(ngModel)]="nuevoUsuario.birth_date"
+                       name="birth_date"
+                       required
+                       #birthDateInput="ngModel"
+                       readonly>
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
                 <mat-icon matSuffix>cake</mat-icon>
+                <mat-error *ngIf="birthDateInput.invalid && (birthDateInput.touched || birthDateInput.dirty)">
+                  <ng-container *ngIf="!nuevoUsuario.birth_date">
+                    La fecha de nacimiento es obligatoria
+                  </ng-container>
+                  <ng-container *ngIf="birthDateInput.errors?.['matDatepickerParse']">
+                    Ingresa una fecha válida
+                  </ng-container>
+                </mat-error>
               </mat-form-field>
 
               <mat-form-field appearance="outline" class="form-col">
                 <mat-label>{{ 'usuarios.genero' | translate }}</mat-label>
-                <mat-select [(ngModel)]="nuevoUsuario.gender" name="gender" required>
-                  <mat-option  data-testid="M" value="M">{{ 'usuarios.masculino' | translate }}</mat-option>
+                <mat-select [(ngModel)]="nuevoUsuario.gender" name="gender" required #genderInput="ngModel">
+                  <mat-option data-testid="M" value="M">{{ 'usuarios.masculino' | translate }}</mat-option>
                   <mat-option value="F">{{ 'usuarios.femenino' | translate }}</mat-option>
                   <mat-option value="O">{{ 'usuarios.otro' | translate }}</mat-option>
                 </mat-select>
                 <mat-icon matSuffix>wc</mat-icon>
+                <mat-error *ngIf="genderInput.invalid && (genderInput.touched || genderInput.dirty)">
+                  El género es obligatorio
+                </mat-error>
               </mat-form-field>
             </div>
           </div>
@@ -221,28 +284,89 @@
             <div class="form-row">
               <mat-form-field appearance="outline" class="form-col">
                 <mat-label>Email</mat-label>
-                <input matInput type="email" [(ngModel)]="nuevoUsuario.email" name="email" required>
+                <input matInput
+                       type="email"
+                       [(ngModel)]="nuevoUsuario.email"
+                       name="email"
+                       required
+                       email
+                       #emailInput="ngModel">
                 <mat-icon matSuffix>email</mat-icon>
+                <mat-error *ngIf="emailInput.invalid && (emailInput.touched || emailInput.dirty)">
+                  <ng-container *ngIf="!nuevoUsuario.email">
+                    El correo electrónico es obligatorio
+                  </ng-container>
+                  <ng-container *ngIf="nuevoUsuario.email && emailInput.errors?.['email']">
+                    Ingresa un correo electrónico válido.
+                  </ng-container>
+                </mat-error>
               </mat-form-field>
 
               <mat-form-field appearance="outline" class="form-col">
                 <mat-label>{{ 'usuarios.telefonoCelular' | translate }}</mat-label>
-                <input matInput [(ngModel)]="nuevoUsuario.cell_phone" name="cell_phone" required>
+                <input matInput
+                       [(ngModel)]="nuevoUsuario.cell_phone"
+                       name="cell_phone"
+                       required
+                       maxlength="15"
+                       minlength="10"
+                       pattern="^[0-9]*$"
+                       (keydown)="blockNonNumeric($event)"
+                       (ngModelChange)="onCellPhoneChange($event)"
+                       #cellPhoneInput="ngModel">
                 <mat-icon matSuffix>phone</mat-icon>
+                <mat-error *ngIf="cellPhoneInput.invalid && (cellPhoneInput.touched || cellPhoneInput.dirty)">
+                  <ng-container *ngIf="!nuevoUsuario.cell_phone">
+                    El número de celular es obligatorio
+                  </ng-container>
+                  <ng-container *ngIf="nuevoUsuario.cell_phone && !esCelularValido(nuevoUsuario.cell_phone)">
+                    El número de celular debe tener al menos 10 dígitos y solo números
+                  </ng-container>
+                </mat-error>
               </mat-form-field>
             </div>
 
             <div class="form-row">
               <mat-form-field appearance="outline" class="form-col">
                 <mat-label>{{ 'usuarios.telefonoFijo' | translate }}</mat-label>
-                <input matInput [(ngModel)]="nuevoUsuario.phone" name="phone">
+                <input matInput
+                       [(ngModel)]="nuevoUsuario.phone"
+                       name="phone"
+                       required
+                       maxlength="10"
+                       minlength="7"
+                       pattern="^[0-9]*$"
+                       (keydown)="blockNonNumeric($event)"
+                       (ngModelChange)="onPhoneChange($event)"
+                       #phoneInput="ngModel">
                 <mat-icon matSuffix>phone_in_talk</mat-icon>
+                <mat-error *ngIf="phoneInput.invalid && (phoneInput.touched || phoneInput.dirty)">
+                  <ng-container *ngIf="!nuevoUsuario.phone">
+                    El teléfono fijo es obligatorio
+                  </ng-container>
+                  <ng-container *ngIf="nuevoUsuario.phone && !esTelefonoFijoValido(nuevoUsuario.phone)">
+                    El teléfono fijo debe tener entre 7 y 10 dígitos y solo números
+                  </ng-container>
+                </mat-error>
               </mat-form-field>
 
               <mat-form-field appearance="outline" class="form-col">
                 <mat-label>{{ 'usuarios.direccion' | translate }}</mat-label>
-                <input matInput [(ngModel)]="nuevoUsuario.address" name="address" required>
+                <input matInput
+                       [(ngModel)]="nuevoUsuario.address"
+                       name="address"
+                       required
+                       minlength="5"
+                       #addressInput="ngModel">
                 <mat-icon matSuffix>home</mat-icon>
+                <mat-error *ngIf="addressInput.invalid && (addressInput.touched || addressInput.dirty)">
+                  <ng-container *ngIf="!nuevoUsuario.address">
+                    La dirección es obligatoria
+                  </ng-container>
+                  <ng-container *ngIf="nuevoUsuario.address && nuevoUsuario.address.length < 5">
+                    La dirección debe tener al menos 5 caracteres
+                  </ng-container>
+                </mat-error>
               </mat-form-field>
             </div>
           </div>
@@ -256,27 +380,80 @@
             <div class="form-row">
               <mat-form-field appearance="outline" class="form-col">
                 <mat-label>{{ 'usuarios.rol' | translate }}</mat-label>
-                <mat-select [(ngModel)]="nuevoUsuario.role_id" name="role" required>
+                <mat-select [(ngModel)]="nuevoUsuario.role_id" name="role" required #roleInput="ngModel">
                   <mat-option *ngFor="let rol of roles" [value]="rol.id.toString()">
                     {{rol.description}}
                   </mat-option>
                 </mat-select>
                 <mat-icon matSuffix>security</mat-icon>
+                <mat-error *ngIf="roleInput.invalid && (roleInput.touched || roleInput.dirty)">
+                  El rol es obligatorio
+                </mat-error>
               </mat-form-field>
             </div>
 
             <div class="form-row">
               <mat-form-field appearance="outline" class="form-col">
                 <mat-label>{{ 'usuarios.contrasena' | translate }}</mat-label>
-                <input matInput type="password" [(ngModel)]="nuevoUsuario.password" name="password" required>
+                <input matInput
+                       type="password"
+                       [(ngModel)]="nuevoUsuario.password"
+                       name="password"
+                       required
+                       (ngModelChange)="onPasswordInput()"
+                       #passwordInput="ngModel">
                 <mat-icon matSuffix>lock</mat-icon>
+                <mat-error *ngIf="passwordInput.invalid && (passwordInput.touched || passwordInput.dirty)">
+                  <ng-container *ngIf="!nuevoUsuario.password">
+                    La contraseña es obligatoria
+                  </ng-container>
+                  <ng-container *ngIf="nuevoUsuario.password && !cumpleRequisitosPassword">
+                    La contraseña no cumple con los requisitos de seguridad
+                  </ng-container>
+                </mat-error>
               </mat-form-field>
 
               <mat-form-field appearance="outline" class="form-col">
                 <mat-label>{{ 'usuarios.confirmarContrasena' | translate }}</mat-label>
-                <input matInput type="password" [(ngModel)]="nuevoUsuario.confirm_password" name="confirm_password" required>
+                <input matInput
+                       type="password"
+                       [(ngModel)]="nuevoUsuario.confirm_password"
+                       name="confirm_password"
+                       required
+                       #confirmPasswordInput="ngModel">
                 <mat-icon matSuffix>lock_clock</mat-icon>
+                <mat-error *ngIf="confirmPasswordInput.invalid && (confirmPasswordInput.touched || confirmPasswordInput.dirty)">
+                  <ng-container *ngIf="!nuevoUsuario.confirm_password">
+                    La confirmación de contraseña es obligatoria
+                  </ng-container>
+                  <ng-container *ngIf="nuevoUsuario.confirm_password && nuevoUsuario.password !== nuevoUsuario.confirm_password">
+                    Las contraseñas no coinciden
+                  </ng-container>
+                </mat-error>
               </mat-form-field>
+
+              <!-- Requisitos de contraseña visuales -->
+              <div class="password-requirements">
+                <p>La contraseña debe tener:</p>
+                <ul>
+                  <li [class.valid-requirement]="requisitosPassword.length" [class.invalid-requirement]="!requisitosPassword.length">
+                    <mat-icon [class.valid-icon]="requisitosPassword.length" [class.invalid-icon]="!requisitosPassword.length">{{ requisitosPassword.length ? 'check_circle' : 'cancel' }}</mat-icon>
+                    <span>8 o más caracteres</span>
+                  </li>
+                  <li [class.valid-requirement]="requisitosPassword.hasNumber && requisitosPassword.hasLower" [class.invalid-requirement]="!(requisitosPassword.hasNumber && requisitosPassword.hasLower)">
+                    <mat-icon [class.valid-icon]="requisitosPassword.hasNumber && requisitosPassword.hasLower" [class.invalid-icon]="!(requisitosPassword.hasNumber && requisitosPassword.hasLower)">{{ (requisitosPassword.hasNumber && requisitosPassword.hasLower) ? 'check_circle' : 'cancel' }}</mat-icon>
+                    <span>Al menos un número y una letra minúscula</span>
+                  </li>
+                  <li [class.valid-requirement]="requisitosPassword.hasUpper" [class.invalid-requirement]="!requisitosPassword.hasUpper">
+                    <mat-icon [class.valid-icon]="requisitosPassword.hasUpper" [class.invalid-icon]="!requisitosPassword.hasUpper">{{ requisitosPassword.hasUpper ? 'check_circle' : 'cancel' }}</mat-icon>
+                    <span>Al menos una letra mayúscula</span>
+                  </li>
+                  <li [class.valid-requirement]="requisitosPassword.hasSpecial" [class.invalid-requirement]="!requisitosPassword.hasSpecial">
+                    <mat-icon [class.valid-icon]="requisitosPassword.hasSpecial" [class.invalid-icon]="!requisitosPassword.hasSpecial">{{ requisitosPassword.hasSpecial ? 'check_circle' : 'cancel' }}</mat-icon>
+                    <span>Al menos un carácter especial (*, .!#$ ...)</span>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
 

@@ -45,13 +45,18 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent extends TranslateLogic implements AfterViewInit {
+  public override translate: TranslateService;
   form?: FormGroup | undefined;
+  recoveryForm?: FormGroup | undefined;
   onCaptchaPassed: boolean = false;
   captchaToken?: string;
   showPassword = false;
   loginError: string = '';
+  recoveryError: string = '';
+  recoverySuccess: string = '';
   isLoading: boolean = true;
   isLoggingIn: boolean = false;
+  isRecoveringPassword: boolean = false;
   isTestMode: boolean = false;
   private snackBar = inject(MatSnackBar);
   constructor(
@@ -65,6 +70,7 @@ export class LoginComponent extends TranslateLogic implements AfterViewInit {
 
   ) {
     super(translate);
+    this.translate = translate;
   }
 
   ngOnInit() {
@@ -77,11 +83,12 @@ export class LoginComponent extends TranslateLogic implements AfterViewInit {
     // Enlazar el callback global para reCAPTCHA
     (window as any).onCaptchaResolved = this.onCaptchaResolved.bind(this);
     this.form = this.formBuilder.group({
-      document_id: ['', Validators.required],
-      password: [
-        '',
-        [Validators.required,],
-      ],
+      document_id: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
+      password: ['', Validators.required],
+    });
+
+    this.recoveryForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
     });
 
     // Simular tiempo de carga inicial
@@ -104,6 +111,14 @@ export class LoginComponent extends TranslateLogic implements AfterViewInit {
   onCaptchaResolved(token: string) {
     this.onCaptchaPassed = true;
     this.captchaToken = token;
+  }
+
+  onDocumentInput(event: any) {
+    // Elimina cualquier caracter que no sea número
+    const value = event.target.value.replace(/[^0-9]/g, '');
+    if (this.form) {
+      this.form.get('document_id')?.setValue(value, { emitEvent: false });
+    }
   }
 
   isAuthenticated(): boolean {
@@ -164,4 +179,8 @@ export class LoginComponent extends TranslateLogic implements AfterViewInit {
   togglePasswordVisibility(): void {
     this.showPassword = !this.showPassword;
   }
+
+
+
+
 }

@@ -61,8 +61,10 @@
 
           <mat-form-field class="custom-field">
             <mat-label>{{ 'register.id' | translate }}</mat-label>
-            <input matInput type="number" class="custom-input"
-              [placeholder]="'register.id_label' | translate" formControlName="document_id">
+            <input matInput type="text" class="custom-input"
+              [placeholder]="'register.id_label' | translate" formControlName="document_id"
+              maxlength="15"
+              (input)="onDocumentInputRegister($event)">
             <mat-icon matPrefix>key</mat-icon>
             <mat-icon matSuffix *ngIf="personalInfoForm.get('document_id')?.valid" color="primary">check_circle</mat-icon>
             <mat-icon matSuffix *ngIf="personalInfoForm.get('document_id')?.invalid && personalInfoForm.get('document_id')?.touched" color="warn">error</mat-icon>
@@ -70,7 +72,7 @@
               {{ 'register.id_required' | translate }}
             </mat-error>
             <mat-error *ngIf="personalInfoForm.get('document_id')?.errors?.['pattern']">
-              {{ 'register.id_invalid' | translate }}
+              El número de documento debe tener entre 6 y 15 dígitos y solo números
             </mat-error>
           </mat-form-field>
 
@@ -254,23 +256,23 @@
             <p>{{ 'register.password_rules_intro' | translate }}</p>
             <ul>
               <li [class.valid-requirement]="requisitos.length" [class.invalid-requirement]="!requisitos.length">
-                <mat-icon [class.valid-icon]="requisitos.length" [class.invalid-icon]="!requisitos.length">cancel</mat-icon>
+                <mat-icon [class.valid-icon]="requisitos.length" [class.invalid-icon]="!requisitos.length">{{ requisitos.length ? 'check_circle' : 'cancel' }}</mat-icon>
                 <span>{{ 'register.length' | translate }}</span>
               </li>
               <li [class.valid-requirement]="requisitos.hasNumber && requisitos.hasLower" 
                   [class.invalid-requirement]="!(requisitos.hasNumber && requisitos.hasLower)">
                 <mat-icon [class.valid-icon]="requisitos.hasNumber && requisitos.hasLower" 
-                         [class.invalid-icon]="!(requisitos.hasNumber && requisitos.hasLower)">cancel</mat-icon>
+                         [class.invalid-icon]="!(requisitos.hasNumber && requisitos.hasLower)">{{ (requisitos.hasNumber && requisitos.hasLower) ? 'check_circle' : 'cancel' }}</mat-icon>
                 <span>{{ 'register.number_lower' | translate }}</span>
               </li>
               <li [class.valid-requirement]="requisitos.hasUpper" [class.invalid-requirement]="!requisitos.hasUpper">
                 <mat-icon [class.valid-icon]="requisitos.hasUpper" 
-                         [class.invalid-icon]="!requisitos.hasUpper">cancel</mat-icon>
+                         [class.invalid-icon]="!requisitos.hasUpper">{{ requisitos.hasUpper ? 'check_circle' : 'cancel' }}</mat-icon>
                 <span>{{ 'register.upper' | translate }}</span>
               </li>
               <li [class.valid-requirement]="requisitos.hasSpecial" [class.invalid-requirement]="!requisitos.hasSpecial">
                 <mat-icon [class.valid-icon]="requisitos.hasSpecial" 
-                         [class.invalid-icon]="!requisitos.hasSpecial">cancel</mat-icon>
+                         [class.invalid-icon]="!requisitos.hasSpecial">{{ requisitos.hasSpecial ? 'check_circle' : 'cancel' }}</mat-icon>
                 <span>{{ 'register.special' | translate }}</span>
               </li>
             </ul>
