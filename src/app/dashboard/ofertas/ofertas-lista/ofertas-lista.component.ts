@@ -19,6 +19,7 @@ import { RolesService, Role } from '../../roles/roles.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { OfertasService, JobOffer } from '../../../services/ofertas.service';
 import { ConfirmDialogComponent } from '../../usuarios/confirm-dialog.component';
+import { OfertaDetalleModalComponent } from './oferta-detalle-modal.component';
 
 
 @Component({
@@ -39,6 +40,7 @@ import { ConfirmDialogComponent } from '../../usuarios/confirm-dialog.component'
     MatDatepickerModule,
     MatNativeDateModule,
     MatTooltipModule,
+    FormsModule, // <--- Agregado para ngModel
     // UserDetailsModalCompozent
   ],
   templateUrl: './ofertas-lista.component.html',
@@ -59,6 +61,9 @@ export class OfertasListaComponent implements OnInit {
   toastClass: string = '';
   mostrarFormulario = false;
   cargando = false;
+  filtroDirectorId: string = '';
+  user: any = null;
+  isAdmin: boolean = false;
 
     constructor(
     private ofertasService: OfertasService,
@@ -68,6 +73,8 @@ export class OfertasListaComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.user = JSON.parse(localStorage.getItem('user_data')!);
+    this.isAdmin = this.user?.role === 1 || this.user?.role?.id === 1;
     this.cargarUsuarios();
     this.cargarRoles();
     this.cargarOfertas();
@@ -89,7 +96,12 @@ export class OfertasListaComponent implements OnInit {
       this.cargando = true;
     this.ofertasService.getOfertas().subscribe({
       next: (data) => {
-        this.ofertas = data;
+        // Filtrado según rol
+        if (this.isAdmin) {
+          this.ofertas = data;
+        } else {
+          this.ofertas = data.filter(oferta => oferta.talent_director_document === this.user.document_id);
+        }
         this.cargando = false;
         console.log("Ofertas recibidas:", this.ofertas);
       },
@@ -123,7 +135,8 @@ export class OfertasListaComponent implements OnInit {
         (!this.filtroPalabra || oferta.title.toLowerCase().includes(this.filtroPalabra.toLowerCase())) &&
         (!this.filtroCargo || oferta.title === this.filtroCargo) &&
         (!this.filtroRango || rango === this.filtroRango) &&
-        (this.filtroSalario === null || salario >= this.filtroSalario)
+        (this.filtroSalario === null || salario >= this.filtroSalario) &&
+        (!this.filtroDirectorId || oferta.talent_director_document === this.filtroDirectorId)
       );
     });
   }
@@ -166,6 +179,20 @@ export class OfertasListaComponent implements OnInit {
             this.cargando = false;
           }
         });
+      }
+    });
+  }
+
+  verDetallesOferta(id: number) {
+    this.ofertasService.getOferta(id).subscribe({
+      next: (oferta) => {
+        this.dialog.open(OfertaDetalleModalComponent, {
+          width: '500px',
+          data: oferta
+        });
+      },
+      error: (error) => {
+        this.mostrarToast('Error al cargar detalles de la oferta', 'error');
       }
     });
   }

@@ -9,10 +9,6 @@
           <p>{{ 'postulantes.Subtitulo' | translate }}</p>
         </div>
         <div class="actions-section">
-          <button mat-raised-button color="primary">
-            <mat-icon>add</mat-icon>
-            {{ 'postulantes.NuevoPostulante' | translate }}
-          </button>
         </div>
       </mat-card-content>
     </mat-card>
@@ -24,27 +20,12 @@
       <mat-card-content>
         <div class="filters-grid">
           <mat-form-field appearance="outline">
-            <mat-label>{{ 'postulantes.Buscar' | translate }}</mat-label>
-            <input matInput [placeholder]="'postulantes.PlaceholderBuscar' | translate">
-            <mat-icon matSuffix>search</mat-icon>
+            <mat-label>Filtrar por nombre</mat-label>
+            <input matInput (input)="onFiltroNombreChange($event)" placeholder="Nombre o apellido">
           </mat-form-field>
-
           <mat-form-field appearance="outline">
-            <mat-label>{{ 'postulantes.Estado' | translate }}</mat-label>
-            <mat-select>
-              <mat-option value="all">{{ 'postulantes.Todos' | translate }}</mat-option>
-              <mat-option value="active">{{ 'postulantes.Activos' | translate }}</mat-option>
-              <mat-option value="inactive">{{ 'postulantes.Inactivos' | translate }}</mat-option>
-            </mat-select>
-          </mat-form-field>
-
-          <mat-form-field appearance="outline">
-            <mat-label>{{ 'postulantes.Oferta' | translate }}</mat-label>
-            <mat-select>
-              <mat-option value="all">{{ 'postulantes.Todas' | translate }}</mat-option>
-              <mat-option value="dev">{{ 'postulantes.DesarrolladorFrontend' | translate }}</mat-option>
-              <mat-option value="analyst">{{ 'postulantes.AnalistaDatos' | translate }}</mat-option>
-            </mat-select>
+            <mat-label>Filtrar por cédula</mat-label>
+            <input matInput (input)="onFiltroCedulaChange($event)" placeholder="Cédula">
           </mat-form-field>
         </div>
       </mat-card-content>
@@ -55,67 +36,34 @@
   <div class="table-section fade-in-up delay-2">
     <mat-card>
       <mat-card-content>
-        <table mat-table [dataSource]="postulantes" class="mat-elevation-z8">
-          <!-- Foto Column -->
-          <ng-container matColumnDef="foto">
-            <th mat-header-cell *matHeaderCellDef>{{ 'postulantes.Foto' | translate }}</th>
-            <td mat-cell *matCellDef="let postulante" class="fade-in-left">
-              <img [src]="postulante.foto" alt="{{ 'postulantes.FotoAlt' | translate }}" class="postulante-foto">
-            </td>
-          </ng-container>
-
+        <table mat-table [dataSource]="postulantesFiltrados" class="mat-elevation-z8">
           <!-- Nombre Column -->
           <ng-container matColumnDef="nombre">
-            <th mat-header-cell *matHeaderCellDef>{{ 'postulantes.Nombre' | translate }}</th>
-            <td mat-cell *matCellDef="let postulante" class="fade-in-left delay-1">
-              {{postulante.nombre}} {{postulante.apellido}}
-            </td>
+            <th mat-header-cell *matHeaderCellDef>Nombre</th>
+            <td mat-cell *matCellDef="let postulante">{{postulante.nombre}}</td>
           </ng-container>
-
-          <!-- Email Column -->
+          <ng-container matColumnDef="apellido">
+            <th mat-header-cell *matHeaderCellDef>Apellido</th>
+            <td mat-cell *matCellDef="let postulante">{{postulante.apellido}}</td>
+          </ng-container>
+          <ng-container matColumnDef="document_id">
+            <th mat-header-cell *matHeaderCellDef>Cédula</th>
+            <td mat-cell *matCellDef="let postulante">{{postulante.document_id}}</td>
+          </ng-container>
           <ng-container matColumnDef="email">
             <th mat-header-cell *matHeaderCellDef>Email</th>
-            <td mat-cell *matCellDef="let postulante" class="fade-in-left delay-2">
-              {{postulante.email}}
-            </td>
+            <td mat-cell *matCellDef="let postulante">{{postulante.email}}</td>
           </ng-container>
-
-          <!-- Oferta Column -->
           <ng-container matColumnDef="oferta">
-            <th mat-header-cell *matHeaderCellDef>{{ 'postulantes.Oferta' | translate }}</th>
-            <td mat-cell *matCellDef="let postulante" class="fade-in-left delay-3">
-              <span class="oferta-badge">{{postulante.oferta}}</span>
-            </td>
+            <th mat-header-cell *matHeaderCellDef>Oferta</th>
+            <td mat-cell *matCellDef="let postulante">{{postulante.oferta}}</td>
           </ng-container>
-
-          <!-- Estado Column -->
-          <ng-container matColumnDef="estado">
-            <th mat-header-cell *matHeaderCellDef>{{ 'postulantes.Estado' | translate }}</th>
-            <td mat-cell *matCellDef="let postulante" class="fade-in-left delay-4">
-              <span class="estado-badge" [class.active]="postulante.estado === 'Activo'">
-                {{postulante.estado}}
-              </span>
-            </td>
+          <ng-container matColumnDef="fecha_postulacion">
+            <th mat-header-cell *matHeaderCellDef>Fecha Postulación</th>
+            <td mat-cell *matCellDef="let postulante">{{postulante.fecha_postulacion | date:'yyyy-MM-dd'}}</td>
           </ng-container>
-
-          <!-- Actions Column -->
-          <ng-container matColumnDef="acciones">
-            <th mat-header-cell *matHeaderCellDef>{{ 'postulantes.Acciones' | translate }}</th>
-            <td mat-cell *matCellDef="let postulante" class="fade-in-left delay-5">
-              <button mat-icon-button color="primary" matTooltip="{{ 'postulantes.VerDetalles' | translate }}">
-                <mat-icon>visibility</mat-icon>
-              </button>
-              <button mat-icon-button color="accent" matTooltip="{{ 'postulantes.Editar' | translate }}">
-                <mat-icon>edit</mat-icon>
-              </button>
-              <button mat-icon-button color="warn" matTooltip="{{ 'postulantes.Eliminar' | translate }}">
-                <mat-icon>delete</mat-icon>
-              </button>
-            </td>
-          </ng-container>
-
-          <tr mat-header-row *matHeaderRowDef="['foto', 'nombre', 'email', 'oferta', 'estado', 'acciones']"></tr>
-          <tr mat-row *matRowDef="let row; columns: ['foto', 'nombre', 'email', 'oferta', 'estado', 'acciones'];"></tr>
+          <tr mat-header-row *matHeaderRowDef="['nombre', 'apellido', 'document_id', 'email', 'oferta', 'fecha_postulacion']"></tr>
+          <tr mat-row *matRowDef="let row; columns: ['nombre', 'apellido', 'document_id', 'email', 'oferta', 'fecha_postulacion'];"></tr>
         </table>
 
         <!-- Pagination -->

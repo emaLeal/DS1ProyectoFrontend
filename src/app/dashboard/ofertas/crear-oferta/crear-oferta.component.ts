@@ -142,7 +142,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
                   <mat-option value="Temporal">{{ 'crear-oferta.Temporal' | translate }}</mat-option>
                   <mat-option value="Prácticas">{{ 'crear-oferta.Practicas' | translate }}</mat-option>
               </mat-select>
-              <mat-error *ngIf="jobType.invalid && (jobType.dirty || jobType.touched)">
+              <mat-error *ngIf="jobType.invalid && (jobType.touched || jobType.dirty || jobType.value === '' || jobType.value == null)">
                 {{ 'crear-oferta.jobTypeRequired' | translate }}
               </mat-error>
               <mat-icon matSuffix>work</mat-icon>
@@ -163,21 +163,47 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
           <div class="form-row">
             <mat-form-field appearance="outline">
               <mat-label>{{ 'crear-oferta.startDate' | translate }}</mat-label>
-              <input matInput [matDatepicker]="startPicker" [(ngModel)]="oferta.start_date" name="start_date" required #startDate="ngModel">
-              <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
-              <mat-datepicker #startPicker></mat-datepicker>
-              <mat-error *ngIf="startDate.invalid && (startDate.dirty || startDate.touched)">
-                {{ 'crear-oferta.startDateRequired' | translate }}
+              <input matInput
+                     [matDatepicker]="pickerInicio"
+                     [(ngModel)]="oferta.start_date"
+                     name="start_date"
+                     required
+                     #fechaInicioInput="ngModel"
+                     (blur)="fechaInicioInput.control.markAsTouched()"
+                     (dateChange)="fechaInicioInput.control.markAsTouched()"
+                     readonly>
+              <mat-datepicker-toggle matSuffix [for]="pickerInicio"></mat-datepicker-toggle>
+              <mat-datepicker #pickerInicio (closed)="fechaInicioInput.control.markAsTouched()"></mat-datepicker>
+              <mat-error *ngIf="fechaInicioInput.invalid && (fechaInicioInput.touched || fechaInicioInput.dirty || !oferta.start_date)">
+                <ng-container *ngIf="!oferta.start_date">
+                  La fecha de inicio es obligatoria
+                </ng-container>
+                <ng-container *ngIf="fechaInicioInput.errors?.['matDatepickerParse']">
+                  Ingresa una fecha válida
+                </ng-container>
               </mat-error>
             </mat-form-field>
 
             <mat-form-field appearance="outline">
               <mat-label>{{ 'crear-oferta.endDate' | translate }}</mat-label>
-              <input matInput [matDatepicker]="endPicker" [(ngModel)]="oferta.end_date" name="end_date" required #endDate="ngModel">
-              <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
-              <mat-datepicker #endPicker></mat-datepicker>
-              <mat-error *ngIf="endDate.invalid && (endDate.dirty || endDate.touched)">
-                {{ 'crear-oferta.endDateRequired' | translate }}
+              <input matInput
+                     [matDatepicker]="pickerFin"
+                     [(ngModel)]="oferta.end_date"
+                     name="end_date"
+                     required
+                     #fechaFinInput="ngModel"
+                     (blur)="fechaFinInput.control.markAsTouched()"
+                     (dateChange)="fechaFinInput.control.markAsTouched()"
+                     readonly>
+              <mat-datepicker-toggle matSuffix [for]="pickerFin"></mat-datepicker-toggle>
+              <mat-datepicker #pickerFin (closed)="fechaFinInput.control.markAsTouched()"></mat-datepicker>
+              <mat-error *ngIf="fechaFinInput.invalid && (fechaFinInput.touched || fechaFinInput.dirty || !oferta.end_date)">
+                <ng-container *ngIf="!oferta.end_date">
+                  La fecha de fin es obligatoria
+                </ng-container>
+                <ng-container *ngIf="fechaFinInput.errors?.['matDatepickerParse']">
+                  Ingresa una fecha válida
+                </ng-container>
               </mat-error>
             </mat-form-field>
           </div>
@@ -328,8 +354,8 @@ export class CrearOfertaComponent implements OnInit {
     other_requirements: '',
     job_type: '',
     salary: 0,
-    start_date: new Date(),
-    end_date: new Date(),
+    start_date: '', // string vacío para cumplir el tipo
+    end_date: '',   // string vacío para cumplir el tipo
     status: 'active'
   };
 
@@ -358,6 +384,13 @@ export class CrearOfertaComponent implements OnInit {
     });
     console.log('CrearOferta - Datos de la oferta:', this.oferta);
     console.log('CrearOferta - Valor del rango:', this.oferta.rank);
+
+    // Asegura que el campo talent_director_document esté presente
+    const userData = localStorage.getItem('user_data');
+    if (userData) {
+      const user = JSON.parse(userData);
+      this.oferta.talent_director_document = user.document_id;
+    }
 
     if (this.validarFormulario()) {
       console.log('CrearOferta - Formulario válido, procediendo a guardar');

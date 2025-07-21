@@ -79,11 +79,8 @@ export class LoginComponent extends TranslateLogic implements AfterViewInit {
     // Enlazar el callback global para reCAPTCHA
     (window as any).onCaptchaResolved = this.onCaptchaResolved.bind(this);
     this.form = this.formBuilder.group({
-      document_id: ['', Validators.required],
-      password: [
-        '',
-        [Validators.required,],
-      ],
+      document_id: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
+      password: ['', Validators.required],
     });
 
     this.recoveryForm = this.formBuilder.group({
@@ -110,6 +107,14 @@ export class LoginComponent extends TranslateLogic implements AfterViewInit {
   onCaptchaResolved(token: string) {
     this.onCaptchaPassed = true;
     this.captchaToken = token;
+  }
+
+  onDocumentInput(event: any) {
+    // Elimina cualquier caracter que no sea número
+    const value = event.target.value.replace(/[^0-9]/g, '');
+    if (this.form) {
+      this.form.get('document_id')?.setValue(value, { emitEvent: false });
+    }
   }
 
   isAuthenticated(): boolean {

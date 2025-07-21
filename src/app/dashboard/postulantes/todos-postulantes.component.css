@@ -1,0 +1,32 @@
+mat-card {
+  width: 900px !important;
+  min-width: 900px !important;
+  max-width: 900px !important;
+  margin: 0 auto;
+}
+
+.tabla-scroll {
+  width: 900px;
+  min-width: 900px;
+  max-width: 900px;
+  overflow-x: auto;
+  overflow-y: auto;
+  max-height: 300px;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  background: #fff;
+}
+
+table.mat-table {
+  width: 900px;
+  min-width: 900px;
+  font-size: 0.85rem;
+}
+
+th.mat-header-cell, td.mat-cell {
+  padding: 3px 6px !important;
+  white-space: nowrap;
+}
+tr.mat-row {
+  height: 24px;
+} 
