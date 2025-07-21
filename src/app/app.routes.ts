@@ -15,10 +15,12 @@ import { PerfilUsuarioComponent } from './dashboard/perfil-usuario/perfil-usuari
 
 import { isAuthenticated, isSuperUser } from './authentication/guards/authentication.guard';
 import { OfertasListaComponent } from './dashboard/ofertas/ofertas-lista/ofertas-lista.component';
+import { ChangePasswordComponent } from './authentication/change-password/change-password.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'change-password/:token', component: ChangePasswordComponent },
   {
     path: 'dashboard',
     component: DashboardComponent,
@@ -49,7 +51,7 @@ export const routes: Routes = [
         canActivate: [isSuperUser] // ✅ Solo para usuarios con rol distinto a 3
       },
       { path: 'agregar', component: AgregarComponent },
-      {path : 'perfil', component: PerfilUsuarioComponent},
+      { path: 'perfil', component: PerfilUsuarioComponent },
       { path: '', component: AgregarComponent },
     ]
   },

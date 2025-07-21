@@ -78,6 +78,10 @@
             {{ 'login.havent_account' | translate }}
             <a routerLink="/register">{{ 'login.register_now' | translate }}</a>
           </p>
+          <p style="margin-top: 15px;">
+            {{ 'login.forgot_password' | translate }}
+            <a (click)="this.forgotPassword()">{{ 'login.reset_password' | translate }}</a>
+          </p>
         </mat-card-content>
       </div>
     </mat-card>
