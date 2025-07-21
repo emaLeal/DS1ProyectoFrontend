@@ -8,7 +8,10 @@
     "welcome_label": "BIENVENIDO",
     "captcha_error_label": "Por favor valida CAPTCHA",
     "havent_account": "¿No tienes una cuenta?",
-    "register_now": "¡Regístrate ahora!"
+    "register_now": "¡Regístrate ahora!",
+    "forgot_password": "¿Olvidaste tu contraseña?",
+    "recover_password": "Recuperar Contraseña",
+    "back_to_login": "Volver al login"
   },
   "register": {
     "welcome_label": "BIENVENIDO",
@@ -60,6 +63,18 @@
     "password_rules_intro": "Tu contraseña debe tener:",
     "password_secure": "Contraseña segura",
     "incorrect": "Las contraseñas no coinciden"
+  },
+  "password_recovery": {
+    "title": "Recuperar Contraseña",
+    "subtitle": "Ingresa tu correo electrónico para recibir instrucciones de recuperación",
+    "email": "Correo Electrónico",
+    "email_label": "Ingresa tu correo electrónico",
+    "email_required": "El correo electrónico es requerido",
+    "email_invalid": "Por favor ingresa un correo electrónico válido",
+    "submit_button": "Enviar Instrucciones",
+    "success_message": "Se han enviado las instrucciones de recuperación a tu correo electrónico",
+    "error_message": "No se pudo enviar las instrucciones. Verifica tu correo electrónico",
+    "loading": "Enviando..."
   },
   "language": {
     "change_to_spanish": "Cambiar a Español",

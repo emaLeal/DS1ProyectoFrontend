@@ -12,6 +12,7 @@ import { CrearOfertaComponent } from './dashboard/ofertas/crear-oferta/crear-ofe
 import { EditarOfertaComponent } from './dashboard/ofertas/editar-oferta/editar-oferta.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { PerfilUsuarioComponent } from './dashboard/perfil-usuario/perfil-usuario.component';
+import { PasswordRecoveryComponent } from './authentication/password-recovery/password-recovery.component';
 
 import { isAuthenticated, isSuperUser } from './authentication/guards/authentication.guard';
 import { OfertasListaComponent } from './dashboard/ofertas/ofertas-lista/ofertas-lista.component';
@@ -19,6 +20,7 @@ import { OfertasListaComponent } from './dashboard/ofertas/ofertas-lista/ofertas
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'password-recovery', component: PasswordRecoveryComponent },
   {
     path: 'dashboard',
     component: DashboardComponent,

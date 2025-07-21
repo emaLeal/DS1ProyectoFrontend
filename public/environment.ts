@@ -4,7 +4,8 @@ export const environment = {
     authentication: {
         login: '/auth/login/',
         register: '/auth/register/',
-        profile: '/auth/get_profile/'
+        profile: '/auth/get_profile/',
+        passwordRecovery: '/auth/password_reset/'
     },
     offers: {
         getOffers: '/offer/getall/',

@@ -42,14 +42,20 @@ import { environment } from '../../../../public/environment';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent extends TranslateLogic implements AfterViewInit {
+  public override translate: TranslateService;
   form?: FormGroup | undefined;
+  recoveryForm?: FormGroup | undefined;
   onCaptchaPassed: boolean = false;
   captchaToken?: string;
   showPassword = false;
   loginError: string = '';
+  recoveryError: string = '';
+  recoverySuccess: string = '';
   isLoading: boolean = true;
   isLoggingIn: boolean = false;
+  isRecoveringPassword: boolean = false;
   isTestMode: boolean = false;
+  showRecoveryForm: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -60,6 +66,7 @@ export class LoginComponent extends TranslateLogic implements AfterViewInit {
     private router: Router
   ) {
     super(translate);
+    this.translate = translate;
   }
 
   ngOnInit() {
@@ -77,6 +84,10 @@ export class LoginComponent extends TranslateLogic implements AfterViewInit {
         '',
         [Validators.required,],
       ],
+    });
+
+    this.recoveryForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
     });
 
     // Simular tiempo de carga inicial
@@ -145,5 +156,40 @@ export class LoginComponent extends TranslateLogic implements AfterViewInit {
 
   togglePasswordVisibility(): void {
     this.showPassword = !this.showPassword;
+  }
+
+  showPasswordRecovery(): void {
+    this.showRecoveryForm = true;
+    this.loginError = '';
+    this.recoveryError = '';
+    this.recoverySuccess = '';
+  }
+
+  backToLogin(): void {
+    this.showRecoveryForm = false;
+    this.recoveryError = '';
+    this.recoverySuccess = '';
+  }
+
+  submitRecovery(): void {
+    if (this.recoveryForm?.valid) {
+      const email = this.recoveryForm.value.email;
+      this.isRecoveringPassword = true;
+      this.recoveryError = '';
+      this.recoverySuccess = '';
+
+      this.authService.passwordRecovery(email).subscribe({
+        next: (response: any) => {
+          this.isRecoveringPassword = false;
+          this.recoverySuccess = this.translate.instant('password_recovery.success_message');
+          this.recoveryForm?.reset();
+        },
+        error: (error) => {
+          this.isRecoveringPassword = false;
+          this.recoveryError = this.translate.instant('password_recovery.error_message');
+          console.error('Error en recuperación de contraseña:', error);
+        }
+      });
+    }
   }
 }

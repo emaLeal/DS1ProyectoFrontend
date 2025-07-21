@@ -6,7 +6,10 @@
         "password_label": "Enter your Password",
         "login_button": "Login",
         "welcome_label": "WELCOME",
-        "captcha_error_label": "Please validate CAPTCHA"
+        "captcha_error_label": "Please validate CAPTCHA",
+        "forgot_password": "Forgot your password?",
+        "recover_password": "Recover Password",
+        "back_to_login": "Back to login"
     },
     "register": {
         "welcome_label":"WELCOME",
@@ -65,6 +68,18 @@
 
 
 
+    },
+    "password_recovery": {
+        "title": "Recover Password",
+        "subtitle": "Enter your email address to receive recovery instructions",
+        "email": "Email Address",
+        "email_label": "Enter your email address",
+        "email_required": "Email address is required",
+        "email_invalid": "Please enter a valid email address",
+        "submit_button": "Send Instructions",
+        "success_message": "Recovery instructions have been sent to your email address",
+        "error_message": "Could not send instructions. Please verify your email address",
+        "loading": "Sending..."
     },
 
  
