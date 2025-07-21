@@ -30,7 +30,7 @@ Chart.register(
 import { ChartConfiguration, ChartType } from 'chart.js';
 import { UsuariosService } from '../usuarios/usuarios.service';
 import { OfertasService } from '../../services/ofertas.service';
-import { PostulantesService } from '../postulantes/postulantes.service';
+import { PostulantesService } from '../../services/postulantes.service';
 
 @Component({
   selector: 'app-graphics',
