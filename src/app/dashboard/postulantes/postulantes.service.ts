@@ -15,6 +15,7 @@ export interface Postulante {
 }
 
 export interface Postulacion {
+  id: number;
   applicant_document: string;
   job_offer_id: number;
   undergraduate_title: string;

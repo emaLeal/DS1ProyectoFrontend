@@ -17,6 +17,7 @@ import { PasswordRecoveryComponent } from './authentication/password-recovery/pa
 import { isAuthenticated, isSuperUser } from './authentication/guards/authentication.guard';
 import { OfertasListaComponent } from './dashboard/ofertas/ofertas-lista/ofertas-lista.component';
 import { TodosPostulantesComponent } from './dashboard/postulantes/todos-postulantes.component';
+import { MisPostulacionesComponent } from './dashboard/postulantes/mis-postulaciones.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -57,6 +58,10 @@ export const routes: Routes = [
       {
         path: 'todos-postulantes',
         component: TodosPostulantesComponent
+      },
+      {
+        path: 'mis-postulaciones',
+        component: MisPostulacionesComponent
       },
     ]
   },
