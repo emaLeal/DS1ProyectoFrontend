@@ -38,6 +38,6 @@ export class AppComponent extends TranslateLogic implements OnInit {
 
   isAuthRoute(): boolean {
     const currentUrl = this.router.url;
-    return currentUrl.includes('/login') || currentUrl.includes('/register');
+    return currentUrl.includes('/login') || currentUrl.includes('/register') || currentUrl.includes('/change-password');
   }
 }

@@ -12,7 +12,7 @@ import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSort } from '@angular/material/sort';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { PostulantesService, Postulacion, UsuarioPostulante, OfertaBasica } from './postulantes.service';
+import { PostulantesService, Postulacion, UsuarioPostulante, OfertaBasica } from '../../services/postulantes.service';
 import { forkJoin } from 'rxjs';
 
 export interface PostulanteTabla {

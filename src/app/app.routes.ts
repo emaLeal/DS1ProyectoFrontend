@@ -12,17 +12,17 @@ import { CrearOfertaComponent } from './dashboard/ofertas/crear-oferta/crear-ofe
 import { EditarOfertaComponent } from './dashboard/ofertas/editar-oferta/editar-oferta.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { PerfilUsuarioComponent } from './dashboard/perfil-usuario/perfil-usuario.component';
-import { PasswordRecoveryComponent } from './authentication/password-recovery/password-recovery.component';
 
 import { isAuthenticated, isSuperUser } from './authentication/guards/authentication.guard';
 import { OfertasListaComponent } from './dashboard/ofertas/ofertas-lista/ofertas-lista.component';
+import { ChangePasswordComponent } from './authentication/change-password/change-password.component';
 import { TodosPostulantesComponent } from './dashboard/postulantes/todos-postulantes.component';
 import { GraphicsComponent } from './dashboard/graphics/graphics.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'password-recovery', component: PasswordRecoveryComponent },
+  { path: 'change-password/:token', component: ChangePasswordComponent },
   {
     path: 'dashboard',
     component: DashboardComponent,

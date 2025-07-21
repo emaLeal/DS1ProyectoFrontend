@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../../public/environment';
+import { environment } from '../../environments/environment';
 import { Observable, forkJoin } from 'rxjs';
 
 export interface Postulante {
@@ -57,17 +57,17 @@ export class PostulantesService {
   }
 
   getPostulaciones(): Observable<Postulacion[]> {
-    const url = environment.baseUrl + '/postulation/getall/';
+    const url = environment.baseUrl + environment.postulations.getAll;
     return this.http.get<Postulacion[]>(url);
   }
 
   getUsuariosPostulantes(): Observable<UsuarioPostulante[]> {
-    const url = environment.baseUrl + '/applicant/getall/';
+    const url = environment.baseUrl + environment.postulants.getPostulants;
     return this.http.get<UsuarioPostulante[]>(url);
   }
 
   getOfertasBasicas(): Observable<OfertaBasica[]> {
-    const url = environment.baseUrl + '/offer/getall/';
+    const url = environment.baseUrl + environment.offers.getOffers;
     return this.http.get<OfertaBasica[]>(url);
   }
 }

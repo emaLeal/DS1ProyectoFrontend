@@ -10,8 +10,25 @@
     "havent_account": "¿No tienes una cuenta?",
     "register_now": "¡Regístrate ahora!",
     "forgot_password": "¿Olvidaste tu contraseña?",
-    "recover_password": "Recuperar Contraseña",
-    "back_to_login": "Volver al login"
+    "reset_password": "Reestablecer contraseña",
+    "loading": "Cargando..."
+  },
+  "forget_password": {
+    "header": "Reestablece tu contraseña",
+    "email_placeholder": "Digita tu correo electronico",
+    "email_label": "Correo Electronico",
+    "reset_password": "Reestablecer contraseña",
+    "error_send": "Hubo un error intentando enviar el correo electronico",
+    "email_sent": "Revisa tu correo electronico para reestablecer tu contraseña"
+  },
+  "change_password": {
+    "password": "Contraseña",
+    "confirm_password": "Confirmar contraseña",
+    "password_label": "Escribe tu nueva contraseña",
+    "confirm_label": "Confirma la nueva contraseña",
+    "reset_password": "Reestablece tu contraseña",
+    "reset_button": "Cambiar contraseña",
+    "change_password_success": "Tu contraseña fue cambiada exitosamente"
   },
   "register": {
     "welcome_label": "BIENVENIDO",

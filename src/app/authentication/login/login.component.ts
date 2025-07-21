@@ -21,7 +21,10 @@ import TranslateLogic from '../../lib/translate/translate.class';
 import { Login } from '../auth.types';
 import { MatCardModule } from '@angular/material/card';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../../public/environment';
+import { environment } from '../../../environments/environment';
+import { MatDialog } from '@angular/material/dialog';
+import { ResetPasswordComponent } from '../reset-password/reset-password.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -55,15 +58,16 @@ export class LoginComponent extends TranslateLogic implements AfterViewInit {
   isLoggingIn: boolean = false;
   isRecoveringPassword: boolean = false;
   isTestMode: boolean = false;
-  showRecoveryForm: boolean = false;
-
+  private snackBar = inject(MatSnackBar);
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private zone: NgZone,
     translate: TranslateService,
     private httpClient: HttpClient,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog,
+
   ) {
     super(translate);
     this.translate = translate;
@@ -133,11 +137,11 @@ export class LoginComponent extends TranslateLogic implements AfterViewInit {
           localStorage.setItem('token', response.access);
           localStorage.setItem('refresh_token', response.refresh);
           localStorage.setItem('captcha-token', this.captchaToken!);
-          
+
           let urlProfile: string = environment.baseUrl + environment.authentication.profile;
-          
-          this.httpClient.get(urlProfile, { 
-            headers: { 'authorization': `Bearer ${response.access}` } 
+
+          this.httpClient.get(urlProfile, {
+            headers: { 'authorization': `Bearer ${response.access}` }
           }).subscribe({
             next: (user) => {
               localStorage.setItem('user_data', JSON.stringify(user));
@@ -159,42 +163,24 @@ export class LoginComponent extends TranslateLogic implements AfterViewInit {
     }
   }
 
+  forgotPassword() {
+    const dialogRef = this.dialog.open(ResetPasswordComponent, {
+      width: '600px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result !== "OK") {
+        this.snackBar.open(this.translate?.instant('forget_password.error_send'), 'X', { duration: 2000 })
+      }
+      this.snackBar.open(this.translate?.instant('forget_password.email_sent'), "X", { duration: 2000 })
+    });
+  }
+
   togglePasswordVisibility(): void {
     this.showPassword = !this.showPassword;
   }
 
-  showPasswordRecovery(): void {
-    this.showRecoveryForm = true;
-    this.loginError = '';
-    this.recoveryError = '';
-    this.recoverySuccess = '';
-  }
 
-  backToLogin(): void {
-    this.showRecoveryForm = false;
-    this.recoveryError = '';
-    this.recoverySuccess = '';
-  }
 
-  submitRecovery(): void {
-    if (this.recoveryForm?.valid) {
-      const email = this.recoveryForm.value.email;
-      this.isRecoveringPassword = true;
-      this.recoveryError = '';
-      this.recoverySuccess = '';
 
-      this.authService.passwordRecovery(email).subscribe({
-        next: (response: any) => {
-          this.isRecoveringPassword = false;
-          this.recoverySuccess = this.translate.instant('password_recovery.success_message');
-          this.recoveryForm?.reset();
-        },
-        error: (error) => {
-          this.isRecoveringPassword = false;
-          this.recoveryError = this.translate.instant('password_recovery.error_message');
-          console.error('Error en recuperación de contraseña:', error);
-        }
-      });
-    }
-  }
 }

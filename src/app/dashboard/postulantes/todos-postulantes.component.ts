@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
-import { PostulantesService, UsuarioPostulante } from './postulantes.service';
+import { PostulantesService, UsuarioPostulante } from '../../services/postulantes.service';
 import './todos-postulantes.component.css';
 
 @Component({

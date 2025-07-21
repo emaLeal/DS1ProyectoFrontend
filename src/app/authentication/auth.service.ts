@@ -1,8 +1,8 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Login, User } from './auth.types'
 import { Router } from '@angular/router';
-import { environment } from '../../../public/environment';
+import { environment } from '../../environments/environment';
 import { catchError } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 
@@ -51,13 +51,16 @@ export class AuthService {
       );
   }
 
-  passwordRecovery(email: string): Observable<any> {
-    const url: string = environment.baseUrl + environment.authentication.passwordRecovery;
-    return this.httpClient
-      .post(url, { email })
-      .pipe(
-        catchError(this.handleError)
-      );
+  resetPassword(email: string) {
+    const url = environment.baseUrl + environment.authentication.resetPassword
+    return this.httpClient.post(url, { email })
+  }
+
+  confirmResetPassword(form: any) {
+    const body = form.value
+    delete body.confirmPassword
+    const url = environment.baseUrl + environment.authentication.confirmResetPassword + body.token
+    return this.httpClient.post(url, body)
   }
 
   get getProfile() {
@@ -66,5 +69,21 @@ export class AuthService {
 
   get isAuthenticated(): boolean {
     return this.auth;
+  }
+
+  private getAuthHeaders(): HttpHeaders {
+    const tokenString = localStorage.getItem('token');
+    let token;
+    try {
+      token = JSON.parse(tokenString!);
+    } catch (e) {
+      // Si no se puede parsear como JSON, usar el token directamente
+      token = { access: tokenString };
+    }
+
+    return new HttpHeaders({
+      'authorization': `Bearer ${token.access}`,
+      'Content-Type': 'application/json'
+    });
   }
 }
