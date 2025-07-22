@@ -13,7 +13,7 @@ import { RolesService, Role } from '../../roles/roles.service';
 import { UsuariosService } from '../usuarios.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../../environments/environment';
+import { environment } from '../../../../environments/environment.prod';
 
 interface Usuario {
   name: string;

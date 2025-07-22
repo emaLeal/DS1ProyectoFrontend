@@ -3,13 +3,13 @@ import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { PostulantesService, Postulacion, OfertaBasica } from './postulantes.service';
 import { PostulationService } from '../../services/postulation.service';
 import { MatDialog } from '@angular/material/dialog';
 import { OfertaDetalleModalComponent } from '../ofertas/ofertas-lista/oferta-detalle-modal.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { PostularDialogComponent } from '../ofertas-activas/postular-dialog/postular-dialog.component';
 import { ViewPostulacionDialogComponent } from './view-postulacion-dialog.component';
+import { OfertaBasica, Postulacion, PostulantesService } from '../../services/postulantes.service';
 
 @Component({
   selector: 'app-mis-postulaciones',
