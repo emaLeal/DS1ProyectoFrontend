@@ -31,15 +31,17 @@ import { ChartConfiguration, ChartType } from 'chart.js';
 import { UsuariosService } from '../usuarios/usuarios.service';
 import { OfertasService } from '../../services/ofertas.service';
 import { PostulantesService } from '../../services/postulantes.service';
+import TranslateLogic from '../../lib/translate/translate.class';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-graphics',
   standalone: true,
-  imports: [BaseChartDirective, CommonModule],
+  imports: [BaseChartDirective, CommonModule, TranslateModule],
   templateUrl: './graphics.component.html',
   styleUrls: ['./graphics.component.css']
 })
-export class GraphicsComponent implements OnInit {
+export class GraphicsComponent extends TranslateLogic implements OnInit {
 
   @ViewChild('chartUsuarios') chartUsuarios?: BaseChartDirective;
   @ViewChild('chartOfertas') chartOfertas?: BaseChartDirective;
@@ -71,9 +73,11 @@ export class GraphicsComponent implements OnInit {
   constructor(
     private userService: UsuariosService,
     private ofertasService: OfertasService,
-    private postulantesService: PostulantesService
-
-  ) { }
+    private postulantesService: PostulantesService,
+    translate: TranslateService
+  ) { 
+    super(translate)
+  }
 
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem('user_data')!);

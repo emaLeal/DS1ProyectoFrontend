@@ -500,5 +500,18 @@
   "reports": {
     "tittle": "Gestion de reportes",
     "generate_reports": "Generar Reportes"
+  },
+  "graphics": {
+    "total_users": "Total de usuarios",
+    "total_postulants": "Total de postulantes",
+    "total_offers": "Total de ofertas",
+    "total_postulations": "Total de postulaciones",
+    "users_monthly": "Tipo de usuarios registrados por mes",
+    "job_offers": "Fechas de ofertas laborales",
+    "postulations_monthly": "Postulaciones Realizadas por Mes",
+    "offers_status": "Ofertas Activas y Cerradas",
+    "offers_postulations_monthly": "Ofertas lanzadas, cerradas y postulaciones por mes",
+    "offers_label": "Ofertas",
+    "offers_date": "Fecha"
   }
 }

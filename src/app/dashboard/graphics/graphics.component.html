@@ -4,7 +4,7 @@
   <div class="dashboard">
     <div class="cards">
       <div class="card green">
-        <h4>Total de usuarios</h4>
+        <h4>{{'graphics.total_users' | translate}}</h4>
         <div class="card-data">
           <i class="fas fa-users"></i>
           <h2>{{ usuarios.length }}</h2>
@@ -12,21 +12,21 @@
       </div>
 
       <div class="card blue">
-        <h4>Total de postulantes</h4>
+        <h4>{{'graphics.total_postulants' | translate}}</h4>
         <div class="card-data">
           <i class="fas fa-user-graduate"></i>
           <h2>{{ postulantes.length }}</h2>
         </div>
       </div>
       <div class="card yellow">
-        <h4>Total de ofertas</h4>
+        <h4>{{'graphics.total_offers' | translate}}</h4>
         <div class="card-data">
           <i class="fas fa-briefcase"></i>
           <h2>{{ ofertas.length }}</h2>
         </div>
       </div>
       <div class="card orange">
-        <h4>Total de postulaciones</h4>
+        <h4>{{'graphics.total_postulations' | translate}}</h4>
         <div class="card-data">
           <i class="fas fa-file-alt"></i>
           <h2>{{ postulaciones.length }}</h2>
@@ -36,7 +36,7 @@
 
     <div class="charts">
       <div class="chart wide">
-        <h4>Tipo de usuarios registrados por mes</h4>
+        <h4>{{'graphics.users_monthly' | translate}}</h4>
         <canvas
           #chartUsuarios="base-chart"
           baseChart
@@ -47,7 +47,7 @@
         </canvas>
       </div>
       <div class="chart wide">
-        <h4>Fechas de Ofertas laborales</h4>
+        <h4>{{'graphics.job_offers' | translate}}</h4>
         <canvas
           #chartOfertas="base-chart"
           baseChart
@@ -58,7 +58,7 @@
         </canvas>
       </div>
       <div class="chart">
-        <h4>Postulaciones Realizadas por Mes</h4>
+        <h4>{{'graphics.postulations_monthly' | translate}}</h4>
         <canvas
           #chartPostulaciones="base-chart"
           baseChart
@@ -68,7 +68,7 @@
         ></canvas>
       </div>
       <div class="chart">
-        <h4>Ofertas Activas y Cerradas</h4>
+        <h4>{{'graphics.offers_status' | translate}}</h4>
         <!-- Donut -->
         <canvas
           #chartStatusOferta="base-chart"
@@ -80,7 +80,7 @@
         </canvas>
       </div>
       <div class="chart wide">
-        <h4>Ofertas lanzadas, cerradas y postulaciones por mes</h4>
+        <h4>{{'graphics.offers_postulations_monthly' | translate}}</h4>
         <canvas
           #chartStacked="base-chart"
           baseChart

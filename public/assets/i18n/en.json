@@ -465,5 +465,18 @@
   "reports": {
     "tittle": "Report's Managing",
     "generate_reports": "Generate Reports"
+  },
+  "graphics": {
+    "total_users": "Total Users",
+    "total_postulants": "Total Postulants",
+    "total_offers": "Total offers",
+    "total_postulations": "Total postulations",
+    "users_monthly": "Type of users registered monthly",
+    "job_offers": "Dates of job offers",
+    "postulations_monthly": "Postulations made monthly",
+    "offers_status": "Active and closed offers",
+    "offers_postulations_monthly": "Launched offers and postulations by month",
+    "offers_label": "Offers",
+    "offers_date": "Date"
   }
 }

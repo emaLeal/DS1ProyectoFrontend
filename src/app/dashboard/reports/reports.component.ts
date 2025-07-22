@@ -13,6 +13,8 @@ import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ReporteConfirmacionComponent } from './reporte-confirmacion.component';
+import TranslateLogic from '../../lib/translate/translate.class';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-reports',
   imports: [
@@ -23,12 +25,13 @@ import { ReporteConfirmacionComponent } from './reporte-confirmacion.component';
     MatNativeDateModule,
     FormsModule,
     ReactiveFormsModule,
-    MatDialogModule
+    MatDialogModule,
+    TranslateModule
   ],
   templateUrl: './reports.component.html',
   styleUrl: './reports.component.css'
 })
-export class ReportsComponent {
+export class ReportsComponent extends TranslateLogic {
   reporteForm: FormGroup;
   datosExcel: any[] = [];
 
@@ -37,9 +40,10 @@ export class ReportsComponent {
     private userService: UsuariosService,
     private ofertasService: OfertasService,
     private postulantesService: PostulantesService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    translate: TranslateService
   ) {
-
+    super(translate)
     this.reporteForm = this.fb.group({
       tipo: ['', Validators.required],
       fechaInicio: ['', Validators.required],
