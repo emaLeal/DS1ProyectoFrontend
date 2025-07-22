@@ -145,7 +145,14 @@ export class LoginComponent extends TranslateLogic implements AfterViewInit {
           }).subscribe({
             next: (user) => {
               localStorage.setItem('user_data', JSON.stringify(user));
-              this.router.navigate(['/dashboard']);
+              const userData = JSON.parse(localStorage.getItem('user_data')!);
+              if (userData.role != 3) {
+                this.router.navigate(['/dashboard']);
+
+              }else{
+                this.router.navigate(['/dashboard/perfil']);
+              }
+
             },
             error: (error) => {
               this.isLoggingIn = false;

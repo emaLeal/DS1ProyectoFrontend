@@ -56,7 +56,7 @@ export const routes: Routes = [
       },
       { path: 'agregar', component: AgregarComponent },
       {path : 'perfil', component: PerfilUsuarioComponent},
-      { path: '', component: GraphicsComponent },
+      { path: '', component: GraphicsComponent, canActivate: [isSuperUser] },
       { path: 'reportes', component: ReportsComponent },
 
       {
