@@ -71,7 +71,7 @@
             <ng-container matColumnDef="document_id">
               <th mat-header-cell *matHeaderCellDef>{{ 'usuarios.documento' | translate }}</th>
               <td mat-cell *matCellDef="let usuario" class="fade-in-left delay-2">
-                <div class="primary-text">
+                <div class="primary-text" style="display: flex;">
                   <mat-icon class="small-icon">badge</mat-icon>
                   {{usuario.identification_type}} {{usuario.document_id}}
                 </div>
