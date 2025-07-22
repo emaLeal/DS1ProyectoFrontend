@@ -14,6 +14,8 @@ import { MatSort } from '@angular/material/sort';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { PostulantesService, Postulacion, UsuarioPostulante, OfertaBasica } from '../../services/postulantes.service';
 import { forkJoin } from 'rxjs';
+import { ViewPostulacionDialogComponent } from './view-postulacion-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 export interface PostulanteTabla {
   nombre: string;
@@ -56,12 +58,12 @@ export class PostulantesComponent {
 
   cargos = ['Desarrollador', 'Diseñador', 'Analista', 'Comercial'];
 
-  postulantes: PostulanteTabla[] = [];
-  postulantesFiltrados: PostulanteTabla[] = [];
+  postulantes: (PostulanteTabla & { postulacion?: Postulacion })[] = [];
+  postulantesFiltrados: (PostulanteTabla & { postulacion?: Postulacion })[] = [];
   user: any;
   isAdmin: boolean = false;
 
-  constructor(private postulantesService: PostulantesService) {
+  constructor(private postulantesService: PostulantesService, private dialog: MatDialog) {
     this.user = JSON.parse(localStorage.getItem('user_data')!);
     this.isAdmin = this.user?.role === 1;
     this.cargarPostulantes();
@@ -83,15 +85,26 @@ export class PostulantesComponent {
             document_id: usuario.document_id,
             email: usuario.email,
             oferta: oferta.title,
-            fecha_postulacion: post.application_date
+            fecha_postulacion: post.application_date,
+            postulacion: post // Guardamos el objeto completo
           } : null;
-        }).filter(p => p !== null) as PostulanteTabla[];
+        }).filter(p => p !== null) as (PostulanteTabla & { postulacion: Postulacion })[];
         this.aplicarFiltros();
       });
     } else {
-      // Lógica para no admin igual que antes
-      this.postulantesService.getPostulantes().subscribe((data) => {
-        this.postulantes = data.filter(p => p.creador_oferta === this.user.document_id) as any;
+      this.postulantesService.getPostulaciones().subscribe((postulaciones) => {
+        const user = this.user;
+        this.postulantes = postulaciones
+          .filter(post => post.applicant_document === user.document_id)
+          .map(post => ({
+            nombre: '', // Si tienes acceso a usuario, puedes buscarlo aquí
+            apellido: '',
+            document_id: post.applicant_document,
+            email: '',
+            oferta: '',
+            fecha_postulacion: post.application_date,
+            postulacion: post
+          }));
         this.aplicarFiltros();
       });
     }
@@ -124,5 +137,14 @@ export class PostulantesComponent {
   loadApplicants() {
 
   } 
+
+  verPostulacion(postulante: any) {
+    // Si existe el objeto postulacion, lo pasamos, si no, pasamos el objeto completo
+    const postulacion = postulante.postulacion ? postulante.postulacion : postulante;
+    this.dialog.open(ViewPostulacionDialogComponent, {
+      width: '600px',
+      data: { postulacion }
+    });
+  }
 }
 
