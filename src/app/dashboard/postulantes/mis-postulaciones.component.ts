@@ -8,6 +8,8 @@ import { PostulationService } from '../../services/postulation.service';
 import { MatDialog } from '@angular/material/dialog';
 import { OfertaDetalleModalComponent } from '../ofertas/ofertas-lista/oferta-detalle-modal.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { PostularDialogComponent } from '../ofertas-activas/postular-dialog/postular-dialog.component';
+import { ViewPostulacionDialogComponent } from './view-postulacion-dialog.component';
 
 @Component({
   selector: 'app-mis-postulaciones',
@@ -34,6 +36,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
           <td mat-cell *matCellDef="let p">
             <button mat-icon-button color="primary" (click)="verDetallesOferta(p.job_offer_id)">
               <mat-icon>visibility</mat-icon>
+            </button>
+            <button mat-icon-button color="accent" (click)="verPostulacion(p)">
+              <mat-icon>info</mat-icon>
+            </button>
+            <button mat-icon-button color="accent" (click)="editarPostulacion(p)">
+              <mat-icon>edit</mat-icon>
             </button>
             <button mat-icon-button color="warn" (click)="eliminarPostulacion(p)">
               <mat-icon>delete</mat-icon>
@@ -79,6 +87,34 @@ export class MisPostulacionesComponent implements OnInit {
         width: '500px',
         data: this.ofertas.find(o => o.id === id)
       });
+    });
+  }
+
+  verPostulacion(postulacion: Postulacion) {
+    this.dialog.open(ViewPostulacionDialogComponent, {
+      width: '600px',
+      data: { postulacion }
+    });
+  }
+
+  editarPostulacion(postulacion: Postulacion) {
+    const dialogRef = this.dialog.open(PostularDialogComponent, {
+      width: '600px',
+      data: { usuario: postulacion, modo: 'editar' }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.postulationService.updatePostulation(postulacion.id, result).subscribe({
+          next: () => {
+            // Actualiza la tabla localmente
+            Object.assign(postulacion, result);
+            this.snackBar.open('Postulación actualizada correctamente', 'Cerrar', { duration: 3000 });
+          },
+          error: () => {
+            this.snackBar.open('No se pudo actualizar la postulación', 'Cerrar', { duration: 3000 });
+          }
+        });
+      }
     });
   }
 

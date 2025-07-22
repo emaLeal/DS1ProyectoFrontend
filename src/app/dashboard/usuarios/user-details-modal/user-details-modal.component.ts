@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
@@ -76,21 +76,13 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
           <h3>{{ 'userDetails.informacionSistema' | translate }}</h3>
           <div class="detail-row">
             <span class="label">{{ 'userDetails.rol' | translate }}</span>
-            <span class="value">{{getRoleName(data.usuario.role)}}</span>
+            <span class="value">{{ getRoleDescription(data.usuario.role) }}</span>
           </div>
         </div>
       </div>
     </mat-card-content>
 
     <mat-card-actions align="end">
-      <button mat-raised-button color="primary" (click)="onEdit()">
-        <mat-icon>edit</mat-icon>
-        {{ 'userDetails.editar' | translate }}
-      </button>
-      <button mat-raised-button color="warn" (click)="onDelete()">
-        <mat-icon>delete</mat-icon>
-        {{ 'userDetails.eliminar' | translate }}
-      </button>
       <button mat-button (click)="onClose()" name="cerrar">
         {{ 'userDetails.cerrar' | translate }}
       </button>
@@ -219,6 +211,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
   `]
 })
 export class UserDetailsModalComponent {
+  @Input() roles: any[] = [];
   constructor(
     public dialogRef: MatDialogRef<UserDetailsModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
@@ -233,13 +226,12 @@ export class UserDetailsModalComponent {
     return genderMap[gender] || gender;
   }
 
-  getRoleName(role: number): string {
-    const roleMap: { [key: number]: string } = {
-      1: 'Administrador',
-      2: 'Usuario',
-      3: 'Super Usuario'
-    };
-    return roleMap[role] || `Rol ${role}`;
+  getRoleDescription(roleId: number | string): string {
+    if (this.data.roles && Array.isArray(this.data.roles)) {
+      const found = this.data.roles.find((r: any) => r.id === roleId || r.id === Number(roleId));
+      if (found) return found.description;
+    }
+    return `Rol ${roleId}`;
   }
 
   onEdit(): void {

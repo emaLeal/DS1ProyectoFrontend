@@ -515,7 +515,7 @@ export class UsuariosComponent implements OnInit {
   verDetalles(usuario: any) {
     const dialogRef = this.dialog.open(UserDetailsModalComponent, {
       width: '600px',
-      data: { usuario: usuario }
+      data: { usuario: usuario, roles: this.roles }
     });
 
     dialogRef.afterClosed().subscribe(result => {

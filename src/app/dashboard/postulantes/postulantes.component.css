@@ -81,3 +81,15 @@
 table.mat-table {
   min-width: 1200px;
 }
+
+.filters-grid {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.filters-grid mat-form-field {
+  max-width: 300px;
+  width: 100%;
+  font-size: 0.95rem;
+}
