@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://tu-api-de-produccion.com/api',
+  baseUrl: 'https://tu-api-de-produccion.com/api',
   authentication: {
     login: '/auth/login/',
     register: '/auth/register/',

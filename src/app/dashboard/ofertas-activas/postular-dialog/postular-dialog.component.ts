@@ -60,8 +60,19 @@ export class PostularDialogComponent implements OnInit {
     motivation: "",
     resume: "",
     phone: "",
-    application_date: ""
+    application_date: "",
+    resume_support: null,
+    resume_filename: "",
+    undergraduate_support: null,
+    undergraduate_filename: "",
+    postgraduate_support: null,
+    postgraduate_filename: ""
   }
+
+  // Variables para mostrar nombres de archivos
+  undergraduateFileName: string = '';
+  postgraduateFileName: string = '';
+  resumeFileName: string = '';
 
 
   constructor(
@@ -92,27 +103,30 @@ export class PostularDialogComponent implements OnInit {
 
   postular() {
     const currentdate = new Date();
-    const year = currentdate.getFullYear()
-    const month = currentdate.getMonth().toString().length == 1 ? '0' + (currentdate.getMonth() + 1) : currentdate.getMonth() + 1
-    const day = currentdate.getDate().toString().length == 1 ? '0' + currentdate.getDate() : currentdate.getDate()
-    const hour = currentdate.getHours().toString().length == 1 ? '0' + currentdate.getHours() : currentdate.getHours()
-    const minutes = currentdate.getMinutes().toString().length == 1 ? '0' + currentdate.getMinutes() : currentdate.getMinutes()
-    const seconds = currentdate.getSeconds().toString().length == 1 ? '0' + currentdate.getSeconds() : currentdate.getSeconds()
-    const application_date = year + "-" + month + "-" + day + " " + hour + ":" + minutes + ":" + seconds
-    this.form = { ...this.form, application_date }
+    const year = currentdate.getFullYear();
+    const month = String(currentdate.getMonth() + 1).padStart(2, '0');
+    const day = String(currentdate.getDate()).padStart(2, '0');
+    const hour = String(currentdate.getHours()).padStart(2, '0');
+    const minutes = String(currentdate.getMinutes()).padStart(2, '0');
+    const seconds = String(currentdate.getSeconds()).padStart(2, '0');
+    
+    const application_date = `${year}-${month}-${day} ${hour}:${minutes}:${seconds}`;
+    this.form.application_date = application_date;
+
     if (this.data.modo === 'editar') {
-      // Solo envía los campos no vacíos
-      const camposNoVacios: Partial<Postulacion> = {};
-      (Object.entries(this.form) as [keyof Postulacion, any][]).forEach(([key, value]) => {
-        if (value !== '' && value !== null && value !== undefined) {
-          camposNoVacios[key] = value;
+      // Lógica para edición
+      this.dialogRef.close(this.form);
+    } else {
+      // Enviar como JSON
+      this.postulationService.postular(this.form).subscribe({
+        next: (value) => {
+          this.dialogRef.close(true);
+        },
+        error: (err) => {
+          console.error('Error al postular:', err);
+          alert('Error al enviar la postulación');
         }
       });
-      this.dialogRef.close(camposNoVacios);
-    } else {
-      this.postulationService.postular(this.form).subscribe(value => {
-        this.dialogRef.close(true)
-      })
     }
   }
 
@@ -128,5 +142,63 @@ export class PostularDialogComponent implements OnInit {
     const month = String(d.getMonth() + 1).padStart(2, '0');
     const day = String(d.getDate()).padStart(2, '0');
     return `${year}-${month}-${day}`;
+  }
+
+  onResumeFile(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      if (!file.name.toLowerCase().endsWith('.pdf')) {
+        alert('Por favor seleccione un archivo PDF');
+        return;
+      }
+
+      this.form.resume_filename = file.name;
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        // Convertir a base64
+        const base64String = e.target;
+        this.form.resume_support = base64String;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+
+  onUnderGraduateFile(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      if (!file.name.toLowerCase().endsWith('.pdf')) {
+        alert('Por favor seleccione un archivo PDF');
+        return;
+      }
+
+      this.form.undergraduate_filename = file.name;
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        // Convertir a base64
+        const base64String = e.target.result;
+        this.form.undergraduate_support = base64String;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  onPostGraduateFile(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      if (!file.name.toLowerCase().endsWith('.pdf')) {
+        alert('Por favor seleccione un archivo PDF');
+        return;
+      }
+
+      this.form.postgraduate_filename = file.name;
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        // Convertir a base64
+        const base64String = e.target.result;
+        this.form.postgraduate_support = base64String;
+      };
+      reader.readAsDataURL(file);
+    }
   }
 }

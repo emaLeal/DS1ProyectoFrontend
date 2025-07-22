@@ -218,7 +218,8 @@
     "Salario": "Salario",
     "NivelEducacion": "Nivel de Educación",
     "Editar": "Editar",
-    "Postularme": "Postularme"
+    "Postularme": "Postularme",
+    "upload_support": "Subir pdf"
   },
   "lista_ofertas": {
     "manage_offers_title": "Gestion de Ofertas",
@@ -248,8 +249,6 @@
     "BackEnd": "Back-End",
     "Comercial": "Comercial",
     "Rango": "Rango",
-    "Junior": "Junior",
-    "Senior": "Senior",
     "SalarioMinimo": "Salario mínimo",
     "AplicarFiltros": "Aplicar Filtros",
     "Empresa": "Empresa",
@@ -300,7 +299,8 @@
     "motivacion": "Motivación",
     "perfil": "Perfil de Aspirante",
     "confirmar_postulacion": "Confirmar Postulación",
-    "cancelar": "Cancelar"
+    "cancelar": "Cancelar",
+    "no_file_selected": "Archivo no seleccionado"
   },
   "dashboard": {
     "Menu": "Menú",

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +27,7 @@ export class PostulationService {
   constructor(private httpClient: HttpClient
   ) { }
 
-  postular(data: any) {
+  postular(data: any): Observable<any> {
     const url = environment.baseUrl + environment.postulations.postulate
     
     return this.httpClient.post(url, data, {
