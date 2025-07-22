@@ -237,7 +237,10 @@
     "director_name": "Nombre de director",
     "salary": "Salario",
     "job_type": "Tipo de Trabajo",
-    "status": "Estado"
+    "status": "Estado",
+    "open": "Abierta",
+    "closed": "Cerrada",
+    "filter_by_name": "Filtrar por nombre"
   },
   "ofertas-cerradas": {
     "HeroTitulo": "Consulta las ofertas cerradas",

@@ -22,25 +22,20 @@
   <mat-card class="search-card">
     <mat-card-content class="search-content">
       <mat-form-field appearance="outline" class="search-field">
-        <mat-label>{{ 'lista_ofertas.search_offer' | translate }}</mat-label>
-        <input matInput [placeholder]="'lista_ofertas.search_offer'| translate">
+        <mat-label>Filtrar por nombre</mat-label>
+        <input matInput [(ngModel)]="filtroPalabra" placeholder="Filtrar por nombre">
         <mat-icon matSuffix>search</mat-icon>
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="search-field">
         <mat-label>{{ 'lista_ofertas.filter_by_state' | translate }}</mat-label>
-        <mat-select>
-          <mat-option value="status" [(ngModel)]="filtroRol">{{ 'lista_ofertas.all_offers' | translate }}</mat-option>
-          <mat-option *ngFor="let rol of roles" [value]="rol.id.toString()">
-            {{'lista_ofertas.'+rol.description | translate}}
-          </mat-option>
+        <mat-select [(ngModel)]="filtroRol">
+          <mat-option value="status">{{ 'lista_ofertas.all_offers' | translate }}</mat-option>
+          <mat-option value="active">{{ 'lista_ofertas.open' | translate }}</mat-option>
+          <mat-option value="closed">{{ 'lista_ofertas.closed' | translate }}</mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-form-field appearance="outline" class="search-field">
-        <mat-label>{{'lista_ofertas.filter_by_id' | translate}}</mat-label>
-        <input matInput [(ngModel)]="filtroDirectorId"
-          [placeholder]="'lista_ofertas.filter_by_id_placeholder' | translate">
-      </mat-form-field>
+      <!-- Elimino el filtro por ID de usuario -->
     </mat-card-content>
   </mat-card>
 </div>

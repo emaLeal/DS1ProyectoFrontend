@@ -53,7 +53,10 @@ export class OfertasListaComponent extends TranslateLogic implements OnInit {
   filtroRango = '';
   filtroSalario: number | null = null;
   usuarios: any[] = [];
-  roles: any[] = [{id: 'active', description: 'Activa'}, {id: 'closed', description: 'Inactiva'}];
+  roles: any[] = [
+    {id: 'active', description: 'open'},
+    {id: 'closed', description: 'closed'}
+  ];
   filtroRol: string = '';
   filtroBusqueda: string = '';
   ofertas: JobOffer[] = [];
@@ -86,12 +89,11 @@ export class OfertasListaComponent extends TranslateLogic implements OnInit {
  
 
   cargarOfertas() {
-      this.cargando = true;
+    this.cargando = true;
     this.ofertasService.getOfertas().subscribe({
       next: (data) => {
-        // Filtrado según rol
         if (this.isAdmin) {
-        this.ofertas = data;
+          this.ofertas = data;
         } else {
           this.ofertas = data.filter(oferta => oferta.talent_director_document === this.user.document_id);
         }
@@ -124,12 +126,15 @@ export class OfertasListaComponent extends TranslateLogic implements OnInit {
     return this.ofertasFiltradas = this.ofertas.filter(oferta => {
       const salario = oferta.salary;
       const rango = oferta.rank === 'SemiSenior' ? 'Semi Senior' : oferta.rank;
+      // Filtro por estado (status)
+      const cumpleEstado = !this.filtroRol || this.filtroRol === 'status' || oferta.status === this.filtroRol;
       return (
         (!this.filtroPalabra || oferta.title.toLowerCase().includes(this.filtroPalabra.toLowerCase())) &&
         (!this.filtroCargo || oferta.title === this.filtroCargo) &&
         (!this.filtroRango || rango === this.filtroRango) &&
         (this.filtroSalario === null || salario >= this.filtroSalario) &&
-        (!this.filtroDirectorId || oferta.talent_director_document === this.filtroDirectorId)
+        (!this.filtroDirectorId || oferta.talent_director_document === this.filtroDirectorId) &&
+        cumpleEstado
       );
     });
   }
