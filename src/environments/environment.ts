@@ -6,7 +6,8 @@ export const environment = {
     register: '/auth/register/',
     profile: '/auth/get_profile/',
     resetPassword: '/auth/password_reset/',
-    confirmResetPassword: '/auth/password_reset/confirm/?token='
+    confirmResetPassword: '/auth/password_reset/confirm/?token=',
+    changePassword: '/auth/change_password/'
   },
   offers: {
     getOffers: '/offer/getall/',
@@ -30,7 +31,7 @@ export const environment = {
   },
   postulations: {
     postulate: '/postulation/create/',
-    getAll: '/postulation/getall/'
+    getAll: '/applicant/getall/'
   },
   users: {
     getUsers: '/auth/users/getall/'

@@ -25,9 +25,9 @@
           <input matInput [(ngModel)]="filtroBusqueda" [placeholder]="'usuarios.placeholderBusqueda' | translate">
           <mat-icon matSuffix>search</mat-icon>
         </mat-form-field>
-          <mat-form-field appearance="outline" class="search-field">
+        <mat-form-field appearance="outline" class="search-field">
           <mat-label>{{ 'usuarios.buscarDocumento' | translate }}</mat-label>
-          <input matInput [(ngModel)]="filtroDocumento" [placeholder]="'usuarios.placeholderDocumento' | translate">
+          <input matInput [(ngModel)]="filtroDocumento" [placeholder]="'usuarios.placeHolderDocumento' | translate">
           <mat-icon matSuffix>search</mat-icon>
         </mat-form-field>
         <mat-form-field appearance="outline" class="search-field">
@@ -35,7 +35,7 @@
           <mat-select [(ngModel)]="filtroRol">
             <mat-option value="">{{ 'usuarios.todosLosRoles' | translate }}</mat-option>
             <mat-option *ngFor="let rol of roles" [value]="rol.id.toString()">
-              {{rol.description}}
+              {{'usuarios.'+rol.description | translate}}
             </mat-option>
           </mat-select>
         </mat-form-field>
@@ -93,41 +93,41 @@
               <th mat-header-cell *matHeaderCellDef>{{ 'usuarios.acciones' | translate }}</th>
               <td mat-cell *matCellDef="let usuario" class="fade-in-left delay-4">
                 <div class="action-buttons">
-                  <button mat-icon-button 
-                          color="primary"
-                          (click)="verDetalles(usuario)" 
-                          matTooltip="{{ 'usuarios.verDetalles' | translate }}">
+                  <button mat-icon-button color="primary" (click)="verDetalles(usuario)"
+                    matTooltip="{{ 'usuarios.verDetalles' | translate }}">
                     <mat-icon>visibility</mat-icon>
                   </button>
-                  <button mat-icon-button 
-                          color="primary"
-                          (click)="editarUsuario(usuario)" 
-                          matTooltip="{{ 'usuarios.editar' | translate }}">
+                  <button mat-icon-button color="primary" (click)="editarUsuario(usuario)"
+                    matTooltip="{{ 'usuarios.editar' | translate }}">
                     <mat-icon>edit</mat-icon>
                   </button>
-                  <button mat-icon-button 
-                          color="warn"
-                          (click)="borrarUsuario(usuario)" 
-                          matTooltip="{{ 'usuarios.eliminar' | translate }}">
+                  <button mat-icon-button color="warn" (click)="borrarUsuario(usuario)"
+                    matTooltip="{{ 'usuarios.eliminar' | translate }}">
                     <mat-icon>delete</mat-icon>
                   </button>
                 </div>
               </td>
             </ng-container>
 
-            <tr mat-header-row *matHeaderRowDef="['name', 'email', 'document_id', 'role', 'actions']" class="table-header-row"></tr>
-            <tr mat-row *matRowDef="let row; columns: ['name', 'email', 'document_id', 'role', 'actions'];" class="table-data-row"></tr>
+            <tr mat-header-row *matHeaderRowDef="['name', 'email', 'document_id', 'role', 'actions']"
+              class="table-header-row"></tr>
+            <tr mat-row *matRowDef="let row; columns: ['name', 'email', 'document_id', 'role', 'actions'];"
+              class="table-data-row"></tr>
 
             <!-- Fila cuando no hay datos -->
             <tr class="mat-row" *matNoDataRow>
               <td class="mat-cell no-data" [attr.colspan]="5">
                 <div class="no-data-content">
-                  <mat-icon class="no-data-icon">{{filtroBusqueda || filtroRol ? 'search_off' : 'people_off'}}</mat-icon>
-                  <h3 class="no-data-title">{{ filtroBusqueda || filtroRol ? ('usuarios.sinResultados' | translate) : ('usuarios.noUsuarios' | translate) }}</h3>
+                  <mat-icon class="no-data-icon">{{filtroBusqueda || filtroRol ? 'search_off' :
+                    'people_off'}}</mat-icon>
+                  <h3 class="no-data-title">{{ filtroBusqueda || filtroRol ? ('usuarios.sinResultados' | translate) :
+                    ('usuarios.noUsuarios' | translate) }}</h3>
                   <p class="no-data-message">
-                    {{ filtroBusqueda || filtroRol ? ('usuarios.mensajeSinResultados' | translate) : ('usuarios.mensajeNoUsuarios' | translate) }}
+                    {{ filtroBusqueda || filtroRol ? ('usuarios.mensajeSinResultados' | translate) :
+                    ('usuarios.mensajeNoUsuarios' | translate) }}
                   </p>
-                  <button *ngIf="!filtroBusqueda && !filtroRol" mat-raised-button color="primary" (click)="mostrarFormulario = true">
+                  <button *ngIf="!filtroBusqueda && !filtroRol" mat-raised-button color="primary"
+                    (click)="mostrarFormulario = true">
                     <mat-icon>person_add</mat-icon>
                     {{ 'usuarios.crearPrimerUsuario' | translate }}
                   </button>
@@ -161,12 +161,7 @@
             <div class="form-row">
               <mat-form-field appearance="outline" class="form-col">
                 <mat-label>{{ 'usuarios.nombre' | translate }}</mat-label>
-                <input matInput
-                       [(ngModel)]="nuevoUsuario.name"
-                       name="name"
-                       required
-                       minlength="2"
-                       #nameInput="ngModel">
+                <input matInput [(ngModel)]="nuevoUsuario.name" name="name" required minlength="2" #nameInput="ngModel">
                 <mat-icon matSuffix>badge</mat-icon>
                 <mat-error *ngIf="nameInput.invalid && (nameInput.touched || nameInput.dirty)">
                   <ng-container *ngIf="!nuevoUsuario.name">
@@ -180,12 +175,8 @@
 
               <mat-form-field appearance="outline" class="form-col">
                 <mat-label>{{ 'usuarios.apellido' | translate }}</mat-label>
-                <input matInput
-                       [(ngModel)]="nuevoUsuario.last_name"
-                       name="last_name"
-                       required
-                       minlength="2"
-                       #lastNameInput="ngModel">
+                <input matInput [(ngModel)]="nuevoUsuario.last_name" name="last_name" required minlength="2"
+                  #lastNameInput="ngModel">
                 <mat-icon matSuffix>badge</mat-icon>
                 <mat-error *ngIf="lastNameInput.invalid && (lastNameInput.touched || lastNameInput.dirty)">
                   <ng-container *ngIf="!nuevoUsuario.last_name">
@@ -201,7 +192,8 @@
             <div class="form-row">
               <mat-form-field appearance="outline" class="form-col">
                 <mat-label>{{ 'usuarios.tipoDocumento' | translate }}</mat-label>
-                <mat-select [(ngModel)]="nuevoUsuario.identification_type"  name="identification_type" required #idTypeInput="ngModel">
+                <mat-select [(ngModel)]="nuevoUsuario.identification_type" name="identification_type" required
+                  #idTypeInput="ngModel">
                   <mat-option data-testid="identification-CC" value="CC">{{ 'usuarios.cc' | translate }}</mat-option>
                   <mat-option value="CE">{{ 'usuarios.ce' | translate }}</mat-option>
                   <mat-option value="TI">{{ 'usuarios.ti' | translate }}</mat-option>
@@ -215,16 +207,9 @@
 
               <mat-form-field appearance="outline" class="form-col">
                 <mat-label>{{ 'usuarios.numeroDocumento' | translate }}</mat-label>
-                <input matInput
-                       [(ngModel)]="nuevoUsuario.document_id"
-                       name="document_id"
-                       required
-                       maxlength="15"
-                       minlength="6"
-                       pattern="^[0-9]*$"
-                       (keydown)="blockNonNumeric($event)"
-                       (ngModelChange)="onDocumentInput($event)"
-                       #documentInput="ngModel">
+                <input matInput [(ngModel)]="nuevoUsuario.document_id" name="document_id" required maxlength="15"
+                  minlength="6" pattern="^[0-9]*$" (keydown)="blockNonNumeric($event)"
+                  (ngModelChange)="onDocumentInput($event)" #documentInput="ngModel">
                 <mat-icon matSuffix>pin</mat-icon>
                 <mat-error *ngIf="documentInput.invalid && (documentInput.touched || documentInput.dirty)">
                   <ng-container *ngIf="!nuevoUsuario.document_id">
@@ -240,13 +225,8 @@
             <div class="form-row">
               <mat-form-field appearance="outline" class="form-col">
                 <mat-label>{{ 'usuarios.fechaNacimiento' | translate }}</mat-label>
-                <input matInput
-                       [matDatepicker]="picker"
-                       [(ngModel)]="nuevoUsuario.birth_date"
-                       name="birth_date"
-                       required
-                       #birthDateInput="ngModel"
-                       readonly>
+                <input matInput [matDatepicker]="picker" [(ngModel)]="nuevoUsuario.birth_date" name="birth_date"
+                  required #birthDateInput="ngModel" readonly>
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
                 <mat-icon matSuffix>cake</mat-icon>
@@ -284,13 +264,8 @@
             <div class="form-row">
               <mat-form-field appearance="outline" class="form-col">
                 <mat-label>Email</mat-label>
-                <input matInput
-                       type="email"
-                       [(ngModel)]="nuevoUsuario.email"
-                       name="email"
-                       required
-                       email
-                       #emailInput="ngModel">
+                <input matInput type="email" [(ngModel)]="nuevoUsuario.email" name="email" required email
+                  #emailInput="ngModel">
                 <mat-icon matSuffix>email</mat-icon>
                 <mat-error *ngIf="emailInput.invalid && (emailInput.touched || emailInput.dirty)">
                   <ng-container *ngIf="!nuevoUsuario.email">
@@ -304,16 +279,9 @@
 
               <mat-form-field appearance="outline" class="form-col">
                 <mat-label>{{ 'usuarios.telefonoCelular' | translate }}</mat-label>
-                <input matInput
-                       [(ngModel)]="nuevoUsuario.cell_phone"
-                       name="cell_phone"
-                       required
-                       maxlength="15"
-                       minlength="10"
-                       pattern="^[0-9]*$"
-                       (keydown)="blockNonNumeric($event)"
-                       (ngModelChange)="onCellPhoneChange($event)"
-                       #cellPhoneInput="ngModel">
+                <input matInput [(ngModel)]="nuevoUsuario.cell_phone" name="cell_phone" required maxlength="15"
+                  minlength="10" pattern="^[0-9]*$" (keydown)="blockNonNumeric($event)"
+                  (ngModelChange)="onCellPhoneChange($event)" #cellPhoneInput="ngModel">
                 <mat-icon matSuffix>phone</mat-icon>
                 <mat-error *ngIf="cellPhoneInput.invalid && (cellPhoneInput.touched || cellPhoneInput.dirty)">
                   <ng-container *ngIf="!nuevoUsuario.cell_phone">
@@ -329,16 +297,9 @@
             <div class="form-row">
               <mat-form-field appearance="outline" class="form-col">
                 <mat-label>{{ 'usuarios.telefonoFijo' | translate }}</mat-label>
-                <input matInput
-                       [(ngModel)]="nuevoUsuario.phone"
-                       name="phone"
-                       required
-                       maxlength="10"
-                       minlength="7"
-                       pattern="^[0-9]*$"
-                       (keydown)="blockNonNumeric($event)"
-                       (ngModelChange)="onPhoneChange($event)"
-                       #phoneInput="ngModel">
+                <input matInput [(ngModel)]="nuevoUsuario.phone" name="phone" required maxlength="10" minlength="7"
+                  pattern="^[0-9]*$" (keydown)="blockNonNumeric($event)" (ngModelChange)="onPhoneChange($event)"
+                  #phoneInput="ngModel">
                 <mat-icon matSuffix>phone_in_talk</mat-icon>
                 <mat-error *ngIf="phoneInput.invalid && (phoneInput.touched || phoneInput.dirty)">
                   <ng-container *ngIf="!nuevoUsuario.phone">
@@ -352,12 +313,8 @@
 
               <mat-form-field appearance="outline" class="form-col">
                 <mat-label>{{ 'usuarios.direccion' | translate }}</mat-label>
-                <input matInput
-                       [(ngModel)]="nuevoUsuario.address"
-                       name="address"
-                       required
-                       minlength="5"
-                       #addressInput="ngModel">
+                <input matInput [(ngModel)]="nuevoUsuario.address" name="address" required minlength="5"
+                  #addressInput="ngModel">
                 <mat-icon matSuffix>home</mat-icon>
                 <mat-error *ngIf="addressInput.invalid && (addressInput.touched || addressInput.dirty)">
                   <ng-container *ngIf="!nuevoUsuario.address">
@@ -395,13 +352,8 @@
             <div class="form-row">
               <mat-form-field appearance="outline" class="form-col">
                 <mat-label>{{ 'usuarios.contrasena' | translate }}</mat-label>
-                <input matInput
-                       type="password"
-                       [(ngModel)]="nuevoUsuario.password"
-                       name="password"
-                       required
-                       (ngModelChange)="onPasswordInput()"
-                       #passwordInput="ngModel">
+                <input matInput type="password" [(ngModel)]="nuevoUsuario.password" name="password" required
+                  (ngModelChange)="onPasswordInput()" #passwordInput="ngModel">
                 <mat-icon matSuffix>lock</mat-icon>
                 <mat-error *ngIf="passwordInput.invalid && (passwordInput.touched || passwordInput.dirty)">
                   <ng-container *ngIf="!nuevoUsuario.password">
@@ -415,18 +367,16 @@
 
               <mat-form-field appearance="outline" class="form-col">
                 <mat-label>{{ 'usuarios.confirmarContrasena' | translate }}</mat-label>
-                <input matInput
-                       type="password"
-                       [(ngModel)]="nuevoUsuario.confirm_password"
-                       name="confirm_password"
-                       required
-                       #confirmPasswordInput="ngModel">
+                <input matInput type="password" [(ngModel)]="nuevoUsuario.confirm_password" name="confirm_password"
+                  required #confirmPasswordInput="ngModel">
                 <mat-icon matSuffix>lock_clock</mat-icon>
-                <mat-error *ngIf="confirmPasswordInput.invalid && (confirmPasswordInput.touched || confirmPasswordInput.dirty)">
+                <mat-error
+                  *ngIf="confirmPasswordInput.invalid && (confirmPasswordInput.touched || confirmPasswordInput.dirty)">
                   <ng-container *ngIf="!nuevoUsuario.confirm_password">
                     La confirmación de contraseña es obligatoria
                   </ng-container>
-                  <ng-container *ngIf="nuevoUsuario.confirm_password && nuevoUsuario.password !== nuevoUsuario.confirm_password">
+                  <ng-container
+                    *ngIf="nuevoUsuario.confirm_password && nuevoUsuario.password !== nuevoUsuario.confirm_password">
                     Las contraseñas no coinciden
                   </ng-container>
                 </mat-error>
@@ -436,20 +386,33 @@
               <div class="password-requirements">
                 <p>La contraseña debe tener:</p>
                 <ul>
-                  <li [class.valid-requirement]="requisitosPassword.length" [class.invalid-requirement]="!requisitosPassword.length">
-                    <mat-icon [class.valid-icon]="requisitosPassword.length" [class.invalid-icon]="!requisitosPassword.length">{{ requisitosPassword.length ? 'check_circle' : 'cancel' }}</mat-icon>
+                  <li [class.valid-requirement]="requisitosPassword.length"
+                    [class.invalid-requirement]="!requisitosPassword.length">
+                    <mat-icon [class.valid-icon]="requisitosPassword.length"
+                      [class.invalid-icon]="!requisitosPassword.length">{{ requisitosPassword.length ? 'check_circle' :
+                      'cancel' }}</mat-icon>
                     <span>8 o más caracteres</span>
                   </li>
-                  <li [class.valid-requirement]="requisitosPassword.hasNumber && requisitosPassword.hasLower" [class.invalid-requirement]="!(requisitosPassword.hasNumber && requisitosPassword.hasLower)">
-                    <mat-icon [class.valid-icon]="requisitosPassword.hasNumber && requisitosPassword.hasLower" [class.invalid-icon]="!(requisitosPassword.hasNumber && requisitosPassword.hasLower)">{{ (requisitosPassword.hasNumber && requisitosPassword.hasLower) ? 'check_circle' : 'cancel' }}</mat-icon>
+                  <li [class.valid-requirement]="requisitosPassword.hasNumber && requisitosPassword.hasLower"
+                    [class.invalid-requirement]="!(requisitosPassword.hasNumber && requisitosPassword.hasLower)">
+                    <mat-icon [class.valid-icon]="requisitosPassword.hasNumber && requisitosPassword.hasLower"
+                      [class.invalid-icon]="!(requisitosPassword.hasNumber && requisitosPassword.hasLower)">{{
+                      (requisitosPassword.hasNumber && requisitosPassword.hasLower) ? 'check_circle' : 'cancel'
+                      }}</mat-icon>
                     <span>Al menos un número y una letra minúscula</span>
                   </li>
-                  <li [class.valid-requirement]="requisitosPassword.hasUpper" [class.invalid-requirement]="!requisitosPassword.hasUpper">
-                    <mat-icon [class.valid-icon]="requisitosPassword.hasUpper" [class.invalid-icon]="!requisitosPassword.hasUpper">{{ requisitosPassword.hasUpper ? 'check_circle' : 'cancel' }}</mat-icon>
+                  <li [class.valid-requirement]="requisitosPassword.hasUpper"
+                    [class.invalid-requirement]="!requisitosPassword.hasUpper">
+                    <mat-icon [class.valid-icon]="requisitosPassword.hasUpper"
+                      [class.invalid-icon]="!requisitosPassword.hasUpper">{{ requisitosPassword.hasUpper ?
+                      'check_circle' : 'cancel' }}</mat-icon>
                     <span>Al menos una letra mayúscula</span>
                   </li>
-                  <li [class.valid-requirement]="requisitosPassword.hasSpecial" [class.invalid-requirement]="!requisitosPassword.hasSpecial">
-                    <mat-icon [class.valid-icon]="requisitosPassword.hasSpecial" [class.invalid-icon]="!requisitosPassword.hasSpecial">{{ requisitosPassword.hasSpecial ? 'check_circle' : 'cancel' }}</mat-icon>
+                  <li [class.valid-requirement]="requisitosPassword.hasSpecial"
+                    [class.invalid-requirement]="!requisitosPassword.hasSpecial">
+                    <mat-icon [class.valid-icon]="requisitosPassword.hasSpecial"
+                      [class.invalid-icon]="!requisitosPassword.hasSpecial">{{ requisitosPassword.hasSpecial ?
+                      'check_circle' : 'cancel' }}</mat-icon>
                     <span>Al menos un carácter especial (*, .!#$ ...)</span>
                   </li>
                 </ul>
@@ -463,7 +426,8 @@
               <mat-icon>close</mat-icon>
               {{ 'usuarios.cancelar' | translate }}
             </button>
-            <button mat-raised-button color="primary" type="submit" name="submit" [disabled]="!usuarioForm.form.valid" class="save-btn">
+            <button mat-raised-button color="primary" type="submit" name="submit" [disabled]="!usuarioForm.form.valid"
+              class="save-btn">
               <mat-icon>save</mat-icon>
               {{ 'usuarios.crearUsuario' | translate }}
             </button>

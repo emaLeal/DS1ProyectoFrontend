@@ -20,11 +20,11 @@
       <mat-card-content>
         <div class="filters-grid">
           <mat-form-field appearance="outline">
-            <mat-label>Filtrar por nombre</mat-label>
+            <mat-label>{{'postulantes.filtrarNombre' | translate}}</mat-label>
             <input matInput (input)="onFiltroNombreChange($event)" placeholder="Nombre o apellido">
           </mat-form-field>
           <mat-form-field appearance="outline">
-            <mat-label>Filtrar por cédula</mat-label>
+            <mat-label>{{'postulantes.filtrarCedula' | translate}}</mat-label>
             <input matInput (input)="onFiltroCedulaChange($event)" placeholder="Cédula">
           </mat-form-field>
         </div>
@@ -39,31 +39,31 @@
         <table mat-table [dataSource]="postulantesFiltrados" class="mat-elevation-z8">
           <!-- Nombre Column -->
           <ng-container matColumnDef="nombre">
-            <th mat-header-cell *matHeaderCellDef>Nombre</th>
+            <th mat-header-cell *matHeaderCellDef>{{'postulantes.Nombre' | translate}}</th>
             <td mat-cell *matCellDef="let postulante">{{postulante.nombre}}</td>
           </ng-container>
           <ng-container matColumnDef="apellido">
-            <th mat-header-cell *matHeaderCellDef>Apellido</th>
+            <th mat-header-cell *matHeaderCellDef>{{'postulantes.Apellido' | translate}}</th>
             <td mat-cell *matCellDef="let postulante">{{postulante.apellido}}</td>
           </ng-container>
           <ng-container matColumnDef="document_id">
-            <th mat-header-cell *matHeaderCellDef>Cédula</th>
+            <th mat-header-cell *matHeaderCellDef>{{'postulantes.Document_id' | translate}}</th>
             <td mat-cell *matCellDef="let postulante">{{postulante.document_id}}</td>
           </ng-container>
           <ng-container matColumnDef="email">
-            <th mat-header-cell *matHeaderCellDef>Email</th>
+            <th mat-header-cell *matHeaderCellDef>{{'postulantes.Email' | translate}}</th>
             <td mat-cell *matCellDef="let postulante">{{postulante.email}}</td>
           </ng-container>
           <ng-container matColumnDef="oferta">
-            <th mat-header-cell *matHeaderCellDef>Oferta</th>
+            <th mat-header-cell *matHeaderCellDef>{{'postulantes.Oferta' | translate}}</th>
             <td mat-cell *matCellDef="let postulante">{{postulante.oferta}}</td>
           </ng-container>
           <ng-container matColumnDef="fecha_postulacion">
-            <th mat-header-cell *matHeaderCellDef>Fecha Postulación</th>
+            <th mat-header-cell *matHeaderCellDef>{{'postulantes.postulation_date' | translate}}</th>
             <td mat-cell *matCellDef="let postulante">{{postulante.fecha_postulacion | date:'yyyy-MM-dd'}}</td>
           </ng-container>
           <ng-container matColumnDef="acciones">
-            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+            <th mat-header-cell *matHeaderCellDef>{{'postulantes.Acciones' | translate}}</th>
             <td mat-cell *matCellDef="let postulante">
               <button mat-icon-button color="accent" (click)="verPostulacion(postulante)">
                 <mat-icon>info</mat-icon>

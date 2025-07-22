@@ -20,6 +20,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { OfertasService, JobOffer } from '../../../services/ofertas.service';
 import { ConfirmDialogComponent } from '../../usuarios/confirm-dialog.component';
 import { OfertaDetalleModalComponent } from './oferta-detalle-modal.component';
+import TranslateLogic from '../../../lib/translate/translate.class';
 
 
 @Component({
@@ -46,13 +47,13 @@ import { OfertaDetalleModalComponent } from './oferta-detalle-modal.component';
   templateUrl: './ofertas-lista.component.html',
   styleUrl: './ofertas-lista.component.css'
 })
-export class OfertasListaComponent implements OnInit {
+export class OfertasListaComponent extends TranslateLogic implements OnInit {
   filtroPalabra = '';
   filtroCargo = '';
   filtroRango = '';
   filtroSalario: number | null = null;
   usuarios: any[] = [];
-  roles: Role[] = [];
+  roles: any[] = [{id: 'active', description: 'Activa'}, {id: 'closed', description: 'Inactiva'}];
   filtroRol: string = '';
   filtroBusqueda: string = '';
   ofertas: JobOffer[] = [];
@@ -70,27 +71,19 @@ export class OfertasListaComponent implements OnInit {
     private userService: UsuariosService,
     private rolesService: RolesService,
     private dialog: MatDialog,
-  ) {}
+    translateService: TranslateService
+  ) {
+    super(translateService)
+  }
 
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem('user_data')!);
     this.isAdmin = this.user?.role === 1 || this.user?.role?.id === 1;
     this.cargarUsuarios();
-    this.cargarRoles();
     this.cargarOfertas();
   }
 
-  cargarRoles() {
-    this.rolesService.getRoles().subscribe({
-      next: (roles) => {
-        this.roles = roles;
-      },
-      error: (error) => {
-        console.error('Error al cargar roles:', error);
-        // this.mostrarToast('Error al cargar roles', 'error');
-      }
-    });
-  }
+ 
 
   cargarOfertas() {
       this.cargando = true;

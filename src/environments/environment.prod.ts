@@ -1,12 +1,14 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://tu-api-de-produccion.com/api',
+  baseUrl: 'https://tu-api-de-produccion.com/api',
   authentication: {
     login: '/auth/login/',
     register: '/auth/register/',
     profile: '/auth/get_profile/',
     resetPassword: '/auth/password_reset/',
-    confirmResetPassword: '/auth/password_reset/confirm/?token='
+    confirmResetPassword: '/auth/password_reset/confirm/?token=',
+    changePassword: '/auth/change_password/'
+
   },
   offers: {
     getOffers: '/offer/getall/',

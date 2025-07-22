@@ -18,14 +18,31 @@
             <input matInput [(ngModel)]="form.undergraduate_title" name="undergraduate_title" required>
             <mat-icon matSuffix>school</mat-icon>
           </mat-form-field>
+          <div class="file-upload-container">
+            <button type="button" mat-raised-button (click)="undergraduateInput.click()">
+              {{'ofertas_activas.upload_support' | translate}}
+            </button>
+            <span class="file-name">{{ undergraduateFileName || ('postulacion.no_file_selected' | translate) }}</span>
+            <input hidden (change)="onUnderGraduateFile($event)" #undergraduateInput type="file" id="undergraduate_file" accept=".pdf">
+          </div>
+        </div>
 
+        <div class="form-row">
           <mat-form-field appearance="outline">
             <mat-label>{{ 'postulacion.titulo_posgrado' | translate }}</mat-label>
-            <input matInput [(ngModel)]="form.postgraduate_title" name="postgraduate_tittle" required>
+            <input matInput [(ngModel)]="form.postgraduate_title" name="postgraduate_title" required>
             <mat-icon matSuffix>school</mat-icon>
           </mat-form-field>
+          <div class="file-upload-container">
+            <button type="button" mat-raised-button (click)="postgraduateInput.click()">
+              {{'ofertas_activas.upload_support' | translate}}
+            </button>
+            <span class="file-name">{{ postgraduateFileName || ('postulacion.no_file_selected' | translate) }}</span>
+            <input hidden (change)="onPostGraduateFile($event)" #postgraduateInput type="file" id="postgraduate_file" accept=".pdf">
+          </div>
         </div>
       </div>
+
       <div class="form-section">
         <h3>
           <mat-icon>abc</mat-icon>
@@ -42,9 +59,18 @@
           <textarea matInput [(ngModel)]="form.resume" name="resume" required></textarea>
           <mat-icon matSuffix>school</mat-icon>
         </mat-form-field>
+        
+        <div class="file-upload-container">
+          <button type="button" mat-raised-button (click)="resumeInput.click()">
+            {{'ofertas_activas.upload_support' | translate}}
+          </button>
+          <span class="file-name">{{ resumeFileName || ('postulacion.no_file_selected' | translate) }}</span>
+          <input hidden (change)="onResumeFile($event)" #resumeInput type="file" id="resume_file" accept=".pdf">
+        </div>
       </div>
     </form>
   </mat-dialog-content>
+  
   <mat-dialog-actions align="end">
     <button mat-button (click)="cancelar()">
       <mat-icon>close</mat-icon>

@@ -176,7 +176,26 @@
     "motivacion": "Motivation",
     "perfil": "Applicant's Profile",
     "confirmar_postulacion": "Confirm Application",
-    "cancelar": "Cancel"
+    "cancelar": "Cancel",
+    "no_file_selected": "File not selected"
+  },
+  "lista_ofertas": {
+    "manage_offers_title": "Managing offers",
+    "manage_offers_subtitle": "Manage created offers",
+    "create_offer_button": "Create offer",
+    "search_offer": "Search offer",
+    "Activa": "Active",
+    "Inactiva": "Inactive",
+    "all_offers": "All offers",
+    "filter_by_state": "Filter by state",
+    "filter_by_id": "Filter by user's id",
+    "filter_by_id_placeholder": "user's id",
+    "offers_total": "Total offers",
+    "offer_name": "Offer's name",
+    "director_name": "Director's name",
+    "salary": "Salary",
+    "job_type": "Job's type",
+    "status": "Status"
   },
   "ofertas_activas": {
     "TituloPrincipal": "Find the opportunity you are looking for",
@@ -198,7 +217,8 @@
     "Salario": "Salary",
     "NivelEducacion": "Education Level",
     "Editar": "Edit",
-    "Postularme": "Apply"
+    "Postularme": "Apply",
+    "upload_support": "Upload Pdf"
   },
   "ofertas-cerradas": {
     "HeroTitulo": "Check the closed offers",
@@ -221,6 +241,8 @@
     "OfertaCerrada": "Offer Closed"
   },
   "postulantes": {
+    "filtrarNombre": "Filter by name",
+    "filtrarCedula": "Filter by id number",
     "Titulo": "Applicants",
     "Subtitulo": "Manage applicants for job offers",
     "NuevoPostulante": "New Applicant",
@@ -237,6 +259,10 @@
     "Foto": "Photo",
     "FotoAlt": "Applicant photo",
     "Nombre": "Name",
+    "Apellido": "Last name",
+    "Document_id": "Document id",
+    "Email": "Email",
+    "postulation_date": "Postulation Date",
     "Acciones": "Actions",
     "VerDetalles": "View details",
     "Editar": "Edit",
@@ -257,7 +283,7 @@
     "MisPostulantes": "My applicants",
     "Usuarios": "Users",
     "Roles": "Roles",
-    "Reportes":"Reports",
+    "Reportes": "Reports",
     "Inicio": "Home",
     "CerrarSesion": "Log out",
     "BuscarPlaceholder": "Search applicants, offers, users...",
@@ -266,7 +292,9 @@
     "CambiarIdioma": "Change language",
     "MiPerfil": "My profile",
     "Configuracion": "Settings",
-    "Cargando": "Loading..."
+    "Cargando": "Loading...",
+    "all_postulants": "All applicants",
+    "my_postulants": "My postulants"
   },
   "roles": {
     "gestionRoles": "Role Management",
@@ -362,6 +390,7 @@
     "placeholderBusqueda": "Search by first name, last name, or email...",
     "filtrarPorRol": "Filter by role",
     "todosLosRoles": "All roles",
+    "placeHolderDocumento": "Digit your number's id",
     "total": "Users",
     "nombre": "First Name",
     "apellido": "Last Name",
@@ -397,7 +426,10 @@
     "confirmarContrasena": "Confirm Password",
     "cancelar": "Cancel",
     "crearUsuario": "Create User",
-    "buscarDocumento": "Search Document Number"
+    "buscarDocumento": "Search Document Number",
+    "Administrador": "Administrator",
+    "Gestor de Talento": "Talent's Manager",
+    "Postulante": "Postulant"
   },
   "perfil": {
     "altFoto": "Profile picture",
@@ -410,5 +442,28 @@
     "telefono": "Phone",
     "direccion": "Address",
     "sinDatos": "No user data available."
+  },
+  "all_postulants": {
+    "name": "Name",
+    "last_name": "Last name",
+    "id_type": "Identification type",
+    "document_id": "Document Id",
+    "gender": "Gender",
+    "email": "Email",
+    "phone": "Phone",
+    "cell_phone": "Cell phone",
+    "address": "Address",
+    "birth_date": "Birth date"
+  },
+  "my_postulants": {
+    "tittle": "My postulants",
+    "offer": "Offer",
+    "date": "Date",
+    "motivation": "Motivation",
+    "actions": "Actions"
+  },
+  "reports": {
+    "tittle": "Report's Managing",
+    "generate_reports": "Generate Reports"
   }
 }

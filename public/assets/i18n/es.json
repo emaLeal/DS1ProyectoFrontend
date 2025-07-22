@@ -218,7 +218,26 @@
     "Salario": "Salario",
     "NivelEducacion": "Nivel de Educación",
     "Editar": "Editar",
-    "Postularme": "Postularme"
+    "Postularme": "Postularme",
+    "upload_support": "Subir pdf"
+  },
+  "lista_ofertas": {
+    "manage_offers_title": "Gestion de Ofertas",
+    "manage_offers_subtitle": "Administrar ofertas creadas",
+    "create_offer_button": "Crear oferta",
+    "search_offer": "Buscar oferta",
+    "Activa": "Activa",
+    "Inactiva": "Inactiva",
+    "all_offers": "Todas las ofertas",
+    "filter_by_state": "Filtrar por estado",
+    "filter_by_id": "Filtrar por Id de usuario",
+    "filter_by_id_placeholder": "Id de usuario",
+    "offers_total": "Total de ofertas",
+    "offer_name": "Nombre de oferta",
+    "director_name": "Nombre de director",
+    "salary": "Salario",
+    "job_type": "Tipo de Trabajo",
+    "status": "Estado"
   },
   "ofertas-cerradas": {
     "HeroTitulo": "Consulta las ofertas cerradas",
@@ -230,8 +249,6 @@
     "BackEnd": "Back-End",
     "Comercial": "Comercial",
     "Rango": "Rango",
-    "Junior": "Junior",
-    "Senior": "Senior",
     "SalarioMinimo": "Salario mínimo",
     "AplicarFiltros": "Aplicar Filtros",
     "Empresa": "Empresa",
@@ -247,6 +264,8 @@
     "Lead": "Lead"
   },
   "postulantes": {
+    "filtrarNombre": "Filtrar por nombre",
+    "filtrarCedula": "Filtrar por cedula",
     "Titulo": "Postulantes",
     "Subtitulo": "Gestiona los postulantes a las ofertas laborales",
     "NuevoPostulante": "Nuevo Postulante",
@@ -263,6 +282,10 @@
     "Foto": "Foto",
     "FotoAlt": "Foto del postulante",
     "Nombre": "Nombre",
+    "Apellido": "Apellido",
+    "Document_id": "Cedula",
+    "Email": "Correo Electronico",
+    "postulation_date": "Fecha de postulacion",
     "Acciones": "Acciones",
     "VerDetalles": "Ver detalles",
     "Editar": "Editar",
@@ -276,7 +299,8 @@
     "motivacion": "Motivación",
     "perfil": "Perfil de Aspirante",
     "confirmar_postulacion": "Confirmar Postulación",
-    "cancelar": "Cancelar"
+    "cancelar": "Cancelar",
+    "no_file_selected": "Archivo no seleccionado"
   },
   "dashboard": {
     "Menu": "Menú",
@@ -293,7 +317,7 @@
     "MisPostulantes": "Mis postulantes",
     "Usuarios": "Usuarios",
     "Roles": "Roles",
-    "Reportes":"Reportes",
+    "Reportes": "Reportes",
     "Inicio": "Inicio",
     "CerrarSesion": "Cerrar sesión",
     "BuscarPlaceholder": "Buscar postulantes, ofertas, usuarios...",
@@ -302,7 +326,9 @@
     "CambiarIdioma": "Cambiar idioma",
     "MiPerfil": "Mi perfil",
     "Configuracion": "Configuración",
-    "Cargando": "Cargando..."
+    "Cargando": "Cargando...",
+    "all_postulants": "Todos los postulantes",
+    "my_postulants": "Mis postulantes"
   },
   "roles": {
     "gestionRoles": "Gestión de Roles",
@@ -406,6 +432,7 @@
     "acciones": "Acciones",
     "verDetalles": "Ver detalles",
     "editar": "Editar usuario",
+    "placeHolderDocumento": "Ingresa el numero de documento",
     "eliminar": "Eliminar usuario",
     "sinResultados": "Sin resultados",
     "mensajeSinResultados": "No se encontraron usuarios que coincidan con tu búsqueda",
@@ -433,9 +460,11 @@
     "confirmarContrasena": "Confirmar Contraseña",
     "cancelar": "Cancelar",
     "crearUsuario": "Crear Usuario",
-    "buscarDocumento": "Buscar Numero de Documento"
+    "buscarDocumento": "Buscar Numero de Documento",
+    "Administrador": "Administrador",
+    "Gestor de Talento": "Gestor de Talento",
+    "Postulante": "Postulante"
   },
-
   "perfil": {
     "altFoto": "Foto de perfil",
     "bienvenida": "HOLA",
@@ -447,5 +476,29 @@
     "telefono": "Teléfono",
     "direccion": "Dirección",
     "sinDatos": "No hay datos de usuario."
+  },
+  "all_postulants": {
+    "tittle": "All registered postulants",
+    "name": "Nombre",
+    "last_name": "Apellido",
+    "id_type": "Tipo de documento",
+    "document_id": "Cedula",
+    "gender": "Genero",
+    "email": "Correo",
+    "phone": "Telefono",
+    "cell_phone": "Celular",
+    "address": "Dirección",
+    "birth_date": "Fecha de nacimiento"
+  },
+  "my_postulants": {
+    "tittle": "Mis postulantes",
+    "offer": "Oferta",
+    "date": "Fecha",
+    "motivation": "Motivacion",
+    "actions": "Acciones"
+  },
+  "reports": {
+    "tittle": "Gestion de reportes",
+    "generate_reports": "Generar Reportes"
   }
 }

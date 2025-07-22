@@ -7,6 +7,8 @@ import { PostulationService } from '../../services/postulation.service';
 import { MatDialog } from '@angular/material/dialog';
 import { OfertaDetalleModalComponent } from '../ofertas/ofertas-lista/oferta-detalle-modal.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import TranslateLogic from '../../lib/translate/translate.class';
 import { PostularDialogComponent } from '../ofertas-activas/postular-dialog/postular-dialog.component';
 import { ViewPostulacionDialogComponent } from './view-postulacion-dialog.component';
 import { OfertaBasica, Postulacion, PostulantesService } from '../../services/postulantes.service';
@@ -14,25 +16,25 @@ import { OfertaBasica, Postulacion, PostulantesService } from '../../services/po
 @Component({
   selector: 'app-mis-postulaciones',
   standalone: true,
-  imports: [CommonModule, MatTableModule, MatButtonModule, MatIconModule],
+  imports: [CommonModule, MatTableModule, MatButtonModule, MatIconModule, TranslateModule],
   template: `
-    <h2 style="margin-bottom: 12px;">Mis postulaciones</h2>
+    <h2 style="margin-bottom: 12px;">{{'my_postulants.tittle' | translate}}</h2>
     <div class="tabla-scroll">
       <table mat-table [dataSource]="postulaciones" class="mat-elevation-z8 tabla-simple">
         <ng-container matColumnDef="oferta">
-          <th mat-header-cell *matHeaderCellDef>Oferta</th>
+          <th mat-header-cell *matHeaderCellDef>{{'my_postulants.offer' | translate}}</th>
           <td mat-cell *matCellDef="let p">{{getOfertaNombre(p.job_offer_id)}}</td>
         </ng-container>
         <ng-container matColumnDef="application_date">
-          <th mat-header-cell *matHeaderCellDef>Fecha</th>
+          <th mat-header-cell *matHeaderCellDef>{{'my_postulants.date' | translate}}</th>
           <td mat-cell *matCellDef="let p">{{p.application_date | date:'yyyy-MM-dd'}}</td>
         </ng-container>
         <ng-container matColumnDef="motivation">
-          <th mat-header-cell *matHeaderCellDef>Motivación</th>
+          <th mat-header-cell *matHeaderCellDef>{{'my_postulants.motivation' | translate}}</th>
           <td mat-cell *matCellDef="let p">{{p.motivation}}</td>
         </ng-container>
         <ng-container matColumnDef="acciones">
-          <th mat-header-cell *matHeaderCellDef>Acciones</th>
+          <th mat-header-cell *matHeaderCellDef>{{'my_postulants.actions' | translate}}</th>
           <td mat-cell *matCellDef="let p">
             <button mat-icon-button color="primary" (click)="verDetallesOferta(p.job_offer_id)">
               <mat-icon>visibility</mat-icon>
@@ -54,7 +56,7 @@ import { OfertaBasica, Postulacion, PostulantesService } from '../../services/po
     </div>
   `
 })
-export class MisPostulacionesComponent implements OnInit {
+export class MisPostulacionesComponent extends TranslateLogic implements OnInit {
   postulaciones: Postulacion[] = [];
   ofertas: OfertaBasica[] = [];
   displayedColumns = ['oferta', 'application_date', 'motivation', 'acciones'];
@@ -63,15 +65,18 @@ export class MisPostulacionesComponent implements OnInit {
     private postulantesService: PostulantesService,
     private postulationService: PostulationService,
     private dialog: MatDialog,
-    private snackBar: MatSnackBar
-  ) {}
+    private snackBar: MatSnackBar,
+    translate: TranslateService
+  ) {
+    super(translate)
+  }
 
   ngOnInit() {
     const user = JSON.parse(localStorage.getItem('user_data')!);
-    this.postulantesService.getPostulaciones().subscribe(data => {
-      this.postulaciones = data.filter(p => String(p.applicant_document).trim() === String(user.document_id).trim());
+    this.postulantesService.getPostulaciones().subscribe((data: any) => {
+      this.postulaciones = data.filter((p: any) => String(p.applicant_document).trim() === String(user.document_id).trim());
     });
-    this.postulantesService.getOfertasBasicas().subscribe(ofertas => {
+    this.postulantesService.getOfertasBasicas().subscribe((ofertas: any) => {
       this.ofertas = ofertas;
     });
   }

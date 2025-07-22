@@ -310,7 +310,7 @@ export class EditarUsuarioComponent {
       const userData = JSON.parse(localStorage.getItem('user_data')!);
       const isAdmin = userData?.role === 1 || userData?.role?.id === 1;
       if (isAdmin && this.usuario.password) {
-        this.http.post(environment.apiUrl + '/auth/admin_change_password/', {
+        this.http.post(environment.baseUrl +environment.authentication.changePassword, {
           document_id: this.data.usuario.document_id,
           new_password: this.usuario.password
         }).subscribe({
