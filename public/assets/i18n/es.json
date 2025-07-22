@@ -260,6 +260,8 @@
     "OfertaCerrada": "Oferta Cerrada"
   },
   "postulantes": {
+    "filtrarNombre": "Filtrar por nombre",
+    "filtrarCedula": "Filtrar por cedula",
     "Titulo": "Postulantes",
     "Subtitulo": "Gestiona los postulantes a las ofertas laborales",
     "NuevoPostulante": "Nuevo Postulante",
@@ -276,6 +278,10 @@
     "Foto": "Foto",
     "FotoAlt": "Foto del postulante",
     "Nombre": "Nombre",
+    "Apellido": "Apellido",
+    "Document_id": "Cedula",
+    "Email": "Correo Electronico",
+    "postulation_date": "Fecha de postulacion",
     "Acciones": "Acciones",
     "VerDetalles": "Ver detalles",
     "Editar": "Editar",
@@ -306,7 +312,7 @@
     "MisPostulantes": "Mis postulantes",
     "Usuarios": "Usuarios",
     "Roles": "Roles",
-    "Reportes":"Reportes",
+    "Reportes": "Reportes",
     "Inicio": "Inicio",
     "CerrarSesion": "Cerrar sesión",
     "BuscarPlaceholder": "Buscar postulantes, ofertas, usuarios...",
@@ -461,5 +467,29 @@
     "telefono": "Teléfono",
     "direccion": "Dirección",
     "sinDatos": "No hay datos de usuario."
+  },
+  "all_postulants": {
+    "tittle": "All registered postulants",
+    "name": "Nombre",
+    "last_name": "Apellido",
+    "id_type": "Tipo de documento",
+    "document_id": "Cedula",
+    "gender": "Genero",
+    "email": "Correo",
+    "phone": "Telefono",
+    "cell_phone": "Celular",
+    "address": "Dirección",
+    "birth_date": "Fecha de nacimiento"
+  },
+  "my_postulants": {
+    "tittle": "Mis postulantes",
+    "offer": "Oferta",
+    "date": "Fecha",
+    "motivation": "Motivacion",
+    "actions": "Acciones"
+  },
+  "reports": {
+    "tittle": "Gestion de reportes",
+    "generate_reports": "Generar Reportes"
   }
 }

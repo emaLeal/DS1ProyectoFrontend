@@ -240,6 +240,8 @@
     "OfertaCerrada": "Offer Closed"
   },
   "postulantes": {
+    "filtrarNombre": "Filter by name",
+    "filtrarCedula": "Filter by id number",
     "Titulo": "Applicants",
     "Subtitulo": "Manage applicants for job offers",
     "NuevoPostulante": "New Applicant",
@@ -256,6 +258,10 @@
     "Foto": "Photo",
     "FotoAlt": "Applicant photo",
     "Nombre": "Name",
+    "Apellido": "Last name",
+    "Document_id": "Document id",
+    "Email": "Email",
+    "postulation_date": "Postulation Date",
     "Acciones": "Actions",
     "VerDetalles": "View details",
     "Editar": "Edit",
@@ -276,7 +282,7 @@
     "MisPostulantes": "My applicants",
     "Usuarios": "Users",
     "Roles": "Roles",
-    "Reportes":"Reports",
+    "Reportes": "Reports",
     "Inicio": "Home",
     "CerrarSesion": "Log out",
     "BuscarPlaceholder": "Search applicants, offers, users...",
@@ -431,5 +437,28 @@
     "telefono": "Phone",
     "direccion": "Address",
     "sinDatos": "No user data available."
+  },
+  "all_postulants": {
+    "name": "Name",
+    "last_name": "Last name",
+    "id_type": "Identification type",
+    "document_id": "Document Id",
+    "gender": "Gender",
+    "email": "Email",
+    "phone": "Phone",
+    "cell_phone": "Cell phone",
+    "address": "Address",
+    "birth_date": "Birth date"
+  },
+  "my_postulants": {
+    "tittle": "My postulants",
+    "offer": "Offer",
+    "date": "Date",
+    "motivation": "Motivation",
+    "actions": "Actions"
+  },
+  "reports": {
+    "tittle": "Report's Managing",
+    "generate_reports": "Generate Reports"
   }
 }
