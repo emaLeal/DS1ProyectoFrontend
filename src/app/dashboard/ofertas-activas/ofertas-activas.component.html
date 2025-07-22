@@ -110,9 +110,9 @@
       </p>
       <p class="descripcion">{{ oferta.responsibilities }}</p>
       <div class="botones">
-        <button *ngIf="isAdmin" mat-button color="primary" (click)="editarOferta(oferta.id!)">
-          <mat-icon>edit</mat-icon>
-          {{ "ofertas_activas.Editar" | translate }}
+        <button mat-button color="primary" (click)="verDetallesOferta(oferta)">
+          <mat-icon>visibility</mat-icon>
+          Ver detalles
         </button>
         <button (click)="postulate(oferta.id)" mat-raised-button color="primary" name="crear_postulacion">
           <mat-icon>person_add</mat-icon>

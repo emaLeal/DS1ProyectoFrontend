@@ -225,9 +225,8 @@
     "manage_offers_subtitle": "Administrar ofertas creadas",
     "create_offer_button": "Crear oferta",
     "search_offer": "Buscar oferta",
-    "Administrador": "Administrador",
-    "Gestor de Talento": "Director de Talento Humano",
-    "Postulante": "Postulante",
+    "Activa": "Activa",
+    "Inactiva": "Inactiva",
     "all_offers": "Todas las ofertas",
     "filter_by_state": "Filtrar por estado",
     "filter_by_id": "Filtrar por Id de usuario",
@@ -257,7 +256,13 @@
     "Salario": "Salario",
     "Ubicacion": "Ubicación",
     "VerDetalles": "Ver Detalles",
-    "OfertaCerrada": "Oferta Cerrada"
+    "OfertaCerrada": "Oferta Cerrada",
+    "TodosLosCargos": "Todos los cargos",
+    "TodosLosRangos": "Todos los rangos",
+    "Junior": "Junior",
+    "SemiSenior": "Semi Senior",
+    "Senior": "Senior",
+    "Lead": "Lead"
   },
   "postulantes": {
     "filtrarNombre": "Filtrar por nombre",
@@ -379,7 +384,7 @@
     "rol": "Rol",
     "nuevaContrasena": "Nueva Contraseña (opcional)",
     "confirmarContrasena": "Confirmar Nueva Contraseña",
-    "hintContrasena": "Dejar en blanco para mantener la contraseña actual",
+    "hintContrasena": "",
     "cancelar": "Cancelar",
     "guardarCambios": "Guardar Cambios"
   },
@@ -427,6 +432,7 @@
     "acciones": "Acciones",
     "verDetalles": "Ver detalles",
     "editar": "Editar usuario",
+    "placeHolderDocumento": "Ingresa el numero de documento",
     "eliminar": "Eliminar usuario",
     "sinResultados": "Sin resultados",
     "mensajeSinResultados": "No se encontraron usuarios que coincidan con tu búsqueda",
@@ -454,7 +460,10 @@
     "confirmarContrasena": "Confirmar Contraseña",
     "cancelar": "Cancelar",
     "crearUsuario": "Crear Usuario",
-    "buscarDocumento": "Buscar Numero de Documento"
+    "buscarDocumento": "Buscar Numero de Documento",
+    "Administrador": "Administrador",
+    "Gestor de Talento": "Gestor de Talento",
+    "Postulante": "Postulante"
   },
   "perfil": {
     "altFoto": "Foto de perfil",

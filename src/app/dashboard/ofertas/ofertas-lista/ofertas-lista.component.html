@@ -30,7 +30,7 @@
       <mat-form-field appearance="outline" class="search-field">
         <mat-label>{{ 'lista_ofertas.filter_by_state' | translate }}</mat-label>
         <mat-select>
-          <mat-option value="">{{ 'lista_ofertas.all_offers' | translate }}</mat-option>
+          <mat-option value="status" [(ngModel)]="filtroRol">{{ 'lista_ofertas.all_offers' | translate }}</mat-option>
           <mat-option *ngFor="let rol of roles" [value]="rol.id.toString()">
             {{'lista_ofertas.'+rol.description | translate}}
           </mat-option>

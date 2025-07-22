@@ -13,6 +13,8 @@ import { OfertasService, JobOffer } from '../../services/ofertas.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { PostularDialogComponent } from './postular-dialog/postular-dialog.component';
 import { Router } from '@angular/router';
+import { OfertaDetalleModalComponent } from '../ofertas/ofertas-lista/oferta-detalle-modal.component';
+
 @Component({
   selector: 'app-ofertas-activas',
   standalone: true,
@@ -55,7 +57,8 @@ export class OfertasActivasComponent {
   cargarOfertas() {
     this.ofertasService.getOfertas().subscribe({
       next: (ofertas) => {
-        this.ofertas = ofertas;
+        // Solo mostrar ofertas activas
+        this.ofertas = ofertas.filter(o => o.status === 'active');
         this.aplicarFiltros();
       },
       error: (error) => {
@@ -97,7 +100,10 @@ export class OfertasActivasComponent {
     });
   }
 
-  editarOferta(id: number) {
-    this.router.navigate(['/dashboard/editar-oferta', id]);
+  verDetallesOferta(oferta: JobOffer) {
+    this.dialog.open(OfertaDetalleModalComponent, {
+      width: '500px',
+      data: oferta
+    });
   }
 }

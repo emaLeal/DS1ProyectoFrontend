@@ -183,9 +183,8 @@
     "manage_offers_subtitle": "Manage created offers",
     "create_offer_button": "Create offer",
     "search_offer": "Search offer",
-    "Administrador": "Administrator",
-    "Gestor de Talento": "Talent's Director",
-    "Postulante": "Applicant",
+     "Activa": "Active",
+    "Inactiva": "Inactive",
     "all_offers": "All offers",
     "filter_by_state": "Filter by state",
     "filter_by_id": "Filter by user's id",
@@ -389,6 +388,7 @@
     "placeholderBusqueda": "Search by first name, last name, or email...",
     "filtrarPorRol": "Filter by role",
     "todosLosRoles": "All roles",
+    "placeHolderDocumento": "Digit your number's id",
     "total": "Users",
     "nombre": "First Name",
     "apellido": "Last Name",
@@ -424,7 +424,10 @@
     "confirmarContrasena": "Confirm Password",
     "cancelar": "Cancel",
     "crearUsuario": "Create User",
-    "buscarDocumento": "Search Document Number"
+    "buscarDocumento": "Search Document Number",
+    "Administrador": "Administrator",
+    "Gestor de Talento": "Talent's Manager",
+    "Postulante": "Postulant"
   },
   "perfil": {
     "altFoto": "Profile picture",

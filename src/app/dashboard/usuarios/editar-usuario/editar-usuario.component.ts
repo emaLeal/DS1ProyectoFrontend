@@ -12,6 +12,8 @@ import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/materia
 import { RolesService, Role } from '../../roles/roles.service';
 import { UsuariosService } from '../usuarios.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../../environments/environment';
 
 interface Usuario {
   name: string;
@@ -64,53 +66,40 @@ interface Usuario {
         <div class="form-row">
           <mat-form-field appearance="outline">
             <mat-label>{{ 'editarUsuario.nombre' | translate }}</mat-label>
-            <input matInput [(ngModel)]="usuario.name" name="name" required>
+            <input matInput [(ngModel)]="usuario.name" name="name">
             <mat-icon matSuffix>badge</mat-icon>
+            <mat-hint *ngIf="!usuario.name">Si dejas este campo vacío, se mantendrá el valor anterior.</mat-hint>
           </mat-form-field>
 
           <mat-form-field appearance="outline">
             <mat-label>{{ 'editarUsuario.apellido' | translate }}</mat-label>
-            <input matInput [(ngModel)]="usuario.last_name" name="last_name" required>
+            <input matInput [(ngModel)]="usuario.last_name" name="last_name">
             <mat-icon matSuffix>badge</mat-icon>
+            <mat-hint *ngIf="!usuario.last_name">Si dejas este campo vacío, se mantendrá el valor anterior.</mat-hint>
           </mat-form-field>
         </div>
 
-        <div class="form-row">
-          <mat-form-field appearance="outline">
-            <mat-label>{{ 'editarUsuario.tipoDocumento' | translate }}</mat-label>
-            <mat-select [(ngModel)]="usuario.identification_type" name="identification_type" required>
-              <mat-option value="CC">{{ 'editarUsuario.cedulaCiudadania' | translate }}</mat-option>
-              <mat-option value="CE">{{ 'editarUsuario.cedulaExtranjeria' | translate }}</mat-option>
-              <mat-option value="TI">{{ 'editarUsuario.tarjetaIdentidad' | translate }}</mat-option>
-              <mat-option value="PP">{{ 'editarUsuario.pasaporte' | translate }}</mat-option>
-            </mat-select>
-            <mat-icon matSuffix>credit_card</mat-icon>
-          </mat-form-field>
-
-          <mat-form-field appearance="outline">
-            <mat-label>{{ 'editarUsuario.numeroDocumento' | translate }}</mat-label>
-            <input matInput [(ngModel)]="usuario.document_id" name="document_id" required>
-            <mat-icon matSuffix>pin</mat-icon>
-          </mat-form-field>
-        </div>
+        <!-- Eliminados tipoDocumento y numeroDocumento -->
 
         <div class="form-row">
           <mat-form-field appearance="outline">
             <mat-label>{{ 'editarUsuario.fechaNacimiento' | translate }}</mat-label>
-            <input matInput [matDatepicker]="picker" [(ngModel)]="usuario.birth_date" name="birth_date" required>
+            <input matInput [matDatepicker]="picker" [(ngModel)]="usuario.birth_date" name="birth_date">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
             <mat-icon matSuffix>cake</mat-icon>
+            <mat-hint *ngIf="!usuario.birth_date">Si dejas este campo vacío, se mantendrá el valor anterior.</mat-hint>
           </mat-form-field>
 
           <mat-form-field appearance="outline">
             <mat-label>{{ 'editarUsuario.genero' | translate }}</mat-label>
-            <mat-select [(ngModel)]="usuario.gender" name="gender" required>
+            <mat-select [(ngModel)]="usuario.gender" name="gender">
               <mat-option value="M">{{ 'editarUsuario.masculino' | translate }}</mat-option>
               <mat-option value="F">{{ 'editarUsuario.femenino' | translate }}</mat-option>
               <mat-option value="O">{{ 'editarUsuario.otro' | translate }}</mat-option>
             </mat-select>
             <mat-icon matSuffix>wc</mat-icon>
+            <mat-hint *ngIf="!usuario.gender">Si dejas este campo vacío, se mantendrá el valor anterior.</mat-hint>
           </mat-form-field>
         </div>
       </div>
@@ -124,14 +113,16 @@ interface Usuario {
         <div class="form-row">
           <mat-form-field appearance="outline">
             <mat-label>{{ 'editarUsuario.email' | translate }}</mat-label>
-            <input matInput type="email" [(ngModel)]="usuario.email" name="email" required>
+            <input matInput type="email" [(ngModel)]="usuario.email" name="email">
             <mat-icon matSuffix>email</mat-icon>
+            <mat-hint *ngIf="!usuario.email">Si dejas este campo vacío, se mantendrá el valor anterior.</mat-hint>
           </mat-form-field>
 
           <mat-form-field appearance="outline">
             <mat-label>{{ 'editarUsuario.telefonoCelular' | translate }}</mat-label>
-            <input matInput [(ngModel)]="usuario.cell_phone" name="cell_phone" required>
+            <input matInput [(ngModel)]="usuario.cell_phone" name="cell_phone">
             <mat-icon matSuffix>phone</mat-icon>
+            <mat-hint *ngIf="!usuario.cell_phone">Si dejas este campo vacío, se mantendrá el valor anterior.</mat-hint>
           </mat-form-field>
         </div>
 
@@ -140,12 +131,14 @@ interface Usuario {
             <mat-label>{{ 'editarUsuario.telefonoFijo' | translate }}</mat-label>
             <input matInput [(ngModel)]="usuario.phone" name="phone">
             <mat-icon matSuffix>phone_in_talk</mat-icon>
+            <mat-hint *ngIf="!usuario.phone">Si dejas este campo vacío, se mantendrá el valor anterior.</mat-hint>
           </mat-form-field>
 
           <mat-form-field appearance="outline">
             <mat-label>{{ 'editarUsuario.direccion' | translate }}</mat-label>
-            <input matInput [(ngModel)]="usuario.address" name="address" required>
+            <input matInput [(ngModel)]="usuario.address" name="address">
             <mat-icon matSuffix>home</mat-icon>
+            <mat-hint *ngIf="!usuario.address">Si dejas este campo vacío, se mantendrá el valor anterior.</mat-hint>
           </mat-form-field>
         </div>
       </div>
@@ -165,23 +158,27 @@ interface Usuario {
               </mat-option>
             </mat-select>
             <mat-icon matSuffix>security</mat-icon>
+            <mat-hint *ngIf="!usuario.role_id">Si dejas este campo vacío, se mantendrá el valor anterior.</mat-hint>
           </mat-form-field>
         </div>
 
         <div class="form-row">
           <mat-form-field appearance="outline">
             <mat-label>{{ 'editarUsuario.nuevaContrasena' | translate }}</mat-label>
-            <input matInput type="password" [(ngModel)]="usuario.password" name="password">
+            <input matInput type="password" [(ngModel)]="usuario.password" name="password" (ngModelChange)="onPasswordInputChange()">
             <mat-icon matSuffix>lock</mat-icon>
-            <mat-hint>{{ 'editarUsuario.hintContrasena' | translate }}</mat-hint>
+            <mat-hint *ngIf="!usuario.password && passwordMatch">Si dejas este campo vacío, se mantendrá la contraseña actual.</mat-hint>
           </mat-form-field>
 
           <mat-form-field appearance="outline">
             <mat-label>{{ 'editarUsuario.confirmarContrasena' | translate }}</mat-label>
-            <input matInput type="password" [(ngModel)]="usuario.confirm_password" name="confirm_password">
+            <input matInput type="password" [(ngModel)]="usuario.confirm_password" name="confirm_password" (ngModelChange)="onPasswordInputChange()">
             <mat-icon matSuffix>lock_clock</mat-icon>
-            <mat-hint>{{ 'editarUsuario.hintContrasena' | translate }}</mat-hint>
+            <mat-hint *ngIf="!usuario.confirm_password && passwordMatch">Si dejas este campo vacío, se mantendrá la contraseña actual.</mat-hint>
           </mat-form-field>
+        </div>
+        <div class="mat-error" *ngIf="usuario.password && usuario.confirm_password && !passwordMatch" style="margin-top: -10px; margin-bottom: 10px; color: #f44336; font-size: 0.95rem;">
+          Las contraseñas no coinciden
         </div>
       </div>
     </form>
@@ -192,7 +189,7 @@ interface Usuario {
       <mat-icon>close</mat-icon>
       {{ 'editarUsuario.cancelar' | translate }}
     </button>
-    <button mat-raised-button color="primary" name="submit_editar" (click)="guardar()" [disabled]="!editForm.form.valid">
+    <button mat-raised-button color="primary" name="submit_editar" (click)="guardar()" [disabled]="!passwordMatch">
       <mat-icon>save</mat-icon>
       {{ 'editarUsuario.guardarCambios' | translate }}
     </button>
@@ -259,12 +256,15 @@ interface Usuario {
 export class EditarUsuarioComponent {
   usuario: Usuario;
   roles: Role[] = [];
+  passwordError: string = '';
+  passwordMatch: boolean = true;
 
   constructor(
     private dialogRef: MatDialogRef<EditarUsuarioComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private rolesService: RolesService,
-    private usuariosService: UsuariosService
+    private usuariosService: UsuariosService,
+    private http: HttpClient
   ) {
     this.usuario = { ...data.usuario };
     this.usuario.role_id = this.usuario.role.toString();
@@ -287,33 +287,58 @@ export class EditarUsuarioComponent {
   }
 
   guardar(): void {
-    if (this.validarFormulario()) {
-      const usuarioActualizado: Partial<Usuario> = {
-        name: this.usuario.name,
-        last_name: this.usuario.last_name,
-        email: this.usuario.email,
-        cell_phone: this.usuario.cell_phone.toString(),
-        phone: this.usuario.phone ? this.usuario.phone.toString() : '',
-        document_id: this.usuario.document_id.toString(),
-        identification_type: this.usuario.identification_type,
-        birth_date: this.formatearFecha(this.usuario.birth_date),
-        gender: this.usuario.gender,
-        address: this.usuario.address,
-        role: parseInt(this.usuario.role_id!)
-      };
-
-      if (this.usuario.password) {
-        usuarioActualizado.password = this.usuario.password;
+    this.passwordError = '';
+    if (this.usuario.password || this.usuario.confirm_password) {
+      if (this.usuario.password !== this.usuario.confirm_password) {
+        this.passwordError = 'Las contraseñas no coinciden';
+        return;
       }
-
-      this.usuariosService.updateUser(this.usuario.document_id, usuarioActualizado).subscribe({
-        next: () => {
-          this.dialogRef.close(true);
-        },
-        error: (error) => {
-          console.error('Error al actualizar usuario:', error);
-        }
-      });
+    }
+    if (this.validarFormulario()) {
+      // Solo incluir campos no vacíos
+      const usuarioActualizado: Partial<Usuario> = {};
+      if (this.usuario.name) usuarioActualizado.name = this.usuario.name;
+      if (this.usuario.last_name) usuarioActualizado.last_name = this.usuario.last_name;
+      if (this.usuario.email) usuarioActualizado.email = this.usuario.email;
+      if (this.usuario.cell_phone) usuarioActualizado.cell_phone = this.usuario.cell_phone.toString();
+      if (this.usuario.phone) usuarioActualizado.phone = this.usuario.phone.toString();
+      if (this.usuario.birth_date) usuarioActualizado.birth_date = this.formatearFecha(this.usuario.birth_date);
+      if (this.usuario.gender) usuarioActualizado.gender = this.usuario.gender;
+      if (this.usuario.address) usuarioActualizado.address = this.usuario.address;
+      if (this.usuario.role_id) usuarioActualizado.role = parseInt(this.usuario.role_id!);
+      // Si el usuario es admin y quiere cambiar la contraseña
+      const userData = JSON.parse(localStorage.getItem('user_data')!);
+      const isAdmin = userData?.role === 1 || userData?.role?.id === 1;
+      if (isAdmin && this.usuario.password) {
+        this.http.post(environment.baseUrl +environment.authentication.changePassword, {
+          document_id: this.data.usuario.document_id,
+          new_password: this.usuario.password
+        }).subscribe({
+          next: () => {
+            this.usuariosService.updateUser(this.usuario.document_id, usuarioActualizado).subscribe({
+              next: () => {
+                this.dialogRef.close(true);
+              },
+              error: (error) => {
+                console.error('Error al actualizar usuario:', error);
+              }
+            });
+          },
+          error: (error) => {
+            this.passwordError = 'Error al cambiar la contraseña';
+            console.error('Error al cambiar contraseña:', error);
+          }
+        });
+      } else {
+        this.usuariosService.updateUser(this.usuario.document_id, usuarioActualizado).subscribe({
+          next: () => {
+            this.dialogRef.close(true);
+          },
+          error: (error) => {
+            console.error('Error al actualizar usuario:', error);
+          }
+        });
+      }
     }
   }
 
@@ -334,5 +359,15 @@ export class EditarUsuarioComponent {
     const month = String(d.getMonth() + 1).padStart(2, '0');
     const day = String(d.getDate()).padStart(2, '0');
     return `${year}-${month}-${day}`;
+  }
+
+  onPasswordInputChange() {
+    if (!this.usuario.password && !this.usuario.confirm_password) {
+      this.passwordMatch = true;
+    } else if (this.usuario.password && this.usuario.confirm_password) {
+      this.passwordMatch = this.usuario.password === this.usuario.confirm_password;
+    } else {
+      this.passwordMatch = false;
+    }
   }
 } 

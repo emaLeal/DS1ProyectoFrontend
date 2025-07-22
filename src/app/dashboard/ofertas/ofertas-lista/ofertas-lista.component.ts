@@ -53,7 +53,7 @@ export class OfertasListaComponent extends TranslateLogic implements OnInit {
   filtroRango = '';
   filtroSalario: number | null = null;
   usuarios: any[] = [];
-  roles: Role[] = [];
+  roles: any[] = [{id: 'active', description: 'Activa'}, {id: 'closed', description: 'Inactiva'}];
   filtroRol: string = '';
   filtroBusqueda: string = '';
   ofertas: JobOffer[] = [];
@@ -80,21 +80,10 @@ export class OfertasListaComponent extends TranslateLogic implements OnInit {
     this.user = JSON.parse(localStorage.getItem('user_data')!);
     this.isAdmin = this.user?.role === 1 || this.user?.role?.id === 1;
     this.cargarUsuarios();
-    this.cargarRoles();
     this.cargarOfertas();
   }
 
-  cargarRoles() {
-    this.rolesService.getRoles().subscribe({
-      next: (roles) => {
-        this.roles = roles;
-      },
-      error: (error) => {
-        console.error('Error al cargar roles:', error);
-        // this.mostrarToast('Error al cargar roles', 'error');
-      }
-    });
-  }
+ 
 
   cargarOfertas() {
       this.cargando = true;
@@ -102,7 +91,7 @@ export class OfertasListaComponent extends TranslateLogic implements OnInit {
       next: (data) => {
         // Filtrado según rol
         if (this.isAdmin) {
-          this.ofertas = data;
+        this.ofertas = data;
         } else {
           this.ofertas = data.filter(oferta => oferta.talent_director_document === this.user.document_id);
         }
