@@ -79,6 +79,16 @@
         >
         </canvas>
       </div>
+      <div class="chart wide">
+        <h4>Ofertas lanzadas, cerradas y postulaciones por mes</h4>
+        <canvas
+          #chartStacked="base-chart"
+          baseChart
+          [data]="chartStackedData"
+          [options]="chartStackedOptions"
+          [type]="'bar'"
+        ></canvas>
+      </div>
     </div>
   </div>
 

@@ -45,6 +45,7 @@ export class GraphicsComponent implements OnInit {
   @ViewChild('chartOfertas') chartOfertas?: BaseChartDirective;
   @ViewChild('chartPostulaciones') chartPostulaciones?: BaseChartDirective;
   @ViewChild('chartStatusOferta') chartStatusOferta?: BaseChartDirective;
+  @ViewChild('chartStacked') chartStacked?: BaseChartDirective;
 
 
 
@@ -111,40 +112,6 @@ export class GraphicsComponent implements OnInit {
       },
       error: (error) => {
         console.error('Error al cargar usuarios:', error);
-      }
-    });
-  }
-
-  cargarOfertas() {
-    this.ofertasService.getOfertas().subscribe({
-      next: (data) => {
-        // Filtrado según rol
-        if (this.isAdmin) {
-          this.ofertas = data;
-
-        } else {
-          this.ofertas = data.filter(oferta => oferta.talent_director_document === this.user.document_id);
-        }
-        this.graficoOfertas();
-        this.graficoOfertasActivasCerradas();
-        console.log("Ofertas recibidas:", this.ofertas);
-      },
-      error: (error) => {
-        console.error('Error al cargar ofertas:', error);
-      }
-    });
-  }
-
-  cargarPostulaciones() {
-    this.postulantesService.getPostulaciones().subscribe({
-      next: (data) => {
-        // Filtrado según rol
-        this.postulaciones = data;
-        this.graficoPostulaciones()
-        console.log("Ofertas postulaciones:", this.postulaciones);
-      },
-      error: (error) => {
-        console.error('Error al cargar ofertas:', error);
       }
     });
   }
@@ -346,6 +313,98 @@ export class GraphicsComponent implements OnInit {
 
     this.chartOfertasDonutData.datasets[0].data = [activas, cerradas];
     this.chartStatusOferta?.update();
+  }
+
+  // Gráfico de barras apiladas: Ofertas lanzadas, cerradas y postulaciones por mes
+  chartStackedData: ChartConfiguration<'bar'>['data'] = {
+    labels: [
+      'Enero', 'Febrero', 'Marzo', 'Abril',
+      'Mayo', 'Junio', 'Julio', 'Agosto',
+      'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+    ],
+    datasets: [
+      { label: 'Ofertas lanzadas', data: [], backgroundColor: '#1976d2' },
+      { label: 'Ofertas cerradas', data: [], backgroundColor: '#fa1313' },
+      { label: 'Postulaciones', data: [], backgroundColor: '#ffc107' }
+    ]
+  };
+
+  chartStackedOptions: ChartConfiguration<'bar'>['options'] = {
+    responsive: true,
+    plugins: {
+      legend: { position: 'top' },
+      title: { display: true, text: 'Ofertas lanzadas, cerradas y postulaciones por mes' }
+    },
+    scales: {
+      x: { stacked: true },
+      y: { stacked: true, beginAtZero: true }
+    }
+  };
+
+  actualizarGraficoStacked() {
+    // Inicializar arrays de 12 meses
+    const lanzadas = new Array(12).fill(0);
+    const cerradas = new Array(12).fill(0);
+    const postulaciones = new Array(12).fill(0);
+
+    // Ofertas lanzadas por mes (start_date)
+    this.ofertas.forEach(oferta => {
+      if (oferta.start_date) {
+        const mes = new Date(oferta.start_date).getMonth();
+        lanzadas[mes]++;
+      }
+      if (oferta.status === 'closed' && oferta.end_date) {
+        const mesCierre = new Date(oferta.end_date).getMonth();
+        cerradas[mesCierre]++;
+      }
+    });
+
+    // Postulaciones por mes
+    this.postulaciones.forEach(p => {
+      if (p.application_date) {
+        const mes = new Date(p.application_date).getMonth();
+        postulaciones[mes]++;
+      }
+    });
+
+    this.chartStackedData.datasets[0].data = lanzadas;
+    this.chartStackedData.datasets[1].data = cerradas;
+    this.chartStackedData.datasets[2].data = postulaciones;
+    this.chartStacked?.update();
+  }
+
+  // Llamar a actualizarGraficoStacked después de cargar datos
+  cargarOfertas() {
+    this.ofertasService.getOfertas().subscribe({
+      next: (data) => {
+        if (this.isAdmin) {
+          this.ofertas = data;
+        } else {
+          this.ofertas = data.filter(oferta => oferta.talent_director_document === this.user.document_id);
+        }
+        this.graficoOfertas();
+        this.graficoOfertasActivasCerradas();
+        this.actualizarGraficoStacked();
+        console.log("Ofertas recibidas:", this.ofertas);
+      },
+      error: (error) => {
+        console.error('Error al cargar ofertas:', error);
+      }
+    });
+  }
+
+  cargarPostulaciones() {
+    this.postulantesService.getPostulaciones().subscribe({
+      next: (data) => {
+        this.postulaciones = data;
+        this.graficoPostulaciones();
+        this.actualizarGraficoStacked();
+        console.log("Ofertas postulaciones:", this.postulaciones);
+      },
+      error: (error) => {
+        console.error('Error al cargar ofertas:', error);
+      }
+    });
   }
 }
 

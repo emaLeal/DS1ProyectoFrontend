@@ -18,6 +18,8 @@ import { OfertasListaComponent } from './dashboard/ofertas/ofertas-lista/ofertas
 import { ChangePasswordComponent } from './authentication/change-password/change-password.component';
 import { TodosPostulantesComponent } from './dashboard/postulantes/todos-postulantes.component';
 import { GraphicsComponent } from './dashboard/graphics/graphics.component';
+import { ReportsComponent } from './dashboard/reports/reports.component';
+import { MisPostulacionesComponent } from './dashboard/postulantes/mis-postulaciones.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -55,9 +57,15 @@ export const routes: Routes = [
       { path: 'agregar', component: AgregarComponent },
       {path : 'perfil', component: PerfilUsuarioComponent},
       { path: '', component: GraphicsComponent },
+      { path: 'reportes', component: ReportsComponent },
+
       {
         path: 'todos-postulantes',
         component: TodosPostulantesComponent
+      },
+      {
+        path: 'mis-postulaciones',
+        component: MisPostulacionesComponent
       },
     ]
   },

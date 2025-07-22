@@ -10,11 +10,9 @@ import './todos-postulantes.component.css';
   standalone: true,
   imports: [CommonModule, MatTableModule, MatCardModule],
   template: `
-    <mat-card>
-      <mat-card-title>Todos los postulantes registrados</mat-card-title>
-      <mat-card-content>
-        <div class="tabla-scroll">
-          <table mat-table [dataSource]="postulantes" class="mat-elevation-z8">
+    <h2 style="margin-bottom: 12px;">Todos los postulantes registrados</h2>
+    <div class="tabla-scroll">
+      <table mat-table [dataSource]="postulantes" class="mat-elevation-z8 tabla-simple">
             <ng-container matColumnDef="name">
               <th mat-header-cell *matHeaderCellDef>Nombre</th>
               <td mat-cell *matCellDef="let p">{{p.name}}</td>
@@ -59,8 +57,6 @@ import './todos-postulantes.component.css';
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           </table>
         </div>
-      </mat-card-content>
-    </mat-card>
   `
 })
 export class TodosPostulantesComponent implements OnInit {
