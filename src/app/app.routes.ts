@@ -19,6 +19,7 @@ import { ChangePasswordComponent } from './authentication/change-password/change
 import { TodosPostulantesComponent } from './dashboard/postulantes/todos-postulantes.component';
 import { GraphicsComponent } from './dashboard/graphics/graphics.component';
 import { ReportsComponent } from './dashboard/reports/reports.component';
+import { MisPostulacionesComponent } from './dashboard/postulantes/mis-postulaciones.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -61,6 +62,10 @@ export const routes: Routes = [
       {
         path: 'todos-postulantes',
         component: TodosPostulantesComponent
+      },
+      {
+        path: 'mis-postulaciones',
+        component: MisPostulacionesComponent
       },
     ]
   },

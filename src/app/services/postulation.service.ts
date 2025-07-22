@@ -33,4 +33,11 @@ export class PostulationService {
       headers: this.getAuthHeaders()
     })
   }
+
+  deletePostulation(id: number) {
+    const url = environment.baseUrl + `/postulation/delete/${id}/`;
+    return this.httpClient.delete(url, {
+      headers: this.getAuthHeaders()
+    });
+  }
 }
