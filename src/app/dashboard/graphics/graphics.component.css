@@ -1,0 +1,98 @@
+/* dashboard.component.css */
+.dashboard {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.cards {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.card {
+  flex: 1 1 200px;
+  padding: 16px;
+  border-radius: 8px;
+  color: white;
+}
+
+.card h2 {
+  margin: 8px 0;
+  font-size: 24px;
+}
+
+.card p {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.card-data {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.card-data i {
+  font-size: 54px; /* Tamaño grande */
+  color: #fff; /* o el color que prefieras */
+}
+
+.green { background: #1a8b49; }
+.blue { background: #458cbb; }
+.yellow { background: #bb2f36; }
+.orange { background: #bb6d2a; }
+
+.charts {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.chart {
+  background: #f4f4f4;
+  max-height: 350px;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+
+/* En pantallas pequeñas, 1 columna */
+@media (max-width: 968px) {
+  .charts {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+.fake-chart-line,
+.fake-chart-area,
+.fake-chart-bar,
+.fake-chart-pie {
+  background: repeating-linear-gradient(
+    to right,
+    #ccc,
+    #ccc 10px,
+    #eee 10px,
+    #eee 20px
+  );
+  height: 150px;
+  margin-top: 10px;
+  border-radius: 4px;
+}
+
+.funnel div {
+  background: #dfe6e9;
+  margin: 4px 0;
+  padding: 8px;
+  border-radius: 4px;
+  text-align: center;
+}

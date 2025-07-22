@@ -72,7 +72,7 @@ export class TodosPostulantesComponent implements OnInit {
   constructor(private postulantesService: PostulantesService) {}
 
   ngOnInit() {
-    this.postulantesService.getUsuariosPostulantes().subscribe(data => {
+      this.postulantesService.getUsuariosPostulantes().subscribe(data => {
       this.postulantes = data;
     });
   }
