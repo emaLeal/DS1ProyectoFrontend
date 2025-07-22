@@ -1,12 +1,59 @@
-<div class="card-reporte">
-  <div class="info-reporte">
-    <div class="icono">
-       <i class="fa-solid fa-file-import"></i>
-    </div>
-    <div>
-      <h2>{{'reports.tittle' | translate}}</h2>
-      <p>{{'reports.generate_reports' | translate}}</p>
+<div>
+  <div class="card-reporte">
+    <div class="info-reporte">
+      <div class="icono">
+        <i class="fa-solid fa-file-import"></i>
+      </div>
+      <div>
+        <h2>Gestión de Reportes</h2>
+        <p>Generar Reportes</p>
+      </div>
     </div>
   </div>
+  <div class="card">
+    <form [formGroup]="reporteForm" class="reporte-form">
+      <!-- Tipo de reporte -->
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>Tipo de reporte</mat-label>
+        <mat-select formControlName="tipo">
+          <mat-option value="Usuarios">Usuarios</mat-option>
+          <mat-option value="Ofertas">Ofertas</mat-option>
+          <mat-option value="Postulaciones">Postulaciones</mat-option>
+        </mat-select>
+      </mat-form-field>
 
+      <!-- Fecha de inicio -->
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>Fecha de inicio</mat-label>
+        <input
+          matInput
+          [matDatepicker]="inicioPicker"
+          formControlName="fechaInicio"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="inicioPicker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #inicioPicker></mat-datepicker>
+      </mat-form-field>
+
+      <!-- Fecha final -->
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>Fecha final</mat-label>
+        <input
+          matInput
+          [matDatepicker]="finPicker"
+          formControlName="fechaFin"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="finPicker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #finPicker></mat-datepicker>
+      </mat-form-field>
+      <button class="button-reporte" (click)="generarReporte()">
+        Generar Reporte
+      </button>
+    </form>
+  </div>
 </div>

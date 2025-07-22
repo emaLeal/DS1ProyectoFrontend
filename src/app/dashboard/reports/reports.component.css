@@ -2,12 +2,26 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: linear-gradient(90deg, #001bc4, #0012b3);
+  background: linear-gradient(90deg, #1e39e9, #0012b3);
   color: white;
   padding: 30px;
   border-radius: 16px;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
 }
+
+.card {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  border-top: 7px solid #0924E2; 
+}
+
+
 
 .info-reporte {
   display: flex;
@@ -31,4 +45,35 @@
 }
 .icono{
     font-size: 50px;
+}
+
+.reporte-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center; 
+}
+
+.form-field {
+  flex: 1;
+  min-width: 200px; /* Controla el ancho mínimo de cada campo */
+}
+
+
+.button-reporte {
+  align-self: center;
+  margin-left: 40px;
+  margin-bottom: 10px;
+  padding: 12px 24px;
+  background-color: #46a849;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  white-space: nowrap;
+  font-weight: bold;
+}
+
+.button-reporte:hover {
+  background-color: #348d37;
 }

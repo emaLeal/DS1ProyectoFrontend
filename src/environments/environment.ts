@@ -24,9 +24,9 @@ export const environment = {
   },
   postulants: {
     getPostulants: '/applicant/getall/',
-    getOnePostulant: '/applicant/get/',
+    getOnePostulant: 'applicant/get/',
     createPostulants: '/applicant/create/',
-    updatePostulant: '/applicant/update/',
+    updatePostulant: 'applicant/update/',
     deletePostulants: '/applicant/delete/',
   },
   postulations: {
