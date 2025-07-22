@@ -178,6 +178,25 @@
     "confirmar_postulacion": "Confirm Application",
     "cancelar": "Cancel"
   },
+  "lista_ofertas": {
+    "manage_offers_title": "Managing offers",
+    "manage_offers_subtitle": "Manage created offers",
+    "create_offer_button": "Create offer",
+    "search_offer": "Search offer",
+    "Administrador": "Administrator",
+    "Gestor de Talento": "Talent's Director",
+    "Postulante": "Applicant",
+    "all_offers": "All offers",
+    "filter_by_state": "Filter by state",
+    "filter_by_id": "Filter by user's id",
+    "filter_by_id_placeholder": "user's id",
+    "offers_total": "Total offers",
+    "offer_name": "Offer's name",
+    "director_name": "Director's name",
+    "salary": "Salary",
+    "job_type": "Job's type",
+    "status": "Status"
+  },
   "ofertas_activas": {
     "TituloPrincipal": "Find the opportunity you are looking for",
     "Subtitulo": "Apply to job offers that match your professional profile.",
@@ -265,7 +284,9 @@
     "CambiarIdioma": "Change language",
     "MiPerfil": "My profile",
     "Configuracion": "Settings",
-    "Cargando": "Loading..."
+    "Cargando": "Loading...",
+    "all_postulants": "All applicants",
+    "my_postulants": "My postulants"
   },
   "roles": {
     "gestionRoles": "Role Management",

@@ -22,15 +22,15 @@ export const environment = {
     deleteRole: '/roles/delete/'
   },
   postulants: {
-    getPostulants: '/postulant/getall/',
-    getOnePostulant: 'postulant/get/',
-    createPostulants: '/postulant/create/',
-    updatePostulant: 'postulant/update/',
-    deletePostulants: '/postulant/delete/',
+    getPostulants: '/applicant/getall/',
+    getOnePostulant: '/applicant/get/',
+    createPostulants: '/applicant/create/',
+    updatePostulant: '/applicant/update/',
+    deletePostulants: '/applicant/delete/',
   },
   postulations: {
     postulate: '/postulation/create/',
-    getAll: '/postulation/getall/'
+    getAll: '/applicant/getall/'
   },
   users: {
     getUsers: '/auth/users/getall/'

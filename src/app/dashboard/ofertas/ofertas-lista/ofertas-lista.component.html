@@ -1,147 +1,143 @@
 <div>
 
-<div class="header-section fade-in-up">
+  <div class="header-section fade-in-up">
     <mat-card class="header-card">
       <mat-card-content class="header-content">
         <div class="title-section">
           <mat-icon class="title-icon">people</mat-icon>
-          <h1 class="page-title">{{ 'Gestion de ofertas' | translate }}</h1>
-          <p class="page-subtitle">{{ 'Administrar ofertas creadas' | translate }}</p>
+          <h1 class="page-title">{{ 'lista_ofertas.manage_offers_title' | translate }}</h1>
+          <p class="page-subtitle">{{ 'lista_ofertas.manage_offers_subtitle' | translate }}</p>
         </div>
-        <button mat-raised-button  class="create-button">
+        <button [routerLink]="['/dashboard/crear-oferta']" mat-raised-button class="create-button">
           <mat-icon>person_add</mat-icon>
-          {{ 'Crear oferta' | translate }}
+          {{ 'lista_ofertas.create_offer_button' | translate }}
         </button>
       </mat-card-content>
     </mat-card>
   </div>
 </div>
 
-  <!-- Search Section -->
-  <div class="search-section fade-in-up delay-1">
-    <mat-card class="search-card">
-      <mat-card-content class="search-content">
-        <mat-form-field appearance="outline" class="search-field">
-          <mat-label>{{ 'Buscar oferta' | translate }}</mat-label>
-          <input matInput  [placeholder]="'buscar oferta' | translate">
-          <mat-icon matSuffix>search</mat-icon>
-        </mat-form-field>
+<!-- Search Section -->
+<div class="search-section fade-in-up delay-1">
+  <mat-card class="search-card">
+    <mat-card-content class="search-content">
+      <mat-form-field appearance="outline" class="search-field">
+        <mat-label>{{ 'lista_ofertas.search_offer' | translate }}</mat-label>
+        <input matInput [placeholder]="'lista_ofertas.search_offer'| translate">
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
 
-        <mat-form-field appearance="outline" class="search-field">
-          <mat-label>{{ 'Filtrar por estado' | translate }}</mat-label>
-          <mat-select >
-            <mat-option value="">{{ 'Todas las ofertas' | translate }}</mat-option>
-            <mat-option *ngFor="let rol of roles" [value]="rol.id.toString()">
-              {{rol.description}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <mat-form-field appearance="outline" class="search-field">
-          <mat-label>Filtrar por ID de usuario</mat-label>
-          <input matInput [(ngModel)]="filtroDirectorId" placeholder="ID de usuario">
-        </mat-form-field>
-      </mat-card-content>
-    </mat-card>
-  </div>
-  <!-- Table Section -->
-  <div class="table-section fade-in-up delay-2">
-    <mat-card class="table-card">
-      <mat-card-header class="table-header">
-        <mat-card-title class="table-title">
-          <mat-icon>list</mat-icon>
-          {{ 'Total de ofertas' | translate }} ({{ofertas.length}})
-        </mat-card-title>
-      </mat-card-header>
-      <mat-card-content class="table-content">
-        <div class="table-container">
-          <table mat-table  class="usuarios-table" [dataSource]="aplicarFiltros">
-            <!-- Columna Nombre -->
-            <ng-container matColumnDef="title">
-              <th mat-header-cell *matHeaderCellDef>{{ 'Nombre de oferta' | translate }}</th>
-              <td mat-cell *matCellDef="let ofertas" class="fade-in-left">{{ofertas.title}} </td>
-            </ng-container>
+      <mat-form-field appearance="outline" class="search-field">
+        <mat-label>{{ 'lista_ofertas.filter_by_state' | translate }}</mat-label>
+        <mat-select>
+          <mat-option value="">{{ 'lista_ofertas.all_offers' | translate }}</mat-option>
+          <mat-option *ngFor="let rol of roles" [value]="rol.id.toString()">
+            {{'lista_ofertas.'+rol.description | translate}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="search-field">
+        <mat-label>{{'lista_ofertas.filter_by_id' | translate}}</mat-label>
+        <input matInput [(ngModel)]="filtroDirectorId"
+          [placeholder]="'lista_ofertas.filter_by_id_placeholder' | translate">
+      </mat-form-field>
+    </mat-card-content>
+  </mat-card>
+</div>
+<!-- Table Section -->
+<div class="table-section fade-in-up delay-2">
+  <mat-card class="table-card">
+    <mat-card-header class="table-header">
+      <mat-card-title class="table-title">
+        <mat-icon>list</mat-icon>
+        {{ 'lista_ofertas.offers_total' | translate }} ({{ofertas.length}})
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="table-content">
+      <div class="table-container">
+        <table mat-table class="usuarios-table" [dataSource]="aplicarFiltros">
+          <!-- Columna Nombre -->
+          <ng-container matColumnDef="title">
+            <th mat-header-cell *matHeaderCellDef>{{ 'lista_ofertas.offer_name' | translate }}</th>
+            <td mat-cell *matCellDef="let ofertas" class="fade-in-left">{{ofertas.title}} </td>
+          </ng-container>
 
-            <!-- Columna Email -->
-            <ng-container matColumnDef="director">
-              <th mat-header-cell *matHeaderCellDef>Nombre del director</th>
-              <td mat-cell *matCellDef="let ofertas" class="fade-in-left delay-1">{{ofertas.talent_director_name}}</td>
-            </ng-container>
+          <!-- Columna Email -->
+          <ng-container matColumnDef="director">
+            <th mat-header-cell *matHeaderCellDef>{{'lista_ofertas.director_name' | translate}}</th>
+            <td mat-cell *matCellDef="let ofertas" class="fade-in-left delay-1">{{ofertas.talent_director_name}}</td>
+          </ng-container>
 
-            <!-- Columna TypeJob -->
-            <ng-container matColumnDef="TypeJob">
-              <th mat-header-cell *matHeaderCellDef>Tipo de trabajo</th>
-              <td mat-cell *matCellDef="let ofertas" class="fade-in-left delay-1">{{ofertas.job_type}}</td>
-            </ng-container>
+          <!-- Columna TypeJob -->
+          <ng-container matColumnDef="TypeJob">
+            <th mat-header-cell *matHeaderCellDef>{{'lista_ofertas.job_type' | translate}}</th>
+            <td mat-cell *matCellDef="let ofertas" class="fade-in-left delay-1">{{ofertas.job_type}}</td>
+          </ng-container>
 
-            <!-- Columna salary -->
-            <ng-container matColumnDef="salary">
-              <th mat-header-cell *matHeaderCellDef>{{ 'Salario' | translate }}</th>
-              <td mat-cell *matCellDef="let ofertas" class="fade-in-left delay-2">
-                <div class="primary-text"> 
-                  ${{ofertas.salary}}
-                </div>
-              </td>
-            </ng-container>
+          <!-- Columna salary -->
+          <ng-container matColumnDef="salary">
+            <th mat-header-cell *matHeaderCellDef>{{ 'lista_ofertas.salary' | translate }}</th>
+            <td mat-cell *matCellDef="let ofertas" class="fade-in-left delay-2">
+              <div class="primary-text">
+                ${{ofertas.salary}}
+              </div>
+            </td>
+          </ng-container>
 
-            <!-- Columna status -->
-            <ng-container matColumnDef="status">
-              <th mat-header-cell *matHeaderCellDef>{{ 'Estatus' | translate }}</th>
-              <td mat-cell *matCellDef="let ofertas" class="fade-in-left delay-3">
-                <span class="role-badge text-white px-2 py-1 rounded" 
-                    [style.backgroundColor]="ofertas.status === 'active' ? 'green' : 'red'">
+          <!-- Columna status -->
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef>{{ 'lista_ofertas.status' | translate }}</th>
+            <td mat-cell *matCellDef="let ofertas" class="fade-in-left delay-3">
+              <span class="role-badge text-white px-2 py-1 rounded"
+                [style.backgroundColor]="ofertas.status === 'active' ? 'green' : 'red'">
                 {{ ofertas.status }}
-                </span>
-              </td>
-            </ng-container>
+              </span>
+            </td>
+          </ng-container>
 
-            <!-- Columna Acciones -->
-            <ng-container matColumnDef="actions">
-              <th mat-header-cell *matHeaderCellDef>{{ 'usuarios.acciones' | translate }}</th>
-              <td mat-cell *matCellDef="let ofertas" class="fade-in-left delay-4">
-                <div class="action-buttons">
-                  <button mat-icon-button 
-                          color="primary"
-                          matTooltip="{{ 'usuarios.verDetalles' | translate }}"
-                          (click)="verDetallesOferta(ofertas.id)">
-                    <mat-icon>visibility</mat-icon>
-                  </button>
-                  <button mat-icon-button 
-                          color="primary"
-                          matTooltip="{{ 'usuarios.editar' | translate }} " 
-                            [routerLink]="['/dashboard/editar-oferta', ofertas.id]">
-                    <mat-icon>edit</mat-icon>
-                  </button>
-                  <button mat-icon-button 
-                          color="warn"
-                          (click)="borrarOferta(ofertas)"
-                          matTooltip="{{ 'usuarios.eliminar' | translate }}">
-                    <mat-icon>delete</mat-icon>
-                  </button>
-                </div>
-              </td>
-            </ng-container>
+          <!-- Columna Acciones -->
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>{{ 'usuarios.acciones' | translate }}</th>
+            <td mat-cell *matCellDef="let ofertas" class="fade-in-left delay-4">
+              <div class="action-buttons">
+                <button mat-icon-button color="primary" matTooltip="{{ 'usuarios.verDetalles' | translate }}"
+                  (click)="verDetallesOferta(ofertas.id)">
+                  <mat-icon>visibility</mat-icon>
+                </button>
+                <button mat-icon-button color="primary" matTooltip="{{ 'usuarios.editar' | translate }} "
+                  [routerLink]="['/dashboard/editar-oferta', ofertas.id]">
+                  <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button color="warn" (click)="borrarOferta(ofertas)"
+                  matTooltip="{{ 'usuarios.eliminar' | translate }}">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+            </td>
+          </ng-container>
 
-            <tr mat-header-row *matHeaderRowDef="['title', 'director', 'salary','TypeJob', 'status', 'actions']" class="table-header-row"></tr>
-            <tr mat-row *matRowDef="let row; columns: ['title', 'director', 'salary','TypeJob', 'status', 'actions']" class="table-data-row"></tr>
+          <tr mat-header-row *matHeaderRowDef="['title', 'director', 'salary','TypeJob', 'status', 'actions']"
+            class="table-header-row"></tr>
+          <tr mat-row *matRowDef="let row; columns: ['title', 'director', 'salary','TypeJob', 'status', 'actions']"
+            class="table-data-row"></tr>
 
-            <!-- Fila cuando no hay datos -->
-            <tr class="mat-row" *matNoDataRow>
-              <td class="mat-cell no-data" [attr.colspan]="5">
-                <div class="no-data-content">
-                  <mat-icon class="no-data-icon">search_off</mat-icon>
-                  <h3 class="no-data-title">No hay ofertas disponibles.</h3>
-                </div>
-              </td>
-            </tr>
-          </table>
-        </div>
-      </mat-card-content>
-    </mat-card>
-      <!-- Toast Messages -->
+          <!-- Fila cuando no hay datos -->
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell no-data" [attr.colspan]="5">
+              <div class="no-data-content">
+                <mat-icon class="no-data-icon">search_off</mat-icon>
+                <h3 class="no-data-title">No hay ofertas disponibles.</h3>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <!-- Toast Messages -->
 
-  </div>
-  <div *ngIf="mensajeToast" class="toast" [ngClass]="toastClass">
-    <mat-icon>{{ toastClass.includes('success') ? 'check_circle' : 'error' }}</mat-icon>
-    {{ mensajeToast }}
-  </div>
-  
+</div>
+<div *ngIf="mensajeToast" class="toast" [ngClass]="toastClass">
+  <mat-icon>{{ toastClass.includes('success') ? 'check_circle' : 'error' }}</mat-icon>
+  {{ mensajeToast }}
+</div>

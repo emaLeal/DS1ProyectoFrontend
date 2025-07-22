@@ -1,10 +1,10 @@
 <div class="dashboard">
   <button class="hamburger" (click)="toggleSidebar()">
-  <i class="fa-solid fa-bars"></i>
-</button>
+    <i class="fa-solid fa-bars"></i>
+  </button>
   <aside class="sidebar" [class.collapsed]="sidebarCollapsed">
     <div class="sidebar-header">
-    <h2>{{ 'dashboard.Menu' | translate }}</h2>
+      <h2>{{ 'dashboard.Menu' | translate }}</h2>
     </div>
     <div class="menu-container">
       <!-- Menú Principal -->
@@ -27,7 +27,8 @@
       </div>
 
       <!-- Menú Director -->
-      <div class="director-menu menu-section" [class.collapsed]="directorMenuCollapsed" *ngIf="user?.role === 2 || user?.role === 1">
+      <div class="director-menu menu-section" [class.collapsed]="directorMenuCollapsed"
+        *ngIf="user?.role === 2 || user?.role === 1">
         <h3 (click)="toggleDirectorMenu()">{{ 'dashboard.MenuDirector' | translate }}</h3>
         <ul class="menu-lista">
           <li>
@@ -57,13 +58,13 @@
           <li>
             <a routerLink="todos-postulantes">
               <i class="fa-solid fa-users"></i>
-              <span>Todos los postulantes</span>
+              <span>{{'dashboard.all_postulants' | translate}}</span>
             </a>
           </li>
           <li>
             <a routerLink="postulantes">
               <i class="fa-solid fa-circle-user"></i>
-              <span>Mis postulantes</span>
+              <span>{{'dashboard.my_postulants' | translate}}</span>
             </a>
           </li>
         </ul>
@@ -88,7 +89,7 @@
         </ul>
       </div>
     </div>
-    
+
     <div class="bottom-buttons">
       <a routerLink="agregar" class="inicio-btn">
         <i class="fa-solid fa-house"></i>
@@ -105,15 +106,9 @@
     <header class="topbar">
       <div class="search-container">
         <i class="fa-solid fa-search search-icon"></i>
-        <input 
-          type="text" 
-          class="search-bar" 
-          [placeholder]="'dashboard.BuscarPlaceholder' | translate"
-          [(ngModel)]="searchTerm"
-          (input)="onSearch($event)"
-          (focus)="showSearchResults = true"
-          (blur)="closeSearchResults()"
-        />
+        <input type="text" class="search-bar" [placeholder]="'dashboard.BuscarPlaceholder' | translate"
+          [(ngModel)]="searchTerm" (input)="onSearch($event)" (focus)="showSearchResults = true"
+          (blur)="closeSearchResults()" />
         <div class="search-loading" *ngIf="isSearching">
           <i class="fa-solid fa-circle-notch fa-spin"></i>
         </div>
@@ -124,11 +119,7 @@
           <div class="search-message" *ngIf="!isSearching && searchResults.length === 0 && searchTerm">
             {{ 'dashboard.SinResultados' | translate }}
           </div>
-          <div 
-            class="search-result-item" 
-            *ngFor="let result of searchResults"
-            (mousedown)="selectResult(result)"
-          >
+          <div class="search-result-item" *ngFor="let result of searchResults" (mousedown)="selectResult(result)">
             <i class="fa-solid {{result.icon}}"></i>
             <div class="result-info">
               <div class="result-title">{{result.title}}</div>
@@ -156,19 +147,20 @@
           </button>
         </div>
       </div>
-      
+
       <div class="user-section" (click)="toggleMenu()" tabindex="0" (blur)="closeMenu()">
         <div class="user-avatar">
           <i class="fa-solid fa-circle-user"></i>
         </div>
-        
-        
+
+
         <div class="user-menu" *ngIf="isMenuOpen">
-          <a routerLink="perfil" >
+          <a routerLink="perfil">
             <i class="fa-solid fa-user"></i> {{ 'dashboard.MiPerfil' | translate }}
           </a>
           <a href="#"><i class="fa-solid fa-gear"></i> {{ 'dashboard.Configuracion' | translate }}</a>
-          <a (click)="logout()"><i class="fa-solid fa-right-from-bracket"></i> {{ 'dashboard.CerrarSesion' | translate }}</a>
+          <a (click)="logout()"><i class="fa-solid fa-right-from-bracket"></i> {{ 'dashboard.CerrarSesion' | translate
+            }}</a>
         </div>
       </div>
     </header>
