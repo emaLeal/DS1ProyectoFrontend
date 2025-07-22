@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  baseUrl: 'https://tu-api-de-produccion.com/api',
+  baseUrl: 'https://ds1proyectobackend.onrender.com/api',
   authentication: {
     login: '/auth/login/',
     register: '/auth/register/',

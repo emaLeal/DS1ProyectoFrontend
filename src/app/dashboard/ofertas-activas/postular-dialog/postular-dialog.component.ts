@@ -156,7 +156,7 @@ export class PostularDialogComponent implements OnInit {
       const reader = new FileReader();
       reader.onload = (e: any) => {
         // Convertir a base64
-        const base64String = e.target;
+        const base64String = e.target.result;
         this.form.resume_support = base64String;
       };
       reader.readAsDataURL(file);
