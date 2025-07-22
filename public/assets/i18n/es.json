@@ -221,7 +221,13 @@
     "Salario": "Salario",
     "Ubicacion": "Ubicación",
     "VerDetalles": "Ver Detalles",
-    "OfertaCerrada": "Oferta Cerrada"
+    "OfertaCerrada": "Oferta Cerrada",
+    "TodosLosCargos": "Todos los cargos",
+    "TodosLosRangos": "Todos los rangos",
+    "Junior": "Junior",
+    "SemiSenior": "Semi Senior",
+    "Senior": "Senior",
+    "Lead": "Lead"
   },
   "postulantes": {
     "Titulo": "Postulantes",
@@ -334,7 +340,7 @@
     "rol": "Rol",
     "nuevaContrasena": "Nueva Contraseña (opcional)",
     "confirmarContrasena": "Confirmar Nueva Contraseña",
-    "hintContrasena": "Dejar en blanco para mantener la contraseña actual",
+    "hintContrasena": "",
     "cancelar": "Cancelar",
     "guardarCambios": "Guardar Cambios"
   },

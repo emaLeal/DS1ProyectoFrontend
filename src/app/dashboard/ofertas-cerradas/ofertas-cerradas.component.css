@@ -47,13 +47,18 @@
   gap: 1rem;
 }
 
-.filtro-grupo input,
-.filtro-grupo select {
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 1rem;
-  flex: 1 1 200px;
+.filtro-item {
+  flex: 1 1 calc(50% - 1rem);
+  min-width: 250px;
+}
+
+.full-width {
+  flex: 1 1 100%;
+}
+
+/* Opcional: para que los mat-form-field no ocupen todo el ancho en pantallas grandes */
+::ng-deep .filtro-item .mat-form-field-flex {
+  width: auto !important;
 }
 
 .filtrar-btn {

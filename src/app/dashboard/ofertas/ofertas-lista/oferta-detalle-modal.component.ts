@@ -27,7 +27,7 @@ import { MatCardModule } from '@angular/material/card';
         <div class="detalle-row"><span class="label">Rango:</span> <span class="value">{{data.rank}}</span></div>
         <div class="detalle-row"><span class="label">Otros requisitos:</span> <span class="value">{{data.other_requirements}}</span></div>
         <div class="detalle-row"><span class="label">Salario:</span> <span class="value">{{data.salary | currency:'COP':'symbol-narrow':'1.0-0'}}</span></div>
-        <div class="detalle-row"><span class="label">Estado:</span> <span class="value status" [ngClass]="{'active': data.status === 'active', 'closed': data.status === 'closed'}">{{data.status}}</span></div>
+        <div class="detalle-row"><span class="label">Estado:</span> <span class="value status" [ngClass]="{'active': data.status === 'active', 'closed': data.status === 'closed'}">{{ traducirEstado(data.status) }}</span></div>
         <div class="detalle-row"><span class="label">Director (ID):</span> <span class="value">{{data.talent_director_document}}</span></div>
       </mat-card-content>
       <mat-card-actions align="end" class="modal-actions">
@@ -101,4 +101,11 @@ export class OfertaDetalleModalComponent {
     public dialogRef: MatDialogRef<OfertaDetalleModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
+
+  traducirEstado(status: string): string {
+    if (status === 'active') return 'Activa';
+    if (status === 'closed') return 'Cerrada';
+    if (status === 'suspended') return 'Suspendida';
+    return status;
+  }
 } 

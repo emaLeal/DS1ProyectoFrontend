@@ -69,11 +69,16 @@ export class PostularDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private postulationService: PostulationService
   ) {
-    this.form = {
-      ...this.form,
-      job_offer_id: data.usuario.job_offer_id,
-      applicant_document: data.usuario.applicant_document,
-      phone: data.usuario.phone
+    if (data.modo === 'editar') {
+      // Precarga todos los campos con los datos de la postulación
+      this.form = { ...this.form, ...data.usuario };
+    } else {
+      this.form = {
+        ...this.form,
+        job_offer_id: data.usuario.job_offer_id,
+        applicant_document: data.usuario.applicant_document,
+        phone: data.usuario.phone
+      };
     }
   }
   ngOnInit(): void {
@@ -95,9 +100,24 @@ export class PostularDialogComponent implements OnInit {
     const seconds = currentdate.getSeconds().toString().length == 1 ? '0' + currentdate.getSeconds() : currentdate.getSeconds()
     const application_date = year + "-" + month + "-" + day + " " + hour + ":" + minutes + ":" + seconds
     this.form = { ...this.form, application_date }
-    this.postulationService.postular(this.form).subscribe(value => {
-      this.dialogRef.close(true)
-    })
+    if (this.data.modo === 'editar') {
+      // Solo envía los campos no vacíos
+      const camposNoVacios: Partial<Postulacion> = {};
+      (Object.entries(this.form) as [keyof Postulacion, any][]).forEach(([key, value]) => {
+        if (value !== '' && value !== null && value !== undefined) {
+          camposNoVacios[key] = value;
+        }
+      });
+      this.dialogRef.close(camposNoVacios);
+    } else {
+      this.postulationService.postular(this.form).subscribe(value => {
+        this.dialogRef.close(true)
+      })
+    }
+  }
+
+  getBotonTexto() {
+    return this.data.modo === 'editar' ? 'Guardar cambios' : 'Confirmar postulación';
   }
 
 

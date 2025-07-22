@@ -40,4 +40,11 @@ export class PostulationService {
       headers: this.getAuthHeaders()
     });
   }
+
+  updatePostulation(id: number, data: any) {
+    const url = environment.baseUrl + `/postulation/update/${id}/`;
+    return this.httpClient.put(url, data, {
+      headers: this.getAuthHeaders()
+    });
+  }
 }

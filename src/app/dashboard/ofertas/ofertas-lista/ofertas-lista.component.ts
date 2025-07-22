@@ -98,7 +98,7 @@ export class OfertasListaComponent implements OnInit {
       next: (data) => {
         // Filtrado según rol
         if (this.isAdmin) {
-          this.ofertas = data;
+        this.ofertas = data;
         } else {
           this.ofertas = data.filter(oferta => oferta.talent_director_document === this.user.document_id);
         }
