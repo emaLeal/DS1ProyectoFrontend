@@ -328,7 +328,8 @@
     "Configuracion": "Configuración",
     "Cargando": "Cargando...",
     "all_postulants": "Todos los postulantes",
-    "my_postulants": "Mis postulantes"
+    "my_postulants": "Mis postulantes",
+    "my_applications": "Mis postulaciones"
   },
   "roles": {
     "gestionRoles": "Gestión de Roles",
@@ -513,5 +514,12 @@
     "offers_postulations_monthly": "Ofertas lanzadas, cerradas y postulaciones por mes",
     "offers_label": "Ofertas",
     "offers_date": "Fecha"
+  },
+  "my_applications": {
+    "tittle": "Mis postulaciones",
+    "offer": "Oferta",
+    "date": "Fecha",
+    "motivation": "Motivación",
+    "actions": "Acciones"
   }
 }

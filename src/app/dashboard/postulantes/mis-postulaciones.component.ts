@@ -18,36 +18,38 @@ import { OfertaBasica, Postulacion, PostulantesService } from '../../services/po
   standalone: true,
   imports: [CommonModule, MatTableModule, MatButtonModule, MatIconModule, TranslateModule],
   template: `
-    <h2 style="margin-bottom: 12px;">{{'my_postulants.tittle' | translate}}</h2>
+    <h2 style="margin-bottom: 12px;">{{'my_applications.tittle' | translate}}</h2>
     <div class="tabla-scroll">
       <table mat-table [dataSource]="postulaciones" class="mat-elevation-z8 tabla-simple">
-        <ng-container matColumnDef="oferta">
-          <th mat-header-cell *matHeaderCellDef>{{'my_postulants.offer' | translate}}</th>
+        <ng-container matColumnDef="job_offer_id">
+          <th mat-header-cell *matHeaderCellDef>{{'my_applications.offer' | translate}}</th>
           <td mat-cell *matCellDef="let p">{{getOfertaNombre(p.job_offer_id)}}</td>
         </ng-container>
         <ng-container matColumnDef="application_date">
-          <th mat-header-cell *matHeaderCellDef>{{'my_postulants.date' | translate}}</th>
+          <th mat-header-cell *matHeaderCellDef>{{'my_applications.date' | translate}}</th>
           <td mat-cell *matCellDef="let p">{{p.application_date | date:'yyyy-MM-dd'}}</td>
         </ng-container>
         <ng-container matColumnDef="motivation">
-          <th mat-header-cell *matHeaderCellDef>{{'my_postulants.motivation' | translate}}</th>
+          <th mat-header-cell *matHeaderCellDef>{{'my_applications.motivation' | translate}}</th>
           <td mat-cell *matCellDef="let p">{{p.motivation}}</td>
         </ng-container>
         <ng-container matColumnDef="acciones">
-          <th mat-header-cell *matHeaderCellDef>{{'my_postulants.actions' | translate}}</th>
+          <th mat-header-cell *matHeaderCellDef>{{'my_applications.actions' | translate}}</th>
           <td mat-cell *matCellDef="let p">
-            <button mat-icon-button color="primary" (click)="verDetallesOferta(p.job_offer_id)">
-              <mat-icon>visibility</mat-icon>
-            </button>
-            <button mat-icon-button color="accent" (click)="verPostulacion(p)">
-              <mat-icon>info</mat-icon>
-            </button>
-            <button mat-icon-button color="accent" (click)="editarPostulacion(p)">
-              <mat-icon>edit</mat-icon>
-            </button>
-            <button mat-icon-button color="warn" (click)="eliminarPostulacion(p)">
-              <mat-icon>delete</mat-icon>
-            </button>
+            <div style="display: flex; gap: 8px; align-items: center;">
+              <button mat-icon-button color="primary" (click)="verDetallesOferta(p.job_offer_id)">
+                <mat-icon>visibility</mat-icon>
+              </button>
+              <button mat-icon-button color="accent" (click)="verPostulacion(p)">
+                <mat-icon>info</mat-icon>
+              </button>
+              <button mat-icon-button color="accent" (click)="editarPostulacion(p)">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button color="warn" (click)="eliminarPostulacion(p)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
           </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -59,7 +61,7 @@ import { OfertaBasica, Postulacion, PostulantesService } from '../../services/po
 export class MisPostulacionesComponent extends TranslateLogic implements OnInit {
   postulaciones: Postulacion[] = [];
   ofertas: OfertaBasica[] = [];
-  displayedColumns = ['oferta', 'application_date', 'motivation', 'acciones'];
+  displayedColumns = ['job_offer_id', 'application_date', 'motivation', 'acciones'];
 
   constructor(
     private postulantesService: PostulantesService,
@@ -74,16 +76,22 @@ export class MisPostulacionesComponent extends TranslateLogic implements OnInit 
   ngOnInit() {
     const user = JSON.parse(localStorage.getItem('user_data')!);
     this.postulantesService.getPostulaciones().subscribe((data: any) => {
-      this.postulaciones = data.filter((p: any) => String(p.applicant_document).trim() === String(user.document_id).trim());
+      if (user.role === 1) {
+        this.postulaciones = data;
+      } else {
+        this.postulaciones = data.filter((p: any) => String(p.applicant_document).trim() === String(user.document_id).trim());
+      }
+      console.log('Postulaciones cargadas:', this.postulaciones);
     });
     this.postulantesService.getOfertasBasicas().subscribe((ofertas: any) => {
       this.ofertas = ofertas;
     });
   }
 
-  getOfertaNombre(id: number): string {
+  getOfertaNombre(id: any): string {
+    if (id === undefined || id === null) return '';
     const oferta = this.ofertas.find(o => o.id === id);
-    return oferta ? oferta.title : id.toString();
+    return oferta ? oferta.title : String(id);
   }
 
   verDetallesOferta(id: number) {

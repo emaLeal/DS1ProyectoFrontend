@@ -294,7 +294,8 @@
     "Configuracion": "Settings",
     "Cargando": "Loading...",
     "all_postulants": "All applicants",
-    "my_postulants": "My postulants"
+    "my_postulants": "My postulants",
+    "my_applications": "My applications"
   },
   "roles": {
     "gestionRoles": "Role Management",
@@ -478,5 +479,12 @@
     "offers_postulations_monthly": "Launched offers and postulations by month",
     "offers_label": "Offers",
     "offers_date": "Date"
+  },
+  "my_applications": {
+    "tittle": "My applications",
+    "offer": "Offer",
+    "date": "Date",
+    "motivation": "Motivation",
+    "actions": "Actions"
   }
 }

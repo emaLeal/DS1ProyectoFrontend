@@ -31,7 +31,7 @@ export const environment = {
   },
   postulations: {
     postulate: '/postulation/create/',
-    getAll: '/applicant/getall/'
+    getAll: '/postulation/getall/'
   },
   users: {
     getUsers: '/auth/users/getall/'

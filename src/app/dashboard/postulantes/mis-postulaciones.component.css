@@ -1,0 +1,28 @@
+table.mat-table {
+  min-width: 600px;
+  width: 100%;
+  font-size: 0.95rem;
+}
+
+th.mat-header-cell, td.mat-cell {
+  padding: 6px 8px !important;
+  white-space: nowrap;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+tr.mat-row {
+  height: 32px;
+}
+
+.tabla-scroll {
+  overflow-x: auto;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Alineación de botones de acción */
+td.mat-cell > div {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+} 
