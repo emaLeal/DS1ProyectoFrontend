@@ -6,6 +6,7 @@
     "password_label": "Enter your Password",
     "login_button": "Login",
     "welcome_label": "WELCOME",
+    "havent_account": "Don't have an account?",
     "captcha_error_label": "Please validate CAPTCHA",
     "register_now": "¡Register now!",
     "forgot_password": "Did you forget your password?",
