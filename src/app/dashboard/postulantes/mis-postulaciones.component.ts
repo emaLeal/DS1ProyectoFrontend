@@ -12,6 +12,8 @@ import TranslateLogic from '../../lib/translate/translate.class';
 import { PostularDialogComponent } from '../ofertas-activas/postular-dialog/postular-dialog.component';
 import { ViewPostulacionDialogComponent } from './view-postulacion-dialog.component';
 import { OfertaBasica, Postulacion, PostulantesService } from '../../services/postulantes.service';
+import { HttpClient } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-mis-postulaciones',
@@ -49,6 +51,9 @@ import { OfertaBasica, Postulacion, PostulantesService } from '../../services/po
               <button mat-icon-button color="warn" (click)="eliminarPostulacion(p)">
                 <mat-icon>delete</mat-icon>
               </button>
+                <button mat-icon-button color="primary" (click)="descargarArchivos(p.undergraduate_support)">
+    <mat-icon>download</mat-icon>
+  </button>
             </div>
           </td>
         </ng-container>
@@ -66,6 +71,7 @@ export class MisPostulacionesComponent extends TranslateLogic implements OnInit 
   constructor(
     private postulantesService: PostulantesService,
     private postulationService: PostulationService,
+    private http: HttpClient,
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
     translate: TranslateService
@@ -143,5 +149,15 @@ export class MisPostulacionesComponent extends TranslateLogic implements OnInit 
         }
       });
     }
+  }
+
+  descargarArchivos(url: string): void {
+    const link = document.createElement('a');
+    link.href = "http://127.0.0.1:8000" + url;
+    link.target = '_blank'; // para abrir en nueva pestaña, opcional
+    link.download = ''; // opcional: nombre del archivo si lo deseas forzar
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   }
 } 
